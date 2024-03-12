@@ -1,16 +1,6 @@
 import SwiftUI
 import Shared
 
-struct ContentViewNew: View {
-        // Create helper instance
-    let greet = GreetingHelper().greet()
-
-    var body: some View {
-        Text(greet)
-    }
-}
-
-
 @main
 struct iOSApp: App {
 
@@ -20,7 +10,7 @@ struct iOSApp: App {
 
 	var body: some Scene {
 		WindowGroup {
-			ContentViewNew()
+			ContentView()
 		}
 	}
 }
