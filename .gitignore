@@ -1,0 +1,52 @@
+# built application files
+*.apk
+*.ap_
+# files for the dex VM
+*.dex
+# Java class files
+*.class
+# generated files
+bin/
+gen/
+# Local configuration file (sdk path, etc)
+local.properties
+# Eclipse project files
+.classpath
+.project
+# Android Studio
+.idea/
+.idea
+/.idea/
+.gradle
+*/local.properties
+*/out
+build
+*/production
+*/prod
+*.iml
+*.iws
+*.ipr
+*~
+*.swp
+# zsh-plugins
+.gradletasknamecache
+com_crashlytics_export_strings.xml
+crashlytics-build.properties
+crashlytics.properties
+# fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/test_output
+fastlane/README.md
+fastlane/build
+#keystore en json ignoren
+tc-signing.jks
+signing.jks
+gc_fastlane_keys.json
+tc-signing.gradle
+**/.DS_Store
+#zodat Bitrise CI dirty kan managen fix for detached header
+Vendor
+repository-settings.gradle
+azure-configs.properties
+tc-config-secrets.properties
