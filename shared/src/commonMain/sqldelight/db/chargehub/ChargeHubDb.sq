@@ -1,0 +1,19 @@
+CREATE TABLE ChargeHub (
+    id INTEGER PRIMARY KEY,
+    name TEXT NOT NULL
+);
+
+getAllChargeHubs:
+SELECT * FROM ChargeHub;
+
+getChargeHubById:
+SELECT * FROM ChargeHub WHERE id = ?;
+
+updateChargeHub:
+UPDATE ChargeHub SET name = ? WHERE id = ?;
+
+deleteChargeHub:
+DELETE FROM ChargeHub WHERE id = ?;
+
+insertChargeHub:
+INSERT INTO ChargeHub (name) VALUES (?);

@@ -1,0 +1,22 @@
+CREATE TABLE Car (
+    id INTEGER PRIMARY KEY,
+    userId INTEGER,
+    plate TEXT NOT NULL,
+    brand TEXT NOT NULL,
+    FOREIGN KEY (userId) REFERENCES User(id)
+);
+
+getAllCars:
+SELECT * FROM Car;
+
+getCarById:
+SELECT * FROM Car WHERE id = ?;
+
+updateCar:
+UPDATE Car SET userId = ?, plate = ?, brand = ? WHERE id = ?;
+
+deleteCar:
+DELETE FROM Car WHERE id = ?;
+
+insertCar:
+INSERT INTO Car (userId, plate, brand) VALUES (?, ?, ?);
