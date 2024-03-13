@@ -1,6 +1,7 @@
 package com.wisemen.chargehub
 
 import android.app.Application
+import android.util.Log
 import di.modules
 import di.clientsModule
 import di.platformModules
@@ -15,7 +16,7 @@ class MainApp : Application() {
         super.onCreate()
 
         initKoin()
-
+        Log.d("TAGG", "onCreate: Koin Init")
     }
 
     private fun initKoin() {
