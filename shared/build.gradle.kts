@@ -1,9 +1,8 @@
-
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinSerialization)
-    alias(libs.plugins.sqldelight)
+    alias(libs.plugins.sqlDelight)
 }
 
 kotlin {
@@ -14,7 +13,7 @@ kotlin {
             }
         }
     }
-    
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -25,7 +24,7 @@ kotlin {
             isStatic = true
         }
     }
-    
+
     sourceSets {
         commonMain.dependencies {
             // put your Multiplatform dependencies here
@@ -66,8 +65,9 @@ android {
 }
 
 sqldelight {
-    database("ChargeHubDb") {
-        packageName = "db.chargehub"
-        sourceFolders = listOf("sqldelight")
+    databases {
+        create("ChargeHubDb") {
+            packageName.set("db.chargehub")
+        }
     }
 }
