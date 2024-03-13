@@ -6,6 +6,7 @@ plugins {
 }
 
 kotlin {
+    task("testClasses")
     androidTarget {
         compilations.all {
             kotlinOptions {

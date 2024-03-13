@@ -1,6 +1,6 @@
 package db.database
 
-import com.squareup.sqldelight.db.SqlDriver
+import app.cash.sqldelight.db.SqlDriver
 import db.chargehub.ChargeHubDb
 import db.chargehub.User
 
