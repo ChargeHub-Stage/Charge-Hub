@@ -2,10 +2,8 @@ import SwiftUI
 import Shared
 
 struct ContentView: View {
-    let greet = GreetingHelper().greet()
-
         var body: some View {
-            Text(greet)
+            Text("hello")
         }
 }
 
