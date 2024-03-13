@@ -3,7 +3,7 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinSerialization)
-    alias(libs.plugins.sqldelight)
+    alias(libs.plugins.sqlDelight)
 }
 
 kotlin {
@@ -37,18 +37,21 @@ kotlin {
             implementation(libs.bundles.ktor)
             implementation(libs.ktor.client.content.negotiation)
             implementation(libs.ktor.client.serialization)
-            implementation(libs.sqldelight.common)
-            implementation(libs.kotlinx.datetime)
 
+            implementation(libs.sqldelight.runtime)
+            implementation(libs.sqldelight.coroutines.extensions)
+
+            implementation(libs.kotlinx.datetime)
         }
         androidMain.dependencies {
             implementation(libs.ktor.client.okhttp)
-            implementation(libs.sqldelight.android)
+            implementation(libs.sqldelight.android.driver)
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
-            implementation(libs.sqldelight.native)
+            implementation(libs.sqldelight.native.driver)
         }
+
 
     }
 }
@@ -64,10 +67,11 @@ android {
         minSdk = libs.versions.android.minSdk.get().toInt()
     }
 }
+//sqldelight {
+  //  database("ChargeHubDb") {
+    //    packageName = "db.chargehub"
+     //   sourceFolders = listOf("sqldelight")
+    //}
+//}
 
-sqldelight {
-    database("ChargeHubDb") {
-        packageName = "db.chargehub"
-        sourceFolders = listOf("sqldelight")
-    }
-}
+
