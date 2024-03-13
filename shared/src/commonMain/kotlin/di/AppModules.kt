@@ -23,3 +23,11 @@ val clientsModule = module {
         }
     }
 }
+
+val servicesModule = module {
+
+}
+
+val repositoriesModule = module {
+
+}
