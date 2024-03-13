@@ -1,4 +1,3 @@
-
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
@@ -14,7 +13,7 @@ kotlin {
             }
         }
     }
-    
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -25,7 +24,7 @@ kotlin {
             isStatic = true
         }
     }
-    
+
     sourceSets {
         commonMain.dependencies {
             // put your Multiplatform dependencies here
@@ -37,21 +36,18 @@ kotlin {
             implementation(libs.bundles.ktor)
             implementation(libs.ktor.client.content.negotiation)
             implementation(libs.ktor.client.serialization)
-
-            implementation(libs.sqldelight.runtime)
-            implementation(libs.sqldelight.coroutines.extensions)
-
+            implementation(libs.sqldelight.common)
             implementation(libs.kotlinx.datetime)
+
         }
         androidMain.dependencies {
             implementation(libs.ktor.client.okhttp)
-            implementation(libs.sqldelight.android.driver)
+            implementation(libs.sqldelight.android)
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
-            implementation(libs.sqldelight.native.driver)
+            implementation(libs.sqldelight.native)
         }
-
 
     }
 }
@@ -67,11 +63,11 @@ android {
         minSdk = libs.versions.android.minSdk.get().toInt()
     }
 }
-//sqldelight {
-  //  database("ChargeHubDb") {
-    //    packageName = "db.chargehub"
-     //   sourceFolders = listOf("sqldelight")
-    //}
-//}
 
-
+sqldelight {
+    databases {
+        create("ChargeHubDb") {
+            packageName.set("db.chargehub")
+        }
+    }
+}
