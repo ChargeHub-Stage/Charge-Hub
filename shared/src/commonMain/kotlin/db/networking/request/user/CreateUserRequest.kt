@@ -1,4 +1,4 @@
-package db.networking.request
+package db.networking.request.user
 
 import kotlinx.serialization.Serializable
 
@@ -9,4 +9,4 @@ data class CreateUserRequest(
     val email: String,
     val password: String,
     val currentPoints: Long
-)
+) : UserRequest

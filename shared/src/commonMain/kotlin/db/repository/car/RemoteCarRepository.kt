@@ -19,8 +19,8 @@ class RemoteCarRepository : GenericRepository<CreateCarRequest, Car, CarDatabase
         database.create(request)
     }
 
-    override suspend fun fetchAll() {
-        database.getAll()
+    override suspend fun fetchAll(): List<Car> {
+        return database.getAll()
     }
 
     override suspend fun fetchById(id: String) {

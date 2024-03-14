@@ -14,8 +14,8 @@ class RemoteReservationRepository :
     override val database: ReservationDatabase
         get() = inject<ReservationDatabaseWrapper>().value.database
 
-    override suspend fun fetchAll() {
-        database.getAll()
+    override suspend fun fetchAll(): List<Reservation> {
+        return database.getAll()
     }
 
     override suspend fun fetchById(id: String) {

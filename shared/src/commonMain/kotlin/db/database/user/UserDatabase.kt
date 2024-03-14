@@ -4,20 +4,22 @@ import app.cash.sqldelight.db.SqlDriver
 import db.chargehub.User
 import db.chargehub.UserDbQueries
 import db.database.GenericDatabaseOperations
-import db.networking.request.CreateUserRequest
+import db.networking.request.user.CreateUserRequest
+import db.networking.request.user.GetUserRequest
+import db.networking.request.user.UserRequest
 
 class UserDatabase(sqlDriver: SqlDriver) :
-    GenericDatabaseOperations<User, CreateUserRequest>(sqlDriver) {
+    GenericDatabaseOperations<UserRequest, CreateUserRequest>(sqlDriver) {
 
     private val query: UserDbQueries
         get() = database.userDbQueries
 
-    override fun getAll(): List<User> {
-        return query.getAllUsers().executeAsList()
+    override fun getAll(): List<GetUserRequest> {
+        return query.getAllUsers().executeAsList().map { it.mapToGetUserRequest() }
     }
 
-    override fun getById(id: String): User {
-        return query.getUserById(id).executeAsOne()
+    override fun getById(id: String): GetUserRequest {
+        return query.getUserById(id).executeAsOne().mapToGetUserRequest()
     }
 
     override fun delete(id: String) {
@@ -44,4 +46,6 @@ class UserDatabase(sqlDriver: SqlDriver) :
             currentPoints = request.currentPoints
         )
     }
+
+    private fun User.mapToGetUserRequest() : GetUserRequest = GetUserRequest(name = name, email = email, password = password)
 }

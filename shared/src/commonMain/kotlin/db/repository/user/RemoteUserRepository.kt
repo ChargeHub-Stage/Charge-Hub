@@ -3,8 +3,9 @@ package db.repository.user
 import db.chargehub.User
 import db.database.user.UserDatabase
 import db.database.user.UserDatabaseWrapper
-import db.networking.request.CreateUserRequest
-import db.networking.request.GetUserRequest
+import db.networking.request.user.CreateUserRequest
+import db.networking.request.user.GetUserRequest
+import db.networking.request.user.UserRequest
 import dev.gitlive.firebase.Firebase
 import dev.gitlive.firebase.firestore.firestore
 import db.repository.GenericRepository
@@ -14,7 +15,7 @@ import kotlinx.coroutines.flow.flowOf
 import org.koin.core.component.inject
 
 class RemoteUserRepository(private val httpClient: HttpClient) :
-    GenericRepository<CreateUserRequest, User, UserDatabase> {
+    GenericRepository<CreateUserRequest, UserRequest, UserDatabase> {
 
 
     private val databaseWrapper: UserDatabaseWrapper by inject()
@@ -27,7 +28,7 @@ class RemoteUserRepository(private val httpClient: HttpClient) :
         database.create(request)
     }
 
-    override suspend fun fetchAll(): List<User> {
+    override suspend fun fetchAll(): List<GetUserRequest> {
         try {
             val userResponse =
                 firestore.collection("USERS").get()
@@ -49,11 +50,11 @@ class RemoteUserRepository(private val httpClient: HttpClient) :
         database.delete(id)
     }
 
-    override fun findById(id: String): Flow<User> {
+    override fun findById(id: String): Flow<GetUserRequest> {
         return flowOf(database.getById(id))
     }
 
-    override fun findAll(): Flow<List<User>> {
+    override fun findAll(): Flow<List<GetUserRequest>> {
         return flowOf(database.getAll())
     }
 }

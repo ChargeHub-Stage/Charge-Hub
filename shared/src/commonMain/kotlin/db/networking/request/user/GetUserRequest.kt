@@ -1,4 +1,4 @@
-package db.networking.request
+package db.networking.request.user
 
 import kotlinx.serialization.Serializable
 
@@ -7,4 +7,4 @@ class GetUserRequest (
     val name: String,
     val email: String,
     val password: String,
-)
+) : UserRequest
