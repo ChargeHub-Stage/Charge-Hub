@@ -1,5 +1,6 @@
 package di
 
+import DATABASE_NAME
 import app.cash.sqldelight.driver.native.NativeSqliteDriver
 import db.chargehub.ChargeHubDb
 import db.database.car.CarDatabase
