@@ -1,9 +1,9 @@
-package db.database.firebase
+package db.networking.request
 
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class User(
+class GetUserRequest (
     val name: String,
     val email: String,
     val password: String,

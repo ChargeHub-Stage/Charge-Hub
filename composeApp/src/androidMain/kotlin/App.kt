@@ -21,7 +21,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @OptIn(ExperimentalResourceApi::class)
 @Composable
 @Preview
-fun App(firstUser: String? = null){
+fun App(firstUser: String? = null) {
     MaterialTheme {
         var showContent by remember { mutableStateOf(false) }
 

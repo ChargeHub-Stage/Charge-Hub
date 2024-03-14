@@ -7,5 +7,5 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform) apply false
 
     alias(libs.plugins.sqlDelight) apply false
-    id("com.google.gms.google-services").version("4.4.1").apply(false)
+    alias(libs.plugins.googleService).apply(false)
 }

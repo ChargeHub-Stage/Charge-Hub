@@ -13,6 +13,7 @@ androidx-test-junit = "1.1.5"
 compose = "1.6.3"
 compose-plugin = "1.6.10-dev1509"
 firebaseCommon = "20.4.2"
+firebaseBom = "32.7.4"
 firebaseFirestore = "1.11.1"
 junit = "4.13.2"
 kotlin = "1.9.23"
@@ -22,6 +23,7 @@ ktor = "2.3.9"
 coroutines = "1.8.0"
 kotlinxDatetime = "0.6.0-RC.2"
 sqlDelight = "2.0.1"
+googleService = "4.4.1"
 
 [libraries]
 firebase-common = { module = "dev.gitlive:firebase-common", version.ref = "firebaseFirestore" }
@@ -59,6 +61,7 @@ sqldelight-android = { module = "app.cash.sqldelight:android-driver", version.re
 sqldelight-native = { module = "app.cash.sqldelight:native-driver", version.ref = "sqlDelight" }
 
 firebase-common-ktx = { module = "com.google.firebase:firebase-common", version.ref = "firebaseCommon" }
+firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
@@ -67,6 +70,7 @@ jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 sqlDelight = { id = "app.cash.sqldelight", version.ref = "sqlDelight" }
+googleService = { id = "com.google.gms.google-services", version.ref = "googleService" }
 
 [bundles]
 ktor = ["ktor-client-core", "ktor-client-content-negotiation"]
