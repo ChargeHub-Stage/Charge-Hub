@@ -4,6 +4,9 @@ import db.chargehub.User
 import db.database.user.UserDatabase
 import db.database.user.UserDatabaseWrapper
 import db.networking.request.CreateUserRequest
+import db.networking.request.GetUserRequest
+import dev.gitlive.firebase.Firebase
+import dev.gitlive.firebase.firestore.firestore
 import db.repository.GenericRepository
 import io.ktor.client.HttpClient
 import kotlinx.coroutines.flow.Flow
@@ -14,6 +17,10 @@ class RemoteUserRepository(private val httpClient: HttpClient) :
     GenericRepository<CreateUserRequest, User, UserDatabase> {
 
 
+    private val databaseWrapper: UserDatabaseWrapper by inject()
+    private val firestore = Firebase.firestore
+    override suspend fun create(user: CreateUserRequest) {
+        databaseWrapper.database.createUser(user)
     override val database: UserDatabase
         get() = inject<UserDatabaseWrapper>().value.database
 
@@ -21,8 +28,14 @@ class RemoteUserRepository(private val httpClient: HttpClient) :
         database.create(request)
     }
 
-    override suspend fun fetchAll() {
-        database.getAll()
+    override suspend fun fetchAll(): List<GetUserRequest> {
+        try {
+            val userResponse =
+                firestore.collection("USERS").get()
+            return userResponse.documents.map { it.data() }
+        } catch (e: Exception) {
+            throw e
+        }
     }
 
     override suspend fun fetchById(id: String) {

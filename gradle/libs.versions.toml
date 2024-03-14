@@ -12,15 +12,22 @@ androidx-material = "1.11.0"
 androidx-test-junit = "1.1.5"
 compose = "1.6.3"
 compose-plugin = "1.6.10-dev1509"
+firebaseCommon = "20.4.2"
+firebaseBom = "32.7.4"
+firebaseFirestore = "1.11.1"
 junit = "4.13.2"
 kotlin = "1.9.23"
 koin = "3.5.3"
+kotlinxSerializationJson = "1.6.3"
 ktor = "2.3.9"
 coroutines = "1.8.0"
 kotlinxDatetime = "0.6.0-RC.2"
 sqlDelight = "2.0.1"
+googleService = "4.4.1"
 
 [libraries]
+firebase-common = { module = "dev.gitlive:firebase-common", version.ref = "firebaseFirestore" }
+firebase-firestore = { module = "dev.gitlive:firebase-firestore", version.ref = "firebaseFirestore" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -38,6 +45,7 @@ koinCore = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 koinTest = { module = "io.insert-koin:koin-test", version.ref = "koin" }
 koinAndroid = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
 ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
@@ -47,12 +55,13 @@ ktor-client-serialization = { module = "io.ktor:ktor-serialization-kotlinx-json"
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
 
-
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinxDatetime" }
 sqldelight-common = { module = "app.cash.sqldelight:runtime", version.ref = "sqlDelight" }
 sqldelight-android = { module = "app.cash.sqldelight:android-driver", version.ref = "sqlDelight" }
 sqldelight-native = { module = "app.cash.sqldelight:native-driver", version.ref = "sqlDelight" }
 
+firebase-common-ktx = { module = "com.google.firebase:firebase-common", version.ref = "firebaseCommon" }
+firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
@@ -61,6 +70,7 @@ jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 sqlDelight = { id = "app.cash.sqldelight", version.ref = "sqlDelight" }
+googleService = { id = "com.google.gms.google-services", version.ref = "googleService" }
 
 [bundles]
 ktor = ["ktor-client-core", "ktor-client-content-negotiation"]

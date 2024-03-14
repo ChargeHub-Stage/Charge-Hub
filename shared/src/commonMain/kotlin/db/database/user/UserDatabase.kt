@@ -44,5 +44,4 @@ class UserDatabase(sqlDriver: SqlDriver) :
             currentPoints = request.currentPoints
         )
     }
-
 }
