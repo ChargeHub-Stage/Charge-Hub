@@ -15,7 +15,7 @@ interface GenericRepository<R, T, D> : KoinComponent {
 
     suspend fun create(request: R)
 
-    suspend fun fetchAll()
+    suspend fun fetchAll() : List<T>
 
     suspend fun fetchById(id: String)
 
