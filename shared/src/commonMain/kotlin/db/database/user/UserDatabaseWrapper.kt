@@ -1,4 +1,4 @@
 package db.database.user
 
-class UserDatabaseWrapper(val database: UserDatabase?) {
+class UserDatabaseWrapper(val database: UserDatabase) {
 }
