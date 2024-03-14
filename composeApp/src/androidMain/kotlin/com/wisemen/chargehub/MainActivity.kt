@@ -22,9 +22,8 @@ class MainActivity : ComponentActivity(), KoinComponent {
         super.onCreate(savedInstanceState)
         val userRepo: RemoteUserRepository by inject()
 
-        userRepo.create(User(id = 1L, levelId = 1L, "Jan", "Jan@piet.com", "eee", 1L))
         setContent {
-            App(userRepo.getAll().map { it.name }.first())
+            App(userRepo.getAll().map { it.name }.firstOrNull() ?: "Nothing found in db")
         }
     }
 }

@@ -1,16 +1,17 @@
 package di
 
-import db.database.UserDatabase
 import db.repository.user.RemoteUserRepository
 import db.repository.user.UserRepository
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
+import org.koin.core.module.dsl.singleOf
+import org.koin.dsl.bind
 import org.koin.dsl.module
 
 val modules = module {
-    single { UserDatabase(get()) }
+
 }
 
 val clientsModule = module {
@@ -32,5 +33,5 @@ val servicesModule = module {
 }
 
 val repositoriesModule = module {
-    single<UserRepository> { RemoteUserRepository(get()) }
+    singleOf(::RemoteUserRepository).bind<UserRepository>()
 }

@@ -1,13 +1,16 @@
 package di
 
 
-import android.util.Log
 import app.cash.sqldelight.driver.android.AndroidSqliteDriver
 import db.chargehub.ChargeHubDb
+import db.database.UserDatabase
+import db.database.UserDatabaseWrapper
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
-actual fun platformModules(): Module = module {
-    Log.d("TAGG", "platformModules: registered")
-    single { AndroidSqliteDriver(ChargeHubDb.Schema, get(), "chargehubdb.db") }
+actual fun platformModules() = module {
+    single {
+        val driver = AndroidSqliteDriver(ChargeHubDb.Schema, get(), "chargehubdb.db")
+        UserDatabaseWrapper(UserDatabase(driver))
+    }
 }
