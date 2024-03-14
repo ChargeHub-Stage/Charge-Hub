@@ -1,0 +1,26 @@
+CREATE TABLE Reservation (
+    id TEXT PRIMARY KEY,
+    userId TEXT NOT NULL,
+    chargeHubId TEXT NOT NULL,
+    carId TEXT NOT NULL,
+    startTime TEXT NOT NULL,
+    endTime TEXT NOT NULL,
+    FOREIGN KEY (userId) REFERENCES User(id),
+    FOREIGN KEY (chargeHubId) REFERENCES ChargeHub(id),
+    FOREIGN KEY (carId) REFERENCES Car(id)
+);
+
+getAllReservations:
+SELECT * FROM Reservation;
+
+getReservationById:
+SELECT * FROM Reservation WHERE id = ?;
+
+updateReservation:
+UPDATE Reservation SET userId = ?, carId = ?,chargeHubId = ?, startTime = ?, endTime = ? WHERE id = ?;
+
+deleteReservation:
+DELETE FROM Reservation WHERE id = ?;
+
+insertReservation:
+INSERT INTO Reservation (userId, chargeHubId, carId ,startTime, endTime) VALUES (?,?, ?, ?, ?);

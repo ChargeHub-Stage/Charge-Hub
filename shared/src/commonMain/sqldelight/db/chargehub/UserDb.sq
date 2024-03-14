@@ -1,0 +1,24 @@
+CREATE TABLE User (
+    id TEXT PRIMARY KEY,
+    levelId TEXT,
+    name TEXT NOT NULL,
+    email TEXT NOT NULL,
+    password TEXT NOT NULL,
+    currentPoints INTEGER NOT NULL,
+    FOREIGN KEY (levelId) REFERENCES Level(id)
+);
+
+getAllUsers:
+SELECT * FROM User;
+
+getUserById:
+SELECT * FROM User WHERE id = ?;
+
+updateUser:
+UPDATE User SET levelId = ?, name = ?, email = ?, password = ?, currentPoints = ? WHERE id = ?;
+
+deleteUser:
+DELETE FROM User WHERE id = ?;
+
+insertUser:
+INSERT INTO User (levelId, name, email, password, currentPoints) VALUES (?, ?, ?, ?, ?);
