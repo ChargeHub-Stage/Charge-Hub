@@ -20,7 +20,6 @@ kotlin {
         androidMain.dependencies {
             implementation(libs.compose.ui.tooling.preview)
             implementation(libs.androidx.activity.compose)
-
             implementation(libs.koinAndroid)
         }
         commonMain.dependencies {
@@ -67,5 +66,8 @@ android {
     dependencies {
         debugImplementation(libs.compose.ui.tooling)
     }
+}
+dependencies {
+    implementation(libs.androidx.material3.android)
 }
 
