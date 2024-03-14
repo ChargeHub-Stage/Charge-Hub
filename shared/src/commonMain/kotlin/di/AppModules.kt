@@ -1,5 +1,7 @@
 package di
 
+import db.repository.user.FirebaseRepository
+import db.repository.user.RemoteFirebaseRepository
 import db.repository.user.RemoteUserRepository
 import db.repository.user.UserRepository
 import io.ktor.client.HttpClient
@@ -34,4 +36,5 @@ val servicesModule = module {
 
 val repositoriesModule = module {
     singleOf(::RemoteUserRepository).bind<UserRepository>()
+    singleOf(::RemoteFirebaseRepository).bind<FirebaseRepository>()
 }

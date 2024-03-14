@@ -40,6 +40,10 @@ kotlin {
             implementation(libs.sqldelight.common)
             implementation(libs.kotlinx.datetime)
 
+            implementation(libs.firebase.firestore)
+            implementation(libs.firebase.common)
+            implementation(libs.kotlinx.serialization.json)
+
         }
         androidMain.dependencies {
             implementation(libs.ktor.client.okhttp)

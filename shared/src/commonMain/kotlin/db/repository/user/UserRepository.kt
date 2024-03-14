@@ -16,7 +16,6 @@ interface UserRepository {
 
     suspend fun delete(id: Long)
 
-    // Local database
     fun findById(id: Long) : Flow<User>
 
     fun findAll() : Flow<List<User>>

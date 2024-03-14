@@ -4,6 +4,8 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsCompose)
+
+    id("com.google.gms.google-services") version "4.4.1"
 }
 
 kotlin {
@@ -24,6 +26,8 @@ kotlin {
             implementation(libs.kotlinx.coroutines.android)
             implementation(libs.koinAndroid)
             implementation(libs.koinCore)
+
+            implementation(project.dependencies.platform("com.google.firebase:firebase-bom:32.7.4"))
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -33,6 +37,8 @@ kotlin {
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
             implementation(projects.shared)
+
+            implementation(libs.firebase.common.ktx)
         }
     }
 }

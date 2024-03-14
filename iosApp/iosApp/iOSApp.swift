@@ -1,11 +1,13 @@
 import SwiftUI
 import Shared
+import Firebase
 
 @main
 struct iOSApp: App {
 
 	init() {
-	   HelperKt.doInitKoin()
+        FirebaseApp.configure()
+        HelperKt.doInitKoinIos()
 	}
 
 	var body: some Scene {

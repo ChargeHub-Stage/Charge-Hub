@@ -41,5 +41,4 @@ class UserDatabase(sqlDriver: SqlDriver) {
             currentPoints = user.currentPoints
         )
     }
-
 }
