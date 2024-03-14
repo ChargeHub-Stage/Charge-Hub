@@ -19,8 +19,7 @@ class RemoteUserRepository(private val httpClient: HttpClient) :
 
     private val databaseWrapper: UserDatabaseWrapper by inject()
     private val firestore = Firebase.firestore
-    override suspend fun create(user: CreateUserRequest) {
-        databaseWrapper.database.createUser(user)
+
     override val database: UserDatabase
         get() = inject<UserDatabaseWrapper>().value.database
 
@@ -28,7 +27,7 @@ class RemoteUserRepository(private val httpClient: HttpClient) :
         database.create(request)
     }
 
-    override suspend fun fetchAll(): List<GetUserRequest> {
+    override suspend fun fetchAll(): List<User> {
         try {
             val userResponse =
                 firestore.collection("USERS").get()
