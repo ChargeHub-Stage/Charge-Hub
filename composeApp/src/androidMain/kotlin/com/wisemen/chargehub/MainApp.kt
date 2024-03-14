@@ -1,8 +1,10 @@
 package com.wisemen.chargehub
 
 import android.app.Application
+import androidx.appcompat.widget.ThemedSpinnerAdapter.Helper
 import di.modules
 import di.clientsModule
+import di.initKoin
 import di.platformModules
 import di.repositoriesModule
 import di.servicesModule
@@ -14,15 +16,12 @@ class MainApp : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        initKoin()
-
-    }
-
-    private fun initKoin() {
-        startKoin {
+        initKoin {
             androidContext(this@MainApp)
-            modules(modules, clientsModule, servicesModule, repositoriesModule, platformModules())
         }
+
+
     }
+
 
 }
