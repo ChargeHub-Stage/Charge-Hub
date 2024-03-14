@@ -1,5 +1,5 @@
 CREATE TABLE Level (
-    id INTEGER PRIMARY KEY,
+    id TEXT PRIMARY KEY,
     level INTEGER NOT NULL,
     pointsToNextLevel INTEGER NOT NULL,
     requiredPoints INTEGER NOT NULL

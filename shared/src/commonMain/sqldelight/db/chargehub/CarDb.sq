@@ -1,6 +1,6 @@
 CREATE TABLE Car (
-    id INTEGER PRIMARY KEY,
-    userId INTEGER,
+    id TEXT PRIMARY KEY,
+    userId TEXT NOT NULL,
     plate TEXT NOT NULL,
     brand TEXT NOT NULL,
     FOREIGN KEY (userId) REFERENCES User(id)
