@@ -8,7 +8,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.lifecycleScope
 import db.chargehub.Car
+import db.networking.request.CreateChargeHubRequest
 import db.repository.car.RemoteCarRepository
+import db.repository.chargehub.RemoteChargeHubRepository
 import db.repository.user.RemoteUserRepository
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
@@ -20,6 +22,7 @@ class MainActivity : ComponentActivity(), KoinComponent {
         super.onCreate(savedInstanceState)
         val userRepo: RemoteUserRepository by inject()
         val carRepo: RemoteCarRepository by inject()
+        val chargeHubRepo: RemoteChargeHubRepository by inject()
 
         lifecycleScope.launch {
             val cars = mutableListOf<Car>()

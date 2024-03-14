@@ -1,11 +1,7 @@
 package db.repository
 
-import db.chargehub.User
-import db.networking.request.CreateUserRequest
 import kotlinx.coroutines.flow.Flow
 import org.koin.core.component.KoinComponent
-import org.koin.core.component.get
-import org.koin.core.component.inject
 
 /**
  *  A Generic repository interface.
@@ -28,8 +24,8 @@ interface GenericRepository<R, T, D> : KoinComponent {
     suspend fun delete(id: String)
 
     // Local database
-    fun findById(id: String) : Flow<T>
+    fun findById(id: String): Flow<T>
 
-    fun findAll() : Flow<List<T>>
+    fun findAll(): Flow<List<T>>
 
 }
