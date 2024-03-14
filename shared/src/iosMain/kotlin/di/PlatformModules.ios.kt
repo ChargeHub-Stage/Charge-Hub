@@ -4,6 +4,8 @@ import app.cash.sqldelight.driver.native.NativeSqliteDriver
 import db.chargehub.ChargeHubDb
 import db.database.car.CarDatabase
 import db.database.car.CarDatabaseWrapper
+import db.database.chargehub.ChargeHubDatabase
+import db.database.chargehub.ChargeHubDatabaseWrapper
 import db.database.user.UserDatabase
 import db.database.user.UserDatabaseWrapper
 import org.koin.core.module.Module
@@ -18,5 +20,9 @@ actual fun platformModules(): Module = module {
 
     single {
         CarDatabaseWrapper(CarDatabase(driver))
+    }
+
+    single {
+        ChargeHubDatabaseWrapper(ChargeHubDatabase(driver))
     }
 }

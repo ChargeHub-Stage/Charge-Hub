@@ -2,6 +2,7 @@ package di
 
 import db.repository.car.RemoteCarRepository
 import db.repository.user.RemoteUserRepository
+import db.repository.chargehub.RemoteChargeHubRepository
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.serialization.kotlinx.json.json
@@ -34,4 +35,5 @@ val servicesModule = module {
 val repositoriesModule = module {
     singleOf(::RemoteUserRepository)
     singleOf(::RemoteCarRepository)
+    singleOf(::RemoteChargeHubRepository)
 }
