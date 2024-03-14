@@ -1,4 +1,4 @@
-package db.database
+package db.database.user
 
 import app.cash.sqldelight.db.SqlDriver
 import db.chargehub.ChargeHubDb

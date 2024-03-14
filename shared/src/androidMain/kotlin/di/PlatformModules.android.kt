@@ -3,9 +3,8 @@ package di
 
 import app.cash.sqldelight.driver.android.AndroidSqliteDriver
 import db.chargehub.ChargeHubDb
-import db.database.UserDatabase
-import db.database.UserDatabaseWrapper
-import org.koin.core.module.Module
+import db.database.user.UserDatabase
+import db.database.user.UserDatabaseWrapper
 import org.koin.dsl.module
 
 actual fun platformModules() = module {
