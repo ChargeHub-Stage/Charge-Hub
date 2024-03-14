@@ -14,10 +14,6 @@ import org.koin.core.component.inject
 
 class MainActivity : ComponentActivity(), KoinComponent {
 
-    init {
-        Log.d("TAGG", ":Init mainnn ")
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val userRepo: RemoteUserRepository by inject()
