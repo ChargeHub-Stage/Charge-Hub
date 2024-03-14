@@ -6,6 +6,8 @@ import db.database.car.CarDatabaseWrapper
 import db.networking.request.CreateCarRequest
 import db.repository.GenericRepository
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOf
 import org.koin.core.component.inject
 
 class RemoteCarRepository : GenericRepository<CreateCarRequest, Car, CarDatabase> {
@@ -14,31 +16,33 @@ class RemoteCarRepository : GenericRepository<CreateCarRequest, Car, CarDatabase
     override val database: CarDatabase = inject<CarDatabaseWrapper>().value.database
 
     override suspend fun create(request: CreateCarRequest) {
-        TODO("Not yet implemented")
+        database.create(request)
     }
 
     override suspend fun fetchAll() {
-        TODO("Not yet implemented")
+        database.getAll()
     }
 
     override suspend fun fetchById(id: Long) {
-        TODO("Not yet implemented")
+        database.getById(id)
     }
 
     override suspend fun delete(id: Long) {
-        TODO("Not yet implemented")
+        database.delete(id)
     }
 
     override fun findById(id: Long): Flow<Car> {
-        TODO("Not yet implemented")
+        return flow { database.getById(id) }
     }
 
     override fun findAll(): Flow<List<Car>> {
-        TODO("Not yet implemented")
+        return flowOf(database.getAll())
     }
 
+    fun findAllBlocking() : List<Car> = database.getAll()
+
     override suspend fun update(id: Long, request: CreateCarRequest) {
-        TODO("Not yet implemented")
+        database.update(id, request)
     }
 
 }
