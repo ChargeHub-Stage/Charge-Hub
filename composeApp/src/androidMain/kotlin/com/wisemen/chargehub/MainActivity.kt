@@ -2,16 +2,16 @@ package com.wisemen.chargehub
 
 import App
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.tooling.preview.Preview
-import db.chargehub.User
+import androidx.lifecycle.lifecycleScope
+import db.chargehub.Car
+import db.networking.request.CreateChargeHubRequest
+import db.repository.car.RemoteCarRepository
+import db.repository.chargehub.RemoteChargeHubRepository
 import db.repository.user.RemoteUserRepository
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -21,14 +21,19 @@ class MainActivity : ComponentActivity(), KoinComponent {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val userRepo: RemoteUserRepository by inject()
-        var user: User? = null
+        val carRepo: RemoteCarRepository by inject()
+        val chargeHubRepo: RemoteChargeHubRepository by inject()
 
-        userRepo.findAll().onEach {
-            user = it.firstOrNull()
-        }
+        lifecycleScope.launch {
+            val cars = mutableListOf<Car>()
 
-        setContent {
-            App(user?.name ?: "Nothing found in db")
+            carRepo.findAll().collect {
+                cars += it
+            }
+
+            setContent {
+                App(cars.map { it.brand }.toString())
+            }
         }
     }
 }

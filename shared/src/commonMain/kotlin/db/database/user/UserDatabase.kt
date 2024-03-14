@@ -1,44 +1,47 @@
 package db.database.user
 
 import app.cash.sqldelight.db.SqlDriver
-import db.chargehub.ChargeHubDb
 import db.chargehub.User
+import db.chargehub.UserDbQueries
+import db.database.GenericDatabaseOperations
 import db.networking.request.CreateUserRequest
 
-class UserDatabase(sqlDriver: SqlDriver) {
-    private val database = ChargeHubDb(sqlDriver)
-    private val dbQuery = database.userDbQueries
+class UserDatabase(sqlDriver: SqlDriver) :
+    GenericDatabaseOperations<User, CreateUserRequest>(sqlDriver) {
 
-    fun getAll(): List<User> {
-        return dbQuery.getAllUsers().executeAsList()
+    private val query: UserDbQueries
+        get() = database.userDbQueries
+
+    override fun getAll(): List<User> {
+        return query.getAllUsers().executeAsList()
     }
 
-    fun fetchById(id: Long): User {
-        return dbQuery.getUserById(id).executeAsOne()
+    override fun getById(id: String): User {
+        return query.getUserById(id).executeAsOne()
     }
 
-    fun delete(id: Long) {
-        dbQuery.deleteUser(id)
+    override fun delete(id: String) {
+        query.deleteUser(id)
     }
 
-    fun update(id: Long, updatedUser: CreateUserRequest) {
-        dbQuery.updateUser(
+    override fun update(id: String, request: CreateUserRequest) {
+        query.updateUser(
             id = id,
-            levelId = updatedUser.levelId,
-            name = updatedUser.name,
-            email = updatedUser.email,
-            password = updatedUser.password,
-            currentPoints = updatedUser.currentPoints
+            levelId = request.levelId,
+            name = request.name,
+            email = request.email,
+            password = request.password,
+            currentPoints = request.currentPoints
         )
     }
 
-    fun createUser(user: CreateUserRequest) {
-        dbQuery.insertUser(
-            levelId = user.levelId,
-            name = user.name,
-            email = user.email,
-            password = user.password,
-            currentPoints = user.currentPoints
+    override fun create(request: CreateUserRequest) {
+        query.insertUser(
+            levelId = request.levelId,
+            name = request.name,
+            email = request.email,
+            password = request.password,
+            currentPoints = request.currentPoints
         )
     }
 

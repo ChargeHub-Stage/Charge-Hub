@@ -1,6 +1,6 @@
 CREATE TABLE User (
-    id INTEGER PRIMARY KEY,
-    levelId INTEGER,
+    id TEXT PRIMARY KEY,
+    levelId TEXT,
     name TEXT NOT NULL,
     email TEXT NOT NULL,
     password TEXT NOT NULL,
