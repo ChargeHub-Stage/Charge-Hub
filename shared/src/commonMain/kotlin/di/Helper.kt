@@ -1,9 +1,11 @@
 package di
 
 import org.koin.core.context.startKoin
+import org.koin.dsl.KoinAppDeclaration
 
-fun initKoin() {
+fun initKoin(koinAppDeclaration: KoinAppDeclaration = {}) {
     startKoin {
-        modules(modules, clientsModule)
+        koinAppDeclaration()
+        modules(modules, clientsModule, servicesModule, repositoriesModule, platformModules())
     }
 }
