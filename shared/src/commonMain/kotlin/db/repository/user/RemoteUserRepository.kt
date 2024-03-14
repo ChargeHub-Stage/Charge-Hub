@@ -39,6 +39,4 @@ class RemoteUserRepository(private val httpClient: HttpClient) : UserRepository,
     override fun findAll(): Flow<List<User>> {
         return flow { databaseWrapper.database.getAll() }
     }
-
-
 }
