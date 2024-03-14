@@ -9,6 +9,8 @@ import db.database.chargehub.ChargeHubDatabase
 import db.database.chargehub.ChargeHubDatabaseWrapper
 import db.database.level.LevelDatabase
 import db.database.level.LevelDatabaseWrapper
+import db.database.reservation.ReservationDatabase
+import db.database.reservation.ReservationDatabaseWrapper
 import db.database.user.UserDatabase
 import db.database.user.UserDatabaseWrapper
 import org.koin.core.module.Module
@@ -31,5 +33,9 @@ actual fun platformModules(): Module = module {
 
     single {
         LevelDatabaseWrapper(LevelDatabase(driver))
+    }
+
+    single {
+        ReservationDatabaseWrapper(ReservationDatabase(driver))
     }
 }

@@ -2,6 +2,7 @@ package di
 
 import db.repository.car.RemoteCarRepository
 import db.repository.chargehub.RemoteChargeHubRepository
+import db.repository.reservation.RemoteReservationRepository
 import db.repository.level.RemoteLevelRepository
 import db.repository.user.RemoteUserRepository
 import io.ktor.client.HttpClient
@@ -38,4 +39,5 @@ val repositoriesModule = module {
     singleOf(::RemoteCarRepository)
     singleOf(::RemoteChargeHubRepository)
     singleOf(::RemoteLevelRepository)
+    singleOf(::RemoteReservationRepository)
 }

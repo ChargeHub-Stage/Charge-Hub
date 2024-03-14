@@ -10,6 +10,8 @@ import db.database.chargehub.ChargeHubDatabase
 import db.database.chargehub.ChargeHubDatabaseWrapper
 import db.database.level.LevelDatabase
 import db.database.level.LevelDatabaseWrapper
+import db.database.reservation.ReservationDatabase
+import db.database.reservation.ReservationDatabaseWrapper
 import db.database.user.UserDatabase
 import db.database.user.UserDatabaseWrapper
 import org.koin.dsl.module
@@ -34,5 +36,10 @@ actual fun platformModules() = module {
     single {
         val driver = AndroidSqliteDriver(ChargeHubDb.Schema, get(), DATABASE_NAME)
         LevelDatabaseWrapper(LevelDatabase(driver))
+    }
+
+    single {
+        val driver = AndroidSqliteDriver(ChargeHubDb.Schema, get(), DATABASE_NAME)
+        ReservationDatabaseWrapper(ReservationDatabase(driver))
     }
 }

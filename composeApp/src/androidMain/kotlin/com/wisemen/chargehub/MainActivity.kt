@@ -11,6 +11,7 @@ import db.chargehub.Car
 import db.repository.car.RemoteCarRepository
 import db.repository.chargehub.RemoteChargeHubRepository
 import db.repository.level.RemoteLevelRepository
+import db.repository.reservation.RemoteReservationRepository
 import db.repository.user.RemoteUserRepository
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
@@ -24,6 +25,7 @@ class MainActivity : ComponentActivity(), KoinComponent {
         val carRepo: RemoteCarRepository by inject()
         val chargeHubRepo: RemoteChargeHubRepository by inject()
         val levelRepo: RemoteLevelRepository by inject()
+        val reservationRepo: RemoteReservationRepository by inject()
 
         lifecycleScope.launch {
             val cars = mutableListOf<Car>()
