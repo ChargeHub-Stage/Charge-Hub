@@ -11,13 +11,12 @@ import org.koin.dsl.module
 
 
 actual fun platformModules(): Module = module {
+    val driver = NativeSqliteDriver(ChargeHubDb.Schema, "chargehubdb.db")
     single {
-        val driver = NativeSqliteDriver(ChargeHubDb.Schema, "chargehubdb.db")
         UserDatabaseWrapper(UserDatabase(driver))
     }
 
     single {
-        val driver = NativeSqliteDriver(ChargeHubDb.Schema, "chargehubdb.db")
         CarDatabaseWrapper(CarDatabase(driver))
     }
 }

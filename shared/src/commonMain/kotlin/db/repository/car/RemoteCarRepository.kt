@@ -23,15 +23,15 @@ class RemoteCarRepository : GenericRepository<CreateCarRequest, Car, CarDatabase
         database.getAll()
     }
 
-    override suspend fun fetchById(id: Long) {
+    override suspend fun fetchById(id: String) {
         database.getById(id)
     }
 
-    override suspend fun delete(id: Long) {
+    override suspend fun delete(id: String) {
         database.delete(id)
     }
 
-    override fun findById(id: Long): Flow<Car> {
+    override fun findById(id: String): Flow<Car> {
         return flow { database.getById(id) }
     }
 
@@ -39,9 +39,7 @@ class RemoteCarRepository : GenericRepository<CreateCarRequest, Car, CarDatabase
         return flowOf(database.getAll())
     }
 
-    fun findAllBlocking() : List<Car> = database.getAll()
-
-    override suspend fun update(id: Long, request: CreateCarRequest) {
+    override suspend fun update(id: String, request: CreateCarRequest) {
         database.update(id, request)
     }
 

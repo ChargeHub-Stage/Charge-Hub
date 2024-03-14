@@ -3,4 +3,4 @@ package db.networking.request
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class CreateCarRequest(val userId: Long, val brand: String, val plate: String)
+data class CreateCarRequest(val userId: String, val brand: String, val plate: String)

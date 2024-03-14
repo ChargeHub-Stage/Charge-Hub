@@ -25,19 +25,19 @@ class RemoteUserRepository(private val httpClient: HttpClient) :
         database.getAll()
     }
 
-    override suspend fun fetchById(id: Long) {
+    override suspend fun fetchById(id: String) {
         database.getById(id)
     }
 
-    override suspend fun update(id: Long, request: CreateUserRequest) {
+    override suspend fun update(id: String, request: CreateUserRequest) {
         database.update(id, request)
     }
 
-    override suspend fun delete(id: Long) {
+    override suspend fun delete(id: String) {
         database.delete(id)
     }
 
-    override fun findById(id: Long): Flow<User> {
+    override fun findById(id: String): Flow<User> {
         return flowOf(database.getById(id))
     }
 

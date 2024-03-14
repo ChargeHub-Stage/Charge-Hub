@@ -16,11 +16,11 @@ abstract class GenericDatabaseOperations<T, R>(sqlDriver: SqlDriver) {
 
     abstract fun getAll() : List<T>
 
-    abstract fun getById(id: Long) : T
+    abstract fun getById(id: String) : T
 
     abstract fun create(request: R)
 
-    abstract fun delete(id: Long)
+    abstract fun delete(id: String)
 
-    abstract fun update(id: Long, request: R)
+    abstract fun update(id: String, request: R)
 }

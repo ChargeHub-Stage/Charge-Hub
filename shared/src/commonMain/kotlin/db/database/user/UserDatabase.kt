@@ -16,15 +16,15 @@ class UserDatabase(sqlDriver: SqlDriver) :
         return query.getAllUsers().executeAsList()
     }
 
-    override fun getById(id: Long): User {
+    override fun getById(id: String): User {
         return query.getUserById(id).executeAsOne()
     }
 
-    override fun delete(id: Long) {
+    override fun delete(id: String) {
         query.deleteUser(id)
     }
 
-    override fun update(id: Long, request: CreateUserRequest) {
+    override fun update(id: String, request: CreateUserRequest) {
         query.updateUser(
             id = id,
             levelId = request.levelId,

@@ -15,15 +15,15 @@ class CarDatabase(sqlDriver: SqlDriver) :
         return query.getAllCars().executeAsList()
     }
 
-    override fun getById(id: Long): Car {
+    override fun getById(id: String): Car {
         return query.getCarById(id).executeAsOne()
     }
 
-    override fun delete(id: Long) {
+    override fun delete(id: String) {
         query.deleteCar(id)
     }
 
-    override fun update(id: Long, request: CreateCarRequest) {
+    override fun update(id: String, request: CreateCarRequest) {
         query.updateCar(
             id = id,
             brand = request.brand,

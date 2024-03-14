@@ -21,14 +21,14 @@ interface GenericRepository<R, T, D> : KoinComponent {
 
     suspend fun fetchAll()
 
-    suspend fun fetchById(id: Long)
+    suspend fun fetchById(id: String)
 
-    suspend fun update(id: Long, request: R)
+    suspend fun update(id: String, request: R)
 
-    suspend fun delete(id: Long)
+    suspend fun delete(id: String)
 
     // Local database
-    fun findById(id: Long) : Flow<T>
+    fun findById(id: String) : Flow<T>
 
     fun findAll() : Flow<List<T>>
 
