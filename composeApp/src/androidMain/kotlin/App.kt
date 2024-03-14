@@ -18,7 +18,7 @@ import chargehub.composeapp.generated.resources.compose_multiplatform
 @OptIn(ExperimentalResourceApi::class)
 @Composable
 @Preview
-fun App(firstUser: String) {
+fun App(firstUser: String? = null) {
     MaterialTheme {
         var showContent by remember { mutableStateOf(false) }
         Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
