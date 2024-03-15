@@ -22,7 +22,7 @@ struct TextOnlyButton: View {
                 .cornerRadius(5)
                 .overlay(
                     RoundedRectangle(cornerRadius: 5)
-                        .stroke(textColor, lineWidth: 1)
+                        .stroke(textColor, lineWidth: 0)
                 )
         }
         .disabled(!enabled)
