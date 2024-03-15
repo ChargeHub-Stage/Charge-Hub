@@ -44,6 +44,8 @@ kotlin {
             implementation(libs.firebase.common)
             implementation(libs.kotlinx.serialization.json)
 
+            api(libs.kmm.viewmodel.core)
+
         }
         androidMain.dependencies {
             implementation(libs.ktor.client.okhttp)
