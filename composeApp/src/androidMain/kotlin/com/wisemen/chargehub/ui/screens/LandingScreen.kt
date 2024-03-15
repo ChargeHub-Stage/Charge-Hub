@@ -42,8 +42,6 @@ fun LandingLayout(onAction: (LandingScreenUiAction) -> Unit) {
         ) {
             onAction(LandingScreenUiAction.ClickedLoginButtonAction)
         }
-    }
-    Column(modifier = Modifier.padding(10.dp)) {
         Buttons.AppButton(
             text = "Register"
         ) {
