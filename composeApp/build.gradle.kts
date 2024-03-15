@@ -4,6 +4,8 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsCompose)
+
+    alias(libs.plugins.googleService)
 }
 
 kotlin {
@@ -23,6 +25,8 @@ kotlin {
             implementation(libs.kotlinx.coroutines.android)
             implementation(libs.koinAndroid)
             implementation(libs.koinCore)
+
+            implementation(project.dependencies.platform(libs.firebase.bom))
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -32,6 +36,8 @@ kotlin {
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
             implementation(projects.shared)
+
+            implementation(libs.firebase.common.ktx)
         }
     }
 }

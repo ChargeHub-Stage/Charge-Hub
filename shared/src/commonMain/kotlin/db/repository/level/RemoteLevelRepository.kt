@@ -14,12 +14,12 @@ class RemoteLevelRepository : GenericRepository<CreateLevelRequest, Level, Level
     override val database: LevelDatabase
         get() = inject<LevelDatabaseWrapper>().value.database
 
-    override suspend fun fetchAll() {
-        database.getAll()
+    override suspend fun fetchAll(): List<Level> {
+        return database.getAll()
     }
 
-    override suspend fun fetchById(id: String) {
-       database.getById(id)
+    override suspend fun fetchById(id: String): Level {
+       return database.getById(id)
     }
 
     override suspend fun delete(id: String) {

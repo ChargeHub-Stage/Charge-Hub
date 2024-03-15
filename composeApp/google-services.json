@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "370764391542",
+    "project_id": "chargehub-kmp",
+    "storage_bucket": "chargehub-kmp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:370764391542:android:82cf27ae9e811ee1e2ab57",
+        "android_client_info": {
+          "package_name": "com.wisemen.chargehub"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjW5DTzxdoPpc97NHLB4uASm_UZFUCGS4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
