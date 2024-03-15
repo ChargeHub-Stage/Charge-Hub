@@ -23,15 +23,17 @@ class ReservationDatabase(sqlDriver: SqlDriver) :
         query.deleteReservation(id)
     }
 
-    override fun update(id: String, request: CreateReservationRequest) {
-        query.updateReservation(
-            id = id,
-            userId = request.userId,
-            carId = request.carId,
-            chargeHubId = request.chargeHubId,
-            startTime = request.startTime,
-            endTime = request.endTime
-        )
+    override fun update(request: CreateReservationRequest) {
+        request.id?.let {
+            query.updateReservation(
+                id = it,
+                userId = request.userId,
+                carId = request.carId,
+                chargeHubId = request.chargeHubId,
+                startTime = request.startTime,
+                endTime = request.endTime
+            )
+        }
     }
 
     override fun create(request: CreateReservationRequest) {

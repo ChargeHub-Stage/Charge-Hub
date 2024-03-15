@@ -34,8 +34,8 @@ class RemoteReservationRepository :
         return flowOf(database.getAll())
     }
 
-    override suspend fun update(id: String, request: CreateReservationRequest) {
-        database.update(id, request)
+    override suspend fun update(request: CreateReservationRequest) {
+        database.update(request)
     }
 
     override suspend fun create(request: CreateReservationRequest) {

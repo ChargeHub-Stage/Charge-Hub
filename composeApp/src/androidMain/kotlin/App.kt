@@ -21,7 +21,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @OptIn(ExperimentalResourceApi::class)
 @Composable
 @Preview
-fun App(firstUser: String? = null) {
+fun App(user: String) {
     MaterialTheme {
         var showContent by remember { mutableStateOf(false) }
 
@@ -32,7 +32,7 @@ fun App(firstUser: String? = null) {
             AnimatedVisibility(showContent) {
                 Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
                     Image(painterResource(Res.drawable.compose_multiplatform), null)
-                    Text("Compose $firstUser")
+                    Text("Compose $user")
                 }
             }
         }

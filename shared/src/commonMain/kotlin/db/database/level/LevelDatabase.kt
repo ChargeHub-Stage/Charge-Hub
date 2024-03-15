@@ -23,12 +23,14 @@ class LevelDatabase(sqlDriver: SqlDriver) :
         query.deleteLevel(id)
     }
 
-    override fun update(id: String, request: CreateLevelRequest) {
-        query.updateLevel(
-            id = id,
-            level = request.level,
-            requiredPoints = request.requiredPoints,
-        )
+    override fun update(request: CreateLevelRequest) {
+        request.id?.let {
+            query.updateLevel(
+                id = it,
+                level = request.level,
+                requiredPoints = request.requiredPoints,
+            )
+        }
     }
 
     override fun create(request: CreateLevelRequest) {

@@ -39,8 +39,8 @@ class RemoteCarRepository : GenericRepository<CreateCarRequest, Car, CarDatabase
         return flowOf(database.getAll())
     }
 
-    override suspend fun update(id: String, request: CreateCarRequest) {
-        database.update(id, request)
+    override suspend fun update(request: CreateCarRequest) {
+        database.update(request)
     }
 
 }

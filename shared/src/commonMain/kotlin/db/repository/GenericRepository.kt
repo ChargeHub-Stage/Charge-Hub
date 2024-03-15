@@ -19,7 +19,7 @@ interface GenericRepository<R, T, D> : KoinComponent {
 
     suspend fun fetchById(id: String) : T?
 
-    suspend fun update(id: String, request: R)
+    suspend fun update(request: R)
 
     suspend fun delete(id: String)
 

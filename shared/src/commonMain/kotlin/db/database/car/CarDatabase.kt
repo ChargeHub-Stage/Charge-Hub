@@ -23,13 +23,15 @@ class CarDatabase(sqlDriver: SqlDriver) :
         query.deleteCar(id)
     }
 
-    override fun update(id: String, request: CreateCarRequest) {
-        query.updateCar(
-            id = id,
-            brand = request.brand,
-            plate = request.plate,
-            userId = request.userId
-        )
+    override fun update(request: CreateCarRequest) {
+        request.id?.let {
+            query.updateCar(
+                id = it,
+                brand = request.brand,
+                plate = request.plate,
+                userId = request.userId
+            )
+        }
     }
 
     override fun create(request: CreateCarRequest) {

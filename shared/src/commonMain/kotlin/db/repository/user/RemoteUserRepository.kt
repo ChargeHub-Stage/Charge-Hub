@@ -13,17 +13,18 @@ import kotlinx.coroutines.flow.flowOf
 import org.koin.core.component.inject
 
 class RemoteUserRepository(private val httpClient: HttpClient) :
-    GenericRepository<UserRequest, User, UserDatabase> {
+    GenericRepository<UserRequest, UserRequest, UserDatabase> {
 
     private val firestore = Firebase.firestore
     override val database: UserDatabase
         get() = inject<UserDatabaseWrapper>().value.database
 
     override suspend fun create(request: UserRequest) {
-        firestore.collection("USERS").add(request)
+        val firebaseUser = firestore.collection("USERS").add(request)
+        database.create(request.copy(id = firebaseUser.id))
     }
 
-    override suspend fun fetchAll(): List<User> {
+    override suspend fun fetchAll(): List<UserRequest> {
         try {
             val userResponse =
                 firestore.collection("USERS").get()
@@ -33,7 +34,7 @@ class RemoteUserRepository(private val httpClient: HttpClient) :
         }
     }
 
-    override suspend fun fetchById(id: String): User {
+    override suspend fun fetchById(id: String): UserRequest {
        try {
            val userDocument =
                firestore.collection("USERS").document(id).get()
@@ -43,19 +44,20 @@ class RemoteUserRepository(private val httpClient: HttpClient) :
        }
     }
 
-    override suspend fun update(id: String, request: UserRequest) {
-        firestore.collection("USERS").document(id).update(request)
+    override suspend fun update(request: UserRequest) {
+        request.id?.let { firestore.collection("USERS").document(it).update(request) }
+        database.update(request.copy(id = request.id))
     }
 
     override suspend fun delete(id: String) {
         firestore.collection("USERS").document(id).delete()
     }
 
-    override fun findById(id: String): Flow<User> {
+    override fun findById(id: String): Flow<UserRequest> {
         return flowOf(database.getById(id))
     }
 
-    override fun findAll(): Flow<List<User>> {
+    override fun findAll(): Flow<List<UserRequest>> {
         return flowOf(database.getAll())
     }
 }

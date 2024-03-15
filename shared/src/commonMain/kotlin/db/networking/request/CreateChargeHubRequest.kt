@@ -3,4 +3,7 @@ package db.networking.request
 import kotlinx.serialization.Serializable
 
 @Serializable
-class CreateChargeHubRequest(val name: String)
+class CreateChargeHubRequest(
+    val id: String? = null,
+    val name: String
+)

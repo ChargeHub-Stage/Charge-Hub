@@ -23,8 +23,8 @@ class ChargeHubDatabase(sqlDriver: SqlDriver) :
         query.deleteChargeHub(id)
     }
 
-    override fun update(id: String, request: CreateChargeHubRequest) {
-        query.updateChargeHub(id = id, name = request.name)
+    override fun update(request: CreateChargeHubRequest) {
+        request.id?.let { query.updateChargeHub(id = it, name = request.name) }
     }
 
     override fun create(request: CreateChargeHubRequest) {

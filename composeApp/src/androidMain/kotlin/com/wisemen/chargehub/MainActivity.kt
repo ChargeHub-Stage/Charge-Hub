@@ -30,20 +30,19 @@ class MainActivity : ComponentActivity(), KoinComponent {
 
         lifecycleScope.launch {
             val cars = mutableListOf<Car>()
+            val users = userRepo.fetchAll()
 
-            carRepo.findAll().collect {
-                cars += it
-            }
+            carRepo.findAll().collect { cars += it }
 
             setContent {
-                App(cars.map { it.brand }.toString())
+                App(users.map { it.name }.firstOrNull() ?: "User")
             }
         }
     }
 }
 
-@Preview
-@Composable
-fun AppAndroidPreview() {
-    App()
-}
+//@Preview
+//@Composable
+//fun AppAndroidPreview() {
+//    App()
+//}

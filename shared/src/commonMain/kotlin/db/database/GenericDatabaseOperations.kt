@@ -22,5 +22,5 @@ abstract class GenericDatabaseOperations<T, R>(sqlDriver: SqlDriver) {
 
     abstract fun delete(id: String)
 
-    abstract fun update(id: String, request: R)
+    abstract fun update(request: R)
 }

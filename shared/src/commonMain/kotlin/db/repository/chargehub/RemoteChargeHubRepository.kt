@@ -33,8 +33,8 @@ class RemoteChargeHubRepository : GenericRepository<CreateChargeHubRequest, Char
         return flowOf(database.getAll())
     }
 
-    override suspend fun update(id: String, request: CreateChargeHubRequest) {
-       database.update(id = id, request)
+    override suspend fun update(request: CreateChargeHubRequest) {
+       database.update(request)
     }
 
     override suspend fun create(request: CreateChargeHubRequest) {

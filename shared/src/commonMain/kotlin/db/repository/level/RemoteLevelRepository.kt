@@ -41,8 +41,8 @@ class RemoteLevelRepository :
         }
     }
 
-    override suspend fun update(id: String, request: CreateLevelRequest) {
-        firestore.collection("LEVELS").document(id).update(request)
+    override suspend fun update(request: CreateLevelRequest) {
+        request.id?.let { firestore.collection("LEVELS").document(it).update(request) }
     }
 
     override suspend fun delete(id: String) {
