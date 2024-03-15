@@ -13,12 +13,12 @@ class RemoteChargeHubRepository : GenericRepository<CreateChargeHubRequest, Char
     override val database: ChargeHubDatabase
         get() = inject<ChargeHubDatabaseWrapper>().value.database
 
-    override suspend fun fetchAll() {
-        database.getAll()
+    override suspend fun fetchAll(): List<ChargeHub> {
+        return database.getAll()
     }
 
-    override suspend fun fetchById(id: String) {
-        database.getById(id)
+    override suspend fun fetchById(id: String): ChargeHub {
+        return database.getById(id)
     }
 
     override suspend fun delete(id: String) {

@@ -3,8 +3,7 @@ package db.repository.user
 import db.chargehub.User
 import db.database.user.UserDatabase
 import db.database.user.UserDatabaseWrapper
-import db.networking.request.CreateUserRequest
-import db.networking.request.GetUserRequest
+import db.networking.request.UserRequest
 import dev.gitlive.firebase.Firebase
 import dev.gitlive.firebase.firestore.firestore
 import db.repository.GenericRepository
@@ -14,21 +13,17 @@ import kotlinx.coroutines.flow.flowOf
 import org.koin.core.component.inject
 
 class RemoteUserRepository(private val httpClient: HttpClient) :
-    GenericRepository<CreateUserRequest, User, UserDatabase> {
+    GenericRepository<UserRequest, User, UserDatabase> {
 
-
-    private val databaseWrapper: UserDatabaseWrapper by inject()
     private val firestore = Firebase.firestore
-    override suspend fun create(user: CreateUserRequest) {
-        databaseWrapper.database.createUser(user)
     override val database: UserDatabase
         get() = inject<UserDatabaseWrapper>().value.database
 
-    override suspend fun create(request: CreateUserRequest) {
-        database.create(request)
+    override suspend fun create(request: UserRequest) {
+        firestore.collection("USERS").add(request)
     }
 
-    override suspend fun fetchAll(): List<GetUserRequest> {
+    override suspend fun fetchAll(): List<User> {
         try {
             val userResponse =
                 firestore.collection("USERS").get()
@@ -38,16 +33,22 @@ class RemoteUserRepository(private val httpClient: HttpClient) :
         }
     }
 
-    override suspend fun fetchById(id: String) {
-        database.getById(id)
+    override suspend fun fetchById(id: String): User {
+       try {
+           val userDocument =
+               firestore.collection("USERS").document(id).get()
+           return userDocument.data()
+       } catch(e: Exception) {
+           throw e
+       }
     }
 
-    override suspend fun update(id: String, request: CreateUserRequest) {
-        database.update(id, request)
+    override suspend fun update(id: String, request: UserRequest) {
+        firestore.collection("USERS").document(id).update(request)
     }
 
     override suspend fun delete(id: String) {
-        database.delete(id)
+        firestore.collection("USERS").document(id).delete()
     }
 
     override fun findById(id: String): Flow<User> {

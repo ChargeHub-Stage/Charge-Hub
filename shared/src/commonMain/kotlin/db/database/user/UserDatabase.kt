@@ -4,10 +4,10 @@ import app.cash.sqldelight.db.SqlDriver
 import db.chargehub.User
 import db.chargehub.UserDbQueries
 import db.database.GenericDatabaseOperations
-import db.networking.request.CreateUserRequest
+import db.networking.request.UserRequest
 
 class UserDatabase(sqlDriver: SqlDriver) :
-    GenericDatabaseOperations<User, CreateUserRequest>(sqlDriver) {
+    GenericDatabaseOperations<User, UserRequest>(sqlDriver) {
 
     private val query: UserDbQueries
         get() = database.userDbQueries
@@ -24,7 +24,7 @@ class UserDatabase(sqlDriver: SqlDriver) :
         query.deleteUser(id)
     }
 
-    override fun update(id: String, request: CreateUserRequest) {
+    override fun update(id: String, request: UserRequest) {
         query.updateUser(
             id = id,
             levelId = request.levelId,
@@ -35,7 +35,7 @@ class UserDatabase(sqlDriver: SqlDriver) :
         )
     }
 
-    override fun create(request: CreateUserRequest) {
+    override fun create(request: UserRequest) {
         query.insertUser(
             levelId = request.levelId,
             name = request.name,
