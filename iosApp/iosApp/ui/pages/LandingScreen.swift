@@ -1,4 +1,8 @@
 import SwiftUI
+import Shared
+import KMMViewModelSwiftUI
+
+
 
 struct LandingScreenView: View {
     var body: some View {
@@ -13,7 +17,7 @@ struct LandingScreenView: View {
                 Spacer()
                 ButtonsComponent()
             }.padding(.horizontal, 16)
-            .padding(.top, 46)
+                .padding(.top, 46)
         }
     }
 }
@@ -38,13 +42,17 @@ struct HeaderComponent: View {
 }
 
 struct ButtonsComponent: View {
+    @StateViewModel var landingViewModel = LandingScreenViewModel()
+    
     var body: some View {
         VStack() {
             PrimaryButton(
                 text: "Aanmelden",
                 textColor: .blackPearl,
                 backgroundColor: .acid,
-                action: {}
+                action: {
+                    landingViewModel.onAction(action: LandingScreenUiAction.ClickedLoginButtonAction())
+                }
             )
             .padding(.bottom, 16)
             .frame(maxWidth: .infinity) .cornerRadius(8)
@@ -53,10 +61,12 @@ struct ButtonsComponent: View {
                 text: "Registreren",
                 textColor: .white,
                 backgroundColor: .smoke,
-                action: {}
+                action: {
+                    landingViewModel.onAction(action: LandingScreenUiAction.ClickedRegisterButtonAction())
+                }
             )
             .padding(.bottom, 35)
-    
+            
             .frame(maxWidth: .infinity) .cornerRadius(8)
         }
     }

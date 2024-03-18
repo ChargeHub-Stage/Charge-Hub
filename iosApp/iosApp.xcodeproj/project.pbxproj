@@ -16,6 +16,9 @@
 		64BF5C2B2BA3109200338446 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 64BF5C2A2BA3109200338446 /* FirebaseFirestore */; };
 		64BF5C2D2BA31C0E00338446 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 64BF5C2C2BA31C0E00338446 /* GoogleService-Info.plist */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
+		DD564B632BA8977F001D1EED /* KMMViewModelCore in Frameworks */ = {isa = PBXBuildFile; productRef = DD564B622BA8977F001D1EED /* KMMViewModelCore */; };
+		DD564B652BA8977F001D1EED /* KMMViewModelSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = DD564B642BA8977F001D1EED /* KMMViewModelSwiftUI */; };
+		DD564B682BA897BE001D1EED /* KMMViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD564B672BA897BE001D1EED /* KMMViewModel.swift */; };
 		DD5877F82BA34552000CD0DE /* color.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5877F72BA34552000CD0DE /* color.swift */; };
 		DD5877FA2BA34581000CD0DE /* buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5877F92BA34581000CD0DE /* buttons.swift */; };
 		DD877E6A2BA4730200608CF5 /* textStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD877E692BA4730200608CF5 /* textStyles.swift */; };
@@ -32,6 +35,7 @@
 		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AB3632DC29227652001CCB65 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		DD564B672BA897BE001D1EED /* KMMViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMMViewModel.swift; sourceTree = "<group>"; };
 		DD5877F72BA34552000CD0DE /* color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = color.swift; sourceTree = "<group>"; };
 		DD5877F92BA34581000CD0DE /* buttons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = buttons.swift; sourceTree = "<group>"; };
 		DD877E692BA4730200608CF5 /* textStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = textStyles.swift; sourceTree = "<group>"; };
@@ -45,9 +49,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				64BF5C292BA3109200338446 /* FirebaseDatabase in Frameworks */,
+				DD564B652BA8977F001D1EED /* KMMViewModelSwiftUI in Frameworks */,
 				64BF5C2B2BA3109200338446 /* FirebaseFirestore in Frameworks */,
 				64BF5C252BA3109200338446 /* FirebaseAnalytics in Frameworks */,
 				64BF5C272BA3109200338446 /* FirebaseAuth in Frameworks */,
+				DD564B632BA8977F001D1EED /* KMMViewModelCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,6 +96,7 @@
 		7555FF7D242A565900829871 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
+				DD564B662BA897A7001D1EED /* viewmodel */,
 				DD5877F62BA34522000CD0DE /* ui */,
 				64BF5C2C2BA31C0E00338446 /* GoogleService-Info.plist */,
 				058557BA273AAA24004C7B11 /* Assets.xcassets */,
@@ -107,6 +114,14 @@
 				AB3632DC29227652001CCB65 /* Config.xcconfig */,
 			);
 			path = Configuration;
+			sourceTree = "<group>";
+		};
+		DD564B662BA897A7001D1EED /* viewmodel */ = {
+			isa = PBXGroup;
+			children = (
+				DD564B672BA897BE001D1EED /* KMMViewModel.swift */,
+			);
+			path = viewmodel;
 			sourceTree = "<group>";
 		};
 		DD5877F62BA34522000CD0DE /* ui */ = {
@@ -159,6 +174,8 @@
 				64BF5C262BA3109200338446 /* FirebaseAuth */,
 				64BF5C282BA3109200338446 /* FirebaseDatabase */,
 				64BF5C2A2BA3109200338446 /* FirebaseFirestore */,
+				DD564B622BA8977F001D1EED /* KMMViewModelCore */,
+				DD564B642BA8977F001D1EED /* KMMViewModelSwiftUI */,
 			);
 			productName = iosApp;
 			productReference = 7555FF7B242A565900829871 /* ChargeHub.app */;
@@ -190,6 +207,7 @@
 			mainGroup = 7555FF72242A565900829871;
 			packageReferences = (
 				64BF5C232BA3109200338446 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				DD564B612BA8977F001D1EED /* XCRemoteSwiftPackageReference "KMM-ViewModel" */,
 			);
 			productRefGroup = 7555FF7C242A565900829871 /* Products */;
 			projectDirPath = "";
@@ -245,6 +263,7 @@
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				DD877E6A2BA4730200608CF5 /* textStyles.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
+				DD564B682BA897BE001D1EED /* KMMViewModel.swift in Sources */,
 				DD5877FA2BA34581000CD0DE /* buttons.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -464,6 +483,14 @@
 				minimumVersion = 10.22.1;
 			};
 		};
+		DD564B612BA8977F001D1EED /* XCRemoteSwiftPackageReference "KMM-ViewModel" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/rickclephas/KMM-ViewModel.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -486,6 +513,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 64BF5C232BA3109200338446 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
+		};
+		DD564B622BA8977F001D1EED /* KMMViewModelCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DD564B612BA8977F001D1EED /* XCRemoteSwiftPackageReference "KMM-ViewModel" */;
+			productName = KMMViewModelCore;
+		};
+		DD564B642BA8977F001D1EED /* KMMViewModelSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DD564B612BA8977F001D1EED /* XCRemoteSwiftPackageReference "KMM-ViewModel" */;
+			productName = KMMViewModelSwiftUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
