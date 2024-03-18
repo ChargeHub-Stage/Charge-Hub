@@ -26,10 +26,17 @@ import com.wisemen.chargehub.ui.theme.Colors
 private fun ButtonPreview() {
     AppTheme {
         Column {
-            IconButton(onClick = {}, icon = { Icon(Icons.Default.Add, "") })
+            IconButton(
+                onClick = {},
+                icon = { Icon(Icons.Default.Add, "") })
             AppButton(
-                onClick = {}, text = "click", colors = ButtonDefaults.buttonColors()
-                    .copy(containerColor = Colors.acid, contentColor = Colors.white)
+                onClick = {},
+                text = "click",
+                colors = ButtonDefaults.buttonColors()
+                    .copy(
+                        containerColor = Colors.acid,
+                        contentColor = Colors.white
+                    )
             )
         }
     }
