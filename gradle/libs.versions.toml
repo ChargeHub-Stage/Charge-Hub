@@ -33,6 +33,7 @@ navigationRuntimeKtx = "2.7.7"
 navigationCompose = "2.7.7"
 
 [libraries]
+firebase-auth = { module = "dev.gitlive:firebase-auth", version.ref = "firebaseFirestore" }
 raamcosta-core = { module = "io.github.raamcosta.compose-destinations:core", version.ref = "core" }
 firebase-common = { module = "dev.gitlive:firebase-common", version.ref = "firebaseFirestore" }
 firebase-firestore = { module = "dev.gitlive:firebase-firestore", version.ref = "firebaseFirestore" }

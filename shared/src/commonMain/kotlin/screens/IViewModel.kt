@@ -13,15 +13,14 @@ import kotlinx.coroutines.flow.receiveAsFlow
  */
 interface IViewModel<A, E, S : Any?> {
 
-    private val eventChannel: Channel<E>
-        get() = Channel()
+//    val eventChannel: Channel<E>
+//
+//    val eventFlow: Flow<E>
+//        get() = eventChannel.receiveAsFlow()
 
-    val eventFlow: Flow<E>
-        get() = eventChannel.receiveAsFlow()
-
-    suspend fun sendEvent(event: E) {
-        eventChannel.send(event)
-    }
+//    suspend fun sendEvent(event: E) {
+//        eventChannel.send(event)
+//    }
 
 
     var state: S
