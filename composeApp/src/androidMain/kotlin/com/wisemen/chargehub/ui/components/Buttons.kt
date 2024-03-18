@@ -32,8 +32,6 @@ private fun ButtonPreview() {
                     .copy(containerColor = Colors.acid, contentColor = Colors.white)
             )
         }
-        //TextButton(onClick = {}, text = "Hey")
-
     }
 }
 
