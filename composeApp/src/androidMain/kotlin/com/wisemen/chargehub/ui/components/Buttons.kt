@@ -2,22 +2,26 @@ package com.wisemen.chargehub.ui.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ButtonElevation
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.wisemen.chargehub.ui.components.Buttons.AppButton
 import com.wisemen.chargehub.ui.components.Buttons.IconButton
+import com.wisemen.chargehub.ui.components.Buttons.PrimaryButton
 import com.wisemen.chargehub.ui.theme.AppTheme
 import com.wisemen.chargehub.ui.theme.Colors
 
@@ -26,14 +30,16 @@ import com.wisemen.chargehub.ui.theme.Colors
 private fun ButtonPreview() {
     AppTheme {
         Column {
-            IconButton(onClick = {}, icon = { Icon(Icons.Default.Add, "") })
-            AppButton(
-                onClick = {}, text = "click", colors = ButtonDefaults.buttonColors()
-                    .copy(containerColor = Colors.acid, contentColor = Colors.white)
-            )
+            IconButton(
+                onClick = {},
+                icon = { Icon(Icons.Default.Add, "") })
+            PrimaryButton(
+                onClick = {},
+                text = "click",
+                colors = ButtonDefaults.primaryButtonColors(),
+                trailingIcon = { Icon(Icons.Default.Add, "") },
+                leadingIcon = { Icon(Icons.Default.Add, "") })
         }
-        //TextButton(onClick = {}, text = "Hey")
-
     }
 }
 
@@ -80,7 +86,7 @@ object Buttons {
     }
 
     @Composable
-    fun AppButton(
+    fun PrimaryButton(
         modifier: Modifier = Modifier,
         enabled: Boolean = true,
         text: String,
@@ -88,6 +94,8 @@ object Buttons {
         colors: ButtonColors = ButtonDefaults.buttonColors(),
         textStyle: TextStyle = TextStyle.Default,
         onClick: () -> Unit,
+        trailingIcon: @Composable (() -> Unit)? = null,
+        leadingIcon: @Composable (() -> Unit)? = null
     ) {
         Button(
             enabled = enabled,
@@ -96,9 +104,19 @@ object Buttons {
             colors = colors,
             elevation = ButtonDefaults.buttonElevation(0.dp, 0.dp, 0.dp),
             contentPadding = contentPadding,
-            onClick = onClick
+            onClick = onClick,
         ) {
-            Text(text = text, style = textStyle)
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                leadingIcon?.let { it() }
+                Text(
+                    text = text,
+                    style = textStyle,
+                    modifier = Modifier.align(Alignment.CenterVertically)
+                )
+                trailingIcon?.let { it() }
+            }
         }
     }
 
@@ -119,7 +137,7 @@ object Buttons {
                 contentColor = Colors.blackPearl
             ),
             contentPadding = contentPadding,
-            elevation = ButtonDefaults.buttonElevation(0.dp, 0.dp, 0.dp),
+            elevation = ButtonDefaults.noElevation(),
             onClick = onClick
         ) {
             icon()
@@ -127,3 +145,22 @@ object Buttons {
     }
 
 }
+
+@Composable
+fun ButtonDefaults.noElevation(): ButtonElevation = buttonElevation(0.dp, 0.dp, 0.dp)
+
+@Composable
+fun ButtonDefaults.primaryButtonColors(): ButtonColors = buttonColors(
+    contentColor = Colors.blackPearl,
+    containerColor = Colors.acid,
+    disabledContentColor = Colors.blackPearl,
+    disabledContainerColor = Colors.lightGrey
+)
+
+@Composable
+fun ButtonDefaults.secondaryButtonColors(): ButtonColors = buttonColors(
+    contentColor = Colors.white,
+    containerColor = Colors.smoke,
+    disabledContentColor = Colors.blackPearl,
+    disabledContainerColor = Colors.lightGrey
+)

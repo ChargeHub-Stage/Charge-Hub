@@ -4,7 +4,7 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsCompose)
-    alias(libs.plugins.navigation)
+
     alias(libs.plugins.googleService)
 }
 
@@ -25,7 +25,7 @@ kotlin {
             implementation(libs.kotlinx.coroutines.android)
             implementation(libs.koinAndroid)
             implementation(libs.koinCore)
-
+            implementation(libs.androidx.material3.android)
             implementation(project.dependencies.platform(libs.firebase.bom))
         }
         commonMain.dependencies {
@@ -75,10 +75,3 @@ android {
         debugImplementation(libs.compose.ui.tooling)
     }
 }
-dependencies {
-    implementation(libs.androidx.material3.android)
-    implementation(libs.androidx.material3.extended)
-    implementation(libs.core)
-    ksp(libs.ksp)
-}
-
