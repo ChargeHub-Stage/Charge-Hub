@@ -11,12 +11,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -27,6 +27,8 @@ import com.ramcosta.composedestinations.annotation.Destination
 import com.wisemen.chargehub.R
 import com.wisemen.chargehub.nav.ChargeHubNavGraph
 import com.wisemen.chargehub.ui.components.Buttons
+import com.wisemen.chargehub.ui.components.primaryButtonColors
+import com.wisemen.chargehub.ui.components.secondaryButtonColors
 import com.wisemen.chargehub.ui.theme.AppTheme
 import com.wisemen.chargehub.ui.theme.Colors
 import com.wisemen.chargehub.ui.theme.TextStyles
@@ -106,20 +108,20 @@ fun Header() {
 @Composable
 fun Buttons(onAction: (LandingScreenUiAction) -> Unit) {
     Row(Modifier.padding(bottom = 16.dp)) {
-        Buttons.AppButton(
+        Buttons.PrimaryButton(
             Modifier.fillMaxWidth(),
             text = stringResource(R.string.aanmelden),
-            colors = Buttons.acidContainerButtonColors
+            colors = ButtonDefaults.primaryButtonColors()
         ) {
             onAction(LandingScreenUiAction.ClickedLoginButtonAction)
         }
     }
 
     Row(Modifier.padding(bottom = 14.dp)) {
-        Buttons.AppButton(
+        Buttons.PrimaryButton(
             Modifier.fillMaxWidth(),
             text = stringResource(R.string.registreren),
-            colors = Buttons.smokeContainerButtonColors
+            colors = ButtonDefaults.secondaryButtonColors()
         ) {
             onAction(LandingScreenUiAction.ClickedRegisterButtonAction)
         }
