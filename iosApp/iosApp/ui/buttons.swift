@@ -6,7 +6,13 @@ struct TextOnlyButton: View {
     var textColor: Color
     var action: () -> Void
     
-    init(text: String, enabled: Bool = true, textColor: Color = .black, action: @escaping () -> Void) {
+    init(
+        text: String,
+        enabled: Bool = true,
+        textColor: Color = .black,
+        action: @escaping () -> Void)
+    {
+            
         self.text = text
         self.enabled = enabled
         self.textColor = textColor
@@ -35,7 +41,12 @@ struct AppButton: View {
     var textColor: Color
     var action: () -> Void
     
-    init(text: String, enabled: Bool = true, textColor: Color = .black, action: @escaping () -> Void) {
+    init(
+        text: String,
+        enabled: Bool = true,
+        textColor: Color = .black,
+        action: @escaping () -> Void) 
+    {
         self.text = text
         self.enabled = enabled
         self.textColor = textColor
@@ -59,7 +70,11 @@ struct IconButton: View {
     var enabled: Bool
     var action: () -> Void
     
-    init(icon: Image, enabled: Bool = true, action: @escaping () -> Void) {
+    init(
+        icon: Image,
+        enabled: Bool = true,
+        action: @escaping () -> Void)
+    {
         self.icon = icon
         self.enabled = enabled
         self.action = action
