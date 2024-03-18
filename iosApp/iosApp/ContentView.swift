@@ -6,15 +6,21 @@ struct ContentView: View {
         VStack {
             Text("Hello, World!")
                 .foregroundColor(.acid)
-
-            TextOnlyButton(text: "Text Only Button") {
-                print("Text Only Button tapped")
-            }
-
-            AppButton(text: "App Button") {
-                print("App Button tapped")
-            }
-
+            
+            TextOnlyButton(
+                text: "Text Only"){
+                    print("Text Only Button tapped")
+                }
+            
+            PrimaryButton(
+                text: "App Button",
+                enabled: true,
+                textColor: .blackPearl,
+                trailingIcon: Image(systemName: "star.fill"),
+                leadingIcon: Image(systemName: "star.fill")) {
+                    print("App Button tapped")
+                }
+            
             IconButton(icon: Image(systemName: "star.fill")) {
                 print("Icon Button tapped")
             }

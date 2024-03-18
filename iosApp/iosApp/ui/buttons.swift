@@ -12,7 +12,7 @@ struct TextOnlyButton: View {
         textColor: Color = .black,
         action: @escaping () -> Void)
     {
-            
+        
         self.text = text
         self.enabled = enabled
         self.textColor = textColor
@@ -35,31 +35,52 @@ struct TextOnlyButton: View {
     }
 }
 
-struct AppButton: View {
+struct PrimaryButton: View {
     var text: String
     var enabled: Bool
     var textColor: Color
+    var trailingIcon:  Image? = nil
+    var leadingIcon:  Image? = nil
     var action: () -> Void
-    
+
     init(
         text: String,
         enabled: Bool = true,
         textColor: Color = .black,
-        action: @escaping () -> Void) 
+        trailingIcon: Image? = nil,
+        leadingIcon: Image? = nil,
+        action: @escaping () -> Void
+    )
     {
         self.text = text
         self.enabled = enabled
         self.textColor = textColor
         self.action = action
+        self.trailingIcon = trailingIcon
+        self.leadingIcon = leadingIcon
     }
     
     var body: some View {
         Button(action: action) {
-            Text(text)
-                .foregroundColor(textColor)
-                .padding()
-                .background(enabled ? Color.blue : Color.gray)
-                .cornerRadius(5)
+            HStack {
+                if let leadingIcon = leadingIcon {
+                    leadingIcon
+                        .resizable()
+                        .frame(width: 20, height: 20)
+                        .foregroundColor(textColor)
+                }
+                Text(text)
+                    .foregroundColor(textColor)
+                if let trailingIcon = trailingIcon {
+                    trailingIcon
+                        .resizable()
+                        .frame(width: 20, height: 20)
+                        .foregroundColor(textColor)
+                }
+            }
+            .padding()
+            .background(enabled ? Color.blue : Color.gray)
+            .cornerRadius(5)
         }
         .disabled(!enabled)
     }
