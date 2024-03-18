@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -38,7 +37,8 @@ private fun ButtonPreview() {
                 onClick = {},
                 text = "click",
                 colors = ButtonDefaults.primaryButtonColors(),
-                trailingIcon = { Icon(Icons.Default.Add, "") })
+                trailingIcon = { Icon(Icons.Default.Add, "") },
+                leadingIcon = { Icon(Icons.Default.Add, "") })
         }
     }
 }
@@ -81,6 +81,7 @@ object Buttons {
         textStyle: TextStyle = TextStyle.Default,
         onClick: () -> Unit,
         trailingIcon: @Composable (() -> Unit)? = null,
+        leadingIcon: @Composable (() -> Unit)? = null
     ) {
         Button(
             enabled = enabled,
@@ -94,8 +95,12 @@ object Buttons {
             Row(
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(text = text, style = textStyle, modifier = Modifier.align(Alignment.CenterVertically))
-                Spacer(Modifier.weight(1F))
+                leadingIcon?.let { it() }
+                Text(
+                    text = text,
+                    style = textStyle,
+                    modifier = Modifier.align(Alignment.CenterVertically)
+                )
                 trailingIcon?.let { it() }
             }
         }
