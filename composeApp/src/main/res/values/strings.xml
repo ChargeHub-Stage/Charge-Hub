@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="type_here">Type here...</string>
+    <string name="type_here">Type here…</string>
     <string name="password_is_required">" 'Password cannot be empty'"</string>
     <string name="email_is_required">" 'Email' is invalid"</string>
     <string name="email">Email</string>
@@ -9,4 +9,7 @@
     <string name="charge">Charge\nHub.</string>
     <string name="aanmelden">Aanmelden</string>
     <string name="registreren">Registreren</string>
+    <string name="welkom_terug">Welkom Terug!</string>
+    <string name="aanmelden_welkom_tekst">Fijn om je terug te zien</string>
+    <string name="wachtwoord_vergeten">Wachtwoord vergeten?</string>
 </resources>

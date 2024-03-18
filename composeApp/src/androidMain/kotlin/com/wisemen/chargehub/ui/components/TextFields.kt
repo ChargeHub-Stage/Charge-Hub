@@ -23,6 +23,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
@@ -94,27 +95,38 @@ object TextFields {
                 )
             }
 
-            OutlinedTextField(
+            Box(
                 modifier = Modifier
-                    .height(textBoxHeight)
-                    .fillMaxWidth(),
-                isError = errorMessage != null,
-                placeholder = {
-                    Text(
-                        text = hint,
-                        style = TextStyles.hint
+                    .fillMaxWidth()
+                    .padding(10.dp)
+                    .graphicsLayer(
+                        shadowElevation = 7.0F,
+                        shape = RoundedCornerShape(10.dp),
+                        spotShadowColor = Color(0.0F, 0.0F, 0.0F, 0.14F)
                     )
-                },
-                maxLines = maxLines,
-                visualTransformation = visualTransformation,
-                enabled = enabled,
-                shape = RoundedCornerShape(10.dp),
-                colors = colors,
-                trailingIcon = trailingIcon,
-                leadingIcon = leadingIcon,
-                value = input,
-                onValueChange = onInputChanged,
-            )
+            ) {
+                OutlinedTextField(
+                    modifier = Modifier
+                        .height(textBoxHeight)
+                        .fillMaxWidth(),
+                    isError = errorMessage != null,
+                    placeholder = {
+                        Text(
+                            text = hint,
+                            style = TextStyles.hint
+                        )
+                    },
+                    maxLines = maxLines,
+                    visualTransformation = visualTransformation,
+                    enabled = enabled,
+                    shape = RoundedCornerShape(10.dp),
+                    colors = colors,
+                    trailingIcon = trailingIcon,
+                    leadingIcon = leadingIcon,
+                    value = input,
+                    onValueChange = onInputChanged,
+                )
+            }
 
             errorMessage?.let {
                 Spacer(modifier = Modifier.padding(top = 5.dp))
@@ -143,7 +155,7 @@ object TextFields {
 
         Box(modifier, contentAlignment = Alignment.CenterEnd) {
             EditText(
-                errorMessage = if (!isValid) stringResource(R.string.password_is_required) else null,
+                errorMessage = if (! isValid) stringResource(R.string.password_is_required) else null,
                 visualTransformation = if (isPasswordVisible) VisualTransformation.None else PasswordVisualTransformation(),
                 topLabel = stringResource(R.string.password),
                 input = currentPassword,
@@ -182,7 +194,7 @@ object TextFields {
     ) {
         EditText(
             modifier = modifier,
-            errorMessage = if (!isValid) stringResource(R.string.email_is_required) else null,
+            errorMessage = if (! isValid) stringResource(R.string.email_is_required) else null,
             topLabel = stringResource(id = R.string.email),
             input = email,
             onInputChanged = {

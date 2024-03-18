@@ -12,15 +12,16 @@ class LoginScreenViewModel : KMMViewModel(),
     private val eventChannel = Channel<LoginScreenUiEvent>()
     val eventFlow = eventChannel.receiveAsFlow()
 
-        override var state: LoginScreenUiState = LoginScreenUiState()
+    override var state: LoginScreenUiState = LoginScreenUiState()
 
     override fun onAction(action: LoginScreenUiAction) = viewModelScope.coroutineScope.launch {
         when (action) {
-            is LoginScreenUiAction.ClickedBackButtonAction -> eventChannel.send(LoginScreenUiEvent.ClickedBackButtonEvent)
+            is LoginScreenUiAction.OnClickedBackButtonAction -> eventChannel.send(LoginScreenUiEvent.ClickedBackButtonEvent)
             is LoginScreenUiAction.OnEmailChangedAction -> state = state.copy(email = action.email)
             is LoginScreenUiAction.OnPasswordChangedAction -> state = state.copy(password = action.password)
-            is LoginScreenUiAction.ClickedLoginButtonAction -> eventChannel.send(LoginScreenUiEvent.ClickedLoginButtonEvent)
-            is LoginScreenUiAction.ClickedForgotPasswordButtonAction -> eventChannel.send(LoginScreenUiEvent.ClickedForgotPasswordButtonEvent)
+            is LoginScreenUiAction.OnClickedPasswordVisibilityButtonAction -> state = state.copy(passwordVisibility = !state.passwordVisibility)
+            is LoginScreenUiAction.OnClickedLoginButtonAction -> eventChannel.send(LoginScreenUiEvent.ClickedLoginButtonEvent)
+            is LoginScreenUiAction.OnClickedForgotPasswordButtonAction -> eventChannel.send(LoginScreenUiEvent.ClickedForgotPasswordButtonEvent)
         }
     }
 }
