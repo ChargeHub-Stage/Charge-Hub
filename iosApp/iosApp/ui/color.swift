@@ -16,7 +16,7 @@ extension Color {
     static let black = Color(UIColor(hex: "000000"))
     static let mist = Color(UIColor(hex: "999999"))
     static let mediumGray = Color(UIColor(hex: "888888"))
-    static let smoke = Color(UIColor(hex: "333333")
+    static let smoke = Color(UIColor(hex: "333333"))
     static let white = Color(UIColor(hex: "FFFFFF"))
 }
 
