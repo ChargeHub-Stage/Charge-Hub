@@ -45,20 +45,6 @@ private fun ButtonPreview() {
 
 object Buttons {
 
-    val acidContainerButtonColors = ButtonColors(
-        containerColor = Colors.acid,
-        contentColor = Colors.blackPearl,
-        disabledContainerColor = Colors.lightGrey,
-        disabledContentColor = Colors.white
-    )
-
-    val smokeContainerButtonColors = ButtonColors(
-        containerColor = Colors.smoke,
-        contentColor = Colors.white,
-        disabledContainerColor = Colors.lightGrey,
-        disabledContentColor = Colors.white
-    )
-
     @Composable
     fun TextOnlyButton(
         modifier: Modifier = Modifier,
@@ -93,9 +79,9 @@ object Buttons {
         contentPadding: PaddingValues = ButtonDefaults.ContentPadding,
         colors: ButtonColors = ButtonDefaults.buttonColors(),
         textStyle: TextStyle = TextStyle.Default,
-        onClick: () -> Unit,
         trailingIcon: @Composable (() -> Unit)? = null,
-        leadingIcon: @Composable (() -> Unit)? = null
+        leadingIcon: @Composable (() -> Unit)? = null,
+        onClick: () -> Unit
     ) {
         Button(
             enabled = enabled,
