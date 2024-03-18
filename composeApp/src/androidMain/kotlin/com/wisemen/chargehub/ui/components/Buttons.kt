@@ -63,7 +63,7 @@ object Buttons {
                 containerColor = Color.Transparent,
                 contentColor = textColor
             ),
-            elevation = ButtonDefaults.buttonElevation(0.dp, 0.dp, 0.dp),
+            elevation = ButtonDefaults.noElevation(),
             contentPadding = contentPadding,
             onClick = onClick
         ) {
@@ -88,7 +88,7 @@ object Buttons {
             modifier = modifier,
             shape = RoundedCornerShape(5.dp),
             colors = colors,
-            elevation = ButtonDefaults.buttonElevation(0.dp, 0.dp, 0.dp),
+            elevation = ButtonDefaults.noElevation(),
             contentPadding = contentPadding,
             onClick = onClick,
         ) {
@@ -131,6 +131,7 @@ object Buttons {
     }
 
 }
+
 
 @Composable
 fun ButtonDefaults.noElevation(): ButtonElevation = buttonElevation(0.dp, 0.dp, 0.dp)
