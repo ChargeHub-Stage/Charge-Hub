@@ -8,6 +8,7 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ButtonElevation
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -110,7 +111,7 @@ object Buttons {
                 contentColor = Colors.blackPearl
             ),
             contentPadding = contentPadding,
-            elevation = ButtonDefaults.buttonElevation(0.dp, 0.dp, 0.dp),
+            elevation = ButtonDefaults.noElevation(),
             onClick = onClick
         ) {
             icon()
@@ -118,3 +119,6 @@ object Buttons {
     }
 
 }
+
+@Composable
+fun ButtonDefaults.noElevation() : ButtonElevation = buttonElevation(0.dp, 0.dp, 0.dp)
