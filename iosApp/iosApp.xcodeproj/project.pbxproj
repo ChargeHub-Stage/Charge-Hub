@@ -20,6 +20,9 @@
 		DD5877FA2BA34581000CD0DE /* buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5877F92BA34581000CD0DE /* buttons.swift */; };
 		DD877E6A2BA4730200608CF5 /* textStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD877E692BA4730200608CF5 /* textStyles.swift */; };
 		DD877E6C2BA4731300608CF5 /* textFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD877E6B2BA4731300608CF5 /* textFields.swift */; };
+		DD98B9232BA84E6D00CFC5F1 /* LandingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD98B9222BA84E6D00CFC5F1 /* LandingScreen.swift */; };
+		DD98B9262BA84EF100CFC5F1 /* landingbackground.png in Resources */ = {isa = PBXBuildFile; fileRef = DD98B9252BA84EF100CFC5F1 /* landingbackground.png */; };
+		DD98B92B2BA84F5500CFC5F1 /* logo_chargehub.svg in Resources */ = {isa = PBXBuildFile; fileRef = DD98B92A2BA84F5500CFC5F1 /* logo_chargehub.svg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +38,9 @@
 		DD5877F92BA34581000CD0DE /* buttons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = buttons.swift; sourceTree = "<group>"; };
 		DD877E692BA4730200608CF5 /* textStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = textStyles.swift; sourceTree = "<group>"; };
 		DD877E6B2BA4731300608CF5 /* textFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = textFields.swift; sourceTree = "<group>"; };
+		DD98B9222BA84E6D00CFC5F1 /* LandingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingScreen.swift; sourceTree = "<group>"; };
+		DD98B9252BA84EF100CFC5F1 /* landingbackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = landingbackground.png; path = ../../../../composeApp/src/androidMain/res/drawable/landingbackground.png; sourceTree = "<group>"; };
+		DD98B92A2BA84F5500CFC5F1 /* logo_chargehub.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = logo_chargehub.svg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,12 +116,31 @@
 		DD5877F62BA34522000CD0DE /* ui */ = {
 			isa = PBXGroup;
 			children = (
+				DD98B9242BA84E8900CFC5F1 /* images */,
+				DD98B9212BA84E4800CFC5F1 /* pages */,
 				DD5877F72BA34552000CD0DE /* color.swift */,
 				DD5877F92BA34581000CD0DE /* buttons.swift */,
 				DD877E692BA4730200608CF5 /* textStyles.swift */,
 				DD877E6B2BA4731300608CF5 /* textFields.swift */,
 			);
 			path = ui;
+			sourceTree = "<group>";
+		};
+		DD98B9212BA84E4800CFC5F1 /* pages */ = {
+			isa = PBXGroup;
+			children = (
+				DD98B9222BA84E6D00CFC5F1 /* LandingScreen.swift */,
+			);
+			path = pages;
+			sourceTree = "<group>";
+		};
+		DD98B9242BA84E8900CFC5F1 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				DD98B92A2BA84F5500CFC5F1 /* logo_chargehub.svg */,
+				DD98B9252BA84EF100CFC5F1 /* landingbackground.png */,
+			);
+			path = images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -187,8 +212,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */,
+				DD98B9262BA84EF100CFC5F1 /* landingbackground.png in Resources */,
 				058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */,
 				64BF5C2D2BA31C0E00338446 /* GoogleService-Info.plist in Resources */,
+				DD98B92B2BA84F5500CFC5F1 /* logo_chargehub.svg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -220,6 +247,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD98B9232BA84E6D00CFC5F1 /* LandingScreen.swift in Sources */,
 				DD5877F82BA34552000CD0DE /* color.swift in Sources */,
 				DD877E6C2BA4731300608CF5 /* textFields.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,

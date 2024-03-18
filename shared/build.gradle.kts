@@ -27,6 +27,10 @@ kotlin {
     }
 
     sourceSets {
+        all {
+            languageSettings.optIn("kotlinx.cinterop.ExperimentalForeignApi")
+        }
+
         commonMain.dependencies {
             // put your Multiplatform dependencies here
             implementation(libs.koinCore)

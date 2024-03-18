@@ -2,6 +2,7 @@ import SwiftUI
 import Shared
 
 struct ContentView: View {
+    
     var body: some View {
         VStack {
             Text("Hello, World!")
@@ -25,6 +26,8 @@ struct ContentView: View {
                 print("Icon Button tapped")
             }
         }
+        .background(Image("images/landingbackground").resizable().aspectRatio(contentMode: .fill))
+
     }
 }
 
