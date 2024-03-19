@@ -9,4 +9,7 @@
     <string name="charge">Charge\nHub.</string>
     <string name="aanmelden">Aanmelden</string>
     <string name="registreren">Registreren</string>
+    <string name="privacybeleid">Privacybeleid</string>
+    <string name="e_mail">E-Mail</string>
+    <string name="volgende">Volgende</string>
 </resources>

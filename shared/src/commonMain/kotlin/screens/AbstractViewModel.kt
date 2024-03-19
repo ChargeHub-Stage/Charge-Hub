@@ -16,11 +16,9 @@ import kotlinx.coroutines.flow.receiveAsFlow
  */
 abstract class AbstractViewModel<A, E, S : Any?> : KMMViewModel() {
 
-    private val eventChannel: Channel<E>
-        get() = Channel()
+    private val eventChannel: Channel<E> = Channel()
 
-    val eventFlow: Flow<E>
-        get() = eventChannel.receiveAsFlow()
+    val eventFlow: Flow<E> = eventChannel.receiveAsFlow()
 
     suspend fun sendEvent(event: E) {
         eventChannel.send(event)

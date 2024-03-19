@@ -12,9 +12,11 @@ import kotlinx.serialization.json.Json
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 import screens.landing.LandingScreenViewModel
+import screens.register.RegisterScreenViewModel
 
 val modules = module {
      singleOf(::LandingScreenViewModel)
+     singleOf(::RegisterScreenViewModel)
 }
 
 val clientsModule = module {

@@ -37,4 +37,10 @@ object TextStyles {
         fontWeight = FontWeight.W700,
         lineHeight = 22.sp
     )
+
+    val bottomLabel = TextStyle(
+        fontSize = 12.sp,
+        fontWeight = FontWeight.W400,
+        lineHeight = 12.32.sp
+    )
 }

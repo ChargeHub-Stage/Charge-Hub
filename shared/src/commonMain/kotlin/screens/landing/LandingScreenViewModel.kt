@@ -13,7 +13,9 @@ class LandingScreenViewModel :
 
     override fun onAction(action: LandingScreenUiAction) = viewModelScope.coroutineScope.launch {
         when (action) {
-            is LandingScreenUiAction.ClickedLoginButtonAction -> sendEvent(LandingScreenUiEvent.ClickedLoginButtonEvent)
+            is LandingScreenUiAction.ClickedLoginButtonAction -> {
+                sendEvent(LandingScreenUiEvent.ClickedLoginButtonEvent)
+            }
             is LandingScreenUiAction.ClickedRegisterButtonAction -> sendEvent(LandingScreenUiEvent.ClickedRegisterButtonEvent)
         }
     }
