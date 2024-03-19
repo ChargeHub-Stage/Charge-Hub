@@ -21,4 +21,7 @@
     <string name="privacy3">" gelezen en ga hiermee akkoord."</string>
     <string name="profile">Profile</string>
     <string name="jouw_auto_id">Jouw auto id</string>
+    <string name="meldingen_toestaan">Meldingen toestaan</string>
+    <string name="meldingen_info">Charge Hub helpt je eraan denken wanneer het jouw beurt is om te laden</string>
+    <string name="overslaan">Overslaan</string>
 </resources>

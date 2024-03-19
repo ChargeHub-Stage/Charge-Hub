@@ -32,6 +32,12 @@ object TextStyles {
         lineHeight = 60.sp,
     )
 
+    val mediumTitle = TextStyle(
+        fontSize = 28.sp,
+        fontWeight = FontWeight.W700,
+        lineHeight = 34.sp
+    )
+
     val topBarTitle = TextStyle(
         fontSize = 17.sp,
         fontWeight = FontWeight.W700,
@@ -42,5 +48,9 @@ object TextStyles {
         fontSize = 12.sp,
         fontWeight = FontWeight.W400,
         lineHeight = 12.32.sp
+    )
+
+    val boldText = TextStyle(
+        fontWeight = FontWeight.W700
     )
 }

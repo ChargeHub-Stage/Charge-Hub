@@ -1,5 +1,9 @@
 package com.wisemen.chargehub.ui.screens
 
+import android.os.Build
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -33,6 +37,8 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
@@ -106,6 +112,7 @@ fun RegisterLayout(
                 CurrentRegisterState.EMAIL -> EmailRegisterStep(state, onAction)
                 CurrentRegisterState.PROFILE -> ProfileCompletionStep(state, onAction)
                 CurrentRegisterState.CAR_CONNECT -> CarConnectStep(state, onAction)
+                CurrentRegisterState.NOTIFICATIONS -> PermissionStep(onAction)
                 else -> {}
             }
 
@@ -203,11 +210,60 @@ fun CarConnectStep(state: RegisterScreenUiState, onAction: (RegisterScreenUiActi
         input = state.carId,
         onInputChanged = { onAction(RegisterScreenUiAction.OnCarIdChangedAction(it)) },
         topLabel = stringResource(R.string.jouw_auto_id),
-        trailingIcon =  { ClearFieldIcon { onAction(RegisterScreenUiAction.OnCarIdChangedAction("")) } }
+        trailingIcon = { ClearFieldIcon { onAction(RegisterScreenUiAction.OnCarIdChangedAction("")) } }
     )
 
     NextButton(onAction)
 
+}
+
+@RequiresApi(Build.VERSION_CODES.TIRAMISU)
+@Composable
+fun PermissionStep(onAction: (RegisterScreenUiAction) -> Unit) {
+
+
+    val permissionLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestPermission()
+    ) { _: Boolean ->
+        onAction(RegisterScreenUiAction.OnNextClickedAction)
+    }
+
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            modifier = Modifier.padding(top = 89.dp),
+            text = stringResource(R.string.meldingen_toestaan),
+            style = TextStyles.mediumTitle,
+            textAlign = TextAlign.Center
+        )
+        Text(
+            modifier = Modifier.padding(bottom = 43.dp),
+            text = stringResource(R.string.meldingen_info),
+            textAlign = TextAlign.Center
+        )
+
+        PrimaryButton(
+            modifier = Modifier.padding(bottom = 16.dp).fillMaxWidth(),
+            text = stringResource(R.string.meldingen_toestaan),
+            colors = ButtonDefaults.primaryButtonColors(),
+            textStyle = TextStyles.boldText,
+        ) {
+            permissionLauncher.launch(android.Manifest.permission.POST_NOTIFICATIONS)
+        }
+
+        Text(
+            modifier = Modifier.clickable {
+                onAction(RegisterScreenUiAction.OnNextClickedAction)
+            },
+            text = stringResource(R.string.overslaan),
+            textDecoration = TextDecoration.Underline,
+            fontWeight = FontWeight.W700
+        )
+
+
+    }
 }
 
 @Composable
@@ -291,6 +347,7 @@ fun NextButton(onAction: (RegisterScreenUiAction) -> Unit) {
         onClick = {
             onAction(RegisterScreenUiAction.OnNextClickedAction)
         },
+        textStyle = TextStyles.boldText,
         colors = ButtonDefaults.primaryButtonColors()
     )
 }
