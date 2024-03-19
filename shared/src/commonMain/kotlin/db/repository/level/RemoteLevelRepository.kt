@@ -1,5 +1,6 @@
 package db.repository.level
 
+import FIREBASE_LEVEL_COLLECTION
 import db.chargehub.Level
 import db.database.level.LevelDatabase
 import db.database.level.LevelDatabaseWrapper
@@ -19,12 +20,13 @@ class RemoteLevelRepository :
         get() = inject<LevelDatabaseWrapper>().value.database
 
     override suspend fun create(request: CreateLevelRequest) {
-        firestore.collection("LEVELS").add(request)
+        firestore.collection(FIREBASE_LEVEL_COLLECTION).add(request)
+        database.create(request)
     }
     override suspend fun fetchAll(): List<Level> {
         try {
             val levelResponse =
-                firestore.collection("LEVELS").get()
+                firestore.collection(FIREBASE_LEVEL_COLLECTION).get()
             return levelResponse.documents.map { it.data() }
         } catch (e: Exception) {
             throw e
@@ -34,7 +36,7 @@ class RemoteLevelRepository :
     override suspend fun fetchById(id: String): Level {
         try {
             val levelDocument =
-                firestore.collection("LEVELS").document(id).get()
+                firestore.collection(FIREBASE_LEVEL_COLLECTION).document(id).get()
             return levelDocument.data()
         } catch(e: Exception) {
             throw e
@@ -42,11 +44,13 @@ class RemoteLevelRepository :
     }
 
     override suspend fun update(id: String, request: CreateLevelRequest) {
-        firestore.collection("LEVELS").document(id).update(request)
+        firestore.collection(FIREBASE_LEVEL_COLLECTION).document(id).update(request)
+        database.update(id, request)
     }
 
     override suspend fun delete(id: String) {
-        firestore.collection("LEVELS").document(id).delete()
+        firestore.collection(FIREBASE_LEVEL_COLLECTION).document(id).delete()
+        database.delete(id)
     }
 
     override fun findById(id: String): Flow<Level> {
