@@ -12,7 +12,6 @@ struct TextOnlyButton: View {
         textColor: Color = .black,
         action: @escaping () -> Void)
     {
-        
         self.text = text
         self.enabled = enabled
         self.textColor = textColor
