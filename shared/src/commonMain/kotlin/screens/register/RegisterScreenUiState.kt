@@ -5,6 +5,7 @@ data class RegisterScreenUiState(
     var firstName: String = "",
     var lastName: String = "",
     var password: String = "",
+    var carId: String = "VSSZZZKL7PR048642",
 
     var currentRegisterState: CurrentRegisterState? = CurrentRegisterState.EMAIL,
 

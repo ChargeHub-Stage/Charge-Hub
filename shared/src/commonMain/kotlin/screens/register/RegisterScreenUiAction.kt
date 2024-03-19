@@ -10,6 +10,8 @@ sealed class RegisterScreenUiAction {
 
     data class OnPasswordChangedAction(val password: String) : RegisterScreenUiAction()
 
+    data class OnCarIdChangedAction(val id: String) : RegisterScreenUiAction()
+
     data object OnNextClickedAction : RegisterScreenUiAction()
 
     data object OnPreviousClickedAction : RegisterScreenUiAction()
