@@ -16,6 +16,8 @@
 		64BF5C2B2BA3109200338446 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 64BF5C2A2BA3109200338446 /* FirebaseFirestore */; };
 		64BF5C2D2BA31C0E00338446 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 64BF5C2C2BA31C0E00338446 /* GoogleService-Info.plist */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
+		DD5877F82BA34552000CD0DE /* color.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5877F72BA34552000CD0DE /* color.swift */; };
+		DD5877FA2BA34581000CD0DE /* buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5877F92BA34581000CD0DE /* buttons.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +29,8 @@
 		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AB3632DC29227652001CCB65 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		DD5877F72BA34552000CD0DE /* color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = color.swift; sourceTree = "<group>"; };
+		DD5877F92BA34581000CD0DE /* buttons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = buttons.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,7 +84,10 @@
 		7555FF7D242A565900829871 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
+				DD5877F62BA34522000CD0DE /* ui */,
+
 				64BF5C2C2BA31C0E00338446 /* GoogleService-Info.plist */,
+
 				058557BA273AAA24004C7B11 /* Assets.xcassets */,
 				7555FF82242A565900829871 /* ContentView.swift */,
 				7555FF8C242A565B00829871 /* Info.plist */,
@@ -96,6 +103,15 @@
 				AB3632DC29227652001CCB65 /* Config.xcconfig */,
 			);
 			path = Configuration;
+			sourceTree = "<group>";
+		};
+		DD5877F62BA34522000CD0DE /* ui */ = {
+			isa = PBXGroup;
+			children = (
+				DD5877F72BA34552000CD0DE /* color.swift */,
+				DD5877F92BA34581000CD0DE /* buttons.swift */,
+			);
+			path = ui;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -200,8 +216,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD5877F82BA34552000CD0DE /* color.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
+				DD5877FA2BA34581000CD0DE /* buttons.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
