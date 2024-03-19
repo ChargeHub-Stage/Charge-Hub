@@ -25,6 +25,8 @@ import com.wisemen.chargehub.ui.components.Buttons.PrimaryButton
 import com.wisemen.chargehub.ui.theme.AppTheme
 import com.wisemen.chargehub.ui.theme.Colors
 
+const val BUTTON_CORNER_RADIUS = 100
+
 @Composable
 @Preview
 private fun ButtonPreview() {
@@ -58,7 +60,7 @@ object Buttons {
         Button(
             enabled = enabled,
             modifier = modifier,
-            shape = RoundedCornerShape(5.dp),
+            shape = RoundedCornerShape(BUTTON_CORNER_RADIUS),
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color.Transparent,
                 contentColor = textColor
@@ -86,7 +88,7 @@ object Buttons {
         Button(
             enabled = enabled,
             modifier = modifier,
-            shape = RoundedCornerShape(5.dp),
+            shape = RoundedCornerShape(BUTTON_CORNER_RADIUS),
             colors = colors,
             elevation = ButtonDefaults.noElevation(),
             contentPadding = contentPadding,
@@ -117,7 +119,7 @@ object Buttons {
         Button(
             enabled = enabled,
             modifier = modifier,
-            shape = RoundedCornerShape(5.dp),
+            shape = RoundedCornerShape(BUTTON_CORNER_RADIUS),
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color.Transparent,
                 contentColor = Colors.blackPearl
