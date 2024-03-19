@@ -5,6 +5,7 @@ import com.rickclephas.kmm.viewmodel.coroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import org.lighthousegames.logging.logging
 import screens.AbstractViewModel
 
 class RegisterScreenViewModel :
@@ -15,10 +16,15 @@ class RegisterScreenViewModel :
 
 
     override fun onAction(action: RegisterScreenUiAction) = viewModelScope.coroutineScope.launch {
+        val logging = logging()
         when (action) {
             is RegisterScreenUiAction.OnNextClickedAction -> handleNext()
             is RegisterScreenUiAction.OnPreviousClickedAction -> handlePrevious()
-            is RegisterScreenUiAction.OnEmailChangedAction -> state.update { it.copy(email = action.email) }
+            is RegisterScreenUiAction.OnEmailChangedAction -> {
+                logging.d { "Action value  ${action.email}" }
+                state.value = state.value.copy(email = action.email)
+                logging.d { "State value... ${state.value.email}" }
+            }
             is RegisterScreenUiAction.OnFirstNameChangedAction -> state.update { it.copy(firstName = action.firstName) }
             is RegisterScreenUiAction.OnLastNameChangedAction -> state.update { it.copy(lastName = action.lastName) }
             is RegisterScreenUiAction.OnPasswordChangedAction -> state.update { it.copy(password = action.password) }
@@ -38,7 +44,7 @@ class RegisterScreenViewModel :
         state.update {
             it.copy(currentRegisterState = it.currentRegisterState?.previous())
         }
-        sendEvent(RegisterScreenUiEvent.OnNextClickedEvent)
+        sendEvent(RegisterScreenUiEvent.OnPreviousClickedEvent)
     }
 
 }

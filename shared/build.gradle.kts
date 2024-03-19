@@ -50,6 +50,8 @@ kotlin {
 
             api(libs.kmm.viewmodel.core)
 
+            api("org.lighthousegames:logging:1.4.2")
+
         }
         androidMain.dependencies {
             implementation(libs.ktor.client.okhttp)

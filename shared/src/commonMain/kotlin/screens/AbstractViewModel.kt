@@ -24,7 +24,6 @@ abstract class AbstractViewModel<A, E, S : Any?> : KMMViewModel() {
         eventChannel.send(event)
     }
 
-
     abstract var state: MutableStateFlow<S>
         internal set
 
