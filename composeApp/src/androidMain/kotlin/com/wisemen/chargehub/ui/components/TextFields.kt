@@ -116,8 +116,10 @@ object TextFields {
             )
 
             errorMessage?.let {
-                Spacer(modifier = Modifier.padding(top = 5.dp))
-                Row(verticalAlignment = Alignment.CenterVertically) {
+                Row(
+                    modifier = Modifier.padding(top = 5.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
                     Icon(
                         modifier = Modifier.size(10.5.dp),
                         imageVector = Icons.Outlined.ErrorOutline,
