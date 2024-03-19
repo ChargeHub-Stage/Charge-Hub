@@ -2,8 +2,9 @@ package com.wisemen.chargehub.ui.theme
 
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.sp
-import com.wisemen.chargehub.ui.theme.Colors
 
 object TextStyles {
 
@@ -52,5 +53,31 @@ object TextStyles {
 
     val boldText = TextStyle(
         fontWeight = FontWeight.W700
+    )
+
+    val infoTitle = TextStyle(
+        fontSize = 20.sp,
+        fontWeight = FontWeight.W600,
+        lineHeight = 25.sp,
+        color = Colors.blackPearl,
+        textAlign = TextAlign.Center
+    )
+
+
+    val infoSubTitle = TextStyle(
+        fontSize = 17.sp,
+        fontWeight = FontWeight.W600,
+        lineHeight = 22.sp,
+        color = Colors.mediumGray,
+        textDecoration = TextDecoration.Underline,
+        textAlign = TextAlign.Center
+    )
+
+    val infoText = TextStyle(
+        fontSize = 17.sp,
+        fontWeight = FontWeight.W600,
+        lineHeight = 22.sp,
+        color = Colors.mist,
+        textAlign = TextAlign.Center
     )
 }

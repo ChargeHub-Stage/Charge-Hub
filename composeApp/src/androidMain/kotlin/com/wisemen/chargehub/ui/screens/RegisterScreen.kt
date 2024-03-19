@@ -4,17 +4,27 @@ import android.os.Build
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.PagerState
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material3.ButtonDefaults
@@ -28,6 +38,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -54,6 +65,7 @@ import com.wisemen.chargehub.ui.components.primaryButtonColors
 import com.wisemen.chargehub.ui.theme.AppTheme
 import com.wisemen.chargehub.ui.theme.Colors
 import com.wisemen.chargehub.ui.theme.TextStyles
+import kotlinx.coroutines.launch
 import org.koin.java.KoinJavaComponent
 import screens.register.CurrentRegisterState
 import screens.register.RegisterScreenUiAction
@@ -113,6 +125,7 @@ fun RegisterLayout(
                 CurrentRegisterState.PROFILE -> ProfileCompletionStep(state, onAction)
                 CurrentRegisterState.CAR_CONNECT -> CarConnectStep(state, onAction)
                 CurrentRegisterState.NOTIFICATIONS -> PermissionStep(onAction)
+                CurrentRegisterState.INFO -> InfoStep(onAction)
                 else -> {}
             }
 
@@ -253,16 +266,176 @@ fun PermissionStep(onAction: (RegisterScreenUiAction) -> Unit) {
             permissionLauncher.launch(android.Manifest.permission.POST_NOTIFICATIONS)
         }
 
+        SkipTextButton { onAction(RegisterScreenUiAction.OnNextClickedAction) }
+
+
+    }
+}
+
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+fun InfoStep(onAction: (RegisterScreenUiAction) -> Unit) {
+
+    @Composable
+    fun InfoTitle(title: String) {
         Text(
-            modifier = Modifier.clickable {
-                onAction(RegisterScreenUiAction.OnNextClickedAction)
-            },
-            text = stringResource(R.string.overslaan),
-            textDecoration = TextDecoration.Underline,
-            fontWeight = FontWeight.W700
+            modifier = Modifier.padding(bottom = 19.06.dp),
+            text = title,
+            style = TextStyles.mediumTitle
+        )
+    }
+
+    @Composable
+    fun InfoPageOne() {
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            InfoTitle(stringResource(R.string.laadbeurten))
+            Image(
+                modifier = Modifier
+                    .padding(bottom = 72.97.dp)
+                    .width(147.82.dp)
+                    .height(135.96.dp),
+                painter = painterResource(R.drawable.laadbeurten_info),
+                contentDescription = null
+            )
+            Text(text = stringResource(R.string.reservatie_info), style = TextStyles.infoSubTitle)
+        }
+    }
+
+    @Composable
+    fun InfoPageTwo() {
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            InfoTitle(title = stringResource(R.string.laadbeurt_afstaan))
+            Image(
+                modifier = Modifier.padding(bottom = 28.dp).width(174.dp).height(211.dp),
+                painter = painterResource(R.drawable.laadbeurt_afstaan),
+                contentDescription = null
+            )
+            Text(
+                text = stringResource(R.string.laadbeurt_afstaan_info),
+                style = TextStyles.infoSubTitle
+            )
+        }
+    }
+
+    @Composable
+    fun InfoPageThree() {
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            InfoTitle(stringResource(R.string.level_systeem))
+            Image(
+                modifier = Modifier.padding(bottom = 28.dp).width(294.dp).height(41.dp),
+                painter = painterResource(R.drawable.progress_bar),
+                contentDescription = null
+            )
+            Text(text = stringResource(R.string.level_system_title), style = TextStyles.infoTitle)
+            Text(text = stringResource(R.string.stiptheid), style = TextStyles.infoSubTitle)
+            Text(
+                modifier = Modifier.padding(bottom = 16.dp),
+                text = stringResource(R.string.stiptheid_details),
+                style = TextStyles.infoText
+            )
+
+            Text(text = stringResource(R.string.hoffelijkheid), style = TextStyles.infoSubTitle)
+            Text(
+                text = stringResource(R.string.hoffelijkheid_details),
+                style = TextStyles.infoText
+            )
+        }
+    }
+
+    @Composable
+    fun InfoPageFour() {
+
+    }
+
+    val pagerState = rememberPagerState(pageCount = { 4 })
+    val currentPage = pagerState.currentPage
+    val coroutine = rememberCoroutineScope()
+    val action = RegisterScreenUiAction.OnFinaliseRegisterAction
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(horizontal = 16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+
+        HorizontalPager(
+            state = pagerState,
+            modifier = Modifier
+                .weight(1f)
+                .fillMaxWidth()
+
+        ) { page ->
+            when (page) {
+                0 -> InfoPageOne()
+                1 -> InfoPageTwo()
+                2 -> InfoPageThree()
+                3 -> InfoPageFour()
+            }
+        }
+
+        BottomPagerIndicator(
+            pagerState = pagerState,
+            modifier = Modifier.padding(top = 130.dp)
         )
 
+        NextButton {
+            // If you reach the last page, finalise the registering process
+            // Else, go to the next
+            if (currentPage == pagerState.pageCount) {
+                onAction(action)
+            } else {
+                coroutine.launch {
+                    pagerState.scrollToPage(currentPage + 1)
+                }
+            }
+        }
 
+        SkipTextButton(
+            modifier = Modifier.padding(bottom = 16.dp, top = 16.dp),
+            textAlign = TextAlign.Center
+        ) { onAction(action) }
+    }
+}
+
+
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+fun BottomPagerIndicator(
+    pagerState: PagerState,
+    modifier: Modifier = Modifier,
+) {
+    val pageCount = pagerState.pageCount
+    val currentPage = pagerState.currentPage
+    val coroutine = rememberCoroutineScope()
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(48.dp)
+            .padding(horizontal = 16.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        LazyRow(
+            horizontalArrangement = Arrangement.Center
+        ) {
+            items(pageCount) { pageIndex ->
+                Box(
+                    modifier = Modifier
+                        .padding(horizontal = 11.dp)
+                        .width(82.dp)
+                        .height(9.dp)
+                        .background(
+                            color = if (pageIndex == currentPage) Colors.acid else Colors.lightGrey,
+                            shape = RoundedCornerShape(4.dp)
+                        )
+                        .clickable {
+                            coroutine.launch {
+                                pagerState.scrollToPage(pageIndex)
+                            }
+                        }
+                )
+            }
+        }
     }
 }
 
@@ -352,3 +525,17 @@ fun NextButton(onAction: (RegisterScreenUiAction) -> Unit) {
     )
 }
 
+@Composable
+fun SkipTextButton(
+    modifier: Modifier = Modifier,
+    textAlign: TextAlign? = null,
+    onAction: () -> Unit
+) {
+    Text(
+        modifier = modifier.clickable { onAction() },
+        text = stringResource(R.string.overslaan),
+        textDecoration = TextDecoration.Underline,
+        fontWeight = FontWeight.W700,
+        textAlign = textAlign
+    )
+}
