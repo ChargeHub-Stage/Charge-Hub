@@ -13,10 +13,13 @@ import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 import screens.landing.LandingScreenViewModel
 import screens.login.LoginScreenViewModel
+import screens.register.RegisterScreenViewModel
 
 val modules = module {
     singleOf(::LandingScreenViewModel)
     singleOf(::LoginScreenViewModel)
+     singleOf(::LandingScreenViewModel)
+     singleOf(::RegisterScreenViewModel)
 }
 
 val clientsModule = module {

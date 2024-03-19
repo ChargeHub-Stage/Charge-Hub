@@ -12,4 +12,9 @@
     <string name="welkom_terug">Welkom Terug!</string>
     <string name="aanmelden_welkom_tekst">Fijn om je terug te zien</string>
     <string name="wachtwoord_vergeten">Wachtwoord vergeten?</string>
+    <string name="privacybeleid">Privacybeleid</string>
+    <string name="e_mail">E-Mail</string>
+    <string name="profiel">Profiel</string>
+    <string name="voertuig">Jouw Voertuig</string>
+    <string name="volgende">Volgende</string>
 </resources>

@@ -1,25 +1,22 @@
 package screens.landing
 
-import com.rickclephas.kmm.viewmodel.KMMViewModel
 import com.rickclephas.kmm.viewmodel.coroutineScope
-import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
-import screens.IViewModel
-import screens.login.LoginScreenUiEvent
+import screens.AbstractViewModel
 
-class LandingScreenViewModel : KMMViewModel(),
-    IViewModel<LandingScreenUiAction, LandingScreenUiEvent, Nothing?> {
-        private val eventChannel = Channel<LandingScreenUiEvent>()
-    val eventFlow = eventChannel.receiveAsFlow()
+class LandingScreenViewModel :
+    AbstractViewModel<LandingScreenUiAction, LandingScreenUiEvent, Unit>() {
 
     // No state involved on this page
-    override var state: Nothing? = null
+    override var state: MutableStateFlow<Unit> = MutableStateFlow(Unit)
 
-    override fun onAction(action: LandingScreenUiAction) = viewModelScope.coroutineScope.launch  {
+    override fun onAction(action: LandingScreenUiAction) = viewModelScope.coroutineScope.launch {
         when (action) {
-            is LandingScreenUiAction.ClickedLoginButtonAction -> eventChannel.send(LandingScreenUiEvent.ClickedLoginButtonEvent)
-            is LandingScreenUiAction.ClickedRegisterButtonAction -> eventChannel.send(LandingScreenUiEvent.ClickedRegisterButtonEvent)
+            is LandingScreenUiAction.ClickedLoginButtonAction -> {
+                sendEvent(LandingScreenUiEvent.ClickedLoginButtonEvent)
+            }
+            is LandingScreenUiAction.ClickedRegisterButtonAction -> sendEvent(LandingScreenUiEvent.ClickedRegisterButtonEvent)
         }
     }
 

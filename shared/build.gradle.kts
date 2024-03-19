@@ -27,6 +27,10 @@ kotlin {
     }
 
     sourceSets {
+        all {
+            languageSettings.optIn("kotlinx.cinterop.ExperimentalForeignApi")
+        }
+
         commonMain.dependencies {
             // put your Multiplatform dependencies here
             implementation(libs.koinCore)
@@ -46,6 +50,8 @@ kotlin {
             implementation(libs.kotlinx.serialization.json)
 
             api(libs.kmm.viewmodel.core)
+
+            api("org.lighthousegames:logging:1.4.2")
 
         }
         androidMain.dependencies {
