@@ -1,6 +1,5 @@
 package com.wisemen.chargehub.ui.screens
 
-import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -26,6 +25,7 @@ import com.wisemen.chargehub.ui.screens.destinations.LandingScreenDestination
 import com.wisemen.chargehub.ui.theme.AppTheme
 import com.wisemen.chargehub.ui.theme.TextStyles
 import org.koin.java.KoinJavaComponent
+import screens.register.CurrentRegisterState
 import screens.register.RegisterScreenUiAction
 import screens.register.RegisterScreenUiEvent
 import screens.register.RegisterScreenUiState
@@ -66,38 +66,53 @@ fun RegisterLayout(
     onAction: (RegisterScreenUiAction) -> Unit,
     state: RegisterScreenUiState
 ) {
-    Log.d("TAGG", "RegisterLayout: Email in layout ${state.email}")
-    TopBar(stringResource(R.string.e_mail), {
+
+    val topBarTitle = when (state.currentRegisterState) {
+        CurrentRegisterState.EMAIL -> stringResource(R.string.e_mail)
+        CurrentRegisterState.CAR_CONNECT -> stringResource(R.string.voertuig)
+        else -> {""}
+    }
+
+    TopBar(topBarTitle, {
         onAction(RegisterScreenUiAction.OnPreviousClickedAction)
     }) {
         Column(Modifier.padding(it).padding(horizontal = 16.dp)) {
-            TextFields.EmailTextField(
-                modifier = Modifier.padding(top = 30.dp),
-                email = state.email,
-                isValid = state.isEmailValid,
-                onInputChanged = { newEmail ->
-                    onAction(
-                        RegisterScreenUiAction.OnEmailChangedAction(
-                            newEmail
-                        )
-                    )
-                }
-            )
-            Text(
-                modifier = Modifier.padding(top = 4.dp, bottom = 27.dp),
-                text = stringResource(R.string.privacybeleid),
-                style = TextStyles.bottomLabel
-            )
 
-            PrimaryButton(
-                modifier = Modifier.fillMaxWidth(),
-                text = stringResource(R.string.volgende),
-                onClick = {
-                    onAction(RegisterScreenUiAction.OnNextClickedAction)
-                },
-                colors = ButtonDefaults.primaryButtonColors()
+            when (state.currentRegisterState) {
+                CurrentRegisterState.EMAIL -> EmailRegisterStep(state, onAction)
+                else -> {}
+            }
 
-            )
         }
     }
+}
+
+@Composable
+fun EmailRegisterStep(state: RegisterScreenUiState, onAction: (RegisterScreenUiAction) -> Unit) {
+    TextFields.EmailTextField(
+        modifier = Modifier.padding(top = 30.dp),
+        email = state.email,
+        isValid = state.isEmailValid,
+        onInputChanged = { newEmail ->
+            onAction(
+                RegisterScreenUiAction.OnEmailChangedAction(
+                    newEmail
+                )
+            )
+        }
+    )
+    Text(
+        modifier = Modifier.padding(top = 4.dp, bottom = 27.dp),
+        text = stringResource(R.string.privacybeleid),
+        style = TextStyles.bottomLabel
+    )
+
+    PrimaryButton(
+        modifier = Modifier.fillMaxWidth(),
+        text = stringResource(R.string.volgende),
+        onClick = {
+            onAction(RegisterScreenUiAction.OnNextClickedAction)
+        },
+        colors = ButtonDefaults.primaryButtonColors()
+    )
 }
