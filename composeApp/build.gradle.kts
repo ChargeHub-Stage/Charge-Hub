@@ -83,3 +83,6 @@ android {
         debugImplementation(libs.compose.ui.tooling)
     }
 }
+dependencies {
+    implementation(libs.androidx.media3.common)
+}

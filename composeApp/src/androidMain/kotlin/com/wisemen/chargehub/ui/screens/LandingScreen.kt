@@ -62,7 +62,10 @@ fun LandingScreen(
                 is LandingScreenUiEvent.ClickedLoginButtonEvent -> navController.navigate(
                     LoginScreenDestination
                 )
-                is LandingScreenUiEvent.ClickedRegisterButtonEvent -> navController.navigate(RegisterScreenDestination)
+
+                is LandingScreenUiEvent.ClickedRegisterButtonEvent -> navController.navigate(
+                    RegisterScreenDestination
+                )
             }
         }
     }

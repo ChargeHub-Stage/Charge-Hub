@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinSerialization)
     alias(libs.plugins.sqlDelight)
+    id("com.rickclephas.kmp.nativecoroutines") version "1.0.0-ALPHA-26"
 }
 
 kotlin {

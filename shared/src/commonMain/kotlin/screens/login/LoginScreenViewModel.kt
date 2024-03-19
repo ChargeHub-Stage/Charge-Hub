@@ -1,27 +1,33 @@
 package screens.login
 
-import com.rickclephas.kmm.viewmodel.KMMViewModel
 import com.rickclephas.kmm.viewmodel.coroutineScope
-import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.receiveAsFlow
+import db.repository.FirebaseRepository
+import com.rickclephas.kmm.viewmodel.MutableStateFlow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
-import screens.IViewModel
+import screens.AbstractViewModel
 
-class LoginScreenViewModel : KMMViewModel(),
-    IViewModel<LoginScreenUiAction, LoginScreenUiEvent, LoginScreenUiState> {
-    private val eventChannel = Channel<LoginScreenUiEvent>()
-    val eventFlow = eventChannel.receiveAsFlow()
+class LoginScreenViewModel(private val firebaseRepo: FirebaseRepository) :
+    AbstractViewModel<LoginScreenUiAction, LoginScreenUiEvent, LoginScreenUiState>() {
 
-    override var state: LoginScreenUiState = LoginScreenUiState()
+    override var state: MutableStateFlow<LoginScreenUiState> =
+        MutableStateFlow(viewModelScope, LoginScreenUiState())
 
     override fun onAction(action: LoginScreenUiAction) = viewModelScope.coroutineScope.launch {
         when (action) {
-            is LoginScreenUiAction.OnClickedBackButtonAction -> eventChannel.send(LoginScreenUiEvent.ClickedBackButtonEvent)
-            is LoginScreenUiAction.OnEmailChangedAction -> state = state.copy(email = action.email)
-            is LoginScreenUiAction.OnPasswordChangedAction -> state = state.copy(password = action.password)
-            is LoginScreenUiAction.OnClickedPasswordVisibilityButtonAction -> state = state.copy(passwordVisibility = !state.passwordVisibility)
-            is LoginScreenUiAction.OnClickedLoginButtonAction -> eventChannel.send(LoginScreenUiEvent.ClickedLoginButtonEvent)
-            is LoginScreenUiAction.OnClickedForgotPasswordButtonAction -> eventChannel.send(LoginScreenUiEvent.ClickedForgotPasswordButtonEvent)
+            is LoginScreenUiAction.OnClickedBackButtonAction -> {sendEvent(LoginScreenUiEvent.ClickedBackButtonEvent) }
+            is LoginScreenUiAction.OnEmailChangedAction -> state.value = state.value.copy(email = action.email)
+            is LoginScreenUiAction.OnPasswordChangedAction -> state.value = state.value.copy(password = action.password)
+            is LoginScreenUiAction.OnClickedPasswordVisibilityButtonAction -> state.value = state.value.copy(passwordVisibility = !state.value.passwordVisibility)
+            is LoginScreenUiAction.OnClickedLoginButtonAction -> firebaseRepo.login(
+                state.value.email,
+                state.value.password
+            ) {
+                trySend(LoginScreenUiEvent.ClickedLoginButtonEvent)
+            }
+            is LoginScreenUiAction.OnClickedForgotPasswordButtonAction -> sendEvent(
+                LoginScreenUiEvent.ClickedForgotPasswordButtonEvent
+            )
         }
     }
 }

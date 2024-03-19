@@ -17,19 +17,25 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.media3.common.util.Log
+import androidx.media3.common.util.UnstableApi
 import androidx.navigation.NavController
 import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.navigate
 import com.wisemen.chargehub.R
 import com.wisemen.chargehub.nav.ChargeHubNavGraph
 import com.wisemen.chargehub.ui.components.Buttons
 import com.wisemen.chargehub.ui.components.TextFields
 import com.wisemen.chargehub.ui.components.primaryButtonColors
+import com.wisemen.chargehub.ui.screens.destinations.HomeScreenDestination
 import com.wisemen.chargehub.ui.theme.AppTheme
 import com.wisemen.chargehub.ui.theme.Colors
 import com.wisemen.chargehub.ui.theme.Spacing
@@ -51,23 +57,25 @@ fun LoginScreenPreview() {
 @Composable
 @Destination
 @ChargeHubNavGraph
-fun LoginScreen(
-    navController: NavController
-) {
+fun LoginScreen(navController: NavController) {
     val viewModel: LoginScreenViewModel by inject(LoginScreenViewModel::class.java)
 
     LaunchedEffect(viewModel) {
         viewModel.eventFlow.collect { event ->
             when (event) {
                 is LoginScreenUiEvent.ClickedBackButtonEvent -> navController.popBackStack()
-                is LoginScreenUiEvent.ClickedLoginButtonEvent -> {}
+                is LoginScreenUiEvent.ClickedLoginButtonEvent -> navController.navigate(
+                    HomeScreenDestination
+                )
                 is LoginScreenUiEvent.ClickedForgotPasswordButtonEvent -> {}
             }
         }
     }
-    LoginLayout(viewModel.state, viewModel::onAction)
+    val state = viewModel.state.collectAsState()
+    LoginLayout(state.value, viewModel::onAction)
 }
 
+@androidx.annotation.OptIn(UnstableApi::class)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginLayout(
@@ -125,7 +133,9 @@ fun LoginLayout(
                 TextFields.PasswordTextField(
                     modifier = Modifier.padding(horizontal = 15.dp),
                     onInputChanged = { onAction(LoginScreenUiAction.OnPasswordChangedAction(it)) },
-                    onTogglePasswordVisibility = { onAction(LoginScreenUiAction.OnClickedPasswordVisibilityButtonAction) },
+                    onTogglePasswordVisibility = {
+                        onAction(LoginScreenUiAction.OnClickedPasswordVisibilityButtonAction)
+                    },
                     currentPassword = state.password,
                     isPasswordVisible = state.passwordVisibility,
                     isValid = true,
@@ -135,7 +145,11 @@ fun LoginLayout(
                     style = TextStyles.small_text,
                     modifier = Modifier
                         .padding(bottom = 30.dp, start = 15.dp)
-                        .clickable { onAction(LoginScreenUiAction.OnClickedForgotPasswordButtonAction) }
+                        .clickable {
+                            onAction(LoginScreenUiAction.OnClickedForgotPasswordButtonAction)
+                            Log.d("Email", state.email)
+                            Log.d("Password", state.password)
+                        }
                 )
             }
             Buttons.PrimaryButton(

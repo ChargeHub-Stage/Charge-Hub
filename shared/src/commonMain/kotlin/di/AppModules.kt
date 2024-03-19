@@ -2,9 +2,10 @@ package di
 
 import db.repository.car.RemoteCarRepository
 import db.repository.chargehub.RemoteChargeHubRepository
-import db.repository.reservation.RemoteReservationRepository
 import db.repository.level.RemoteLevelRepository
+import db.repository.reservation.RemoteReservationRepository
 import db.repository.user.RemoteUserRepository
+import db.repository.FirebaseRepository
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.serialization.kotlinx.json.json
@@ -18,8 +19,8 @@ import screens.register.RegisterScreenViewModel
 val modules = module {
     singleOf(::LandingScreenViewModel)
     singleOf(::LoginScreenViewModel)
-     singleOf(::LandingScreenViewModel)
-     singleOf(::RegisterScreenViewModel)
+    singleOf(::LandingScreenViewModel)
+    singleOf(::RegisterScreenViewModel)
 }
 
 val clientsModule = module {
@@ -46,4 +47,5 @@ val repositoriesModule = module {
     singleOf(::RemoteChargeHubRepository)
     singleOf(::RemoteLevelRepository)
     singleOf(::RemoteReservationRepository)
+    singleOf(::FirebaseRepository)
 }
