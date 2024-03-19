@@ -14,4 +14,10 @@
     <string name="profiel">Profiel</string>
     <string name="voertuig">Jouw Voertuig</string>
     <string name="volgende">Volgende</string>
+    <string name="voornaam">Voornaam</string>
+    <string name="achternaam">Achternaam</string>
+    <string name="privacy1">"Ik heb de "</string>
+    <string name="privacy2">privacy policy</string>
+    <string name="privacy3">" gelezen en ga hiermee akkoord."</string>
+    <string name="profile">Profile</string>
 </resources>

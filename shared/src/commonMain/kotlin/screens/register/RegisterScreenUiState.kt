@@ -8,6 +8,8 @@ data class RegisterScreenUiState(
 
     var currentRegisterState: CurrentRegisterState? = CurrentRegisterState.EMAIL,
 
+    var isPrivacyChecked: Boolean = false,
+
     var isEmailValid: Boolean = false,
     var isFirstNameValid: Boolean = false,
     var isLastNameValid: Boolean = false,

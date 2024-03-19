@@ -25,8 +25,8 @@ class RegisterScreenViewModel :
             is RegisterScreenUiAction.OnFirstNameChangedAction -> state.update { it.copy(firstName = action.firstName) }
             is RegisterScreenUiAction.OnLastNameChangedAction -> state.update { it.copy(lastName = action.lastName) }
             is RegisterScreenUiAction.OnPasswordChangedAction -> state.update { it.copy(password = action.password) }
-            is RegisterScreenUiAction.OnFinaliseRegisterAction -> { /*TODO */
-            }
+            is RegisterScreenUiAction.OnFinaliseRegisterAction -> { /*TODO */ }
+            is RegisterScreenUiAction.OnPrivacyCheckedChangedAction -> state.value = state.value.copy(isPrivacyChecked = !state.value.isPrivacyChecked)
         }
     }
 
