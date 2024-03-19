@@ -3,7 +3,7 @@ package db.networking.request
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class CreateUserRequest(
+data class UserRequest(
     val levelId: String,
     val name: String,
     val email: String,

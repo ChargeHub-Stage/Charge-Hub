@@ -16,15 +16,15 @@ class RemoteCarRepository : GenericRepository<CreateCarRequest, Car, CarDatabase
     override val database: CarDatabase = inject<CarDatabaseWrapper>().value.database
 
     override suspend fun create(request: CreateCarRequest) {
-        database.create(request)
+        return database.create(request)
     }
 
-    override suspend fun fetchAll() {
-        database.getAll()
+    override suspend fun fetchAll(): List<Car> {
+        return database.getAll()
     }
 
-    override suspend fun fetchById(id: String) {
-        database.getById(id)
+    override suspend fun fetchById(id: String): Car {
+        return database.getById(id)
     }
 
     override suspend fun delete(id: String) {
