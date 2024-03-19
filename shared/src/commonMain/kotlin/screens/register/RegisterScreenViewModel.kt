@@ -20,11 +20,8 @@ class RegisterScreenViewModel :
         when (action) {
             is RegisterScreenUiAction.OnNextClickedAction -> handleNext()
             is RegisterScreenUiAction.OnPreviousClickedAction -> handlePrevious()
-            is RegisterScreenUiAction.OnEmailChangedAction -> {
-                logging.d { "Action value  ${action.email}" }
-                state.value = state.value.copy(email = action.email)
-                logging.d { "State value... ${state.value.email}" }
-            }
+            is RegisterScreenUiAction.OnEmailChangedAction -> state.value = state.value.copy(email = action.email)
+
             is RegisterScreenUiAction.OnFirstNameChangedAction -> state.update { it.copy(firstName = action.firstName) }
             is RegisterScreenUiAction.OnLastNameChangedAction -> state.update { it.copy(lastName = action.lastName) }
             is RegisterScreenUiAction.OnPasswordChangedAction -> state.update { it.copy(password = action.password) }
