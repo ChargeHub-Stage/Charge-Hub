@@ -33,7 +33,7 @@ struct HeaderComponent: View {
                 .font(.system(size: 64))
                 .fontWeight(.bold)
                 .foregroundColor(.acid)
-            Image("logo_acid")
+            Image("logo")
                 .resizable()
                 .frame(width: 74, height: 74)
             
