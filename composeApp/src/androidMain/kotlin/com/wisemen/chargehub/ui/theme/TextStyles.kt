@@ -31,4 +31,10 @@ object TextStyles {
         fontWeight = FontWeight.W700,
         lineHeight = 60.sp,
     )
+
+    val topBarTitle = TextStyle(
+        fontSize = 17.sp,
+        fontWeight = FontWeight.W700,
+        lineHeight = 22.sp
+    )
 }
