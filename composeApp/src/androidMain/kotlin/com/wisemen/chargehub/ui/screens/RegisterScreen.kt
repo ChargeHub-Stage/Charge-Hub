@@ -203,10 +203,21 @@ fun CarConnectStep(state: RegisterScreenUiState, onAction: (RegisterScreenUiActi
         input = state.carId,
         onInputChanged = { onAction(RegisterScreenUiAction.OnCarIdChangedAction(it)) },
         topLabel = stringResource(R.string.jouw_auto_id),
-        trailingIcon =  { ClearFieldIcon { onAction(RegisterScreenUiAction.OnCarIdChangedAction("")) } }
+        trailingIcon =  { ClearFieldIcon { onAction(RegisterScreenUiAction.OnCarIdChangedAction("")) } },
+        errorMessage = if (state.isCarIdValid) null else stringResource(R.string.invalid_car_id)
     )
 
-    NextButton(onAction)
+    PrimaryButton(
+        modifier = Modifier.fillMaxWidth(),
+        text = stringResource(R.string.volgende),
+        onClick = {
+            //if (state.isCarIdValid) {
+                onAction(RegisterScreenUiAction.OnNextClickedAction)
+                onAction(RegisterScreenUiAction.RequestCarDetailsAction)
+            //}
+        },
+        colors = ButtonDefaults.primaryButtonColors()
+    )
 
 }
 

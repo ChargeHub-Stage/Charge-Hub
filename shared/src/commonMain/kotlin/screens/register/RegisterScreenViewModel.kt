@@ -2,21 +2,23 @@ package screens.register
 
 import com.rickclephas.kmm.viewmodel.MutableStateFlow
 import com.rickclephas.kmm.viewmodel.coroutineScope
+import db.repository.networkcalls.RemoteCarConnectNetworkCallsRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import org.lighthousegames.logging.logging
+import org.koin.core.component.inject
 import screens.AbstractViewModel
 
 class RegisterScreenViewModel :
     AbstractViewModel<RegisterScreenUiAction, RegisterScreenUiEvent, RegisterScreenUiState>() {
+
+    private val remoteCarConnectNetworkCallsRepository: RemoteCarConnectNetworkCallsRepository by inject()
 
     override var state: MutableStateFlow<RegisterScreenUiState> =
         MutableStateFlow(viewModelScope, RegisterScreenUiState())
 
 
     override fun onAction(action: RegisterScreenUiAction) = viewModelScope.coroutineScope.launch {
-        val logging = logging()
         when (action) {
             is RegisterScreenUiAction.OnNextClickedAction -> handleNext()
             is RegisterScreenUiAction.OnPreviousClickedAction -> handlePrevious()
@@ -25,9 +27,20 @@ class RegisterScreenViewModel :
             is RegisterScreenUiAction.OnFirstNameChangedAction -> state.update { it.copy(firstName = action.firstName) }
             is RegisterScreenUiAction.OnLastNameChangedAction -> state.update { it.copy(lastName = action.lastName) }
             is RegisterScreenUiAction.OnPasswordChangedAction -> state.update { it.copy(password = action.password) }
-            is RegisterScreenUiAction.OnFinaliseRegisterAction -> { /*TODO */ }
-            is RegisterScreenUiAction.OnPrivacyCheckedChangedAction -> state.update { it.copy(isPrivacyChecked = !state.value.isPrivacyChecked) }
+            is RegisterScreenUiAction.OnFinaliseRegisterAction -> { /*TODO */
+            }
+
+            is RegisterScreenUiAction.OnPrivacyCheckedChangedAction -> state.update {
+                it.copy(
+                    isPrivacyChecked = !state.value.isPrivacyChecked
+                )
+            }
+
             is RegisterScreenUiAction.OnCarIdChangedAction -> state.update { it.copy(carId = action.id) }
+
+            is RegisterScreenUiAction.RequestCarDetailsAction -> {
+                remoteCarConnectNetworkCallsRepository.insertOrReplaceNetworkCall()
+            }
         }
     }
 

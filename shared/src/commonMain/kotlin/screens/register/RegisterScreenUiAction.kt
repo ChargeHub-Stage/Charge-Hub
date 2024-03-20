@@ -19,5 +19,6 @@ sealed class RegisterScreenUiAction {
     data object OnFinaliseRegisterAction : RegisterScreenUiAction()
     data object OnPrivacyCheckedChangedAction : RegisterScreenUiAction()
 
+    data object RequestCarDetailsAction : RegisterScreenUiAction()
 
 }

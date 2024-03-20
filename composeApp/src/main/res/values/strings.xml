@@ -21,4 +21,5 @@
     <string name="privacy3">" gelezen en ga hiermee akkoord."</string>
     <string name="profile">Profile</string>
     <string name="jouw_auto_id">Jouw auto id</string>
+    <string name="invalid_car_id">Invalid Car Id</string>
 </resources>

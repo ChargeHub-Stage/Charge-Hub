@@ -48,9 +48,10 @@ kotlin {
             implementation(libs.firebase.common)
             implementation(libs.kotlinx.serialization.json)
 
-            api(libs.kmm.viewmodel.core)
+            implementation(libs.stately.concurrency)
 
-            api("org.lighthousegames:logging:1.4.2")
+            api(libs.kmm.viewmodel.core)
+            api(libs.logging)
 
         }
         androidMain.dependencies {
