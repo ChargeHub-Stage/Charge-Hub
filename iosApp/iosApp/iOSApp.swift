@@ -2,6 +2,7 @@ import SwiftUI
 import Shared
 import Firebase
 
+@available(iOS 16.0, *)
 @main
 struct iOSApp: App {
 
@@ -12,7 +13,7 @@ struct iOSApp: App {
 
 	var body: some Scene {
 		WindowGroup {
-			LoginScreenView()
+			LandingScreenView()
 		}
 	}
 }

@@ -10,6 +10,7 @@
 		058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557BA273AAA24004C7B11 /* Assets.xcassets */; };
 		058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */; };
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
+		641E4B4A2BAB30E400AC738D /* RegistrationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641E4B492BAB30E400AC738D /* RegistrationScreen.swift */; };
 		64666D392BA9CC310052C7F3 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64666D382BA9CC310052C7F3 /* LoginScreen.swift */; };
 		64BF5C252BA3109200338446 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 64BF5C242BA3109200338446 /* FirebaseAnalytics */; };
 		64BF5C272BA3109200338446 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 64BF5C262BA3109200338446 /* FirebaseAuth */; };
@@ -31,6 +32,7 @@
 		058557BA273AAA24004C7B11 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2152FB032600AC8F00CF470E /* iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSApp.swift; sourceTree = "<group>"; };
+		641E4B492BAB30E400AC738D /* RegistrationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationScreen.swift; sourceTree = "<group>"; };
 		64666D382BA9CC310052C7F3 /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		64BF5C2C2BA31C0E00338446 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* ChargeHub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChargeHub.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -144,6 +146,7 @@
 			children = (
 				DD98B9222BA84E6D00CFC5F1 /* LandingScreen.swift */,
 				64666D382BA9CC310052C7F3 /* LoginScreen.swift */,
+				641E4B492BAB30E400AC738D /* RegistrationScreen.swift */,
 			);
 			path = pages;
 			sourceTree = "<group>";
@@ -262,6 +265,7 @@
 			files = (
 				DD98B9232BA84E6D00CFC5F1 /* LandingScreen.swift in Sources */,
 				DD5877F82BA34552000CD0DE /* color.swift in Sources */,
+				641E4B4A2BAB30E400AC738D /* RegistrationScreen.swift in Sources */,
 				64666D392BA9CC310052C7F3 /* LoginScreen.swift in Sources */,
 				DD877E6C2BA4731300608CF5 /* textFields.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,

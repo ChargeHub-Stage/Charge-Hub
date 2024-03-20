@@ -8,9 +8,9 @@ struct EditText: View {
     var isSecure: Bool = false
     var body: some View {
         
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 0) {
             if let topLabel = topLabel {
-                Text(topLabel)
+                Text(topLabel).padding(.bottom, 4)
             }
             if (!isSecure) {
                 TextField("Type here", text: $input)
@@ -56,7 +56,7 @@ struct PasswordTextField: View {
     @Binding var isPasswordVisible: Bool
     
     var body: some View {
-        EditText(input: $password, topLabel: "Password", isSecure: !isPasswordVisible)
+        EditText(input: $password, topLabel: "Wachtwoord", isSecure: !isPasswordVisible)
             .overlay(
                 Button(action: {
                     isPasswordVisible.toggle()
@@ -88,6 +88,6 @@ struct EmailTextField: View {
     var isValid: Bool
     
     var body: some View {
-        EditText(input: $email, topLabel: "Email", errorMessage: isValid ? nil : "Email is required")
+        EditText(input: $email, topLabel: "E-mail", errorMessage: isValid ? nil : "Email is required")
     }
 }
