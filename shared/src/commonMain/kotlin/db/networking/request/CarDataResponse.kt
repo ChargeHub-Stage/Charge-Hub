@@ -1,7 +1,6 @@
 package db.networking.request
 
 import kotlinx.serialization.Serializable
-import kotlin.random.Random
 
 @Serializable
 data class CarDataResponse(
@@ -13,21 +12,11 @@ data class CarDataResponse(
     val year: Int = -1,
     val status: StatusResponse? = null
 ) {
-
-    private fun generateRandomString(): String {
-        val charPool: List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
-        return (1..16)
-            .map { Random.nextInt(0, charPool.size) }
-            .map(charPool::get)
-            .joinToString("")
-    }
-
-    fun toCreateCarRequest(): CreateCarRequest {
+    fun toCreateCarRequest(id : String): CreateCarRequest {
         return CreateCarRequest(
-            id = generateRandomString(),
+            id = id,
             userId = userId,
             brand = brand,
-            vin = vin,
             model = model,
             year = year,
             percentage = status?.point?.battery?.percentage ?: -1,

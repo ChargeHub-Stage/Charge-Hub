@@ -4,7 +4,6 @@ import kotlin.Boolean;
 CREATE TABLE Car (
     id TEXT PRIMARY KEY,
     userId TEXT NOT NULL,
-    vin TEXT NOT NULL,
     brand TEXT NOT NULL,
     year INTEGER NOT NULL,
     model TEXT NOT NULL,
@@ -20,16 +19,23 @@ CREATE TABLE Car (
 getAllCars:
 SELECT * FROM Car;
 
-getCarByVin:
-SELECT * FROM Car WHERE vin = ?;
+getCarById:
+SELECT * FROM Car WHERE id = ?;
+
+getCarByUser:
+SELECT * FROM Car WHERE userId = ?;
+
+insertOrUpdateCar:
+INSERT OR REPLACE INTO Car(id, userId, brand, year, model, percentage, pluggedIn, charging, powerComputed, minutesLeft, chargeLimit)
+VALUES (?, ?,?,?,?,?,?,?,?,?,?);
 
 updateCar:
-UPDATE Car SET userId = ?, vin = ?, brand = ?, year = ?, model = ?, percentage = ?, pluggedIn = ?, charging = ?, chargeLimit = ?, powerComputed = ?, minutesLeft = ? WHERE id = ?;
+UPDATE Car SET userId = ?, brand = ?, year = ?, model = ?, percentage = ?, pluggedIn = ?, charging = ?, chargeLimit = ?, powerComputed = ?, minutesLeft = ? WHERE id = ?;
 
 deleteCar:
 DELETE FROM Car WHERE id = ?;
 
 insertCar:
 INSERT INTO Car
-(userId, vin, brand, year, model, percentage, pluggedIn, charging, chargeLimit, powerComputed, minutesLeft)
- VALUES (?, ?, ?, ?,?,?,?,?,?,?,?);
+(userId, brand, year, model, percentage, pluggedIn, charging, chargeLimit, powerComputed, minutesLeft)
+ VALUES (?,?, ?, ?,?,?,?,?,?,?);

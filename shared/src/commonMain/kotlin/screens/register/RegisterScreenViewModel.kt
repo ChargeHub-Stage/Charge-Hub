@@ -2,7 +2,8 @@ package screens.register
 
 import com.rickclephas.kmm.viewmodel.MutableStateFlow
 import com.rickclephas.kmm.viewmodel.coroutineScope
-import db.repository.networkcalls.RemoteCarConnectNetworkCallsRepository
+import db.repository.FirebaseRepository
+import db.repository.car.RemoteCarRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -12,7 +13,8 @@ import screens.AbstractViewModel
 class RegisterScreenViewModel :
     AbstractViewModel<RegisterScreenUiAction, RegisterScreenUiEvent, RegisterScreenUiState>() {
 
-    private val remoteCarConnectNetworkCallsRepository: RemoteCarConnectNetworkCallsRepository by inject()
+
+    private val carRepository: RemoteCarRepository by inject()
 
     override var state: MutableStateFlow<RegisterScreenUiState> =
         MutableStateFlow(viewModelScope, RegisterScreenUiState())
@@ -36,15 +38,14 @@ class RegisterScreenViewModel :
                 )
             }
 
-            is RegisterScreenUiAction.OnCarIdChangedAction -> state.update { it.copy(carId = action.id) }
-
-            is RegisterScreenUiAction.RequestCarDetailsAction -> {
-                remoteCarConnectNetworkCallsRepository.fetchCarData(state.value.carId)
-            }
+            is RegisterScreenUiAction.OnCarIdChangedAction -> state.update { it.copy(vin = action.id) }
         }
     }
 
     private suspend fun handleNext() {
+        if (state.value.currentRegisterState == CurrentRegisterState.CAR_CONNECT) {
+            carRepository.fetchCarConnectData(state.value.vin)
+        }
         state.update {
             it.copy(currentRegisterState = it.currentRegisterState?.next())
         }

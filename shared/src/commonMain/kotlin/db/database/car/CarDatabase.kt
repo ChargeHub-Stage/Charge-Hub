@@ -6,7 +6,6 @@ import db.chargehub.CarDbQueries
 import db.database.GenericDatabaseOperations
 import db.networking.request.CarDataResponse
 import db.networking.request.CreateCarRequest
-import kotlinx.serialization.descriptors.PrimitiveKind
 
 class CarDatabase(sqlDriver: SqlDriver) :
     GenericDatabaseOperations<CarDataResponse, CreateCarRequest>(sqlDriver) {
@@ -17,8 +16,13 @@ class CarDatabase(sqlDriver: SqlDriver) :
         return query.getAllCars().executeAsList().map { it.mapToCarDataResponse() }
     }
 
+    // The ID of a car in the localdatabase is equal to the VIN in the car connect database
     override fun getById(id: String): CarDataResponse? {
-        return query.getCarByVin(id).executeAsOneOrNull()?.mapToCarDataResponse()
+        return query.getCarById(id).executeAsOneOrNull()?.mapToCarDataResponse()
+    }
+
+    fun getCarByUserId(userId: String): CarDataResponse? {
+        return query.getCarByUser(userId).executeAsOneOrNull()?.mapToCarDataResponse()
     }
 
     override fun delete(id: String) {
@@ -31,7 +35,22 @@ class CarDatabase(sqlDriver: SqlDriver) :
             id = id,
             userId = request.userId,
             brand = request.brand,
-            vin = request.vin,
+            year = request.year.toLong(),
+            model = request.model,
+            chargeLimit = request.chargeLimit.toLong(),
+            charging = request.charging,
+            percentage = request.percentage.toLong(),
+            minutesLeft = request.minutesLeft.toLong(),
+            pluggedIn = request.pluggedIn,
+            powerComputed = request.powerComputed.toLong()
+        )
+    }
+
+    fun upsert(id: String, request: CreateCarRequest) {
+        query.insertOrUpdateCar(
+            id = id,
+            userId = request.userId,
+            brand = request.brand,
             year = request.year.toLong(),
             model = request.model,
             chargeLimit = request.chargeLimit.toLong(),
@@ -47,7 +66,6 @@ class CarDatabase(sqlDriver: SqlDriver) :
         query.insertCar(
             userId = request.userId,
             brand = request.brand,
-            vin = request.vin,
             year = request.year.toLong(),
             model = request.model,
             chargeLimit = request.chargeLimit.toLong(),
@@ -62,7 +80,6 @@ class CarDatabase(sqlDriver: SqlDriver) :
     private fun Car.mapToCarDataResponse(): CarDataResponse {
         return CarDataResponse(
             id = id,
-            vin = vin,
             model = model,
             year = year.toInt(),
             brand = brand,

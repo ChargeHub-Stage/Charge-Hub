@@ -7,7 +7,6 @@ data class CreateCarRequest(
     val id: String,
     val userId: String,
     val brand: String,
-    val vin: String,
     val model: String,
     val year: Int,
     val percentage: Int,

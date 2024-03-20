@@ -44,7 +44,7 @@ kotlin {
             implementation(libs.sqldelight.common)
             implementation(libs.kotlinx.datetime)
             implementation(libs.ktor.client.auth)
-
+            implementation(libs.firebase.auth)
             implementation(libs.firebase.firestore)
             implementation(libs.firebase.common)
             implementation(libs.kotlinx.serialization.json)

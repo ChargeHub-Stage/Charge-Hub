@@ -3,7 +3,6 @@ package di
 import db.repository.car.RemoteCarRepository
 import db.repository.chargehub.RemoteChargeHubRepository
 import db.repository.level.RemoteLevelRepository
-import db.repository.networkcalls.RemoteCarConnectNetworkCallsRepository
 import db.repository.reservation.RemoteReservationRepository
 import db.repository.user.RemoteUserRepository
 import io.ktor.client.HttpClient
@@ -18,6 +17,7 @@ import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 import screens.landing.LandingScreenViewModel
 import screens.register.RegisterScreenViewModel
+import db.repository.FirebaseRepository
 
 val modules = module {
     singleOf(::LandingScreenViewModel)
@@ -55,5 +55,5 @@ val repositoriesModule = module {
     singleOf(::RemoteChargeHubRepository)
     singleOf(::RemoteLevelRepository)
     singleOf(::RemoteReservationRepository)
-    singleOf(::RemoteCarConnectNetworkCallsRepository)
+    singleOf(::FirebaseRepository)
 }
