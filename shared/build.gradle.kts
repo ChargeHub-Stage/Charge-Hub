@@ -3,7 +3,6 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinSerialization)
     alias(libs.plugins.sqlDelight)
-    id("com.rickclephas.kmp.nativecoroutines") version "1.0.0-ALPHA-26"
 }
 
 kotlin {
@@ -50,9 +49,11 @@ kotlin {
             implementation(libs.firebase.auth)
             implementation(libs.kotlinx.serialization.json)
 
+            implementation("co.touchlab:stately-common:2.0.5")
+
             api(libs.kmm.viewmodel.core)
 
-            api("org.lighthousegames:logging:1.4.2")
+            api(libs.logging)
 
         }
         androidMain.dependencies {

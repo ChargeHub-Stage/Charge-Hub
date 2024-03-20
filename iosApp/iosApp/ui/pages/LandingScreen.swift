@@ -66,7 +66,6 @@ struct ButtonsComponent: View {
                 }
             )
             .padding(.bottom, 35)
-            
             .frame(maxWidth: .infinity) .cornerRadius(8)
         }
     }

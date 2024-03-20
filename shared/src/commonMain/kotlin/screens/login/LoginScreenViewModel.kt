@@ -15,7 +15,7 @@ class LoginScreenViewModel(private val firebaseRepo: FirebaseRepository) :
 
     override fun onAction(action: LoginScreenUiAction) = viewModelScope.coroutineScope.launch {
         when (action) {
-            is LoginScreenUiAction.OnClickedBackButtonAction -> {sendEvent(LoginScreenUiEvent.ClickedBackButtonEvent) }
+            is LoginScreenUiAction.OnClickedBackButtonAction -> { sendEvent(LoginScreenUiEvent.ClickedBackButtonEvent) }
             is LoginScreenUiAction.OnEmailChangedAction -> state.value = state.value.copy(email = action.email)
             is LoginScreenUiAction.OnPasswordChangedAction -> state.value = state.value.copy(password = action.password)
             is LoginScreenUiAction.OnClickedPasswordVisibilityButtonAction -> state.value = state.value.copy(passwordVisibility = !state.value.passwordVisibility)

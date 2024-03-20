@@ -36,10 +36,17 @@ struct TextStyles {
         lineHeight: 14.31,
         color: .rebel
     )
+    
     static let bigTitle = TextStyle(
        fontSize: 64,
        fontWeight: .bold,
        lineHeight: 60
+    )
+    
+    static let title = TextStyle(
+        fontSize: 28,
+        fontWeight: .bold,
+        lineHeight: 34
     )
 }
 
