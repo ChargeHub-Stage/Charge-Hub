@@ -14,9 +14,9 @@ abstract class GenericDatabaseOperations<T, R>(sqlDriver: SqlDriver) {
 
     internal val database = ChargeHubDb(sqlDriver)
 
-    abstract fun getAll() : List<T>
+    abstract fun getAll() : List<T>?
 
-    abstract fun getById(id: String) : T
+    abstract fun getById(id: String) : T?
 
     abstract fun create(request: R)
 

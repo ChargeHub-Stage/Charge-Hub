@@ -24,4 +24,5 @@
     <string name="meldingen_toestaan">Meldingen toestaan</string>
     <string name="meldingen_info">Charge Hub helpt je eraan denken wanneer het jouw beurt is om te laden</string>
     <string name="overslaan">Overslaan</string>
+    <string name="invalid_car_id">Invalid Car Id</string>
 </resources>
