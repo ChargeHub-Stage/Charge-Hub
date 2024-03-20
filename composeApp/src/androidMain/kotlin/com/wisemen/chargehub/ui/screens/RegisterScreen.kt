@@ -4,6 +4,7 @@ import android.os.Build
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -13,6 +14,8 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -44,6 +47,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.painterResource
@@ -67,6 +71,7 @@ import com.wisemen.chargehub.ui.theme.Colors
 import com.wisemen.chargehub.ui.theme.TextStyles
 import kotlinx.coroutines.launch
 import org.koin.java.KoinJavaComponent
+import org.lighthousegames.logging.logging
 import screens.register.CurrentRegisterState
 import screens.register.RegisterScreenUiAction
 import screens.register.RegisterScreenUiEvent
@@ -81,6 +86,7 @@ fun RegisterScreenPreview() {
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @Composable
 @Destination
 @ChargeHubNavGraph
@@ -101,6 +107,7 @@ fun RegisterScreen(
     RegisterLayout(viewModel::onAction, state.value)
 }
 
+@RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @Composable
 fun RegisterLayout(
     onAction: (RegisterScreenUiAction) -> Unit,
@@ -286,65 +293,104 @@ fun InfoStep(onAction: (RegisterScreenUiAction) -> Unit) {
     }
 
     @Composable
-    fun InfoPageOne() {
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            InfoTitle(stringResource(R.string.laadbeurten))
+    fun ShortInfoPage(title: String, imageResId: Int, descriptionResId: Int) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+            modifier = Modifier.fillMaxHeight()
+        ) {
+            Spacer(modifier = Modifier.weight(1f))
+            InfoTitle(title = title)
             Image(
-                modifier = Modifier
-                    .padding(bottom = 72.97.dp)
-                    .width(147.82.dp)
-                    .height(135.96.dp),
-                painter = painterResource(R.drawable.laadbeurten_info),
+                modifier = Modifier.padding(bottom = 16.dp),
+                painter = painterResource(imageResId),
                 contentDescription = null
             )
-            Text(text = stringResource(R.string.reservatie_info), style = TextStyles.infoSubTitle)
+            Text(
+                text = stringResource(descriptionResId),
+                style = TextStyles.infoSubTitle,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.padding(horizontal = 16.dp)
+            )
+            Spacer(modifier = Modifier.weight(1f))
         }
+    }
+
+    @Composable
+    fun InfoPageOne() {
+        ShortInfoPage(
+            title = stringResource(R.string.laadbeurten),
+            imageResId = R.drawable.laadbeurten_info,
+            descriptionResId = R.string.reservatie_info
+        )
     }
 
     @Composable
     fun InfoPageTwo() {
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            InfoTitle(title = stringResource(R.string.laadbeurt_afstaan))
-            Image(
-                modifier = Modifier.padding(bottom = 28.dp).width(174.dp).height(211.dp),
-                painter = painterResource(R.drawable.laadbeurt_afstaan),
-                contentDescription = null
-            )
-            Text(
-                text = stringResource(R.string.laadbeurt_afstaan_info),
-                style = TextStyles.infoSubTitle
-            )
-        }
+        ShortInfoPage(
+            title = stringResource(R.string.laadbeurt_afstaan),
+            imageResId = R.drawable.laadbeurt_afstaan,
+            descriptionResId = R.string.laadbeurt_afstaan_info
+        )
     }
 
     @Composable
     fun InfoPageThree() {
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+            modifier = Modifier.fillMaxHeight()
+        ) {
+            Spacer(modifier = Modifier.weight(1f))
             InfoTitle(stringResource(R.string.level_systeem))
             Image(
-                modifier = Modifier.padding(bottom = 28.dp).width(294.dp).height(41.dp),
+                modifier = Modifier.padding(bottom = 56.dp).width(294.dp).height(41.dp),
                 painter = painterResource(R.drawable.progress_bar),
                 contentDescription = null
             )
-            Text(text = stringResource(R.string.level_system_title), style = TextStyles.infoTitle)
+            Text(
+                modifier = Modifier.padding(bottom = 14.dp),
+                text = stringResource(R.string.level_system_title),
+                style = TextStyles.infoTitle
+            )
             Text(text = stringResource(R.string.stiptheid), style = TextStyles.infoSubTitle)
             Text(
                 modifier = Modifier.padding(bottom = 16.dp),
                 text = stringResource(R.string.stiptheid_details),
                 style = TextStyles.infoText
             )
-
             Text(text = stringResource(R.string.hoffelijkheid), style = TextStyles.infoSubTitle)
             Text(
                 text = stringResource(R.string.hoffelijkheid_details),
                 style = TextStyles.infoText
             )
+            Spacer(modifier = Modifier.weight(1f))
         }
     }
 
     @Composable
     fun InfoPageFour() {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+            modifier = Modifier.fillMaxHeight()
+        ) {
+            Spacer(modifier = Modifier.weight(1f))
+            InfoTitle(stringResource(R.string.level_systeem))
+            Image(
+                modifier = Modifier.padding(bottom = 54.dp).width(294.dp).height(41.dp),
+                painter = painterResource(R.drawable.progress_bar_full),
+                contentDescription = null
+            )
+            Text(
+                modifier = Modifier.padding(bottom = 14.dp),
+                text = stringResource(R.string.level_systeem_2_uitleg),
+                style = TextStyles.infoTitle
+            )
 
+            LevelSquares()
+            Spacer(modifier = Modifier.weight(1f))
+        }
     }
 
     val pagerState = rememberPagerState(pageCount = { 4 })
@@ -382,7 +428,7 @@ fun InfoStep(onAction: (RegisterScreenUiAction) -> Unit) {
         NextButton {
             // If you reach the last page, finalise the registering process
             // Else, go to the next
-            if (currentPage == pagerState.pageCount) {
+            if (currentPage + 1 >= pagerState.pageCount) {
                 onAction(action)
             } else {
                 coroutine.launch {
@@ -391,10 +437,12 @@ fun InfoStep(onAction: (RegisterScreenUiAction) -> Unit) {
             }
         }
 
-        SkipTextButton(
-            modifier = Modifier.padding(bottom = 16.dp, top = 16.dp),
-            textAlign = TextAlign.Center
-        ) { onAction(action) }
+        if (currentPage + 1 != pagerState.pageCount) {
+            SkipTextButton(
+                modifier = Modifier.padding(bottom = 16.dp, top = 16.dp),
+                textAlign = TextAlign.Center
+            ) { onAction(action) }
+        }
     }
 }
 
@@ -422,7 +470,7 @@ fun BottomPagerIndicator(
                 Box(
                     modifier = Modifier
                         .padding(horizontal = 11.dp)
-                        .width(82.dp)
+                        .width(30.dp)
                         .height(9.dp)
                         .background(
                             color = if (pageIndex == currentPage) Colors.acid else Colors.lightGrey,
@@ -511,6 +559,34 @@ fun CircularProfilePicture(
         )
     }
 }
+
+@Composable
+fun LevelSquares() {
+    Row(Modifier.padding(bottom = 14.dp, top = 14.dp)) {
+        LevelColumn(R.string.level_1, R.string.prioriteit, 91.dp)
+        LevelColumn(R.string.level_2, R.string.ruilen, 91.dp)
+    }
+
+    Row {
+        LevelColumn(R.string.level_3, R.string._2_dagen_op_voorhand_reserveren, 135.dp)
+        LevelColumn(R.string.level_4, R.string._3_dagen_op_voorhand_reserveren, 135.dp)
+    }
+}
+
+@Composable
+fun LevelColumn(level: Int, explanation: Int, boxHeight: Dp) {
+    Column(
+        Modifier.padding(end = 13.dp)
+            .border(BorderStroke(2.dp, Colors.blackPearl), shape = RectangleShape)
+            .size(width = 130.dp, height = boxHeight),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Text(text = stringResource(level), style = TextStyles.levelTitle)
+        Text(stringResource(explanation), style = TextStyles.levelExplanation)
+    }
+}
+
 
 @Composable
 fun NextButton(onAction: (RegisterScreenUiAction) -> Unit) {

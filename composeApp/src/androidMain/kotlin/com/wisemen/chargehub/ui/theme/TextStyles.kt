@@ -3,7 +3,6 @@ package com.wisemen.chargehub.ui.theme
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.sp
 
 object TextStyles {
@@ -69,7 +68,6 @@ object TextStyles {
         fontWeight = FontWeight.W600,
         lineHeight = 22.sp,
         color = Colors.mediumGray,
-        textDecoration = TextDecoration.Underline,
         textAlign = TextAlign.Center
     )
 
@@ -78,6 +76,19 @@ object TextStyles {
         fontWeight = FontWeight.W600,
         lineHeight = 22.sp,
         color = Colors.mist,
+        textAlign = TextAlign.Center
+    )
+
+    val levelExplanation = TextStyle(
+        fontSize = 17.sp,
+        fontWeight = FontWeight.W400,
+        lineHeight = 22.sp,
+        textAlign = TextAlign.Center
+    )
+    val levelTitle = TextStyle(
+        fontSize = 20.sp,
+        fontWeight = FontWeight.W600,
+        lineHeight = 25.sp,
         textAlign = TextAlign.Center
     )
 }

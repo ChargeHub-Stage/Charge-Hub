@@ -34,4 +34,13 @@
     <string name="stiptheid_details">Op tijd laadbeurten beginnen en je voertuig verplaatsen.</string>
     <string name="hoffelijkheid">Hoffelijkheid</string>
     <string name="hoffelijkheid_details"><![CDATA[Ruilverzoeken accepteren & laadbeurten vroegtijdig of laattijdig afstaan.]]></string>
+    <string name="level_systeem_2_uitleg">Hoe hoger je huidige level, hoe meer functies je vrijspeelt zoals</string>
+    <string name="prioriteit">Prioriteit</string>
+    <string name="level_1">Level 1</string>
+    <string name="level_2">Level 2</string>
+    <string name="level_3">Level 3</string>
+    <string name="level_4">Level 4</string>
+    <string name="ruilen">Ruilen</string>
+    <string name="_3_dagen_op_voorhand_reserveren">3 dagen op voorhand reserveren</string>
+    <string name="_2_dagen_op_voorhand_reserveren">2 dagen op voorhand reserveren</string>
 </resources>
