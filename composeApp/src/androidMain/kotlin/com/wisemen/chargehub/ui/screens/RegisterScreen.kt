@@ -227,13 +227,23 @@ fun CarConnectStep(state: RegisterScreenUiState, onAction: (RegisterScreenUiActi
 
     TextFields.EditText(
         modifier = Modifier.padding(top = 34.dp, bottom = 16.dp),
-        input = state.carId,
+        input = state.vin,
         onInputChanged = { onAction(RegisterScreenUiAction.OnCarIdChangedAction(it)) },
         topLabel = stringResource(R.string.jouw_auto_id),
-        trailingIcon = { ClearFieldIcon { onAction(RegisterScreenUiAction.OnCarIdChangedAction("")) } }
+        trailingIcon = { ClearFieldIcon { onAction(RegisterScreenUiAction.OnCarIdChangedAction("")) } },
+        errorMessage = if (state.isCarIdValid) null else stringResource(R.string.invalid_car_id)
     )
 
-    NextButton(onAction)
+    PrimaryButton(
+        modifier = Modifier.fillMaxWidth(),
+        text = stringResource(R.string.volgende),
+        onClick = {
+            //if (state.isCarIdValid) {
+                onAction(RegisterScreenUiAction.OnNextClickedAction)
+            //}
+        },
+        colors = ButtonDefaults.primaryButtonColors()
+    )
 
 }
 

@@ -43,4 +43,5 @@
     <string name="ruilen">Ruilen</string>
     <string name="_3_dagen_op_voorhand_reserveren">3 dagen op voorhand reserveren</string>
     <string name="_2_dagen_op_voorhand_reserveren">2 dagen op voorhand reserveren</string>
+    <string name="invalid_car_id">Invalid Car Id</string>
 </resources>

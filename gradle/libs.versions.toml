@@ -22,6 +22,7 @@ kmmViewmodelCore = "1.0.0-ALPHA-19"
 kotlin = "1.9.23"
 koin = "3.5.3"
 ksp = "1.10.1"
+logging = "1.4.2"
 material3Android = "1.2.1"
 kotlinxSerializationJson = "1.6.3"
 ktor = "2.3.9"
@@ -32,12 +33,15 @@ googleService = "4.4.1"
 navigation = "1.9.22-1.0.17"
 navigationRuntimeKtx = "2.7.7"
 navigationCompose = "2.7.7"
+statelyConcurrency = "2.0.5"
 
 [libraries]
 accompanist-pager = { module = "com.google.accompanist:accompanist-pager", version.ref = "accompanistPager" }
+logging = { module = "org.lighthousegames:logging", version.ref = "logging" }
 raamcosta-core = { module = "io.github.raamcosta.compose-destinations:core", version.ref = "core" }
 firebase-common = { module = "dev.gitlive:firebase-common", version.ref = "firebaseFirestore" }
 firebase-firestore = { module = "dev.gitlive:firebase-firestore", version.ref = "firebaseFirestore" }
+firebase-auth = { module = "dev.gitlive:firebase-auth", version.ref = "firebaseFirestore" }
 kmm-viewmodel-core = { module = "com.rickclephas.kmm:kmm-viewmodel-core", version.ref = "kmmViewmodelCore" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
@@ -64,7 +68,7 @@ ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "kto
 ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
 ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
 ktor-client-serialization = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
-
+ktor-client-auth = { module = "io.ktor:ktor-client-auth", version.ref = "ktor" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
 
@@ -77,6 +81,7 @@ firebase-common-ktx = { module = "com.google.firebase:firebase-common", version.
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
 androidx-navigation-runtime-ktx = { group = "androidx.navigation", name = "navigation-runtime-ktx", version.ref = "navigationRuntimeKtx" }
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
+stately-concurrency = { module = "co.touchlab:stately-common", version.ref = "statelyConcurrency" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
