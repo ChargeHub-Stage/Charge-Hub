@@ -1,10 +1,10 @@
 package db.database.networkcalls
 
+import TIMEZONE
 import app.cash.sqldelight.db.SqlDriver
 import db.chargehub.ChargeHubDb
 import kotlinx.datetime.Clock
 import kotlinx.datetime.LocalDateTime
-import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toInstant
 import kotlinx.datetime.toLocalDateTime
 
@@ -20,13 +20,13 @@ class CarConnectNetworkCallsDatabase(sqlDriver: SqlDriver) {
     private val query
         get() = database.carConnectNetworkCallsDbQueries
 
-    //TODO actual network call
-    fun createOrInsertNetworkCall() {
-        if (canSendNetworkRequest()) {
+    fun createOrUpdateNetworkCall() : Boolean {
+        return if (canSendNetworkRequest()) {
             query.insertOrUpdateNetworkCall(
-                Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).toString()
+                Clock.System.now().toLocalDateTime(TIMEZONE).toString()
             )
-        }
+            true
+        } else false
     }
 
     private fun getLastNetworkCall(): LocalDateTime? {
@@ -38,7 +38,7 @@ class CarConnectNetworkCallsDatabase(sqlDriver: SqlDriver) {
         val now = Clock.System.now().toEpochMilliseconds()
         // If no last call is made (first time ever checking this, return true)
         val lastCall =
-            getLastNetworkCall()?.toInstant(TimeZone.currentSystemDefault())?.toEpochMilliseconds()
+            getLastNetworkCall()?.toInstant(TIMEZONE)?.toEpochMilliseconds()
                 ?: return true
         return lastCall + 300_000L <= now
     }

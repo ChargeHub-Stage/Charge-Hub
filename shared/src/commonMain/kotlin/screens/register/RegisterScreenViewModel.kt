@@ -39,7 +39,7 @@ class RegisterScreenViewModel :
             is RegisterScreenUiAction.OnCarIdChangedAction -> state.update { it.copy(carId = action.id) }
 
             is RegisterScreenUiAction.RequestCarDetailsAction -> {
-                remoteCarConnectNetworkCallsRepository.insertOrReplaceNetworkCall()
+                remoteCarConnectNetworkCallsRepository.fetchCarData(state.value.carId)
             }
         }
     }
