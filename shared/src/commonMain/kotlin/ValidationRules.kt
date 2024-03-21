@@ -5,9 +5,11 @@ object ValidationRules {
 
     fun isValidLastName(name: String) = ensureNotEmpty(name) && ensureMinLength(name, 3)
 
-    fun isValidPassword(password: String) = ensureNotEmpty(password) && ensureMinLength(password, 3)
+    // This is based of the min requirements of firebase
+    fun isValidPassword(password: String) = ensureNotEmpty(password) && ensureMinLength(password, 6)
 
-    fun isEmailValid(email: String) = email.matches("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+".toRegex())
+    // Firebase email regex https://stackoverflow.com/questions/66025668/test-email-with-regular-expression-via-firebase-firestore-security-rule
+    fun isEmailValid(email: String) = email.matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}\$".toRegex())
 
 
     // Regex comes from https://regex101.com/r/49qCxI/1

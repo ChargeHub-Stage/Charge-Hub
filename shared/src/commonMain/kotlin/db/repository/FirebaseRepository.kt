@@ -11,12 +11,12 @@ class FirebaseRepository : KoinComponent {
         const val TEST_USER = "test_id"
     }
 
-    suspend fun login(email: String, password: String, onSuccess: () -> Unit) {
+    suspend fun login(email: String, password: String, onSuccess: suspend () -> Unit) {
         auth.signInWithEmailAndPassword(email, password)
         onSuccess()
     }
 
-    suspend fun register(email: String, password: String, onSuccess: () -> Unit) {
+    suspend fun register(email: String, password: String, onSuccess: suspend () -> Unit) {
         auth.createUserWithEmailAndPassword(email, password)
         onSuccess()
     }

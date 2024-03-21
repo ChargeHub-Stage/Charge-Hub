@@ -3,8 +3,12 @@ package screens.register
 import ValidationRules
 import com.rickclephas.kmm.viewmodel.MutableStateFlow
 import com.rickclephas.kmm.viewmodel.coroutineScope
+import db.networking.request.CreateUserRequest
+import db.repository.FirebaseRepository
 import db.repository.car.RemoteCarRepository
+import db.repository.user.RemoteUserRepository
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.koin.core.component.inject
@@ -15,6 +19,7 @@ class RegisterScreenViewModel :
 
 
     private val carRepository: RemoteCarRepository by inject()
+    private val userRepository: RemoteUserRepository by inject()
 
     override var state: MutableStateFlow<RegisterScreenUiState> =
         MutableStateFlow(viewModelScope, RegisterScreenUiState())
@@ -29,9 +34,7 @@ class RegisterScreenViewModel :
             is RegisterScreenUiAction.OnLastNameChangedAction -> handleFieldChange(StateFields.LASTNAME, action.lastName, ValidationRules::isValidLastName)
             is RegisterScreenUiAction.OnPasswordChangedAction -> handleFieldChange(StateFields.PASSWORD, action.password, ValidationRules::isValidPassword)
             is RegisterScreenUiAction.OnCarIdChangedAction -> handleFieldChange(StateFields.VIN, action.vin, ValidationRules::isValidVIN)
-
-            is RegisterScreenUiAction.OnFinaliseRegisterAction -> { /*TODO */
-            }
+            is RegisterScreenUiAction.OnFinaliseRegisterAction -> handleRegisterFinalization()
 
             is RegisterScreenUiAction.OnPrivacyCheckedChangedAction -> state.update {
                 it.copy(
@@ -40,6 +43,19 @@ class RegisterScreenViewModel :
             }
 
         }
+    }
+
+    private suspend fun handleRegisterFinalization() {
+        val request = CreateUserRequest(
+            levelId = "1",
+            firstName = state.value.firstName,
+            lastName = state.value.lastName,
+            password = state.value.password,
+            email = state.value.email,
+            carId = state.value.vin,
+            currentPoints = 0L,
+        )
+        userRepository.create(request)
     }
 
     private suspend fun handleNext() {
