@@ -3,7 +3,7 @@ object ValidationRules {
 
     fun isValidFirstName(name: String) = ensureNotEmpty(name) && ensureMaxLength(name, 12)
 
-    fun isValidLastName(name: String) = ensureNotEmpty(name) && ensureMinLength(name, 2)
+    fun isValidLastName(name: String) = ensureNotEmpty(name) && ensureMinLength(name, 3)
 
     fun isValidPassword(password: String) = ensureNotEmpty(password) && ensureMinLength(password, 3)
 
