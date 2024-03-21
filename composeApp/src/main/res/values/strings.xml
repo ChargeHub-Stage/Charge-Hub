@@ -43,5 +43,7 @@
     <string name="ruilen">Ruilen</string>
     <string name="_3_dagen_op_voorhand_reserveren">3 dagen op voorhand reserveren</string>
     <string name="_2_dagen_op_voorhand_reserveren">2 dagen op voorhand reserveren</string>
-    <string name="invalid_car_id">Invalid Car Id</string>
+    <string name="invalid_car_id">Invalid Vin</string>
+    <string name="first_name_validation_error">First name must not be empty, and can have a max of 12 characters</string>
+    <string name="last_name_validation_error">Last name must not be empty, and must have a min of 3 characters</string>
 </resources>

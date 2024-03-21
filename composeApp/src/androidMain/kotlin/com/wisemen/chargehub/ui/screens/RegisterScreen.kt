@@ -71,7 +71,6 @@ import com.wisemen.chargehub.ui.theme.Colors
 import com.wisemen.chargehub.ui.theme.TextStyles
 import kotlinx.coroutines.launch
 import org.koin.java.KoinJavaComponent
-import org.lighthousegames.logging.logging
 import screens.register.CurrentRegisterState
 import screens.register.RegisterScreenUiAction
 import screens.register.RegisterScreenUiEvent
@@ -152,7 +151,7 @@ fun EmailRegisterStep(state: RegisterScreenUiState, onAction: (RegisterScreenUiA
                     newEmail
                 )
             )
-        }
+        },
     )
     Text(
         modifier = Modifier.padding(top = 4.dp, bottom = 27.dp),
@@ -183,7 +182,8 @@ fun ProfileCompletionStep(
             topLabel = stringResource(R.string.voornaam),
             trailingIcon = {
                 ClearFieldIcon { onAction(RegisterScreenUiAction.OnFirstNameChangedAction("")) }
-            }
+            },
+            errorMessage = if (state.isFirstNameValid) null else stringResource(R.string.first_name_validation_error)
         )
 
         TextFields.EditText(
@@ -193,7 +193,9 @@ fun ProfileCompletionStep(
             topLabel = stringResource(R.string.achternaam),
             trailingIcon = {
                 ClearFieldIcon { onAction(RegisterScreenUiAction.OnLastNameChangedAction("")) }
-            }
+            },
+            errorMessage = if (state.isLastNameValid) null else  stringResource(R.string.last_name_validation_error)
+
         )
 
         TextFields.PasswordTextField(
@@ -231,7 +233,7 @@ fun CarConnectStep(state: RegisterScreenUiState, onAction: (RegisterScreenUiActi
         onInputChanged = { onAction(RegisterScreenUiAction.OnCarIdChangedAction(it)) },
         topLabel = stringResource(R.string.jouw_auto_id),
         trailingIcon = { ClearFieldIcon { onAction(RegisterScreenUiAction.OnCarIdChangedAction("")) } },
-        errorMessage = if (state.isCarIdValid) null else stringResource(R.string.invalid_car_id)
+        errorMessage = if (state.isVinValid) null else stringResource(R.string.invalid_car_id)
     )
 
     PrimaryButton(

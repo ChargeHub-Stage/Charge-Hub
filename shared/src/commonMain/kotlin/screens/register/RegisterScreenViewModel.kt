@@ -1,8 +1,8 @@
 package screens.register
 
+import ValidationRules
 import com.rickclephas.kmm.viewmodel.MutableStateFlow
 import com.rickclephas.kmm.viewmodel.coroutineScope
-import db.repository.FirebaseRepository
 import db.repository.car.RemoteCarRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
@@ -24,11 +24,12 @@ class RegisterScreenViewModel :
         when (action) {
             is RegisterScreenUiAction.OnNextClickedAction -> handleNext()
             is RegisterScreenUiAction.OnPreviousClickedAction -> handlePrevious()
-            is RegisterScreenUiAction.OnEmailChangedAction -> state.update { it.copy(email = action.email) }
+            is RegisterScreenUiAction.OnEmailChangedAction -> handleFieldChange(StateFields.EMAIL,action.email, ValidationRules::isEmailValid)
+            is RegisterScreenUiAction.OnFirstNameChangedAction -> handleFieldChange(StateFields.FIRSTNAME, action.firstName, ValidationRules::isValidFirstName)
+            is RegisterScreenUiAction.OnLastNameChangedAction -> handleFieldChange(StateFields.LASTNAME, action.lastName, ValidationRules::isValidLastName)
+            is RegisterScreenUiAction.OnPasswordChangedAction -> handleFieldChange(StateFields.PASSWORD, action.password, ValidationRules::isValidPassword)
+            is RegisterScreenUiAction.OnCarIdChangedAction -> handleFieldChange(StateFields.VIN, action.vin, ValidationRules::isValidVIN)
 
-            is RegisterScreenUiAction.OnFirstNameChangedAction -> state.update { it.copy(firstName = action.firstName) }
-            is RegisterScreenUiAction.OnLastNameChangedAction -> state.update { it.copy(lastName = action.lastName) }
-            is RegisterScreenUiAction.OnPasswordChangedAction -> state.update { it.copy(password = action.password) }
             is RegisterScreenUiAction.OnFinaliseRegisterAction -> { /*TODO */
             }
 
@@ -38,7 +39,6 @@ class RegisterScreenViewModel :
                 )
             }
 
-            is RegisterScreenUiAction.OnCarIdChangedAction -> state.update { it.copy(vin = action.id) }
         }
     }
 
@@ -59,6 +59,29 @@ class RegisterScreenViewModel :
         sendEvent(RegisterScreenUiEvent.OnPreviousClickedEvent)
     }
 
+    private fun handleFieldChange(
+        field: StateFields,
+        value: String,
+        validationRule: (String) -> Boolean
+    ) {
+        state.update {
+            when (field) {
+                StateFields.EMAIL -> it.copy(email = value, isEmailValid = validationRule(value))
+                StateFields.FIRSTNAME -> it.copy(firstName = value, isFirstNameValid = validationRule(value))
+                StateFields.LASTNAME -> it.copy(lastName = value, isLastNameValid = validationRule(value))
+                StateFields.PASSWORD -> it.copy(password = value, isPasswordValid = validationRule(value))
+                StateFields.VIN -> it.copy(vin = value, isVinValid = validationRule(value))
+            }
+        }
+    }
+
+    private enum class StateFields {
+        EMAIL,
+        FIRSTNAME,
+        LASTNAME,
+        PASSWORD,
+        VIN
+    }
 }
 
 /**

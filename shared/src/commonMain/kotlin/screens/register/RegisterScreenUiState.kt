@@ -15,5 +15,5 @@ data class RegisterScreenUiState(
     var isFirstNameValid: Boolean = false,
     var isLastNameValid: Boolean = false,
     var isPasswordValid: Boolean = false,
-    var isCarIdValid: Boolean = false
+    var isVinValid: Boolean = false
 )
