@@ -46,24 +46,9 @@ class CarDatabase(sqlDriver: SqlDriver) :
         )
     }
 
-    fun upsert(id: String, request: CreateCarRequest) {
-        query.insertOrUpdateCar(
-            id = id,
-            userId = request.userId,
-            brand = request.brand,
-            year = request.year.toLong(),
-            model = request.model,
-            chargeLimit = request.chargeLimit.toLong(),
-            charging = request.charging,
-            percentage = request.percentage.toLong(),
-            minutesLeft = request.minutesLeft.toLong(),
-            pluggedIn = request.pluggedIn,
-            powerComputed = request.powerComputed.toLong()
-        )
-    }
-
     override fun create(request: CreateCarRequest) {
         query.insertCar(
+            id = request.id,
             userId = request.userId,
             brand = request.brand,
             year = request.year.toLong(),
