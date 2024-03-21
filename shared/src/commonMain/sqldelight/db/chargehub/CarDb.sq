@@ -37,5 +37,5 @@ DELETE FROM Car WHERE id = ?;
 
 insertCar:
 INSERT INTO Car
-(userId, brand, year, model, percentage, pluggedIn, charging, chargeLimit, powerComputed, minutesLeft)
- VALUES (?,?, ?, ?,?,?,?,?,?,?);
+(id, userId, brand, year, model, percentage, pluggedIn, charging, chargeLimit, powerComputed, minutesLeft)
+ VALUES (?,?,?, ?, ?,?,?,?,?,?,?);
