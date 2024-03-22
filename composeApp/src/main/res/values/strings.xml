@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="laadpaal">Laadpaal %1$s</string>
+    <string name="_28_september">28 September</string>
+    <string name="start">START</string>
+    <string name="jouw_tijdslot">JOUW TIJDSLOT</string>
+    <string name="start_end_hour">%1$s - %2$s</string>
+</resources>
