@@ -14,21 +14,30 @@ import com.wisemen.chargehub.R
 import com.wisemen.chargehub.ui.components.Buttons
 import com.wisemen.chargehub.ui.components.primaryButtonColors
 import com.wisemen.chargehub.ui.theme.TextStyles
+import data.CurrentRegisterState
 import screens.register.RegisterScreenUiAction
+import screens.register.RegisterScreenUiState
 
 @Composable
-fun NextButton(onAction: (RegisterScreenUiAction) -> Unit) {
+fun NextButton(state: RegisterScreenUiState, onAction: (RegisterScreenUiAction) -> Unit) {
+    val shouldButtonEnable = when (state.currentRegisterState) {
+        CurrentRegisterState.EMAIL -> state.isEmailStepValid()
+        CurrentRegisterState.PROFILE -> state.isProfileStepValid()
+        CurrentRegisterState.CAR_CONNECT -> state.isVinStepValid()
+        CurrentRegisterState.INFO -> true
+        else -> false
+    }
     Buttons.PrimaryButton(
         modifier = Modifier.fillMaxWidth(),
         text = stringResource(R.string.next),
         onClick = {
             onAction(RegisterScreenUiAction.OnNextClickedAction)
         },
+        enabled = shouldButtonEnable,
         textStyle = TextStyles.boldText,
         colors = ButtonDefaults.primaryButtonColors()
     )
 }
-
 @Composable
 fun SkipTextButton(
     modifier: Modifier = Modifier,

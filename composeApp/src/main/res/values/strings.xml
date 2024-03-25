@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="type_here">Type here...</string>
-    <string name="password_is_required">" 'Password' cannot be empty"</string>
+    <string name="password_is_required">" 'Password' cannot be empty and must be atleast 6 characters"</string>
     <string name="email_is_required">" 'Email' is invalid"</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
@@ -29,9 +29,12 @@
     <string name="friendly_details"><![CDATA[Ruilverzoeken accepteren & laadbeurten vroegtijdig of laattijdig afstaan.]]></string>
     <string name="level_system_2_details">Hoe hoger je huidige level, hoe meer functies je vrijspeelt zoals</string>
     <string name="priorities">Prioriteit</string>
+    <string name="trade">Ruilen</string>
+    <string name="invalid_car_id">Invalid Vin</string>
+    <string name="first_name_validation_error">First name must not be empty, and can have a max of 12 characters</string>
+    <string name="last_name_validation_error">Last name must not be empty, and must have a min of 3 characters</string>
     <string name="trading">Ruilen</string>
     <string name="your_car_id">Jouw auto id</string>
-    <string name="invalid_car_id">Invalid Car Id</string>
     <string name="profile">Profiel</string>
     <string name="car">Jouw Voertuig</string>
     <string name="next">Volgende</string>

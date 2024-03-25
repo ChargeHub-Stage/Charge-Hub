@@ -54,6 +54,7 @@ val repositoriesModule = module {
     singleOf(::RemoteCarRepository)
     singleOf(::RemoteChargeHubRepository)
     singleOf(::RemoteLevelRepository)
+    singleOf(::FirebaseRepository)
     singleOf(::RemoteReservationRepository)
     singleOf(::FirebaseRepository)
 }

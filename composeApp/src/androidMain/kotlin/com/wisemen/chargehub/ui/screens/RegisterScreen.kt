@@ -141,7 +141,7 @@ fun RegisterLayout(
                 CurrentRegisterState.PROFILE -> ProfileCompletionStep(state, onAction)
                 CurrentRegisterState.CAR_CONNECT -> CarConnectStep(state, onAction)
                 CurrentRegisterState.NOTIFICATIONS -> PermissionStep(onAction)
-                CurrentRegisterState.INFO -> InfoStep(onAction)
+                CurrentRegisterState.INFO -> InfoStep(state, onAction)
                 else -> {}
             }
         }
@@ -160,14 +160,14 @@ fun EmailRegisterStep(state: RegisterScreenUiState, onAction: (RegisterScreenUiA
                     newEmail
                 )
             )
-        }
+        },
     )
     Text(
         modifier = Modifier.padding(top = 4.dp, bottom = 27.dp),
         text = stringResource(R.string.privacy),
         style = TextStyles.bottomLabel
     )
-    NextButton(onAction)
+    NextButton(state, onAction)
 }
 
 @Composable
@@ -191,7 +191,8 @@ fun ProfileCompletionStep(
             topLabel = stringResource(R.string.firstname),
             trailingIcon = {
                 ClearFieldIcon { onAction(RegisterScreenUiAction.OnFirstNameChangedAction("")) }
-            }
+            },
+            errorMessage = if (state.isFirstNameValid) null else stringResource(R.string.first_name_validation_error)
         )
 
         TextFields.EditText(
@@ -201,7 +202,9 @@ fun ProfileCompletionStep(
             topLabel = stringResource(R.string.lastname),
             trailingIcon = {
                 ClearFieldIcon { onAction(RegisterScreenUiAction.OnLastNameChangedAction("")) }
-            }
+            },
+            errorMessage = if (state.isLastNameValid) null else stringResource(R.string.last_name_validation_error)
+
         )
 
         TextFields.PasswordTextField(
@@ -226,7 +229,7 @@ fun ProfileCompletionStep(
             isChecked = state.isPrivacyChecked,
             onCheckedChange = { onAction(RegisterScreenUiAction.OnPrivacyCheckedChangedAction) })
 
-        NextButton(onAction)
+        NextButton(state, onAction)
     }
 }
 
@@ -238,8 +241,8 @@ fun CarConnectStep(state: RegisterScreenUiState, onAction: (RegisterScreenUiActi
         input = state.vin,
         onInputChanged = { onAction(RegisterScreenUiAction.OnCarIdChangedAction(it)) },
         topLabel = stringResource(R.string.your_car_id),
-        trailingIcon =  { ClearFieldIcon { onAction(RegisterScreenUiAction.OnCarIdChangedAction("")) } },
-        errorMessage = if (state.isCarIdValid) null else stringResource(R.string.invalid_car_id)
+        trailingIcon = { ClearFieldIcon { onAction(RegisterScreenUiAction.OnCarIdChangedAction("")) } },
+        errorMessage = if (state.isVinValid) null else stringResource(R.string.invalid_car_id)
     )
 
     PrimaryButton(
@@ -298,7 +301,7 @@ fun PermissionStep(onAction: (RegisterScreenUiAction) -> Unit) {
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun InfoStep(onAction: (RegisterScreenUiAction) -> Unit) {
+fun InfoStep(state: RegisterScreenUiState, onAction: (RegisterScreenUiAction) -> Unit) {
 
     val pagerState = rememberPagerState(pageCount = { 4 })
     val currentPage = pagerState.currentPage
@@ -332,7 +335,7 @@ fun InfoStep(onAction: (RegisterScreenUiAction) -> Unit) {
             modifier = Modifier.padding(top = 130.dp)
         )
 
-        NextButton {
+        NextButton(state) {
             // If you reach the last page, finalise the registering process
             // Else, go to the next
             if (currentPage + 1 >= pagerState.pageCount) {
@@ -425,4 +428,3 @@ fun CircularProfilePicture(
         )
     }
 }
-

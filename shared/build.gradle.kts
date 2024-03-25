@@ -47,9 +47,11 @@ kotlin {
             implementation(libs.firebase.auth)
             implementation(libs.firebase.firestore)
             implementation(libs.firebase.common)
+            implementation(libs.firebase.auth)
             implementation(libs.kotlinx.serialization.json)
             implementation(libs.logging)
             api(libs.kmm.viewmodel.core)
+
             implementation(libs.stately.concurrency)
             api(libs.kmm.viewmodel.core)
             api(libs.logging)
