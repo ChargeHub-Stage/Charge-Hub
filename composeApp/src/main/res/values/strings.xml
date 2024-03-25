@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="type_here">Type here...</string>
+    <string name="password_is_required">" 'Password' cannot be empty"</string>
+    <string name="email_is_required">" 'Email' is invalid"</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+</resources>
