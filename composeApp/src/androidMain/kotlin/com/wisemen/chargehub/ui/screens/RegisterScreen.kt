@@ -53,9 +53,10 @@ import com.wisemen.chargehub.ui.components.TopBar
 import com.wisemen.chargehub.ui.components.primaryButtonColors
 import com.wisemen.chargehub.ui.theme.AppTheme
 import com.wisemen.chargehub.ui.theme.Colors
+import com.wisemen.chargehub.ui.theme.Padding
 import com.wisemen.chargehub.ui.theme.TextStyles
+import data.CurrentRegisterState
 import org.koin.java.KoinJavaComponent
-import screens.register.CurrentRegisterState
 import screens.register.RegisterScreenUiAction
 import screens.register.RegisterScreenUiEvent
 import screens.register.RegisterScreenUiState
@@ -98,7 +99,7 @@ fun RegisterLayout(
     val topBarTitle = when (state.currentRegisterState) {
         CurrentRegisterState.EMAIL -> stringResource(R.string.e_mail)
         CurrentRegisterState.PROFILE -> stringResource(R.string.profile)
-        CurrentRegisterState.CAR_CONNECT -> stringResource(R.string.voertuig)
+        CurrentRegisterState.CAR_CONNECT -> stringResource(R.string.car)
         else -> {
             ""
         }
@@ -107,7 +108,7 @@ fun RegisterLayout(
     TopBar(topBarTitle, {
         onAction(RegisterScreenUiAction.OnPreviousClickedAction)
     }) {
-        Column(Modifier.padding(it).padding(horizontal = 16.dp)) {
+        Column(Modifier.padding(it).padding(horizontal = Padding.medium)) {
             when (state.currentRegisterState) {
                 CurrentRegisterState.EMAIL -> EmailRegisterStep(state, onAction)
                 CurrentRegisterState.PROFILE -> ProfileCompletionStep(state, onAction)
@@ -136,7 +137,7 @@ fun EmailRegisterStep(state: RegisterScreenUiState, onAction: (RegisterScreenUiA
     )
     Text(
         modifier = Modifier.padding(top = 4.dp, bottom = 27.dp),
-        text = stringResource(R.string.privacybeleid),
+        text = stringResource(R.string.privacy),
         style = TextStyles.bottomLabel
     )
     NextButton(onAction)
@@ -160,7 +161,7 @@ fun ProfileCompletionStep(
             modifier = Modifier.padding(bottom = 21.dp),
             input = state.firstName,
             onInputChanged = { onAction(RegisterScreenUiAction.OnFirstNameChangedAction(it)) },
-            topLabel = stringResource(R.string.voornaam),
+            topLabel = stringResource(R.string.firstname),
             trailingIcon = {
                 ClearFieldIcon { onAction(RegisterScreenUiAction.OnFirstNameChangedAction("")) }
             }
@@ -170,7 +171,7 @@ fun ProfileCompletionStep(
             modifier = Modifier.padding(bottom = 21.dp),
             input = state.lastName,
             onInputChanged = { onAction(RegisterScreenUiAction.OnLastNameChangedAction(it)) },
-            topLabel = stringResource(R.string.achternaam),
+            topLabel = stringResource(R.string.lastname),
             trailingIcon = {
                 ClearFieldIcon { onAction(RegisterScreenUiAction.OnLastNameChangedAction("")) }
             }
@@ -193,7 +194,7 @@ fun ProfileCompletionStep(
                 }
             }
         )
-        PrivacySlider(
+        PrivacySwitch(
             modifier = Modifier.align(Alignment.Start).padding(bottom = 26.dp),
             isChecked = state.isPrivacyChecked,
             onCheckedChange = { onAction(RegisterScreenUiAction.OnPrivacyCheckedChangedAction) })
@@ -209,14 +210,14 @@ fun CarConnectStep(state: RegisterScreenUiState, onAction: (RegisterScreenUiActi
         modifier = Modifier.padding(top = 34.dp, bottom = 16.dp),
         input = state.vin,
         onInputChanged = { onAction(RegisterScreenUiAction.OnCarIdChangedAction(it)) },
-        topLabel = stringResource(R.string.jouw_auto_id),
-        trailingIcon = { ClearFieldIcon { onAction(RegisterScreenUiAction.OnCarIdChangedAction("")) } },
+        topLabel = stringResource(R.string.your_car_id),
+        trailingIcon =  { ClearFieldIcon { onAction(RegisterScreenUiAction.OnCarIdChangedAction("")) } },
         errorMessage = if (state.isCarIdValid) null else stringResource(R.string.invalid_car_id)
     )
 
     PrimaryButton(
         modifier = Modifier.fillMaxWidth(),
-        text = stringResource(R.string.volgende),
+        text = stringResource(R.string.next),
         onClick = {
             //if (state.isCarIdValid) {
                 onAction(RegisterScreenUiAction.OnNextClickedAction)
@@ -288,7 +289,7 @@ fun ClearFieldIcon(
 }
 
 @Composable
-fun PrivacySlider(
+fun PrivacySwitch(
     modifier: Modifier = Modifier,
     isChecked: Boolean,
     onCheckedChange: (Boolean) -> Unit,
@@ -353,7 +354,7 @@ fun CircularProfilePicture(
 fun NextButton(onAction: (RegisterScreenUiAction) -> Unit) {
     PrimaryButton(
         modifier = Modifier.fillMaxWidth(),
-        text = stringResource(R.string.volgende),
+        text = stringResource(R.string.next),
         onClick = {
             onAction(RegisterScreenUiAction.OnNextClickedAction)
         },

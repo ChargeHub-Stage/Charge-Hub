@@ -49,7 +49,8 @@ fun ErrorPreview() {
                 isValid = true,
                 onInputChanged = {},
                 onTogglePasswordVisibility = { },
-                isPasswordVisible = false, trailingIcon = {}
+                isPasswordVisible = false,
+                trailingIcon = {}
             )
         }
     }
@@ -138,7 +139,7 @@ object TextFields {
         currentPassword: String,
         isPasswordVisible: Boolean,
         isValid: Boolean,
-        trailingIcon: @Composable (() -> Unit)?
+        trailingIcon: @Composable (() -> Unit)? = null
     ) {
 
         Box(modifier, contentAlignment = Alignment.CenterEnd) {
