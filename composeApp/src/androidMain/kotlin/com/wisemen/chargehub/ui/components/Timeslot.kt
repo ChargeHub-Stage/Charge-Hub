@@ -24,11 +24,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.wisemen.chargehub.R
 import com.wisemen.chargehub.ui.theme.AppTheme
 import com.wisemen.chargehub.ui.theme.Colors
@@ -82,12 +79,12 @@ fun ChargeDurationDetails(duration: Int) {
         Text(
             modifier = Modifier.padding(end = 44.69.dp),
             text = stringResource(R.string.charge_time),
-            style = headerTextStyle
+            style = TextStyles.timeSlotHeader
         )
         Text(
             modifier = Modifier.padding(end = 44.69.dp),
             text = stringResource(R.string.hour, duration),
-            style = textTextStyle
+            style = TextStyles.timeSlotText
         )
     }
 }
@@ -97,14 +94,14 @@ fun TimeSlotTimeDetails(start: String, end: String) {
     Column {
         Text(
             text = stringResource(R.string.your_timeslot),
-            style = headerTextStyle
+            style = TextStyles.timeSlotHeader
         )
         Text(
             text = stringResource(
                 R.string.timeslot_duration_start_end,
                 start,
                 end
-            ), style = textTextStyle
+            ), style = TextStyles.timeSlotText
         )
     }
 }
@@ -114,7 +111,7 @@ fun TimeSlotTitle(chargeHubName: String, onArrowIconClicked: () -> Unit) {
     Row {
         Text(
             text = stringResource(R.string.chargehub, chargeHubName),
-            style = cardTitleStyle
+            style = TextStyles.timeSlotCardTitle
         )
         Spacer(modifier = Modifier.weight(1F))
         Icon(
@@ -137,8 +134,8 @@ fun DateColumn(dateDay: String, dateMonth: String) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Text(text = dateDay, style = dateDayTextStyle)
-        Text(text = dateMonth, style = dateMonthTextStyle)
+        Text(text = dateDay, style = TextStyles.timeSlotDateDay)
+        Text(text = dateMonth, style = TextStyles.timeSlotDateMonth)
     }
 }
 
@@ -154,37 +151,4 @@ fun TimeSlotBox(content: @Composable () -> Unit) {
         content()
     }
 }
-
-//TODO add to TextStyles object
-private val textTextStyle = TextStyle(
-    fontSize = 17.sp,
-    fontWeight = FontWeight.W400,
-    lineHeight = 11.93.sp,
-    color = Colors.blackPearl
-)
-
-private val headerTextStyle = TextStyle(
-    fontSize = 10.sp,
-    fontWeight = FontWeight.W400,
-    lineHeight = 20.29.sp,
-    color = Color(0XFF888888)
-)
-
-private val cardTitleStyle = TextStyle(
-    fontSize = 17.sp,
-    fontWeight = FontWeight.W600,
-    lineHeight = 20.29.sp
-)
-
-private val dateDayTextStyle = TextStyle(
-    fontSize = 21.sp,
-    fontWeight = FontWeight.W700,
-    lineHeight = 25.sp
-)
-
-private val dateMonthTextStyle = TextStyle(
-    fontSize = 14.sp,
-    fontWeight = FontWeight.W400,
-    lineHeight = 16.71.sp
-)
 
