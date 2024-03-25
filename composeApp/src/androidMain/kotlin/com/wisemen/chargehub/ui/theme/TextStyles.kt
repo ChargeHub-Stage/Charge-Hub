@@ -1,6 +1,5 @@
 package com.wisemen.chargehub.ui.theme
 
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -103,7 +102,7 @@ object TextStyles {
         fontSize = 10.sp,
         fontWeight = FontWeight.W400,
         lineHeight = 20.29.sp,
-        color = Color(0XFF999999)
+        color = Colors.mist
     )
 
     val nextReservationCardTitle = TextStyle(
@@ -149,6 +148,7 @@ object TextStyles {
     val timeSlotDateMonth = TextStyle(
         fontSize = 14.sp,
         fontWeight = FontWeight.W400,
-        lineHeight = 16.71.sp
+        lineHeight = 16.71.sp,
+        textAlign = TextAlign.Center
     )
 }
