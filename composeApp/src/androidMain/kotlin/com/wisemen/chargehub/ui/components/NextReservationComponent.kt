@@ -29,7 +29,7 @@ import com.wisemen.chargehub.ui.theme.Colors
 
 @Preview(showBackground = true)
 @Composable
-fun TimeSlot(
+fun UpcomingReservation(
     chargehubName: String = "Carport",
     date: String = "28 September",
     startTime: String = "Vandaag",
