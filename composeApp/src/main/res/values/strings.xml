@@ -29,13 +29,7 @@
     <string name="friendly_details"><![CDATA[Ruilverzoeken accepteren & laadbeurten vroegtijdig of laattijdig afstaan.]]></string>
     <string name="level_system_2_details">Hoe hoger je huidige level, hoe meer functies je vrijspeelt zoals</string>
     <string name="priorities">Prioriteit</string>
-    <string name="level_1">Level 1</string>
-    <string name="level_2">Level 2</string>
-    <string name="level_3">Level 3</string>
-    <string name="level_4">Level 4</string>
     <string name="trading">Ruilen</string>
-    <string name="reserve_3_days_in_advance">3 dagen op voorhand reserveren</string>
-    <string name="reserve_2_days_in_advance">2 dagen op voorhand reserveren</string>
     <string name="your_car_id">Jouw auto id</string>
     <string name="invalid_car_id">Invalid Car Id</string>
     <string name="profile">Profiel</string>
