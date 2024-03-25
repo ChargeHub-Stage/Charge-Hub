@@ -71,7 +71,6 @@ import com.wisemen.chargehub.ui.theme.Colors
 import com.wisemen.chargehub.ui.theme.TextStyles
 import kotlinx.coroutines.launch
 import org.koin.java.KoinJavaComponent
-import org.lighthousegames.logging.logging
 import screens.register.CurrentRegisterState
 import screens.register.RegisterScreenUiAction
 import screens.register.RegisterScreenUiEvent
