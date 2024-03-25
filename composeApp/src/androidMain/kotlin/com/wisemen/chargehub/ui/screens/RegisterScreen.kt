@@ -135,7 +135,6 @@ fun RegisterLayout(
                 CurrentRegisterState.INFO -> InfoStep(onAction)
                 else -> {}
             }
-
         }
     }
 }
@@ -250,8 +249,7 @@ fun CarConnectStep(state: RegisterScreenUiState, onAction: (RegisterScreenUiActi
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @Composable
 fun PermissionStep(onAction: (RegisterScreenUiAction) -> Unit) {
-
-
+    
     val permissionLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.RequestPermission()
     ) { _: Boolean ->

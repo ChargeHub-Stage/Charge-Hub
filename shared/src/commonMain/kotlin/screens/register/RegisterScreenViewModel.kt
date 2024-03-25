@@ -63,4 +63,3 @@ class RegisterScreenViewModel :
         sendEvent(RegisterScreenUiEvent.OnPreviousClickedEvent)
     }
 }
-
