@@ -7,6 +7,7 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
+import org.koin.core.component.KoinComponent
 
 /**
  * Abstract view model which holds the basic functions each view model needs to have.
@@ -14,7 +15,7 @@ import kotlinx.coroutines.flow.receiveAsFlow
  *  [E] represents the UiEvent.
  *  [S] represents the UiState which can be a nullable type of Any if no state is applicable.
  */
-abstract class AbstractViewModel<A, E, S : Any?> : KMMViewModel() {
+abstract class AbstractViewModel<A, E, S : Any?> : KMMViewModel(), KoinComponent {
 
     private val eventChannel: Channel<E> = Channel()
 
