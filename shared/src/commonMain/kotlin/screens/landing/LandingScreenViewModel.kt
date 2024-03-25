@@ -3,10 +3,10 @@ package screens.landing
 import com.rickclephas.kmm.viewmodel.KMMViewModel
 import com.rickclephas.kmm.viewmodel.coroutineScope
 import kotlinx.coroutines.launch
-import screens.IViewModel
+import screens.BaseComposeViewModel
 
 class LandingScreenViewModel : KMMViewModel(),
-    IViewModel<LandingScreenUiAction, LandingScreenUiEvent, Nothing?> {
+    BaseComposeViewModel<LandingScreenUiAction, LandingScreenUiEvent, Nothing?> {
 
     // No state involved on this page
     override var state: Nothing? = null
