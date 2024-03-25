@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.dp
 import com.wisemen.chargehub.R
 import com.wisemen.chargehub.ui.theme.AppTheme
 import com.wisemen.chargehub.ui.theme.Colors
+import com.wisemen.chargehub.ui.theme.TextStyles
 
 @Preview(showBackground = true)
 @Composable

@@ -1,4 +1,4 @@
-package com.wisemen.chargehub.ui.components
+package com.wisemen.chargehub.ui.theme
 
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
@@ -25,6 +25,12 @@ object TextStyles {
         fontWeight = FontWeight.W400,
         lineHeight = 14.31.sp,
         color = Colors.rebel
+    )
+
+    val bigTitle = TextStyle(
+        fontSize = 69.sp,
+        fontWeight = FontWeight.W700,
+        lineHeight = 60.sp,
     )
 
     val nextReservationText = TextStyle(
@@ -86,5 +92,4 @@ object TextStyles {
         fontWeight = FontWeight.W400,
         lineHeight = 16.71.sp
     )
-
 }

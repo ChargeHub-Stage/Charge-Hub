@@ -24,10 +24,10 @@ struct TextOnlyButton: View {
                 .foregroundColor(textColor)
                 .padding()
                 .background(Color.clear)
-                .cornerRadius(5)
+                .cornerRadius(4)
                 .overlay(
-                    RoundedRectangle(cornerRadius: 5)
-                        .stroke(textColor, lineWidth: 1)
+                    RoundedRectangle(cornerRadius: 4)
+                        .stroke(textColor, lineWidth: 0)
                 )
         }
         .disabled(!enabled)
@@ -38,14 +38,16 @@ struct PrimaryButton: View {
     var text: String
     var enabled: Bool
     var textColor: Color
-    var trailingIcon:  Image? = nil
-    var leadingIcon:  Image? = nil
+    var backgroundColor: Color
+    var trailingIcon: Image? = nil
+    var leadingIcon: Image? = nil
     var action: () -> Void
 
     init(
         text: String,
         enabled: Bool = true,
         textColor: Color = .black,
+        backgroundColor: Color = .acid,
         trailingIcon: Image? = nil,
         leadingIcon: Image? = nil,
         action: @escaping () -> Void
@@ -54,6 +56,7 @@ struct PrimaryButton: View {
         self.text = text
         self.enabled = enabled
         self.textColor = textColor
+        self.backgroundColor = backgroundColor
         self.action = action
         self.trailingIcon = trailingIcon
         self.leadingIcon = leadingIcon
@@ -61,29 +64,34 @@ struct PrimaryButton: View {
     
     var body: some View {
         Button(action: action) {
-            HStack {
+            ZStack {
                 if let leadingIcon = leadingIcon {
                     leadingIcon
                         .resizable()
-                        .frame(width: 20, height: 20)
                         .foregroundColor(textColor)
+                        .frame(width: 20, height: 20)
+                        .padding(.leading)
                 }
                 Text(text)
                     .foregroundColor(textColor)
+                    .frame(maxWidth: .infinity, alignment: .center)
                 if let trailingIcon = trailingIcon {
                     trailingIcon
                         .resizable()
-                        .frame(width: 20, height: 20)
                         .foregroundColor(textColor)
+                        .frame(width: 20, height: 20)
+                        .padding(.trailing)
                 }
             }
             .padding()
-            .background(enabled ? Color.blue : Color.gray)
-            .cornerRadius(5)
+            .background(enabled ? backgroundColor : Color.gray)
+            .cornerRadius(4)
         }
         .disabled(!enabled)
+        .frame(maxWidth: .infinity)
     }
 }
+
 
 struct IconButton: View {
     var icon: Image
@@ -105,9 +113,9 @@ struct IconButton: View {
             icon
                 .padding()
                 .background(Color.clear)
-                .cornerRadius(5)
+                .cornerRadius(4)
                 .overlay(
-                    RoundedRectangle(cornerRadius: 5)
+                    RoundedRectangle(cornerRadius: 4)
                         .stroke(Color.black, lineWidth: 1)
                 )
         }

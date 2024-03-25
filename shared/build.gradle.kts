@@ -27,6 +27,10 @@ kotlin {
     }
 
     sourceSets {
+        all {
+            languageSettings.optIn("kotlinx.cinterop.ExperimentalForeignApi")
+        }
+
         commonMain.dependencies {
             // put your Multiplatform dependencies here
             implementation(libs.koinCore)
@@ -43,6 +47,8 @@ kotlin {
             implementation(libs.firebase.firestore)
             implementation(libs.firebase.common)
             implementation(libs.kotlinx.serialization.json)
+
+            api(libs.kmm.viewmodel.core)
 
         }
         androidMain.dependencies {
