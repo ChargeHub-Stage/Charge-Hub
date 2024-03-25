@@ -89,7 +89,7 @@ fun LandingLayout(onAction: (LandingScreenUiAction) -> Unit) {
 fun Header() {
     Column(Modifier.padding(top = 46.dp)) {
         Text(
-            stringResource(R.string.stroomlijn_je_dag_met),
+            stringResource(R.string.white_title),
             style = TextStyles.bigTitle,
             color = Colors.white
         )
@@ -112,7 +112,7 @@ fun Buttons(onAction: (LandingScreenUiAction) -> Unit) {
     Row(Modifier.padding(bottom = 16.dp)) {
         Buttons.PrimaryButton(
             Modifier.fillMaxWidth(),
-            text = stringResource(R.string.aanmelden),
+            text = stringResource(R.string.login),
             colors = ButtonDefaults.primaryButtonColors()
         ) {
             onAction(LandingScreenUiAction.ClickedLoginButtonAction)
@@ -122,7 +122,7 @@ fun Buttons(onAction: (LandingScreenUiAction) -> Unit) {
     Row(Modifier.padding(bottom = 14.dp)) {
         Buttons.PrimaryButton(
             Modifier.fillMaxWidth(),
-            text = stringResource(R.string.registreren),
+            text = stringResource(R.string.register),
             colors = ButtonDefaults.secondaryButtonColors()
         ) {
             onAction(LandingScreenUiAction.ClickedRegisterButtonAction)
