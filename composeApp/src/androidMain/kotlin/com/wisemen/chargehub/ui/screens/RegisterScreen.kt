@@ -92,7 +92,7 @@ fun RegisterLayout(
     val topBarTitle = when (state.currentRegisterState) {
         CurrentRegisterState.EMAIL -> stringResource(R.string.e_mail)
         CurrentRegisterState.PROFILE -> stringResource(R.string.profile)
-        CurrentRegisterState.CAR_CONNECT -> stringResource(R.string.voertuig)
+        CurrentRegisterState.CAR_CONNECT -> stringResource(R.string.car)
         else -> {
             ""
         }
@@ -128,7 +128,7 @@ fun EmailRegisterStep(state: RegisterScreenUiState, onAction: (RegisterScreenUiA
     )
     Text(
         modifier = Modifier.padding(top = 4.dp, bottom = 27.dp),
-        text = stringResource(R.string.privacybeleid),
+        text = stringResource(R.string.privacy),
         style = TextStyles.bottomLabel
     )
     NextButton(onAction)
@@ -152,7 +152,7 @@ fun ProfileCompletionStep(
             modifier = Modifier.padding(bottom = 21.dp),
             input = state.firstName,
             onInputChanged = { onAction(RegisterScreenUiAction.OnFirstNameChangedAction(it)) },
-            topLabel = stringResource(R.string.voornaam),
+            topLabel = stringResource(R.string.firstname),
             trailingIcon = {
                 ClearFieldIcon { onAction(RegisterScreenUiAction.OnFirstNameChangedAction("")) }
             }
@@ -162,7 +162,7 @@ fun ProfileCompletionStep(
             modifier = Modifier.padding(bottom = 21.dp),
             input = state.lastName,
             onInputChanged = { onAction(RegisterScreenUiAction.OnLastNameChangedAction(it)) },
-            topLabel = stringResource(R.string.achternaam),
+            topLabel = stringResource(R.string.lastname),
             trailingIcon = {
                 ClearFieldIcon { onAction(RegisterScreenUiAction.OnLastNameChangedAction("")) }
             }
@@ -271,7 +271,7 @@ fun CircularProfilePicture(
 fun NextButton(onAction: (RegisterScreenUiAction) -> Unit) {
     PrimaryButton(
         modifier = Modifier.fillMaxWidth(),
-        text = stringResource(R.string.volgende),
+        text = stringResource(R.string.next),
         onClick = {
             onAction(RegisterScreenUiAction.OnNextClickedAction)
         },
