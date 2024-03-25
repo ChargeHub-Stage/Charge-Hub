@@ -16,7 +16,7 @@ data class RegisterScreenUiState(
     var isLastNameValid: Boolean = false,
 
     var isPasswordValid: Boolean = false,
-    var isVinValid: Boolean = false
+    var isVinValid: Boolean = false,
 ) {
 
     fun isEmailStepValid() = isEmailValid
@@ -25,3 +25,4 @@ data class RegisterScreenUiState(
 
     fun isVinStepValid() = isVinValid
 }
+

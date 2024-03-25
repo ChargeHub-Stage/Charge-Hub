@@ -11,6 +11,7 @@ class FirebaseRepository : KoinComponent {
         const val TEST_USER = "test_id"
     }
 
+
     suspend fun login(email: String, password: String, onSuccess: suspend () -> Unit) {
         auth.signInWithEmailAndPassword(email, password)
         onSuccess()

@@ -14,6 +14,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
+
 import screens.AbstractViewModel
 
 class RegisterScreenViewModel :
@@ -22,22 +23,22 @@ class RegisterScreenViewModel :
     private val carRepository: RemoteCarRepository by inject()
     private val userRepository: RemoteUserRepository by inject()
 
+
     override var state: MutableStateFlow<RegisterScreenUiState> =
         MutableStateFlow(viewModelScope, RegisterScreenUiState())
 
 
     override fun onAction(action: RegisterScreenUiAction) = viewModelScope.coroutineScope.launch {
-        val logging = logging()
         when (action) {
             is RegisterScreenUiAction.OnNextClickedAction -> handleNext()
             is RegisterScreenUiAction.OnPreviousClickedAction -> handlePrevious()
-
             is RegisterScreenUiAction.OnEmailChangedAction -> handleFieldChange(StateFields.EMAIL,action.email, ValidationRules::isEmailValid)
             is RegisterScreenUiAction.OnFirstNameChangedAction -> handleFieldChange(StateFields.FIRSTNAME, action.firstName, ValidationRules::isValidFirstName)
             is RegisterScreenUiAction.OnLastNameChangedAction -> handleFieldChange(StateFields.LASTNAME, action.lastName, ValidationRules::isValidLastName)
             is RegisterScreenUiAction.OnPasswordChangedAction -> handleFieldChange(StateFields.PASSWORD, action.password, ValidationRules::isValidPassword)
             is RegisterScreenUiAction.OnCarIdChangedAction -> handleFieldChange(StateFields.VIN, action.vin, ValidationRules::isValidVIN)
             is RegisterScreenUiAction.OnFinaliseRegisterAction -> handleRegisterFinalization()
+
 
             is RegisterScreenUiAction.OnPrivacyCheckedChangedAction -> state.update {
                 it.copy(
@@ -61,6 +62,9 @@ class RegisterScreenViewModel :
     }
 
     private suspend fun handleNext() {
+        if (state.value.currentRegisterState == CurrentRegisterState.CAR_CONNECT) {
+            carRepository.fetchCarConnectData(state.value.vin)
+        }
         state.update {
             it.copy(currentRegisterState = it.currentRegisterState?.next())
         }
