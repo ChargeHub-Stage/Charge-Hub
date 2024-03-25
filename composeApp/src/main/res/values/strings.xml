@@ -14,4 +14,5 @@
     <string name="next">Volgende</string>
     <string name="login">Aanmelden</string>
     <string name="register">Registreren</string>
+    <string name="back_button">Back button</string>
 </resources>
