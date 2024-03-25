@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.automirrored.filled.ArrowForwardIos
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -71,12 +72,12 @@ fun TimeSlot(
                 ) {
                     Row {
                         Text(
-                            text = stringResource(R.string.laadpaal, chargeHubName),
+                            text = stringResource(R.string.chargehub, chargeHubName),
                             style = cardTitleStyle
                         )
                         Spacer(modifier = Modifier.weight(1F))
                         Icon(
-                            Icons.AutoMirrored.Filled.ArrowForwardIos,
+                            Icons.AutoMirrored.Filled.ArrowForward,
                             null,
                             Modifier.padding(bottom = 11.dp, end = 6.dp).clickable { onArrowIconClicked() }
                         )
@@ -86,7 +87,7 @@ fun TimeSlot(
                         Row {
                             Column {
                                 Text(
-                                    text = stringResource(R.string.jouw_tijdslot),
+                                    text = stringResource(R.string.your_timeslot),
                                     style = headerTextStyle
                                 )
                                 Text(
@@ -110,12 +111,12 @@ fun TimeSlot(
                             Column {
                                 Text(
                                     modifier = Modifier.padding(end = 44.69.dp),
-                                    text = stringResource(R.string.oplaadtijd),
+                                    text = stringResource(R.string.charge_time),
                                     style = headerTextStyle
                                 )
                                 Text(
                                     modifier = Modifier.padding(end = 44.69.dp),
-                                    text = stringResource(R.string.uur, duration),
+                                    text = stringResource(R.string.hour, duration),
                                     style = textTextStyle
                                 )
                             }

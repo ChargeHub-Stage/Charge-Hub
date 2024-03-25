@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="jouw_tijdslot">JOUW TIJDSLOT</string>
-    <string name="oplaadtijd">OPLAADTIJD</string>
-    <string name="uur">%1$s uur</string>
-    <string name="laadpaal">Laadpaal %1$s</string>
+    <string name="your_timeslot">JOUW TIJDSLOT</string>
+    <string name="charge_time">OPLAADTIJD</string>
+    <string name="hour">%1$s uur</string>
+    <string name="chargehub">Laadpaal %1$s</string>
     <string name="timeslot_duration_start_end">%1$s - %2$s</string>
 </resources>
