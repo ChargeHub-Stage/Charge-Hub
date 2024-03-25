@@ -60,14 +60,11 @@ struct PasswordTextField: View {
                 }) {
                     Image(systemName: isPasswordVisible ? "eye.slash.fill" : "eye.fill")
                         .foregroundColor(.blackPearl)
-                        .padding(.top, 30)
-                    
+                        .padding(EdgeInsets(top: 30, leading : 0, bottom: 0, trailing: 10))
                 }
-                    .padding(.trailing, 8)
                     .frame(maxHeight: .infinity, alignment: .center),
                 alignment: .trailing
             )
-            .padding(.trailing, 8)
         if !isValid {
             HStack {
                 Image(systemName: "exclamationmark.circle.fill")
