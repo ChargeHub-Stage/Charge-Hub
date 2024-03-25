@@ -37,30 +37,15 @@ fun UpcomingReservation(
     endHour: String = "14:00"
 ) {
     AppTheme {
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(Colors.blackPearl)
-                .height(108.dp)
-        ) {
+        ReservationBox {
             Row {
 
                 Column(
                     Modifier.padding(start = 12.dp, top = 12.dp),
                 ) {
                     Row {
-                        Box(contentAlignment = Alignment.Center) {
-                            Icon(
-                                painter = painterResource(id = R.drawable.ellipse),
-                                contentDescription = "",
-                                tint = Colors.white
-                            )
-                            Icon(
-                                painter = painterResource(id = R.drawable.chargehub_icon),
-                                contentDescription = null,
-                                tint = Colors.white
-                            )
-                        }
+                        IconDisplay()
+
                         Column(modifier = Modifier.padding(start = 4.35.dp)) {
                             Text(
                                 text = stringResource(R.string.laadpaal, chargehubName),
@@ -79,33 +64,9 @@ fun UpcomingReservation(
 
                     Column(Modifier.padding(bottom = 8.dp, top = 11.dp)) {
                         Row {
-                            Column {
-                                Text(
-                                    text = stringResource(R.string.jouw_tijdslot),
-                                    style = headerTextStyle
-                                )
-                                Text(text = stringResource(
-                                    R.string.start_end_hour,
-                                    startHour,
-                                    endHour
-                                ), style = textTextStyle)
-                            }
-
+                            TimeSlotInformation(startHour, endHour)
                             Spacer(Modifier.weight(1F))
-
-
-                            Column {
-                                Text(
-                                    modifier = Modifier.padding(end = 44.69.dp),
-                                    text = stringResource(R.string.start),
-                                    style = headerTextStyle
-                                )
-                                Text(
-                                    modifier = Modifier.padding(end = 44.69.dp),
-                                    text = startTime,
-                                    style = textTextStyle
-                                )
-                            }
+                            StartTimeInformation(startTime)
                         }
                     }
                 }
@@ -114,6 +75,63 @@ fun UpcomingReservation(
     }
 }
 
+@Composable
+fun StartTimeInformation(startTime: String) {
+    Column {
+        Text(
+            modifier = Modifier.padding(end = 44.69.dp),
+            text = stringResource(R.string.start),
+            style = headerTextStyle
+        )
+        Text(
+            modifier = Modifier.padding(end = 44.69.dp),
+            text = startTime,
+            style = textTextStyle
+        )
+    }
+}
+
+@Composable
+fun TimeSlotInformation(startHour: String, endHour: String) {
+    Column {
+        Text(
+            text = stringResource(R.string.jouw_tijdslot),
+            style = headerTextStyle
+        )
+        Text(text = stringResource(
+            R.string.start_end_hour,
+            startHour,
+            endHour
+        ), style = textTextStyle)
+    }
+}
+
+@Composable
+fun IconDisplay() {
+    Box(contentAlignment = Alignment.Center) {
+        Icon(
+            painter = painterResource(id = R.drawable.ellipse),
+            contentDescription = "",
+            tint = Colors.white
+        )
+        Icon(
+            painter = painterResource(id = R.drawable.chargehub_icon),
+            contentDescription = null,
+            tint = Colors.white
+        )
+    }
+}
+@Composable
+fun ReservationBox(content: @Composable () -> Unit) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(Colors.blackPearl)
+            .height(108.dp)
+    ) {
+        content()
+    }
+}
 
 private val textTextStyle = TextStyle(
     fontSize = 17.sp,
