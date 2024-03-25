@@ -25,8 +25,8 @@ import com.wisemen.chargehub.ui.screens.destinations.LandingScreenDestination
 import com.wisemen.chargehub.ui.theme.AppTheme
 import com.wisemen.chargehub.ui.theme.Padding
 import com.wisemen.chargehub.ui.theme.TextStyles
+import data.CurrentRegisterState
 import org.koin.java.KoinJavaComponent
-import screens.register.CurrentRegisterState
 import screens.register.RegisterScreenUiAction
 import screens.register.RegisterScreenUiEvent
 import screens.register.RegisterScreenUiState

@@ -1,5 +1,7 @@
 package screens.register
 
+import data.CurrentRegisterState
+
 data class RegisterScreenUiState(
     var email: String = "",
     var firstName: String = "",
