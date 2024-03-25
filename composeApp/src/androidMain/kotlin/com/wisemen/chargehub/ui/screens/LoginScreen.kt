@@ -108,29 +108,28 @@ fun LoginLayout(
                 colors = TopAppBarDefaults.topAppBarColors(containerColor = Colors.white),
             )
         },
-    ) { padding ->
+    ) { contentPadding ->
         Column(
-            modifier = Modifier.padding(padding).fillMaxWidth(),
+            modifier = Modifier.padding(contentPadding).fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                stringResource(R.string.welcome_back),
+                modifier = Modifier.padding(bottom = Spacing.small, top = 70.dp),
+                text = stringResource(R.string.welcome_back),
                 style = TextStyles.title,
-                modifier = Modifier.padding(bottom = Spacing.small, top = 70.dp)
             )
 
             Text(
                 stringResource(R.string.login_welcome_text),
                 style = TextStyles.text,
-                modifier = Modifier.padding(bottom = 30.dp)
             )
 
             Column {
                 TextFields.EmailTextField(
+                    modifier = Modifier.padding(horizontal = Spacing.medium).padding(bottom = 5.dp),
                     email = state.email,
                     isValid = true,
                     onInputChanged = { onAction(LoginScreenUiAction.OnEmailChangedAction(it)) },
-                    modifier = Modifier.padding(horizontal = Spacing.medium).padding(bottom = 5.dp)
                 )
 
                 TextFields.PasswordTextField(
@@ -145,23 +144,21 @@ fun LoginLayout(
                 )
 
                 Text(
-                    text = stringResource(R.string.forgot_password),
-                    style = TextStyles.small_text,
                     modifier = Modifier
                         .padding(bottom = 30.dp, start = Spacing.medium)
                         .clickable {
                             onAction(LoginScreenUiAction.OnClickedForgotPasswordButtonAction)
-                            Log.d("Email", state.email)
-                            Log.d("Password", state.password)
-                        }
+                        },
+                    text = stringResource(R.string.forgot_password),
+                    style = TextStyles.small_text,
                 )
             }
 
             Buttons.PrimaryButton(
+                modifier = Modifier.fillMaxWidth().padding(horizontal = Spacing.medium),
                 text = stringResource(R.string.login),
                 colors = ButtonDefaults.primaryButtonColors(),
                 onClick = { onAction(LoginScreenUiAction.OnClickedLoginButtonAction) },
-                modifier = Modifier.fillMaxWidth().padding(horizontal = Spacing.medium)
             )
         }
     }

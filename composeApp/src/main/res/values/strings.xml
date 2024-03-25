@@ -5,14 +5,14 @@
     <string name="email_is_required">" 'Email' is invalid"</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
-    <string name="stroomline_your_day_with">Stroomlijn je dag met</string>
+    <string name="streamline_your_day_with">Stroomlijn je dag met</string>
     <string name="charge">Charge\nHub.</string>
     <string name="login">Aanmelden</string>
-    <string name="registreren">Registreren</string>
+    <string name="registering">Registreren</string>
     <string name="welcome_back">Welkom Terug!</string>
     <string name="login_welcome_text">Fijn om je terug te zien</string>
     <string name="forgot_password">Wachtwoord vergeten?</string>
-    <string name="privacybeleid">Privacybeleid</string>
+    <string name="privacy_policy">Privacybeleid</string>
     <string name="e_mail">E-Mail</string>
     <string name="profile">Profiel</string>
     <string name="vehicle">Jouw Voertuig</string>
