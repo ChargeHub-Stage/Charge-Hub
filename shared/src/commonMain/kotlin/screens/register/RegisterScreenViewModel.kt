@@ -5,7 +5,6 @@ import com.rickclephas.kmm.viewmodel.coroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import org.lighthousegames.logging.logging
 import screens.AbstractViewModel
 
 class RegisterScreenViewModel :
@@ -16,7 +15,7 @@ class RegisterScreenViewModel :
 
 
     override fun onAction(action: RegisterScreenUiAction) = viewModelScope.coroutineScope.launch {
-        val logging = logging()
+       // val logging = logging()
         when (action) {
             is RegisterScreenUiAction.OnNextClickedAction -> handleNext()
             is RegisterScreenUiAction.OnPreviousClickedAction -> handlePrevious()
