@@ -31,6 +31,7 @@ import com.wisemen.chargehub.ui.components.primaryButtonColors
 import com.wisemen.chargehub.ui.components.secondaryButtonColors
 import com.wisemen.chargehub.ui.theme.AppTheme
 import com.wisemen.chargehub.ui.theme.Colors
+import com.wisemen.chargehub.ui.theme.Padding
 import com.wisemen.chargehub.ui.theme.TextStyles
 import org.koin.java.KoinJavaComponent.inject
 import screens.landing.LandingScreenUiAction
@@ -74,7 +75,7 @@ fun LandingLayout(onAction: (LandingScreenUiAction) -> Unit) {
             modifier = Modifier.matchParentSize()
         )
         Column(
-            modifier = Modifier.padding(start = 16.dp, end = 16.dp)
+            modifier = Modifier.padding(horizontal = Padding.medium)
         ) {
             Header()
             Spacer(Modifier.weight(1F))
