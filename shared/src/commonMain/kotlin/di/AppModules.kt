@@ -37,7 +37,7 @@ val clientsModule = module {
             install(Auth) {
                 bearer {
                     loadTokens {
-                        BearerTokens(accessToken = Secrets.API_TOKEN, "...")
+                        BearerTokens(accessToken = "Secrets.API_TOKEN", "...")
                     }
                 }
             }
@@ -54,6 +54,7 @@ val repositoriesModule = module {
     singleOf(::RemoteCarRepository)
     singleOf(::RemoteChargeHubRepository)
     singleOf(::RemoteLevelRepository)
+    singleOf(::FirebaseRepository)
     singleOf(::RemoteReservationRepository)
     singleOf(::FirebaseRepository)
 }

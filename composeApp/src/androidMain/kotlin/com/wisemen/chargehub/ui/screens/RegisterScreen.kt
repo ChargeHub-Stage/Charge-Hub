@@ -1,5 +1,10 @@
 package com.wisemen.chargehub.ui.screens
 
+import android.os.Build
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -10,6 +15,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
@@ -24,6 +31,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -33,6 +41,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
@@ -45,10 +54,18 @@ import com.wisemen.chargehub.ui.components.Buttons.PrimaryButton
 import com.wisemen.chargehub.ui.components.TextFields
 import com.wisemen.chargehub.ui.components.TopBar
 import com.wisemen.chargehub.ui.components.primaryButtonColors
+import com.wisemen.chargehub.ui.screens.register.BottomPagerIndicator
+import com.wisemen.chargehub.ui.screens.register.InfoPageLevelingInfo
+import com.wisemen.chargehub.ui.screens.register.InfoPageCharging
+import com.wisemen.chargehub.ui.screens.register.InfoPageLevelInfo
+import com.wisemen.chargehub.ui.screens.register.InfoPageChargingRules
+import com.wisemen.chargehub.ui.screens.register.NextButton
+import com.wisemen.chargehub.ui.screens.register.SkipTextButton
 import com.wisemen.chargehub.ui.theme.AppTheme
 import com.wisemen.chargehub.ui.theme.Colors
 import com.wisemen.chargehub.ui.theme.Padding
 import com.wisemen.chargehub.ui.theme.TextStyles
+import kotlinx.coroutines.launch
 import data.CurrentRegisterState
 import org.koin.java.KoinJavaComponent
 import screens.register.RegisterScreenUiAction
@@ -64,6 +81,7 @@ fun RegisterScreenPreview() {
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @Composable
 @Destination
 @ChargeHubNavGraph
@@ -84,6 +102,7 @@ fun RegisterScreen(
     RegisterLayout(viewModel::onAction, state.value)
 }
 
+@RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @Composable
 fun RegisterLayout(
     onAction: (RegisterScreenUiAction) -> Unit,
@@ -107,9 +126,10 @@ fun RegisterLayout(
                 CurrentRegisterState.EMAIL -> EmailRegisterStep(state, onAction)
                 CurrentRegisterState.PROFILE -> ProfileCompletionStep(state, onAction)
                 CurrentRegisterState.CAR_CONNECT -> CarConnectStep(state, onAction)
+                CurrentRegisterState.NOTIFICATIONS -> PermissionStep(onAction)
+                CurrentRegisterState.INFO -> InfoStep(state, onAction)
                 else -> {}
             }
-
         }
     }
 }
@@ -126,14 +146,14 @@ fun EmailRegisterStep(state: RegisterScreenUiState, onAction: (RegisterScreenUiA
                     newEmail
                 )
             )
-        }
+        },
     )
     Text(
         modifier = Modifier.padding(top = 4.dp, bottom = 27.dp),
         text = stringResource(R.string.privacy),
         style = TextStyles.bottomLabel
     )
-    NextButton(onAction)
+    NextButton(state, onAction)
 }
 
 @Composable
@@ -157,7 +177,8 @@ fun ProfileCompletionStep(
             topLabel = stringResource(R.string.firstname),
             trailingIcon = {
                 ClearFieldIcon { onAction(RegisterScreenUiAction.OnFirstNameChangedAction("")) }
-            }
+            },
+            errorMessage = if (state.isFirstNameValid) null else stringResource(R.string.first_name_validation_error)
         )
 
         TextFields.EditText(
@@ -167,7 +188,9 @@ fun ProfileCompletionStep(
             topLabel = stringResource(R.string.lastname),
             trailingIcon = {
                 ClearFieldIcon { onAction(RegisterScreenUiAction.OnLastNameChangedAction("")) }
-            }
+            },
+            errorMessage = if (state.isLastNameValid) null else stringResource(R.string.last_name_validation_error)
+
         )
 
         TextFields.PasswordTextField(
@@ -192,7 +215,7 @@ fun ProfileCompletionStep(
             isChecked = state.isPrivacyChecked,
             onCheckedChange = { onAction(RegisterScreenUiAction.OnPrivacyCheckedChangedAction) })
 
-        NextButton(onAction)
+        NextButton(state, onAction)
     }
 }
 
@@ -204,8 +227,8 @@ fun CarConnectStep(state: RegisterScreenUiState, onAction: (RegisterScreenUiActi
         input = state.vin,
         onInputChanged = { onAction(RegisterScreenUiAction.OnCarIdChangedAction(it)) },
         topLabel = stringResource(R.string.your_car_id),
-        trailingIcon =  { ClearFieldIcon { onAction(RegisterScreenUiAction.OnCarIdChangedAction("")) } },
-        errorMessage = if (state.isCarIdValid) null else stringResource(R.string.invalid_car_id)
+        trailingIcon = { ClearFieldIcon { onAction(RegisterScreenUiAction.OnCarIdChangedAction("")) } },
+        errorMessage = if (state.isVinValid) null else stringResource(R.string.invalid_car_id)
     )
 
     PrimaryButton(
@@ -219,6 +242,104 @@ fun CarConnectStep(state: RegisterScreenUiState, onAction: (RegisterScreenUiActi
         colors = ButtonDefaults.primaryButtonColors()
     )
 
+}
+
+@RequiresApi(Build.VERSION_CODES.TIRAMISU)
+@Composable
+fun PermissionStep(onAction: (RegisterScreenUiAction) -> Unit) {
+    
+    val permissionLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestPermission()
+    ) { _: Boolean ->
+        onAction(RegisterScreenUiAction.OnNextClickedAction)
+    }
+
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            modifier = Modifier.padding(top = 89.dp),
+            text = stringResource(R.string.allow_notis),
+            style = TextStyles.mediumTitle,
+            textAlign = TextAlign.Center
+        )
+        Text(
+            modifier = Modifier.padding(bottom = 43.dp),
+            text = stringResource(R.string.noti_info),
+            textAlign = TextAlign.Center
+        )
+
+        PrimaryButton(
+            modifier = Modifier.padding(bottom = 16.dp).fillMaxWidth(),
+            text = stringResource(R.string.allow_notis),
+            colors = ButtonDefaults.primaryButtonColors(),
+            textStyle = TextStyles.boldText,
+        ) {
+            permissionLauncher.launch(android.Manifest.permission.POST_NOTIFICATIONS)
+        }
+
+        SkipTextButton { onAction(RegisterScreenUiAction.OnNextClickedAction) }
+
+
+    }
+}
+
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+fun InfoStep(state: RegisterScreenUiState, onAction: (RegisterScreenUiAction) -> Unit) {
+
+    val pagerState = rememberPagerState(pageCount = { 4 })
+    val currentPage = pagerState.currentPage
+    val coroutine = rememberCoroutineScope()
+    val action = RegisterScreenUiAction.OnFinaliseRegisterAction
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(horizontal = 16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+
+        HorizontalPager(
+            state = pagerState,
+            modifier = Modifier
+                .weight(1f)
+                .fillMaxWidth()
+
+        ) { page ->
+            when (page) {
+                0 -> InfoPageCharging()
+                1 -> InfoPageChargingRules()
+                2 -> InfoPageLevelInfo()
+                3 -> InfoPageLevelingInfo()
+            }
+        }
+
+        BottomPagerIndicator(
+            pagerState = pagerState,
+            modifier = Modifier.padding(top = 130.dp)
+        )
+
+        NextButton(state) {
+            // If you reach the last page, finalise the registering process
+            // Else, go to the next
+            if (currentPage + 1 >= pagerState.pageCount) {
+                onAction(action)
+            } else {
+                coroutine.launch {
+                    pagerState.scrollToPage(currentPage + 1)
+                }
+            }
+        }
+
+        if (currentPage + 1 != pagerState.pageCount) {
+            SkipTextButton(
+                modifier = Modifier.padding(bottom = 16.dp, top = 16.dp),
+                textAlign = TextAlign.Center
+            ) { onAction(action) }
+        }
+    }
 }
 
 @Composable
@@ -293,16 +414,3 @@ fun CircularProfilePicture(
         )
     }
 }
-
-@Composable
-fun NextButton(onAction: (RegisterScreenUiAction) -> Unit) {
-    PrimaryButton(
-        modifier = Modifier.fillMaxWidth(),
-        text = stringResource(R.string.next),
-        onClick = {
-            onAction(RegisterScreenUiAction.OnNextClickedAction)
-        },
-        colors = ButtonDefaults.primaryButtonColors()
-    )
-}
-
