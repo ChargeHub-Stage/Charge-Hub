@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
@@ -101,7 +102,7 @@ fun Header() {
             painter = painterResource(R.drawable.logo_charge_hub),
             contentDescription = "logo",
             tint = Colors.acid,
-            modifier = Modifier.height(74.dp).width(74.dp)
+            modifier = Modifier.size(74.dp)
         )
     }
 }
