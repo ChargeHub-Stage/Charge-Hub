@@ -618,7 +618,7 @@ fun SkipTextButton(
 ) {
     Text(
         modifier = modifier.clickable { onAction() },
-        text = stringResource(R.string.overslaan),
+        text = stringResource(R.string.skip),
         textDecoration = TextDecoration.Underline,
         fontWeight = FontWeight.W700,
         textAlign = textAlign
