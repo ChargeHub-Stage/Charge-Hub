@@ -15,7 +15,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
-import androidx.compose.material.icons.automirrored.filled.ArrowForwardIos
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.VerticalDivider
@@ -46,58 +45,18 @@ fun TimeSlot(
     onArrowIconClicked: () -> Unit = {}
 ) {
     AppTheme {
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(Colors.catSkillWhite)
-                .height(82.dp)
-                .clip(RoundedCornerShape(4.dp))
-        ) {
+        TimeSlotBox {
             Row {
-                Column(
-                    Modifier
-                        .background(Colors.acid)
-                        .fillMaxHeight()
-                        .height(82.dp)
-                        .width(56.31.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center
-                ) {
-                    Text(text = dateDay, style = dateDayTextStyle)
-                    Text(text = dateMonth, style = dateMonthTextStyle)
-                }
+                DateColumn(dateDay, dateMonth)
 
                 Column(
                     Modifier.padding(start = 12.dp, top = 10.dp),
                 ) {
-                    Row {
-                        Text(
-                            text = stringResource(R.string.chargehub, chargeHubName),
-                            style = cardTitleStyle
-                        )
-                        Spacer(modifier = Modifier.weight(1F))
-                        Icon(
-                            Icons.AutoMirrored.Filled.ArrowForward,
-                            null,
-                            Modifier.padding(bottom = 11.dp, end = 6.dp).clickable { onArrowIconClicked() }
-                        )
-                    }
+                    TimeSlotTitle(chargeHubName, onArrowIconClicked)
 
                     Column {
                         Row {
-                            Column {
-                                Text(
-                                    text = stringResource(R.string.your_timeslot),
-                                    style = headerTextStyle
-                                )
-                                Text(
-                                    text = stringResource(
-                                        R.string.timeslot_duration_start_end,
-                                        start,
-                                        end
-                                    ), style = textTextStyle
-                                )
-                            }
+                            TimeSlotTimeDetails(start, end)
 
                             Spacer(Modifier.weight(1F))
 
@@ -108,23 +67,91 @@ fun TimeSlot(
 
                             Spacer(Modifier.weight(1F))
 
-                            Column {
-                                Text(
-                                    modifier = Modifier.padding(end = 44.69.dp),
-                                    text = stringResource(R.string.charge_time),
-                                    style = headerTextStyle
-                                )
-                                Text(
-                                    modifier = Modifier.padding(end = 44.69.dp),
-                                    text = stringResource(R.string.hour, duration),
-                                    style = textTextStyle
-                                )
-                            }
+                            ChargeDurationDetails(duration)
                         }
                     }
                 }
             }
         }
+    }
+}
+
+@Composable
+fun ChargeDurationDetails(duration: Int) {
+    Column {
+        Text(
+            modifier = Modifier.padding(end = 44.69.dp),
+            text = stringResource(R.string.charge_time),
+            style = headerTextStyle
+        )
+        Text(
+            modifier = Modifier.padding(end = 44.69.dp),
+            text = stringResource(R.string.hour, duration),
+            style = textTextStyle
+        )
+    }
+}
+
+@Composable
+fun TimeSlotTimeDetails(start: String, end: String) {
+    Column {
+        Text(
+            text = stringResource(R.string.your_timeslot),
+            style = headerTextStyle
+        )
+        Text(
+            text = stringResource(
+                R.string.timeslot_duration_start_end,
+                start,
+                end
+            ), style = textTextStyle
+        )
+    }
+}
+
+@Composable
+fun TimeSlotTitle(chargeHubName: String, onArrowIconClicked: () -> Unit) {
+    Row {
+        Text(
+            text = stringResource(R.string.chargehub, chargeHubName),
+            style = cardTitleStyle
+        )
+        Spacer(modifier = Modifier.weight(1F))
+        Icon(
+            Icons.AutoMirrored.Filled.ArrowForward,
+            null,
+            Modifier.padding(bottom = 11.dp, end = 6.dp).clickable { onArrowIconClicked() }
+        )
+    }
+}
+
+
+@Composable
+fun DateColumn(dateDay: String, dateMonth: String) {
+    Column(
+        Modifier
+            .background(Colors.acid)
+            .fillMaxHeight()
+            .height(82.dp)
+            .width(56.31.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Text(text = dateDay, style = dateDayTextStyle)
+        Text(text = dateMonth, style = dateMonthTextStyle)
+    }
+}
+
+@Composable
+fun TimeSlotBox(content: @Composable () -> Unit) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(Colors.catSkillWhite)
+            .height(82.dp)
+            .clip(RoundedCornerShape(4.dp))
+    ) {
+        content()
     }
 }
 
