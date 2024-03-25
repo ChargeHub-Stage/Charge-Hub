@@ -116,7 +116,7 @@ fun RegisterLayout(
     val topBarTitle = when (state.currentRegisterState) {
         CurrentRegisterState.EMAIL -> stringResource(R.string.e_mail)
         CurrentRegisterState.PROFILE -> stringResource(R.string.profile)
-        CurrentRegisterState.CAR_CONNECT -> stringResource(R.string.voertuig)
+        CurrentRegisterState.CAR_CONNECT -> stringResource(R.string.car)
         else -> {
             ""
         }
@@ -155,7 +155,7 @@ fun EmailRegisterStep(state: RegisterScreenUiState, onAction: (RegisterScreenUiA
     )
     Text(
         modifier = Modifier.padding(top = 4.dp, bottom = 27.dp),
-        text = stringResource(R.string.privacybeleid),
+        text = stringResource(R.string.privacy),
         style = TextStyles.bottomLabel
     )
     NextButton(state, onAction)
@@ -179,7 +179,7 @@ fun ProfileCompletionStep(
             modifier = Modifier.padding(bottom = 21.dp),
             input = state.firstName,
             onInputChanged = { onAction(RegisterScreenUiAction.OnFirstNameChangedAction(it)) },
-            topLabel = stringResource(R.string.voornaam),
+            topLabel = stringResource(R.string.firstname),
             trailingIcon = {
                 ClearFieldIcon { onAction(RegisterScreenUiAction.OnFirstNameChangedAction("")) }
             },
@@ -190,7 +190,7 @@ fun ProfileCompletionStep(
             modifier = Modifier.padding(bottom = 21.dp),
             input = state.lastName,
             onInputChanged = { onAction(RegisterScreenUiAction.OnLastNameChangedAction(it)) },
-            topLabel = stringResource(R.string.achternaam),
+            topLabel = stringResource(R.string.lastname),
             trailingIcon = {
                 ClearFieldIcon { onAction(RegisterScreenUiAction.OnLastNameChangedAction("")) }
             },
@@ -231,12 +231,21 @@ fun CarConnectStep(state: RegisterScreenUiState, onAction: (RegisterScreenUiActi
         modifier = Modifier.padding(top = 34.dp, bottom = 16.dp),
         input = state.vin,
         onInputChanged = { onAction(RegisterScreenUiAction.OnCarIdChangedAction(it)) },
-        topLabel = stringResource(R.string.jouw_auto_id),
+        topLabel = stringResource(R.string.your_car_id),
         trailingIcon = { ClearFieldIcon { onAction(RegisterScreenUiAction.OnCarIdChangedAction("")) } },
         errorMessage = if (state.isVinValid) null else stringResource(R.string.invalid_car_id)
     )
 
-    NextButton(state, onAction)
+    PrimaryButton(
+        modifier = Modifier.fillMaxWidth(),
+        text = stringResource(R.string.next),
+        onClick = {
+            //if (state.isCarIdValid) {
+                onAction(RegisterScreenUiAction.OnNextClickedAction)
+            //}
+        },
+        colors = ButtonDefaults.primaryButtonColors()
+    )
 
 }
 
@@ -257,19 +266,19 @@ fun PermissionStep(onAction: (RegisterScreenUiAction) -> Unit) {
     ) {
         Text(
             modifier = Modifier.padding(top = 89.dp),
-            text = stringResource(R.string.meldingen_toestaan),
+            text = stringResource(R.string.allow_notis),
             style = TextStyles.mediumTitle,
             textAlign = TextAlign.Center
         )
         Text(
             modifier = Modifier.padding(bottom = 43.dp),
-            text = stringResource(R.string.meldingen_info),
+            text = stringResource(R.string.noti_info),
             textAlign = TextAlign.Center
         )
 
         PrimaryButton(
             modifier = Modifier.padding(bottom = 16.dp).fillMaxWidth(),
-            text = stringResource(R.string.meldingen_toestaan),
+            text = stringResource(R.string.allow_notis),
             colors = ButtonDefaults.primaryButtonColors(),
             textStyle = TextStyles.boldText,
         ) {
@@ -322,18 +331,18 @@ fun InfoStep(state: RegisterScreenUiState, onAction: (RegisterScreenUiAction) ->
     @Composable
     fun InfoPageOne() {
         ShortInfoPage(
-            title = stringResource(R.string.laadbeurten),
+            title = stringResource(R.string.charges),
             imageResId = R.drawable.laadbeurten_info,
-            descriptionResId = R.string.reservatie_info
+            descriptionResId = R.string.charges_info
         )
     }
 
     @Composable
     fun InfoPageTwo() {
         ShortInfoPage(
-            title = stringResource(R.string.laadbeurt_afstaan),
+            title = stringResource(R.string.charge_giveaway),
             imageResId = R.drawable.laadbeurt_afstaan,
-            descriptionResId = R.string.laadbeurt_afstaan_info
+            descriptionResId = R.string.charge_giveaway_info
         )
     }
 
@@ -345,7 +354,7 @@ fun InfoStep(state: RegisterScreenUiState, onAction: (RegisterScreenUiAction) ->
             modifier = Modifier.fillMaxHeight()
         ) {
             Spacer(modifier = Modifier.weight(1f))
-            InfoTitle(stringResource(R.string.level_systeem))
+            InfoTitle(stringResource(R.string.level_system))
             Image(
                 modifier = Modifier.padding(bottom = 56.dp).width(294.dp).height(41.dp),
                 painter = painterResource(R.drawable.progress_bar),
@@ -356,15 +365,15 @@ fun InfoStep(state: RegisterScreenUiState, onAction: (RegisterScreenUiAction) ->
                 text = stringResource(R.string.level_system_title),
                 style = TextStyles.infoTitle
             )
-            Text(text = stringResource(R.string.stiptheid), style = TextStyles.infoSubTitle)
+            Text(text = stringResource(R.string.punctuality), style = TextStyles.infoSubTitle)
             Text(
                 modifier = Modifier.padding(bottom = 16.dp),
-                text = stringResource(R.string.stiptheid_details),
+                text = stringResource(R.string.punctuality_details),
                 style = TextStyles.infoText
             )
-            Text(text = stringResource(R.string.hoffelijkheid), style = TextStyles.infoSubTitle)
+            Text(text = stringResource(R.string.friendly), style = TextStyles.infoSubTitle)
             Text(
-                text = stringResource(R.string.hoffelijkheid_details),
+                text = stringResource(R.string.friendly_details),
                 style = TextStyles.infoText
             )
             Spacer(modifier = Modifier.weight(1f))
@@ -379,7 +388,7 @@ fun InfoStep(state: RegisterScreenUiState, onAction: (RegisterScreenUiAction) ->
             modifier = Modifier.fillMaxHeight()
         ) {
             Spacer(modifier = Modifier.weight(1f))
-            InfoTitle(stringResource(R.string.level_systeem))
+            InfoTitle(stringResource(R.string.level_system))
             Image(
                 modifier = Modifier.padding(bottom = 54.dp).width(294.dp).height(41.dp),
                 painter = painterResource(R.drawable.progress_bar_full),
@@ -387,7 +396,7 @@ fun InfoStep(state: RegisterScreenUiState, onAction: (RegisterScreenUiAction) ->
             )
             Text(
                 modifier = Modifier.padding(bottom = 14.dp),
-                text = stringResource(R.string.level_systeem_2_uitleg),
+                text = stringResource(R.string.level_system_2_details),
                 style = TextStyles.infoTitle
             )
 
@@ -566,13 +575,13 @@ fun CircularProfilePicture(
 @Composable
 fun LevelSquares() {
     Row(Modifier.padding(bottom = 14.dp, top = 14.dp)) {
-        LevelColumn(R.string.level_1, R.string.prioriteit, 91.dp)
-        LevelColumn(R.string.level_2, R.string.ruilen, 91.dp)
+        LevelColumn(R.string.level_1, R.string.priorities, 91.dp)
+        LevelColumn(R.string.level_2, R.string.trading, 91.dp)
     }
 
     Row {
-        LevelColumn(R.string.level_3, R.string._2_dagen_op_voorhand_reserveren, 135.dp)
-        LevelColumn(R.string.level_4, R.string._3_dagen_op_voorhand_reserveren, 135.dp)
+        LevelColumn(R.string.level_3, R.string.reserve_2_days_in_advance, 135.dp)
+        LevelColumn(R.string.level_4, R.string.reserve_3_days_in_advance, 135.dp)
     }
 }
 
@@ -602,7 +611,7 @@ fun NextButton(state: RegisterScreenUiState, onAction: (RegisterScreenUiAction) 
     }
     PrimaryButton(
         modifier = Modifier.fillMaxWidth(),
-        text = stringResource(R.string.volgende),
+        text = stringResource(R.string.next),
         onClick = {
             onAction(RegisterScreenUiAction.OnNextClickedAction)
         },
@@ -620,7 +629,7 @@ fun SkipTextButton(
 ) {
     Text(
         modifier = modifier.clickable { onAction() },
-        text = stringResource(R.string.overslaan),
+        text = stringResource(R.string.skip),
         textDecoration = TextDecoration.Underline,
         fontWeight = FontWeight.W700,
         textAlign = textAlign
