@@ -10,8 +10,6 @@ import db.database.chargehub.ChargeHubDatabase
 import db.database.chargehub.ChargeHubDatabaseWrapper
 import db.database.level.LevelDatabase
 import db.database.level.LevelDatabaseWrapper
-import db.database.networkcalls.CarConnectNetworkCallsDatabase
-import db.database.networkcalls.CarConnectNetworkCallsWrapper
 import db.database.reservation.ReservationDatabase
 import db.database.reservation.ReservationDatabaseWrapper
 import db.database.user.UserDatabase
@@ -43,10 +41,5 @@ actual fun platformModules() = module {
     single {
         val driver = AndroidSqliteDriver(ChargeHubDb.Schema, get(), DATABASE_NAME)
         ReservationDatabaseWrapper(ReservationDatabase(driver))
-    }
-
-    single {
-        val driver = AndroidSqliteDriver(ChargeHubDb.Schema, get(), DATABASE_NAME)
-        CarConnectNetworkCallsWrapper(CarConnectNetworkCallsDatabase((driver)))
     }
 }

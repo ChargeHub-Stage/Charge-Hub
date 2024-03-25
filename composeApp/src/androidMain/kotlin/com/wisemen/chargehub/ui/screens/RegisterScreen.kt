@@ -105,7 +105,6 @@ fun RegisterLayout(
             when (state.currentRegisterState) {
                 CurrentRegisterState.EMAIL -> EmailRegisterStep(state, onAction)
                 CurrentRegisterState.PROFILE -> ProfileCompletionStep(state, onAction)
-                CurrentRegisterState.CAR_CONNECT -> CarConnectStep(state, onAction)
                 else -> {}
             }
 
@@ -193,31 +192,6 @@ fun ProfileCompletionStep(
 
         NextButton(onAction)
     }
-}
-
-@Composable
-fun CarConnectStep(state: RegisterScreenUiState, onAction: (RegisterScreenUiAction) -> Unit) {
-
-    TextFields.EditText(
-        modifier = Modifier.padding(top = 34.dp, bottom = 16.dp),
-        input = state.vin,
-        onInputChanged = { onAction(RegisterScreenUiAction.OnCarIdChangedAction(it)) },
-        topLabel = stringResource(R.string.jouw_auto_id),
-        trailingIcon =  { ClearFieldIcon { onAction(RegisterScreenUiAction.OnCarIdChangedAction("")) } },
-        errorMessage = if (state.isCarIdValid) null else stringResource(R.string.invalid_car_id)
-    )
-
-    PrimaryButton(
-        modifier = Modifier.fillMaxWidth(),
-        text = stringResource(R.string.volgende),
-        onClick = {
-            //if (state.isCarIdValid) {
-                onAction(RegisterScreenUiAction.OnNextClickedAction)
-            //}
-        },
-        colors = ButtonDefaults.primaryButtonColors()
-    )
-
 }
 
 @Composable

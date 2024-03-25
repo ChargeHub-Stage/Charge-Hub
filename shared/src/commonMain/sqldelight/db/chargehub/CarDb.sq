@@ -1,18 +1,8 @@
-import kotlin.Boolean;
-
-
 CREATE TABLE Car (
     id TEXT PRIMARY KEY,
     userId TEXT NOT NULL,
+    plate TEXT NOT NULL,
     brand TEXT NOT NULL,
-    year INTEGER NOT NULL,
-    model TEXT NOT NULL,
-    percentage INTEGER,
-    pluggedIn INTEGER AS Boolean,
-    charging INTEGER AS Boolean,
-    powerComputed INTEGER,
-    minutesLeft INTEGER,
-    chargeLimit INTEGER,
     FOREIGN KEY (userId) REFERENCES User(id)
 );
 
@@ -22,20 +12,11 @@ SELECT * FROM Car;
 getCarById:
 SELECT * FROM Car WHERE id = ?;
 
-getCarByUser:
-SELECT * FROM Car WHERE userId = ?;
-
-insertOrUpdateCar:
-INSERT OR REPLACE INTO Car(id, userId, brand, year, model, percentage, pluggedIn, charging, powerComputed, minutesLeft, chargeLimit)
-VALUES (?, ?,?,?,?,?,?,?,?,?,?);
-
 updateCar:
-UPDATE Car SET userId = ?, brand = ?, year = ?, model = ?, percentage = ?, pluggedIn = ?, charging = ?, chargeLimit = ?, powerComputed = ?, minutesLeft = ? WHERE id = ?;
+UPDATE Car SET userId = ?, plate = ?, brand = ? WHERE id = ?;
 
 deleteCar:
 DELETE FROM Car WHERE id = ?;
 
 insertCar:
-INSERT INTO Car
-(id, userId, brand, year, model, percentage, pluggedIn, charging, chargeLimit, powerComputed, minutesLeft)
- VALUES (?,?,?, ?, ?,?,?,?,?,?,?);
+INSERT INTO Car (userId, plate, brand) VALUES (?, ?, ?);
