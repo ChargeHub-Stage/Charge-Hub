@@ -18,7 +18,11 @@ import com.wisemen.chargehub.ui.theme.TextStyles
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopBar(centerText: String, onAction: () -> Unit, body: @Composable ((PaddingValues) -> Unit)) {
+fun TopBar(
+    centerText: String,
+    onAction: () -> Unit,
+    body: @Composable ((PaddingValues) -> Unit)
+) {
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -31,10 +35,7 @@ fun TopBar(centerText: String, onAction: () -> Unit, body: @Composable ((Padding
                     )
                 },
                 navigationIcon = {
-                    IconButton(
-                        onClick = { onAction(
-                        ) },
-                    ) {
+                    IconButton(onClick = { onAction() }) {
                         Row {
                             Icon(
                                 imageVector = Icons.Filled.ChevronLeft,
