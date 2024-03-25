@@ -9,9 +9,8 @@ enum class CurrentRegisterState(private val order: Int) {
     EMAIL(1),
     PROFILE(2),
     CAR_CONNECT(3),
-    FACE_ID(4),
-    NOTIFICATIONS(5),
-    INFO(6);
+    NOTIFICATIONS(4),
+    INFO(5);
 
     fun next(): CurrentRegisterState? {
         return entries.find { it.order == order + 1 }
