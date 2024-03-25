@@ -297,7 +297,6 @@ fun PermissionStep(onAction: (RegisterScreenUiAction) -> Unit) {
 @Composable
 fun InfoStep(onAction: (RegisterScreenUiAction) -> Unit) {
 
-
     val pagerState = rememberPagerState(pageCount = { 4 })
     val currentPage = pagerState.currentPage
     val coroutine = rememberCoroutineScope()
@@ -350,7 +349,6 @@ fun InfoStep(onAction: (RegisterScreenUiAction) -> Unit) {
         }
     }
 }
-
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
