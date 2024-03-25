@@ -66,12 +66,15 @@ import com.wisemen.chargehub.ui.components.Buttons.PrimaryButton
 import com.wisemen.chargehub.ui.components.TextFields
 import com.wisemen.chargehub.ui.components.TopBar
 import com.wisemen.chargehub.ui.components.primaryButtonColors
+import com.wisemen.chargehub.ui.screens.register.BottomPagerIndicator
 import com.wisemen.chargehub.ui.screens.register.InfoPageFour
 import com.wisemen.chargehub.ui.screens.register.InfoPageOne
 import com.wisemen.chargehub.ui.screens.register.InfoPageThree
 import com.wisemen.chargehub.ui.screens.register.InfoPageTwo
 import com.wisemen.chargehub.ui.screens.register.InfoTitle
+import com.wisemen.chargehub.ui.screens.register.NextButton
 import com.wisemen.chargehub.ui.screens.register.ShortInfoPage
+import com.wisemen.chargehub.ui.screens.register.SkipTextButton
 import com.wisemen.chargehub.ui.theme.AppTheme
 import com.wisemen.chargehub.ui.theme.Colors
 import com.wisemen.chargehub.ui.theme.Padding
@@ -350,46 +353,6 @@ fun InfoStep(onAction: (RegisterScreenUiAction) -> Unit) {
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
-@Composable
-fun BottomPagerIndicator(
-    pagerState: PagerState,
-    modifier: Modifier = Modifier,
-) {
-    val pageCount = pagerState.pageCount
-    val currentPage = pagerState.currentPage
-    val coroutine = rememberCoroutineScope()
-    Box(
-        modifier = modifier
-            .fillMaxWidth()
-            .height(48.dp)
-            .padding(horizontal = 16.dp),
-        contentAlignment = Alignment.Center
-    ) {
-        LazyRow(
-            horizontalArrangement = Arrangement.Center
-        ) {
-            items(pageCount) { pageIndex ->
-                Box(
-                    modifier = Modifier
-                        .padding(horizontal = 11.dp)
-                        .width(30.dp)
-                        .height(9.dp)
-                        .background(
-                            color = if (pageIndex == currentPage) Colors.acid else Colors.lightGrey,
-                            shape = RoundedCornerShape(4.dp)
-                        )
-                        .clickable {
-                            coroutine.launch {
-                                pagerState.scrollToPage(pageIndex)
-                            }
-                        }
-                )
-            }
-        }
-    }
-}
-
 @Composable
 fun ClearFieldIcon(
     onAction: () -> Unit
@@ -463,58 +426,3 @@ fun CircularProfilePicture(
     }
 }
 
-@Composable
-fun LevelSquares() {
-    Row(Modifier.padding(bottom = 14.dp, top = 14.dp)) {
-        LevelColumn(R.string.level_1, R.string.priorities, 91.dp)
-        LevelColumn(R.string.level_2, R.string.trading, 91.dp)
-    }
-
-    Row {
-        LevelColumn(R.string.level_3, R.string.reserve_2_days_in_advance, 135.dp)
-        LevelColumn(R.string.level_4, R.string.reserve_3_days_in_advance, 135.dp)
-    }
-}
-
-@Composable
-fun LevelColumn(level: Int, explanation: Int, boxHeight: Dp) {
-    Column(
-        Modifier.padding(end = 13.dp)
-            .border(BorderStroke(2.dp, Colors.blackPearl), shape = RectangleShape)
-            .size(width = 130.dp, height = boxHeight),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Text(text = stringResource(level), style = TextStyles.levelTitle)
-        Text(stringResource(explanation), style = TextStyles.levelExplanation)
-    }
-}
-
-
-@Composable
-fun NextButton(onAction: (RegisterScreenUiAction) -> Unit) {
-    PrimaryButton(
-        modifier = Modifier.fillMaxWidth(),
-        text = stringResource(R.string.next),
-        onClick = {
-            onAction(RegisterScreenUiAction.OnNextClickedAction)
-        },
-        textStyle = TextStyles.boldText,
-        colors = ButtonDefaults.primaryButtonColors()
-    )
-}
-
-@Composable
-fun SkipTextButton(
-    modifier: Modifier = Modifier,
-    textAlign: TextAlign? = null,
-    onAction: () -> Unit
-) {
-    Text(
-        modifier = modifier.clickable { onAction() },
-        text = stringResource(R.string.skip),
-        textDecoration = TextDecoration.Underline,
-        fontWeight = FontWeight.W700,
-        textAlign = textAlign
-    )
-}
