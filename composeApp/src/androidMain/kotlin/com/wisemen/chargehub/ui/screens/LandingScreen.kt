@@ -30,6 +30,7 @@ import com.wisemen.chargehub.nav.ChargeHubNavGraph
 import com.wisemen.chargehub.ui.components.Buttons
 import com.wisemen.chargehub.ui.components.primaryButtonColors
 import com.wisemen.chargehub.ui.components.secondaryButtonColors
+import com.wisemen.chargehub.ui.screens.destinations.LoginScreenDestination
 import com.wisemen.chargehub.ui.screens.destinations.RegisterScreenDestination
 import com.wisemen.chargehub.ui.theme.AppTheme
 import com.wisemen.chargehub.ui.theme.Colors
@@ -59,8 +60,13 @@ fun LandingScreen(
     LaunchedEffect(viewModel) {
         viewModel.eventFlow.collect { event ->
             when (event) {
-                is LandingScreenUiEvent.ClickedLoginButtonEvent -> {}
-                is LandingScreenUiEvent.ClickedRegisterButtonEvent -> navController.navigate(RegisterScreenDestination)
+                is LandingScreenUiEvent.ClickedLoginButtonEvent -> navController.navigate(
+                    LoginScreenDestination
+                )
+
+                is LandingScreenUiEvent.ClickedRegisterButtonEvent -> navController.navigate(
+                    RegisterScreenDestination
+                )
             }
         }
     }
@@ -90,7 +96,7 @@ fun LandingLayout(onAction: (LandingScreenUiAction) -> Unit) {
 fun Header() {
     Column(Modifier.padding(top = 46.dp)) {
         Text(
-            stringResource(R.string.white_title),
+            stringResource(R.string.streamline_your_day_with),
             style = TextStyles.bigTitle,
             color = Colors.white
         )

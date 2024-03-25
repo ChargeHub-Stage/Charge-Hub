@@ -92,6 +92,7 @@ object TextFields {
                     style = TextStyles.topLabelText
                 )
             }
+
             Box(
                 modifier = Modifier
                     .fillMaxWidth()

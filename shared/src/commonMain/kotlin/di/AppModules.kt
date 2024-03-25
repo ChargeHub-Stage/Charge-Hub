@@ -16,10 +16,12 @@ import networking.CarConnectService
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 import screens.landing.LandingScreenViewModel
+import screens.login.LoginScreenViewModel
 import screens.register.RegisterScreenViewModel
 import db.repository.FirebaseRepository
 
 val modules = module {
+    singleOf(::LoginScreenViewModel)
     singleOf(::LandingScreenViewModel)
     singleOf(::RegisterScreenViewModel)
 }

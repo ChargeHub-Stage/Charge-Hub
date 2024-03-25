@@ -151,4 +151,24 @@ object TextStyles {
         lineHeight = 16.71.sp,
         textAlign = TextAlign.Center
     )
+
+    val title = TextStyle(
+        fontSize = 28.sp,
+        fontWeight = FontWeight.W700,
+        lineHeight = 34.sp,
+        letterSpacing = 0.36.sp
+    )
+
+    val text = TextStyle(
+        fontSize = 17.sp,
+        fontWeight = FontWeight.W400,
+        lineHeight = 22.sp,
+        letterSpacing = (- 0.41).sp
+    )
+
+    var small_text = TextStyle(
+        fontSize = 12.sp,
+        fontWeight = FontWeight.W400,
+        lineHeight = 14.32.sp,
+    )
 }

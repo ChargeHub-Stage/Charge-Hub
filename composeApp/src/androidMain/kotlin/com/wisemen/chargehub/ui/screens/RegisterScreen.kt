@@ -111,8 +111,8 @@ fun RegisterLayout(
 
     val topBarTitle = when (state.currentRegisterState) {
         CurrentRegisterState.EMAIL -> stringResource(R.string.e_mail)
+        CurrentRegisterState.CAR_CONNECT -> stringResource(R.string.vehicle)
         CurrentRegisterState.PROFILE -> stringResource(R.string.profile)
-        CurrentRegisterState.CAR_CONNECT -> stringResource(R.string.car)
         else -> {
             ""
         }

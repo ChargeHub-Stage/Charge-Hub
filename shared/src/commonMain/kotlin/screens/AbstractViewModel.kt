@@ -34,5 +34,7 @@ abstract class AbstractViewModel<A, E, S : Any?>(initialValue: S) : KMMViewModel
 
     abstract fun onAction(action: A): Job
 
-
+    fun trySend(event: E) {
+        eventChannel.trySend(event)
+    }
 }
