@@ -15,3 +15,8 @@
     <string name="email_is_required">" 'Email' is invalid"</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
+    <string name="white_title">Stroomlijn je dag met</string>
+    <string name="charge">Charge\nHub.</string>
+    <string name="login">Aanmelden</string>
+    <string name="register">Registreren</string>
+</resources>

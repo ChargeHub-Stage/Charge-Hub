@@ -20,6 +20,6 @@ object Colors {
     val black = Color(0xFF000000)
     val mist = Color(0xFF999999)
     val mediumGray = Color(0xFF888888)
-    val smoke = Color(0xFF999999)
+    val smoke = Color(0xFF333333)
     val white = Color(0xFFFFFFFF)
 }

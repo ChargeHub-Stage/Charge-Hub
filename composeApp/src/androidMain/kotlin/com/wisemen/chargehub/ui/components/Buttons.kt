@@ -80,9 +80,9 @@ object Buttons {
         contentPadding: PaddingValues = ButtonDefaults.ContentPadding,
         colors: ButtonColors = ButtonDefaults.buttonColors(),
         textStyle: TextStyle = TextStyle.Default,
-        onClick: () -> Unit,
         trailingIcon: @Composable (() -> Unit)? = null,
-        leadingIcon: @Composable (() -> Unit)? = null
+        leadingIcon: @Composable (() -> Unit)? = null,
+        onClick: () -> Unit
     ) {
         Button(
             enabled = enabled,

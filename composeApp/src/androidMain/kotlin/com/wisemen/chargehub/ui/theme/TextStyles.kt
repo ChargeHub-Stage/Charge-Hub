@@ -1,4 +1,4 @@
-package com.wisemen.chargehub.ui.components
+package com.wisemen.chargehub.ui.theme
 
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -26,4 +26,9 @@ object TextStyles {
         color = Colors.rebel
     )
 
+    val bigTitle = TextStyle(
+        fontSize = 69.sp,
+        fontWeight = FontWeight.W700,
+        lineHeight = 60.sp,
+    )
 }
