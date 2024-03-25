@@ -16,19 +16,23 @@ import org.koin.core.component.inject
 class RemoteUserRepository(private val httpClient: HttpClient) :
     GenericRepository<UserRequest, User, UserDatabase> {
 
+        companion object {
+            const val USER_COLLECTION = "USERS"
+        }
+
     private val firestore = Firebase.firestore
     override val database: UserDatabase
         get() = inject<UserDatabaseWrapper>().value.database
 
     override suspend fun create(request: UserRequest) {
-        firestore.collection(FIREBASE_USER_COLLECTION).add(request)
         database.create(request)
+        firestore.collection(USER_COLLECTION).add(request)
     }
 
     override suspend fun fetchAll(): List<User> {
         try {
             val userResponse =
-                firestore.collection(FIREBASE_USER_COLLECTION).get()
+                firestore.collection(USER_COLLECTION).get()
             return userResponse.documents.map { it.data() }
         } catch (e: Exception) {
             throw e
@@ -38,7 +42,7 @@ class RemoteUserRepository(private val httpClient: HttpClient) :
     override suspend fun fetchById(id: String): User {
        try {
            val userDocument =
-               firestore.collection(FIREBASE_USER_COLLECTION).document(id).get()
+               firestore.collection(USER_COLLECTION).document(id).get()
            return userDocument.data()
        } catch(e: Exception) {
            throw e
@@ -46,12 +50,12 @@ class RemoteUserRepository(private val httpClient: HttpClient) :
     }
 
     override suspend fun update(id: String, request: UserRequest) {
-        firestore.collection(FIREBASE_USER_COLLECTION).document(id).update(request)
+        firestore.collection(USER_COLLECTION).document(id).update(request)
         database.update(id, request)
     }
 
     override suspend fun delete(id: String) {
-        firestore.collection(FIREBASE_USER_COLLECTION).document(id).delete()
+        firestore.collection(USER_COLLECTION).document(id).delete()
         database.delete(id)
     }
 

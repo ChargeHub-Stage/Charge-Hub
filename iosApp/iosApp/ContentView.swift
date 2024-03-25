@@ -2,9 +2,19 @@ import SwiftUI
 import Shared
 
 struct ContentView: View {
-        var body: some View {
-            Text("hello")
+    var body: some View {
+        ZStack {
+        
+            Image("landingbackground")
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .edgesIgnoringSafeArea(.all)
+            
+            VStack {
+                
+            }
         }
+    }
 }
 
 struct ContentView_Previews: PreviewProvider {

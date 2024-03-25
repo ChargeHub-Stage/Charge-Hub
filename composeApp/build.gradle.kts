@@ -4,8 +4,8 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsCompose)
-
     alias(libs.plugins.googleService)
+    alias(libs.plugins.navigation)
 }
 
 kotlin {
@@ -18,16 +18,24 @@ kotlin {
     }
     
     sourceSets {
-        
+
+        dependencies {
+            ksp(libs.ksp)
+        }
+
         androidMain.dependencies {
             implementation(libs.compose.ui.tooling.preview)
             implementation(libs.androidx.activity.compose)
-
             implementation(libs.kotlinx.coroutines.android)
             implementation(libs.koinAndroid)
             implementation(libs.koinCore)
-
+            implementation(libs.androidx.material3.android)
+            implementation(libs.androidx.material3.extended)
             implementation(project.dependencies.platform(libs.firebase.bom))
+            implementation(libs.androidx.navigation.runtime.ktx)
+            implementation(libs.androidx.navigation.compose)
+            implementation(libs.raamcosta.core)
+            implementation(libs.androidx.material3.extended)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -76,4 +84,3 @@ android {
         debugImplementation(libs.compose.ui.tooling)
     }
 }
-
