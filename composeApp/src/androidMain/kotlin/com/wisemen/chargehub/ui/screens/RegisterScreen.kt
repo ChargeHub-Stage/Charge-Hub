@@ -23,6 +23,7 @@ import com.wisemen.chargehub.ui.components.TopBar
 import com.wisemen.chargehub.ui.components.primaryButtonColors
 import com.wisemen.chargehub.ui.screens.destinations.LandingScreenDestination
 import com.wisemen.chargehub.ui.theme.AppTheme
+import com.wisemen.chargehub.ui.theme.Padding
 import com.wisemen.chargehub.ui.theme.TextStyles
 import org.koin.java.KoinJavaComponent
 import screens.register.CurrentRegisterState
@@ -76,7 +77,7 @@ fun RegisterLayout(
     TopBar(topBarTitle, {
         onAction(RegisterScreenUiAction.OnPreviousClickedAction)
     }) {
-        Column(Modifier.padding(it).padding(horizontal = 16.dp)) {
+        Column(Modifier.padding(it).padding(horizontal = Padding.medium)) {
 
             when (state.currentRegisterState) {
                 CurrentRegisterState.EMAIL -> EmailRegisterStep(state, onAction)

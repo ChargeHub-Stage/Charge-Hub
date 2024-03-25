@@ -50,7 +50,7 @@ kotlin {
 
             api(libs.kmm.viewmodel.core)
 
-            api("org.lighthousegames:logging:1.4.2")
+            api(libs.logging)
 
         }
         androidMain.dependencies {
