@@ -37,7 +37,7 @@ val clientsModule = module {
             install(Auth) {
                 bearer {
                     loadTokens {
-                        BearerTokens(accessToken = Secrets.API_TOKEN, "...")
+                        BearerTokens(accessToken = "Secrets.API_TOKEN", "...")
                     }
                 }
             }

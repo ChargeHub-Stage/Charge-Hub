@@ -48,4 +48,6 @@
     <string name="next">Volgende</string>
     <string name="login">Aanmelden</string>
     <string name="register">Registreren</string>
+    <string name="level">Level %1$s</string>
+    <string name="reserve_in_advance">%1$s dagen op voorhand reserveren</string>
 </resources>

@@ -66,6 +66,15 @@ import com.wisemen.chargehub.ui.components.Buttons.PrimaryButton
 import com.wisemen.chargehub.ui.components.TextFields
 import com.wisemen.chargehub.ui.components.TopBar
 import com.wisemen.chargehub.ui.components.primaryButtonColors
+import com.wisemen.chargehub.ui.screens.register.BottomPagerIndicator
+import com.wisemen.chargehub.ui.screens.register.InfoPageFour
+import com.wisemen.chargehub.ui.screens.register.InfoPageOne
+import com.wisemen.chargehub.ui.screens.register.InfoPageThree
+import com.wisemen.chargehub.ui.screens.register.InfoPageTwo
+import com.wisemen.chargehub.ui.screens.register.InfoTitle
+import com.wisemen.chargehub.ui.screens.register.NextButton
+import com.wisemen.chargehub.ui.screens.register.ShortInfoPage
+import com.wisemen.chargehub.ui.screens.register.SkipTextButton
 import com.wisemen.chargehub.ui.theme.AppTheme
 import com.wisemen.chargehub.ui.theme.Colors
 import com.wisemen.chargehub.ui.theme.Padding
@@ -294,116 +303,6 @@ fun PermissionStep(onAction: (RegisterScreenUiAction) -> Unit) {
 @Composable
 fun InfoStep(state: RegisterScreenUiState, onAction: (RegisterScreenUiAction) -> Unit) {
 
-    @Composable
-    fun InfoTitle(title: String) {
-        Text(
-            modifier = Modifier.padding(bottom = 19.06.dp),
-            text = title,
-            style = TextStyles.mediumTitle
-        )
-    }
-
-    @Composable
-    fun ShortInfoPage(title: String, imageResId: Int, descriptionResId: Int) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center,
-            modifier = Modifier.fillMaxHeight()
-        ) {
-            Spacer(modifier = Modifier.weight(1f))
-            InfoTitle(title = title)
-            Image(
-                modifier = Modifier.padding(bottom = 16.dp),
-                painter = painterResource(imageResId),
-                contentDescription = null
-            )
-            Text(
-                text = stringResource(descriptionResId),
-                style = TextStyles.infoSubTitle,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.padding(horizontal = 16.dp)
-            )
-            Spacer(modifier = Modifier.weight(1f))
-        }
-    }
-
-    @Composable
-    fun InfoPageOne() {
-        ShortInfoPage(
-            title = stringResource(R.string.charges),
-            imageResId = R.drawable.laadbeurten_info,
-            descriptionResId = R.string.charges_info
-        )
-    }
-
-    @Composable
-    fun InfoPageTwo() {
-        ShortInfoPage(
-            title = stringResource(R.string.charge_giveaway),
-            imageResId = R.drawable.laadbeurt_afstaan,
-            descriptionResId = R.string.charge_giveaway_info
-        )
-    }
-
-    @Composable
-    fun InfoPageThree() {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center,
-            modifier = Modifier.fillMaxHeight()
-        ) {
-            Spacer(modifier = Modifier.weight(1f))
-            InfoTitle(stringResource(R.string.level_system))
-            Image(
-                modifier = Modifier.padding(bottom = 56.dp).width(294.dp).height(41.dp),
-                painter = painterResource(R.drawable.progress_bar),
-                contentDescription = null
-            )
-            Text(
-                modifier = Modifier.padding(bottom = 14.dp),
-                text = stringResource(R.string.level_system_title),
-                style = TextStyles.infoTitle
-            )
-            Text(text = stringResource(R.string.punctuality), style = TextStyles.infoSubTitle)
-            Text(
-                modifier = Modifier.padding(bottom = 16.dp),
-                text = stringResource(R.string.punctuality_details),
-                style = TextStyles.infoText
-            )
-            Text(text = stringResource(R.string.friendly), style = TextStyles.infoSubTitle)
-            Text(
-                text = stringResource(R.string.friendly_details),
-                style = TextStyles.infoText
-            )
-            Spacer(modifier = Modifier.weight(1f))
-        }
-    }
-
-    @Composable
-    fun InfoPageFour() {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center,
-            modifier = Modifier.fillMaxHeight()
-        ) {
-            Spacer(modifier = Modifier.weight(1f))
-            InfoTitle(stringResource(R.string.level_system))
-            Image(
-                modifier = Modifier.padding(bottom = 54.dp).width(294.dp).height(41.dp),
-                painter = painterResource(R.drawable.progress_bar_full),
-                contentDescription = null
-            )
-            Text(
-                modifier = Modifier.padding(bottom = 14.dp),
-                text = stringResource(R.string.level_system_2_details),
-                style = TextStyles.infoTitle
-            )
-
-            LevelSquares()
-            Spacer(modifier = Modifier.weight(1f))
-        }
-    }
-
     val pagerState = rememberPagerState(pageCount = { 4 })
     val currentPage = pagerState.currentPage
     val coroutine = rememberCoroutineScope()
@@ -453,47 +352,6 @@ fun InfoStep(state: RegisterScreenUiState, onAction: (RegisterScreenUiAction) ->
                 modifier = Modifier.padding(bottom = 16.dp, top = 16.dp),
                 textAlign = TextAlign.Center
             ) { onAction(action) }
-        }
-    }
-}
-
-
-@OptIn(ExperimentalFoundationApi::class)
-@Composable
-fun BottomPagerIndicator(
-    pagerState: PagerState,
-    modifier: Modifier = Modifier,
-) {
-    val pageCount = pagerState.pageCount
-    val currentPage = pagerState.currentPage
-    val coroutine = rememberCoroutineScope()
-    Box(
-        modifier = modifier
-            .fillMaxWidth()
-            .height(48.dp)
-            .padding(horizontal = 16.dp),
-        contentAlignment = Alignment.Center
-    ) {
-        LazyRow(
-            horizontalArrangement = Arrangement.Center
-        ) {
-            items(pageCount) { pageIndex ->
-                Box(
-                    modifier = Modifier
-                        .padding(horizontal = 11.dp)
-                        .width(30.dp)
-                        .height(9.dp)
-                        .background(
-                            color = if (pageIndex == currentPage) Colors.acid else Colors.lightGrey,
-                            shape = RoundedCornerShape(4.dp)
-                        )
-                        .clickable {
-                            coroutine.launch {
-                                pagerState.scrollToPage(pageIndex)
-                            }
-                        }
-                )
-            }
         }
     }
 }
@@ -569,68 +427,4 @@ fun CircularProfilePicture(
             modifier = Modifier.fillMaxSize()
         )
     }
-}
-
-@Composable
-fun LevelSquares() {
-    Row(Modifier.padding(bottom = 14.dp, top = 14.dp)) {
-        LevelColumn(R.string.level_1, R.string.priorities, 91.dp)
-        LevelColumn(R.string.level_2, R.string.trading, 91.dp)
-    }
-
-    Row {
-        LevelColumn(R.string.level_3, R.string.reserve_2_days_in_advance, 135.dp)
-        LevelColumn(R.string.level_4, R.string.reserve_3_days_in_advance, 135.dp)
-    }
-}
-
-@Composable
-fun LevelColumn(level: Int, explanation: Int, boxHeight: Dp) {
-    Column(
-        Modifier.padding(end = 13.dp)
-            .border(BorderStroke(2.dp, Colors.blackPearl), shape = RectangleShape)
-            .size(width = 130.dp, height = boxHeight),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Text(text = stringResource(level), style = TextStyles.levelTitle)
-        Text(stringResource(explanation), style = TextStyles.levelExplanation)
-    }
-}
-
-
-@Composable
-fun NextButton(state: RegisterScreenUiState, onAction: (RegisterScreenUiAction) -> Unit) {
-    val shouldButtonEnable = when (state.currentRegisterState) {
-        CurrentRegisterState.EMAIL -> state.isEmailStepValid()
-        CurrentRegisterState.PROFILE -> state.isProfileStepValid()
-        CurrentRegisterState.CAR_CONNECT -> state.isVinStepValid()
-        CurrentRegisterState.INFO -> true
-        else -> false
-    }
-    PrimaryButton(
-        modifier = Modifier.fillMaxWidth(),
-        text = stringResource(R.string.next),
-        onClick = {
-            onAction(RegisterScreenUiAction.OnNextClickedAction)
-        },
-        enabled = shouldButtonEnable,
-        textStyle = TextStyles.boldText,
-        colors = ButtonDefaults.primaryButtonColors()
-    )
-}
-
-@Composable
-fun SkipTextButton(
-    modifier: Modifier = Modifier,
-    textAlign: TextAlign? = null,
-    onAction: () -> Unit
-) {
-    Text(
-        modifier = modifier.clickable { onAction() },
-        text = stringResource(R.string.skip),
-        textDecoration = TextDecoration.Underline,
-        fontWeight = FontWeight.W700,
-        textAlign = textAlign
-    )
 }
