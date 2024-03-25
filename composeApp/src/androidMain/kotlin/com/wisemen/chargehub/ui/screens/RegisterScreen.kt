@@ -213,7 +213,7 @@ fun ProfileCompletionStep(
                 }
             }
         )
-        PrivacySlider(
+        PrivacySwitch(
             modifier = Modifier.align(Alignment.Start).padding(bottom = 26.dp),
             isChecked = state.isPrivacyChecked,
             onCheckedChange = { onAction(RegisterScreenUiAction.OnPrivacyCheckedChangedAction) })
@@ -509,7 +509,7 @@ fun ClearFieldIcon(
 }
 
 @Composable
-fun PrivacySlider(
+fun PrivacySwitch(
     modifier: Modifier = Modifier,
     isChecked: Boolean,
     onCheckedChange: (Boolean) -> Unit,
