@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.sp
 import com.wisemen.chargehub.R
 import com.wisemen.chargehub.ui.theme.AppTheme
 import com.wisemen.chargehub.ui.theme.Colors
+import org.w3c.dom.Text
 
 @Preview(showBackground = true)
 @Composable
@@ -49,9 +50,9 @@ fun UpcomingReservation(
                         Column(modifier = Modifier.padding(start = 4.35.dp)) {
                             Text(
                                 text = stringResource(R.string.laadpaal, chargehubName),
-                                style = cardTitleStyle
+                                style = TextStyles.nextReservationCardTitle
                             )
-                            Text(text = stringResource(R.string._28_september), style = cardSubTitleStyle)
+                            Text(text = stringResource(R.string._28_september), style = TextStyles.nextReservationCardSubTitle)
                         }
                         Spacer(modifier = Modifier.weight(1F))
                         Icon(
@@ -81,12 +82,12 @@ fun StartTimeInformation(startTime: String) {
         Text(
             modifier = Modifier.padding(end = 44.69.dp),
             text = stringResource(R.string.start),
-            style = headerTextStyle
+            style = TextStyles.nextReservationHeader
         )
         Text(
             modifier = Modifier.padding(end = 44.69.dp),
             text = startTime,
-            style = textTextStyle
+            style = TextStyles.nextReservationText
         )
     }
 }
@@ -96,13 +97,13 @@ fun TimeSlotInformation(startHour: String, endHour: String) {
     Column {
         Text(
             text = stringResource(R.string.jouw_tijdslot),
-            style = headerTextStyle
+            style = TextStyles.nextReservationHeader
         )
         Text(text = stringResource(
             R.string.start_end_hour,
             startHour,
             endHour
-        ), style = textTextStyle)
+        ), style = TextStyles.nextReservationText)
     }
 }
 
@@ -132,32 +133,3 @@ fun ReservationBox(content: @Composable () -> Unit) {
         content()
     }
 }
-
-//TODO add to TextStyles object
-
-private val textTextStyle = TextStyle(
-    fontSize = 17.sp,
-    fontWeight = FontWeight.W600,
-    lineHeight = 25.sp,
-    color = Colors.white
-)
-
-private val headerTextStyle = TextStyle(
-    fontSize = 10.sp,
-    fontWeight = FontWeight.W400,
-    lineHeight = 20.29.sp,
-    color = Color(0XFF999999)
-)
-
-private val cardTitleStyle = TextStyle(
-    fontSize = 17.sp,
-    fontWeight = FontWeight.W600,
-    lineHeight = 22.sp,
-    color = Color.Green
-)
-private val cardSubTitleStyle = TextStyle(
-    fontSize = 13.sp,
-    fontWeight = FontWeight.W400,
-    lineHeight = 18.sp,
-    color = Colors.white
-)
