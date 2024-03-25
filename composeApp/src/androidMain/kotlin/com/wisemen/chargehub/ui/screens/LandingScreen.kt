@@ -1,7 +1,6 @@
 package com.wisemen.chargehub.ui.screens
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -95,7 +94,7 @@ fun LandingLayout(onAction: (LandingScreenUiAction) -> Unit) {
 fun Header() {
     Column {
         Text(
-            stringResource(R.string.stroomlijn_je_dag_met),
+            stringResource(R.string.stroomline_your_day_with),
             style = TextStyles.bigTitle,
             color = Colors.white
         )
@@ -118,7 +117,7 @@ fun Buttons(onAction: (LandingScreenUiAction) -> Unit) {
     Row(Modifier.padding(bottom = 16.dp)) {
         Buttons.PrimaryButton(
             Modifier.fillMaxWidth(),
-            text = stringResource(R.string.aanmelden),
+            text = stringResource(R.string.login),
             colors = ButtonDefaults.primaryButtonColors()
         ) {
             onAction(LandingScreenUiAction.ClickedLoginButtonAction)

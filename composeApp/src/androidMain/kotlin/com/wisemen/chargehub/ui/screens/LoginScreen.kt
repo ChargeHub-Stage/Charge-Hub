@@ -87,7 +87,7 @@ fun LoginLayout(
             CenterAlignedTopAppBar(
                 title = {
                     Text(
-                        text = stringResource(R.string.aanmelden),
+                        text = stringResource(R.string.login),
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
                         style = TextStyles.topBarTitle,
@@ -114,24 +114,27 @@ fun LoginLayout(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                stringResource(R.string.welkom_terug),
+                stringResource(R.string.welcome_back),
                 style = TextStyles.title,
                 modifier = Modifier.padding(bottom = Spacing.small, top = 70.dp)
             )
+
             Text(
-                stringResource(R.string.aanmelden_welkom_tekst),
+                stringResource(R.string.login_welcome_text),
                 style = TextStyles.text,
                 modifier = Modifier.padding(bottom = 30.dp)
             )
+
             Column {
                 TextFields.EmailTextField(
                     email = state.email,
                     isValid = true,
                     onInputChanged = { onAction(LoginScreenUiAction.OnEmailChangedAction(it)) },
-                    modifier = Modifier.padding(horizontal = 15.dp).padding(bottom = 5.dp)
+                    modifier = Modifier.padding(horizontal = Spacing.medium).padding(bottom = 5.dp)
                 )
+
                 TextFields.PasswordTextField(
-                    modifier = Modifier.padding(horizontal = 15.dp),
+                    modifier = Modifier.padding(horizontal = Spacing.medium),
                     onInputChanged = { onAction(LoginScreenUiAction.OnPasswordChangedAction(it)) },
                     onTogglePasswordVisibility = {
                         onAction(LoginScreenUiAction.OnClickedPasswordVisibilityButtonAction)
@@ -140,11 +143,12 @@ fun LoginLayout(
                     isPasswordVisible = state.passwordVisibility,
                     isValid = true,
                 )
+
                 Text(
-                    text = stringResource(R.string.wachtwoord_vergeten),
+                    text = stringResource(R.string.forgot_password),
                     style = TextStyles.small_text,
                     modifier = Modifier
-                        .padding(bottom = 30.dp, start = 15.dp)
+                        .padding(bottom = 30.dp, start = Spacing.medium)
                         .clickable {
                             onAction(LoginScreenUiAction.OnClickedForgotPasswordButtonAction)
                             Log.d("Email", state.email)
@@ -152,11 +156,12 @@ fun LoginLayout(
                         }
                 )
             }
+
             Buttons.PrimaryButton(
-                text = stringResource(R.string.aanmelden),
+                text = stringResource(R.string.login),
                 colors = ButtonDefaults.primaryButtonColors(),
                 onClick = { onAction(LoginScreenUiAction.OnClickedLoginButtonAction) },
-                modifier = Modifier.fillMaxWidth().padding(horizontal = 15.dp)
+                modifier = Modifier.fillMaxWidth().padding(horizontal = Spacing.medium)
             )
         }
     }

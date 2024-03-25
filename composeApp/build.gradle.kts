@@ -35,6 +35,7 @@ kotlin {
             implementation(libs.androidx.navigation.compose)
             implementation(libs.raamcosta.core)
             implementation(libs.androidx.material3.extended)
+            implementation(libs.androidx.media3.common)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -82,7 +83,4 @@ android {
     dependencies {
         debugImplementation(libs.compose.ui.tooling)
     }
-}
-dependencies {
-    implementation(libs.androidx.media3.common)
 }

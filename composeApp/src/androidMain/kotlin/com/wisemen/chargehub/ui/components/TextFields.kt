@@ -155,7 +155,7 @@ object TextFields {
 
         Box(modifier, contentAlignment = Alignment.CenterEnd) {
             EditText(
-                errorMessage = if (! isValid) stringResource(R.string.password_is_required) else null,
+                errorMessage = if (!isValid) stringResource(R.string.password_is_required) else null,
                 visualTransformation = if (isPasswordVisible) VisualTransformation.None else PasswordVisualTransformation(),
                 topLabel = stringResource(R.string.password),
                 input = currentPassword,
@@ -194,7 +194,7 @@ object TextFields {
     ) {
         EditText(
             modifier = modifier,
-            errorMessage = if (! isValid) stringResource(R.string.email_is_required) else null,
+            errorMessage = if (!isValid) stringResource(R.string.email_is_required) else null,
             topLabel = stringResource(id = R.string.email),
             input = email,
             onInputChanged = {

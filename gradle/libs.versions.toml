@@ -10,8 +10,8 @@ androidx-core-ktx = "1.12.0"
 androidx-espresso-core = "3.5.1"
 androidx-material = "1.11.0"
 androidx-test-junit = "1.1.5"
-compose = "1.6.3"
-compose-plugin = "1.6.10-dev1509"
+compose = "1.6.4"
+compose-plugin = "1.6.10-dev1523"
 core = "1.10.1"
 firebaseCommon = "20.4.2"
 firebaseBom = "32.7.4"
@@ -32,6 +32,7 @@ navigation = "1.9.23-1.0.19"
 navigationRuntimeKtx = "2.7.7"
 navigationCompose = "2.7.7"
 media3Common = "1.3.0"
+native-coroutines = "1.0.0-ALPHA-27"
 
 [libraries]
 firebase-auth = { module = "dev.gitlive:firebase-auth", version.ref = "firebaseFirestore" }
@@ -88,5 +89,6 @@ kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", versio
 sqlDelight = { id = "app.cash.sqldelight", version.ref = "sqlDelight" }
 googleService = { id = "com.google.gms.google-services", version.ref = "googleService" }
 navigation = { id= "com.google.devtools.ksp", version.ref = "navigation" }
+nativeCoroutines = { id = "com.rickclephas.kmp.nativecoroutines", version.ref = "native-coroutines" }
 [bundles]
 ktor = ["ktor-client-core", "ktor-client-content-negotiation"]
