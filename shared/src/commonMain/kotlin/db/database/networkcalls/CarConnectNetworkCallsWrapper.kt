@@ -1,0 +1,3 @@
+package db.database.networkcalls
+
+class CarConnectNetworkCallsWrapper(val database: CarConnectNetworkCallsDatabase)

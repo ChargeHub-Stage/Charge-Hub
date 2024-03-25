@@ -1,7 +1,6 @@
 package com.wisemen.chargehub.ui.screens
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -25,11 +24,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.navigate
 import com.wisemen.chargehub.R
 import com.wisemen.chargehub.nav.ChargeHubNavGraph
 import com.wisemen.chargehub.ui.components.Buttons
 import com.wisemen.chargehub.ui.components.primaryButtonColors
 import com.wisemen.chargehub.ui.components.secondaryButtonColors
+import com.wisemen.chargehub.ui.screens.destinations.LoginScreenDestination
+import com.wisemen.chargehub.ui.screens.destinations.RegisterScreenDestination
 import com.wisemen.chargehub.ui.theme.AppTheme
 import com.wisemen.chargehub.ui.theme.Colors
 import com.wisemen.chargehub.ui.theme.Padding
@@ -58,8 +60,13 @@ fun LandingScreen(
     LaunchedEffect(viewModel) {
         viewModel.eventFlow.collect { event ->
             when (event) {
-                is LandingScreenUiEvent.ClickedLoginButtonEvent -> {}
-                is LandingScreenUiEvent.ClickedRegisterButtonEvent -> {}
+                is LandingScreenUiEvent.ClickedLoginButtonEvent -> navController.navigate(
+                    LoginScreenDestination
+                )
+
+                is LandingScreenUiEvent.ClickedRegisterButtonEvent -> navController.navigate(
+                    RegisterScreenDestination
+                )
             }
         }
     }
@@ -89,7 +96,7 @@ fun LandingLayout(onAction: (LandingScreenUiAction) -> Unit) {
 fun Header() {
     Column(Modifier.padding(top = 46.dp)) {
         Text(
-            stringResource(R.string.white_title),
+            stringResource(R.string.streamline_your_day_with),
             style = TextStyles.bigTitle,
             color = Colors.white
         )

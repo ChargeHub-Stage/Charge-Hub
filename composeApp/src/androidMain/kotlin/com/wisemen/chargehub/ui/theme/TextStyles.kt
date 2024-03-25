@@ -1,10 +1,9 @@
 package com.wisemen.chargehub.ui.theme
 
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
-import com.wisemen.chargehub.ui.theme.Colors
 
 object TextStyles {
 
@@ -33,6 +32,65 @@ object TextStyles {
         lineHeight = 60.sp,
     )
 
+    val mediumTitle = TextStyle(
+        fontSize = 28.sp,
+        fontWeight = FontWeight.W700,
+        lineHeight = 34.sp
+    )
+
+    val topBarTitle = TextStyle(
+        fontSize = 17.sp,
+        fontWeight = FontWeight.W700,
+        lineHeight = 22.sp
+    )
+
+    val bottomLabel = TextStyle(
+        fontSize = 12.sp,
+        fontWeight = FontWeight.W400,
+        lineHeight = 12.32.sp
+    )
+
+    val boldText = TextStyle(
+        fontWeight = FontWeight.W700
+    )
+
+    val infoTitle = TextStyle(
+        fontSize = 20.sp,
+        fontWeight = FontWeight.W600,
+        lineHeight = 25.sp,
+        color = Colors.blackPearl,
+        textAlign = TextAlign.Center
+    )
+
+
+    val infoSubTitle = TextStyle(
+        fontSize = 17.sp,
+        fontWeight = FontWeight.W600,
+        lineHeight = 22.sp,
+        color = Colors.mediumGray,
+        textAlign = TextAlign.Center
+    )
+
+    val infoText = TextStyle(
+        fontSize = 17.sp,
+        fontWeight = FontWeight.W600,
+        lineHeight = 22.sp,
+        color = Colors.mist,
+        textAlign = TextAlign.Center
+    )
+
+    val levelExplanation = TextStyle(
+        fontSize = 17.sp,
+        fontWeight = FontWeight.W400,
+        lineHeight = 22.sp,
+        textAlign = TextAlign.Center
+    )
+    val levelTitle = TextStyle(
+        fontSize = 20.sp,
+        fontWeight = FontWeight.W600,
+        lineHeight = 25.sp,
+        textAlign = TextAlign.Center)
+
     val nextReservationText = TextStyle(
         fontSize = 17.sp,
         fontWeight = FontWeight.W600,
@@ -44,7 +102,7 @@ object TextStyles {
         fontSize = 10.sp,
         fontWeight = FontWeight.W400,
         lineHeight = 20.29.sp,
-        color = Color(0XFF999999)
+        color = Colors.mist
     )
 
     val nextReservationCardTitle = TextStyle(
@@ -90,6 +148,27 @@ object TextStyles {
     val timeSlotDateMonth = TextStyle(
         fontSize = 14.sp,
         fontWeight = FontWeight.W400,
-        lineHeight = 16.71.sp
+        lineHeight = 16.71.sp,
+        textAlign = TextAlign.Center
+    )
+
+    val title = TextStyle(
+        fontSize = 28.sp,
+        fontWeight = FontWeight.W700,
+        lineHeight = 34.sp,
+        letterSpacing = 0.36.sp
+    )
+
+    val text = TextStyle(
+        fontSize = 17.sp,
+        fontWeight = FontWeight.W400,
+        lineHeight = 22.sp,
+        letterSpacing = (- 0.41).sp
+    )
+
+    var small_text = TextStyle(
+        fontSize = 12.sp,
+        fontWeight = FontWeight.W400,
+        lineHeight = 14.32.sp,
     )
 }
