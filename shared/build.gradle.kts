@@ -46,11 +46,10 @@ kotlin {
 
             implementation(libs.firebase.firestore)
             implementation(libs.firebase.common)
+            implementation(libs.firebase.auth)
             implementation(libs.kotlinx.serialization.json)
             implementation(libs.logging)
             api(libs.kmm.viewmodel.core)
-
-            api("org.lighthousegames:logging:1.4.2")
 
         }
         androidMain.dependencies {
