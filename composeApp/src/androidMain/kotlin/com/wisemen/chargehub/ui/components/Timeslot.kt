@@ -155,6 +155,7 @@ fun TimeSlotBox(content: @Composable () -> Unit) {
     }
 }
 
+//TODO add to TextStyles object
 private val textTextStyle = TextStyle(
     fontSize = 17.sp,
     fontWeight = FontWeight.W400,
