@@ -44,15 +44,18 @@ kotlin {
             implementation(libs.ktor.client.serialization)
             implementation(libs.sqldelight.common)
             implementation(libs.kotlinx.datetime)
-
+            implementation(libs.ktor.client.auth)
+            implementation(libs.firebase.auth)
             implementation(libs.firebase.firestore)
             implementation(libs.firebase.common)
             implementation(libs.firebase.auth)
             implementation(libs.kotlinx.serialization.json)
-
+            implementation(libs.logging)
             api(libs.kmm.viewmodel.core)
 
-            api("org.lighthousegames:logging:1.4.2")
+            implementation(libs.stately.concurrency)
+            api(libs.kmm.viewmodel.core)
+            api(libs.logging)
 
         }
         androidMain.dependencies {

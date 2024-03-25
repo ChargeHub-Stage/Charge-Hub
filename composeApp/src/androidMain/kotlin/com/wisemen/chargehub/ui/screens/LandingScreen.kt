@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
@@ -33,6 +34,7 @@ import com.wisemen.chargehub.ui.screens.destinations.LoginScreenDestination
 import com.wisemen.chargehub.ui.screens.destinations.RegisterScreenDestination
 import com.wisemen.chargehub.ui.theme.AppTheme
 import com.wisemen.chargehub.ui.theme.Colors
+import com.wisemen.chargehub.ui.theme.Padding
 import com.wisemen.chargehub.ui.theme.TextStyles
 import org.koin.java.KoinJavaComponent.inject
 import screens.landing.LandingScreenUiAction
@@ -81,7 +83,7 @@ fun LandingLayout(onAction: (LandingScreenUiAction) -> Unit) {
             modifier = Modifier.matchParentSize()
         )
         Column(
-            modifier = Modifier.padding(top = 46.dp, start = 16.dp, end = 16.dp)
+            modifier = Modifier.padding(horizontal = Padding.medium)
         ) {
             Header()
             Spacer(Modifier.weight(1F))
@@ -92,7 +94,7 @@ fun LandingLayout(onAction: (LandingScreenUiAction) -> Unit) {
 
 @Composable
 fun Header() {
-    Column {
+    Column(Modifier.padding(top = 46.dp)) {
         Text(
             stringResource(R.string.stroomline_your_day_with),
             style = TextStyles.bigTitle,
@@ -107,7 +109,7 @@ fun Header() {
             painter = painterResource(R.drawable.logo_charge_hub),
             contentDescription = "logo",
             tint = Colors.acid,
-            modifier = Modifier.height(74.dp).width(74.dp)
+            modifier = Modifier.size(74.dp)
         )
     }
 }
@@ -127,7 +129,7 @@ fun Buttons(onAction: (LandingScreenUiAction) -> Unit) {
     Row(Modifier.padding(bottom = 14.dp)) {
         Buttons.PrimaryButton(
             Modifier.fillMaxWidth(),
-            text = stringResource(R.string.registreren),
+            text = stringResource(R.string.register),
             colors = ButtonDefaults.secondaryButtonColors()
         ) {
             onAction(LandingScreenUiAction.ClickedRegisterButtonAction)

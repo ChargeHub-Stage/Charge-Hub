@@ -1,65 +1,140 @@
 package screens.register
 
-import com.rickclephas.kmm.viewmodel.MutableStateFlow
+import ValidationRules
 import com.rickclephas.kmm.viewmodel.coroutineScope
-import kotlinx.coroutines.flow.MutableStateFlow
+import data.CurrentRegisterState
+import db.networking.request.CreateUserRequest
+import db.repository.car.RemoteCarRepository
+import db.repository.user.RemoteUserRepository
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import org.koin.core.component.inject
 import screens.AbstractViewModel
 
 class RegisterScreenViewModel :
-    AbstractViewModel<RegisterScreenUiAction, RegisterScreenUiEvent, RegisterScreenUiState>() {
+    AbstractViewModel<RegisterScreenUiAction, RegisterScreenUiEvent, RegisterScreenUiState>(
+        RegisterScreenUiState()
+    ) {
 
-    override var state: MutableStateFlow<RegisterScreenUiState> =
-        MutableStateFlow(viewModelScope, RegisterScreenUiState())
+    private val carRepository: RemoteCarRepository by inject()
+    private val userRepository: RemoteUserRepository by inject()
 
 
     override fun onAction(action: RegisterScreenUiAction) = viewModelScope.coroutineScope.launch {
         when (action) {
             is RegisterScreenUiAction.OnNextClickedAction -> handleNext()
             is RegisterScreenUiAction.OnPreviousClickedAction -> handlePrevious()
-            is RegisterScreenUiAction.OnEmailChangedAction -> state.value = state.value.copy(email = action.email)
+            is RegisterScreenUiAction.OnEmailChangedAction -> handleFieldChange(
+                StateFields.EMAIL,
+                action.email,
+                ValidationRules::isEmailValid
+            )
 
-            is RegisterScreenUiAction.OnFirstNameChangedAction -> state.update { it.copy(firstName = action.firstName) }
-            is RegisterScreenUiAction.OnLastNameChangedAction -> state.update { it.copy(lastName = action.lastName) }
-            is RegisterScreenUiAction.OnPasswordChangedAction -> state.update { it.copy(password = action.password) }
-            is RegisterScreenUiAction.OnFinaliseRegisterAction -> {}
+            is RegisterScreenUiAction.OnFirstNameChangedAction -> handleFieldChange(
+                StateFields.FIRSTNAME,
+                action.firstName,
+                ValidationRules::isValidFirstName
+            )
+
+            is RegisterScreenUiAction.OnLastNameChangedAction -> handleFieldChange(
+                StateFields.LASTNAME,
+                action.lastName,
+                ValidationRules::isValidLastName
+            )
+
+            is RegisterScreenUiAction.OnPasswordChangedAction -> handleFieldChange(
+                StateFields.PASSWORD,
+                action.password,
+                ValidationRules::isValidPassword
+            )
+
+            is RegisterScreenUiAction.OnCarIdChangedAction -> handleFieldChange(
+                StateFields.VIN,
+                action.vin,
+                ValidationRules::isValidVIN
+            )
+
+            is RegisterScreenUiAction.OnFinaliseRegisterAction -> handleRegisterFinalization()
+
+
+            is RegisterScreenUiAction.OnPrivacyCheckedChangedAction -> _state.update {
+                it.copy(
+                    isPrivacyChecked = !state.value.isPrivacyChecked
+                )
+            }
+
+            RegisterScreenUiAction.OnPrivacyCheckedChangedAction -> _state.update {
+                it.copy(
+                    isPrivacyChecked = !_state.value.isPrivacyChecked
+                )
             }
         }
+    }
+
+    private suspend fun handleRegisterFinalization() {
+        val request = CreateUserRequest(
+            levelId = "1",
+            firstName = state.value.firstName,
+            lastName = state.value.lastName,
+            password = state.value.password,
+            email = state.value.email,
+            carId = state.value.vin,
+            currentPoints = 0L,
+        )
+        userRepository.create(request)
+    }
 
     private suspend fun handleNext() {
-        state.update {
+        if (state.value.currentRegisterState == CurrentRegisterState.CAR_CONNECT) {
+            carRepository.fetchCarConnectData(state.value.vin)
+        }
+        _state.update {
             it.copy(currentRegisterState = it.currentRegisterState?.next())
         }
         sendEvent(RegisterScreenUiEvent.OnNextClickedEvent)
     }
 
+
     private suspend fun handlePrevious() {
-        state.update {
+        _state.update {
             it.copy(currentRegisterState = it.currentRegisterState?.previous())
         }
         sendEvent(RegisterScreenUiEvent.OnPreviousClickedEvent)
     }
 
-}
+    private fun handleFieldChange(
+        field: StateFields,
+        value: String,
+        validationRule: (String) -> Boolean
+    ) {
+        _state.update {
+            when (field) {
+                StateFields.EMAIL -> it.copy(email = value, isEmailValid = validationRule(value))
+                StateFields.FIRSTNAME -> it.copy(
+                    firstName = value,
+                    isFirstNameValid = validationRule(value)
+                )
 
-/**
- * Enums representing the order of the registering pages.
- * The lowest is the starting point, the highest is the ending point.
- */
-enum class CurrentRegisterState(private val order: Int) {
-    EMAIL(1),
-    PROFILE(2),
-    CAR_CONNECT(3),
-    FACE_ID(4),
-    NOTIFICATIONS(5),
-    INFO(6);
+                StateFields.LASTNAME -> it.copy(
+                    lastName = value,
+                    isLastNameValid = validationRule(value)
+                )
 
-    fun next(): CurrentRegisterState? {
-        return entries.find { it.order == order + 1 }
+                StateFields.PASSWORD -> it.copy(
+                    password = value,
+                    isPasswordValid = validationRule(value)
+                )
+
+                StateFields.VIN -> it.copy(vin = value, isVinValid = validationRule(value))
+            }
+        }
     }
 
-    fun previous(): CurrentRegisterState? {
-        return entries.find { it.order == order - 1 }
+    private enum class StateFields {
+        EMAIL,
+        FIRSTNAME,
+        LASTNAME,
+        PASSWORD,
+        VIN
     }
 }

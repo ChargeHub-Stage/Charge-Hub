@@ -2,8 +2,8 @@ package com.wisemen.chargehub.ui.theme
 
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
-import com.wisemen.chargehub.ui.theme.Colors
 
 object TextStyles {
 
@@ -32,35 +32,63 @@ object TextStyles {
         lineHeight = 60.sp,
     )
 
-    val title = TextStyle(
+    val mediumTitle = TextStyle(
         fontSize = 28.sp,
         fontWeight = FontWeight.W700,
-        lineHeight = 34.sp,
-        letterSpacing = 0.36.sp
+        lineHeight = 34.sp
     )
 
-    val text = TextStyle(
+    val topBarTitle = TextStyle(
         fontSize = 17.sp,
-        fontWeight = FontWeight.W400,
-        lineHeight = 22.sp,
-        letterSpacing = (- 0.41).sp
+        fontWeight = FontWeight.W700,
+        lineHeight = 22.sp
     )
 
-    var topBarTitle = TextStyle(
-        fontSize = 17.sp,
-        fontWeight = FontWeight.W600,
-        lineHeight = 22.sp,
-        letterSpacing = (- 0.41).sp
-    )
-
-    var small_text = TextStyle(
-        fontSize = 12.sp,
-        fontWeight = FontWeight.W400,
-        lineHeight = 14.32.sp,
-    )
     val bottomLabel = TextStyle(
         fontSize = 12.sp,
         fontWeight = FontWeight.W400,
         lineHeight = 12.32.sp
+    )
+
+    val boldText = TextStyle(
+        fontWeight = FontWeight.W700
+    )
+
+    val infoTitle = TextStyle(
+        fontSize = 20.sp,
+        fontWeight = FontWeight.W600,
+        lineHeight = 25.sp,
+        color = Colors.blackPearl,
+        textAlign = TextAlign.Center
+    )
+
+
+    val infoSubTitle = TextStyle(
+        fontSize = 17.sp,
+        fontWeight = FontWeight.W600,
+        lineHeight = 22.sp,
+        color = Colors.mediumGray,
+        textAlign = TextAlign.Center
+    )
+
+    val infoText = TextStyle(
+        fontSize = 17.sp,
+        fontWeight = FontWeight.W600,
+        lineHeight = 22.sp,
+        color = Colors.mist,
+        textAlign = TextAlign.Center
+    )
+
+    val levelExplanation = TextStyle(
+        fontSize = 17.sp,
+        fontWeight = FontWeight.W400,
+        lineHeight = 22.sp,
+        textAlign = TextAlign.Center
+    )
+    val levelTitle = TextStyle(
+        fontSize = 20.sp,
+        fontWeight = FontWeight.W600,
+        lineHeight = 25.sp,
+        textAlign = TextAlign.Center
     )
 }

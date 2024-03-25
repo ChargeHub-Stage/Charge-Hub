@@ -1,12 +1,16 @@
 package screens
 
 import com.rickclephas.kmm.viewmodel.KMMViewModel
+import com.rickclephas.kmm.viewmodel.MutableStateFlow
 import com.rickclephas.kmm.viewmodel.ViewModelScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
+import org.koin.core.component.KoinComponent
 
 /**
  * Abstract view model which holds the basic functions each view model needs to have.
@@ -14,7 +18,7 @@ import kotlinx.coroutines.flow.receiveAsFlow
  *  [E] represents the UiEvent.
  *  [S] represents the UiState which can be a nullable type of Any if no state is applicable.
  */
-abstract class AbstractViewModel<A, E, S : Any?> : KMMViewModel() {
+abstract class AbstractViewModel<A, E, S : Any?>(initialValue: S) : KMMViewModel(), KoinComponent {
 
     private val eventChannel: Channel<E> = Channel()
 
@@ -24,8 +28,9 @@ abstract class AbstractViewModel<A, E, S : Any?> : KMMViewModel() {
         eventChannel.send(event)
     }
 
-    abstract var state: MutableStateFlow<S>
-        internal set
+    internal val _state by lazy { MutableStateFlow(viewModelScope, initialValue) }
+    val state: StateFlow<S> = _state.asStateFlow()
+
 
     abstract fun onAction(action: A): Job
 
