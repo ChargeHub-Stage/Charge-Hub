@@ -35,12 +35,7 @@ fun TopBar(
                     )
                 },
                 navigationIcon = {
-                    IconButton(
-                        onClick = {
-                            onAction(
-                            )
-                        },
-                    ) {
+                    IconButton(onClick = { onAction() }) {
                         Row {
                             Icon(
                                 imageVector = Icons.Filled.ChevronLeft,
