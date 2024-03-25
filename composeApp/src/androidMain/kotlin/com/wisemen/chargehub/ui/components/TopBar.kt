@@ -12,7 +12,9 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
+import com.wisemen.chargehub.R
 import com.wisemen.chargehub.ui.theme.Colors
 import com.wisemen.chargehub.ui.theme.TextStyles
 
@@ -39,7 +41,7 @@ fun TopBar(
                         Row {
                             Icon(
                                 imageVector = Icons.Filled.ChevronLeft,
-                                contentDescription = null
+                                contentDescription = stringResource(R.string.back_button)
                             )
                         }
                     }
