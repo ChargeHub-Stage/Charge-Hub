@@ -60,7 +60,7 @@ struct PasswordTextField: View {
                 }) {
                     Image(systemName: isPasswordVisible ? "eye.slash.fill" : "eye.fill")
                         .foregroundColor(.blackPearl)
-                        .padding(EdgeInsets(top: 30, leading : 0, bottom: 0, trailing: 10))
+                        .padding(EdgeInsets(top: 30, leading : 0, bottom: 0, trailing: 8))
                 }
                     .frame(maxHeight: .infinity, alignment: .center),
                 alignment: .trailing
