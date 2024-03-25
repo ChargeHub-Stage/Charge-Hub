@@ -96,7 +96,7 @@ fun LandingLayout(onAction: (LandingScreenUiAction) -> Unit) {
 fun Header() {
     Column(Modifier.padding(top = 46.dp)) {
         Text(
-            stringResource(R.string.stroomline_your_day_with),
+            stringResource(R.string.streamline_your_day_with),
             style = TextStyles.bigTitle,
             color = Colors.white
         )

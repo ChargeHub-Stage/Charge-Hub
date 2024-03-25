@@ -5,7 +5,6 @@ import db.repository.chargehub.RemoteChargeHubRepository
 import db.repository.level.RemoteLevelRepository
 import db.repository.reservation.RemoteReservationRepository
 import db.repository.user.RemoteUserRepository
-import db.repository.FirebaseRepository
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.auth.Auth
 import io.ktor.client.plugins.auth.providers.BearerTokens

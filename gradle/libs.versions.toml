@@ -44,7 +44,6 @@ logging = { module = "org.lighthousegames:logging", version.ref = "logging" }
 raamcosta-core = { module = "io.github.raamcosta.compose-destinations:core", version.ref = "core" }
 firebase-common = { module = "dev.gitlive:firebase-common", version.ref = "firebaseFirestore" }
 firebase-firestore = { module = "dev.gitlive:firebase-firestore", version.ref = "firebaseFirestore" }
-firebase-auth = { module = "dev.gitlive:firebase-auth", version.ref = "firebaseFirestore" }
 kmm-viewmodel-core = { module = "com.rickclephas.kmm:kmm-viewmodel-core", version.ref = "kmmViewmodelCore" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
