@@ -2,7 +2,6 @@ import SwiftUI
 import Shared
 import KMMViewModelSwiftUI
 
-@available(iOS 16.0, *)
 struct LandingScreenView: View {
     var body: some View {
         NavigationStack() {

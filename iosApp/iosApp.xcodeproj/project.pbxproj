@@ -17,6 +17,9 @@
 		64BF5C292BA3109200338446 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 64BF5C282BA3109200338446 /* FirebaseDatabase */; };
 		64BF5C2B2BA3109200338446 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 64BF5C2A2BA3109200338446 /* FirebaseFirestore */; };
 		64BF5C2D2BA31C0E00338446 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 64BF5C2C2BA31C0E00338446 /* GoogleService-Info.plist */; };
+		64E0996F2BB187FD003AAAAC /* KMPNativeCoroutinesAsync in Frameworks */ = {isa = PBXBuildFile; productRef = 64E0996E2BB187FD003AAAAC /* KMPNativeCoroutinesAsync */; };
+		64E099712BB187FD003AAAAC /* KMPNativeCoroutinesCombine in Frameworks */ = {isa = PBXBuildFile; productRef = 64E099702BB187FD003AAAAC /* KMPNativeCoroutinesCombine */; };
+		64E099732BB187FD003AAAAC /* KMPNativeCoroutinesCore in Frameworks */ = {isa = PBXBuildFile; productRef = 64E099722BB187FD003AAAAC /* KMPNativeCoroutinesCore */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
 		DD564B632BA8977F001D1EED /* KMMViewModelCore in Frameworks */ = {isa = PBXBuildFile; productRef = DD564B622BA8977F001D1EED /* KMMViewModelCore */; };
 		DD564B652BA8977F001D1EED /* KMMViewModelSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = DD564B642BA8977F001D1EED /* KMMViewModelSwiftUI */; };
@@ -53,11 +56,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				64BF5C292BA3109200338446 /* FirebaseDatabase in Frameworks */,
+				64E099712BB187FD003AAAAC /* KMPNativeCoroutinesCombine in Frameworks */,
+				64E0996F2BB187FD003AAAAC /* KMPNativeCoroutinesAsync in Frameworks */,
 				DD564B652BA8977F001D1EED /* KMMViewModelSwiftUI in Frameworks */,
 				64BF5C2B2BA3109200338446 /* FirebaseFirestore in Frameworks */,
 				64BF5C252BA3109200338446 /* FirebaseAnalytics in Frameworks */,
 				64BF5C272BA3109200338446 /* FirebaseAuth in Frameworks */,
 				DD564B632BA8977F001D1EED /* KMMViewModelCore in Frameworks */,
+				64E099732BB187FD003AAAAC /* KMPNativeCoroutinesCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -182,6 +188,9 @@
 				64BF5C2A2BA3109200338446 /* FirebaseFirestore */,
 				DD564B622BA8977F001D1EED /* KMMViewModelCore */,
 				DD564B642BA8977F001D1EED /* KMMViewModelSwiftUI */,
+				64E0996E2BB187FD003AAAAC /* KMPNativeCoroutinesAsync */,
+				64E099702BB187FD003AAAAC /* KMPNativeCoroutinesCombine */,
+				64E099722BB187FD003AAAAC /* KMPNativeCoroutinesCore */,
 			);
 			productName = iosApp;
 			productReference = 7555FF7B242A565900829871 /* ChargeHub.app */;
@@ -214,6 +223,7 @@
 			packageReferences = (
 				64BF5C232BA3109200338446 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				DD564B612BA8977F001D1EED /* XCRemoteSwiftPackageReference "KMM-ViewModel" */,
+				64E0996D2BB187FD003AAAAC /* XCRemoteSwiftPackageReference "KMP-NativeCoroutines" */,
 			);
 			productRefGroup = 7555FF7C242A565900829871 /* Products */;
 			projectDirPath = "";
@@ -331,7 +341,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -387,7 +397,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -404,11 +414,11 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
-				DEVELOPMENT_TEAM = "${TEAM_ID}";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)";
 				INFOPLIST_FILE = iosApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -435,11 +445,11 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
-				DEVELOPMENT_TEAM = "${TEAM_ID}";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)";
 				INFOPLIST_FILE = iosApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -491,6 +501,14 @@
 				minimumVersion = 10.22.1;
 			};
 		};
+		64E0996D2BB187FD003AAAAC /* XCRemoteSwiftPackageReference "KMP-NativeCoroutines" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/rickclephas/KMP-NativeCoroutines.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		DD564B612BA8977F001D1EED /* XCRemoteSwiftPackageReference "KMM-ViewModel" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/rickclephas/KMM-ViewModel.git";
@@ -521,6 +539,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 64BF5C232BA3109200338446 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
+		};
+		64E0996E2BB187FD003AAAAC /* KMPNativeCoroutinesAsync */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 64E0996D2BB187FD003AAAAC /* XCRemoteSwiftPackageReference "KMP-NativeCoroutines" */;
+			productName = KMPNativeCoroutinesAsync;
+		};
+		64E099702BB187FD003AAAAC /* KMPNativeCoroutinesCombine */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 64E0996D2BB187FD003AAAAC /* XCRemoteSwiftPackageReference "KMP-NativeCoroutines" */;
+			productName = KMPNativeCoroutinesCombine;
+		};
+		64E099722BB187FD003AAAAC /* KMPNativeCoroutinesCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 64E0996D2BB187FD003AAAAC /* XCRemoteSwiftPackageReference "KMP-NativeCoroutines" */;
+			productName = KMPNativeCoroutinesCore;
 		};
 		DD564B622BA8977F001D1EED /* KMMViewModelCore */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -1,13 +1,12 @@
 import SwiftUI
 import Shared
 import KMMViewModelSwiftUI
+import KMPNativeCoroutinesAsync
 
 struct LoginScreenView: View {
-    @State private var email: String = ""
-    @State private var password: String = ""
-    @State private var isVisible: Bool = false
     @Environment(\.presentationMode) var presentationMode
-    
+    @StateViewModel var viewModel = LoginScreenViewModel(firebaseRepo: FirebaseRepository())
+
     var body: some View {
         VStack(spacing: 0) {
             Text("Welkom Terug!")
@@ -17,13 +16,13 @@ struct LoginScreenView: View {
             Text("Fijn om je terug te zien")
             Spacer().frame(height: 60)
             VStack(spacing: 0) {
-                EmailTextField(email: $email, isValid: true)
+                EmailTextField(email: viewModel.state.email, isValid: true)
                 Spacer().frame(height: 14)
                 VStack(spacing: 0) {
                     PasswordTextField(
-                        password: $password,
+                        password: viewModel.state.password,
                         isValid: true,
-                        isPasswordVisible: $isVisible
+                        isPasswordVisible: viewModel.state.passwordVisibility
                     ).padding(.bottom, 4)
                     HStack {
                         Text("Wachtwoord vergeten?").font(.system(size: 12)).fontWeight(.regular)

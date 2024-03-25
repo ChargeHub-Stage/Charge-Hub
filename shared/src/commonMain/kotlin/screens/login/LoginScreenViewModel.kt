@@ -2,7 +2,6 @@ package screens.login
 
 import com.rickclephas.kmm.viewmodel.coroutineScope
 import db.repository.FirebaseRepository
-import com.rickclephas.kmm.viewmodel.MutableStateFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import screens.AbstractViewModel
@@ -10,8 +9,9 @@ import screens.AbstractViewModel
 class LoginScreenViewModel(private val firebaseRepo: FirebaseRepository) :
     AbstractViewModel<LoginScreenUiAction, LoginScreenUiEvent, LoginScreenUiState>() {
 
-    override var state: MutableStateFlow<LoginScreenUiState> =
-        MutableStateFlow(viewModelScope, LoginScreenUiState())
+        override var state: MutableStateFlow<LoginScreenUiState> =
+        MutableStateFlow(LoginScreenUiState())
+
 
     override fun onAction(action: LoginScreenUiAction) = viewModelScope.coroutineScope.launch {
         when (action) {

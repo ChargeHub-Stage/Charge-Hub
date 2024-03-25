@@ -3,6 +3,8 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinSerialization)
     alias(libs.plugins.sqlDelight)
+    id("com.rickclephas.kmp.nativecoroutines") version "1.0.0-ALPHA-27"
+
 }
 
 kotlin {
@@ -29,6 +31,7 @@ kotlin {
     sourceSets {
         all {
             languageSettings.optIn("kotlinx.cinterop.ExperimentalForeignApi")
+            languageSettings.optIn("kotlin.experimental.ExperimentalObjCName")
         }
 
         commonMain.dependencies {
@@ -49,7 +52,7 @@ kotlin {
             implementation(libs.firebase.auth)
             implementation(libs.kotlinx.serialization.json)
 
-            implementation("co.touchlab:stately-common:2.0.5")
+            implementation(libs.stately.common)
 
             api(libs.kmm.viewmodel.core)
 
