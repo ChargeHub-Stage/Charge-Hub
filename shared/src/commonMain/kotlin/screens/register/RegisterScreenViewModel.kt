@@ -1,48 +1,71 @@
 package screens.register
 
 import ValidationRules
-import com.rickclephas.kmm.viewmodel.MutableStateFlow
 import com.rickclephas.kmm.viewmodel.coroutineScope
+import data.CurrentRegisterState
 import db.networking.request.CreateUserRequest
-import db.repository.FirebaseRepository
 import db.repository.car.RemoteCarRepository
 import db.repository.user.RemoteUserRepository
-
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.koin.core.component.inject
-import org.lighthousegames.logging.logging
-
 import screens.AbstractViewModel
 
 class RegisterScreenViewModel :
-    AbstractViewModel<RegisterScreenUiAction, RegisterScreenUiEvent, RegisterScreenUiState>() {
+    AbstractViewModel<RegisterScreenUiAction, RegisterScreenUiEvent, RegisterScreenUiState>(
+        RegisterScreenUiState()
+    ) {
 
     private val carRepository: RemoteCarRepository by inject()
     private val userRepository: RemoteUserRepository by inject()
-
-
-    override var state: MutableStateFlow<RegisterScreenUiState> =
-        MutableStateFlow(viewModelScope, RegisterScreenUiState())
 
 
     override fun onAction(action: RegisterScreenUiAction) = viewModelScope.coroutineScope.launch {
         when (action) {
             is RegisterScreenUiAction.OnNextClickedAction -> handleNext()
             is RegisterScreenUiAction.OnPreviousClickedAction -> handlePrevious()
-            is RegisterScreenUiAction.OnEmailChangedAction -> handleFieldChange(StateFields.EMAIL,action.email, ValidationRules::isEmailValid)
-            is RegisterScreenUiAction.OnFirstNameChangedAction -> handleFieldChange(StateFields.FIRSTNAME, action.firstName, ValidationRules::isValidFirstName)
-            is RegisterScreenUiAction.OnLastNameChangedAction -> handleFieldChange(StateFields.LASTNAME, action.lastName, ValidationRules::isValidLastName)
-            is RegisterScreenUiAction.OnPasswordChangedAction -> handleFieldChange(StateFields.PASSWORD, action.password, ValidationRules::isValidPassword)
-            is RegisterScreenUiAction.OnCarIdChangedAction -> handleFieldChange(StateFields.VIN, action.vin, ValidationRules::isValidVIN)
+            is RegisterScreenUiAction.OnEmailChangedAction -> handleFieldChange(
+                StateFields.EMAIL,
+                action.email,
+                ValidationRules::isEmailValid
+            )
+
+            is RegisterScreenUiAction.OnFirstNameChangedAction -> handleFieldChange(
+                StateFields.FIRSTNAME,
+                action.firstName,
+                ValidationRules::isValidFirstName
+            )
+
+            is RegisterScreenUiAction.OnLastNameChangedAction -> handleFieldChange(
+                StateFields.LASTNAME,
+                action.lastName,
+                ValidationRules::isValidLastName
+            )
+
+            is RegisterScreenUiAction.OnPasswordChangedAction -> handleFieldChange(
+                StateFields.PASSWORD,
+                action.password,
+                ValidationRules::isValidPassword
+            )
+
+            is RegisterScreenUiAction.OnCarIdChangedAction -> handleFieldChange(
+                StateFields.VIN,
+                action.vin,
+                ValidationRules::isValidVIN
+            )
+
             is RegisterScreenUiAction.OnFinaliseRegisterAction -> handleRegisterFinalization()
 
 
-            is RegisterScreenUiAction.OnPrivacyCheckedChangedAction -> state.update {
+            is RegisterScreenUiAction.OnPrivacyCheckedChangedAction -> _state.update {
                 it.copy(
                     isPrivacyChecked = !state.value.isPrivacyChecked
+                )
+            }
+
+            RegisterScreenUiAction.OnPrivacyCheckedChangedAction -> _state.update {
+                it.copy(
+                    isPrivacyChecked = !_state.value.isPrivacyChecked
                 )
             }
         }
@@ -65,14 +88,15 @@ class RegisterScreenViewModel :
         if (state.value.currentRegisterState == CurrentRegisterState.CAR_CONNECT) {
             carRepository.fetchCarConnectData(state.value.vin)
         }
-        state.update {
+        _state.update {
             it.copy(currentRegisterState = it.currentRegisterState?.next())
         }
         sendEvent(RegisterScreenUiEvent.OnNextClickedEvent)
     }
 
+
     private suspend fun handlePrevious() {
-        state.update {
+        _state.update {
             it.copy(currentRegisterState = it.currentRegisterState?.previous())
         }
         sendEvent(RegisterScreenUiEvent.OnPreviousClickedEvent)
@@ -83,12 +107,24 @@ class RegisterScreenViewModel :
         value: String,
         validationRule: (String) -> Boolean
     ) {
-        state.update {
+        _state.update {
             when (field) {
                 StateFields.EMAIL -> it.copy(email = value, isEmailValid = validationRule(value))
-                StateFields.FIRSTNAME -> it.copy(firstName = value, isFirstNameValid = validationRule(value))
-                StateFields.LASTNAME -> it.copy(lastName = value, isLastNameValid = validationRule(value))
-                StateFields.PASSWORD -> it.copy(password = value, isPasswordValid = validationRule(value))
+                StateFields.FIRSTNAME -> it.copy(
+                    firstName = value,
+                    isFirstNameValid = validationRule(value)
+                )
+
+                StateFields.LASTNAME -> it.copy(
+                    lastName = value,
+                    isLastNameValid = validationRule(value)
+                )
+
+                StateFields.PASSWORD -> it.copy(
+                    password = value,
+                    isPasswordValid = validationRule(value)
+                )
+
                 StateFields.VIN -> it.copy(vin = value, isVinValid = validationRule(value))
             }
         }
@@ -103,22 +139,3 @@ class RegisterScreenViewModel :
     }
 }
 
-/**
- * Enums representing the order of the registering pages.
- * The lowest is the starting point, the highest is the ending point.
- */
-enum class CurrentRegisterState(private val order: Int) {
-    EMAIL(1),
-    PROFILE(2),
-    CAR_CONNECT(3),
-    NOTIFICATIONS(4),
-    INFO(5);
-
-    fun next(): CurrentRegisterState? {
-        return entries.find { it.order == order + 1 }
-    }
-
-    fun previous(): CurrentRegisterState? {
-        return entries.find { it.order == order - 1 }
-    }
-}

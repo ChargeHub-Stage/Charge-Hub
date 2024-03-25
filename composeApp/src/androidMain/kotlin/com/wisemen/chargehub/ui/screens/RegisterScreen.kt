@@ -68,10 +68,11 @@ import com.wisemen.chargehub.ui.components.TopBar
 import com.wisemen.chargehub.ui.components.primaryButtonColors
 import com.wisemen.chargehub.ui.theme.AppTheme
 import com.wisemen.chargehub.ui.theme.Colors
+import com.wisemen.chargehub.ui.theme.Padding
 import com.wisemen.chargehub.ui.theme.TextStyles
 import kotlinx.coroutines.launch
+import data.CurrentRegisterState
 import org.koin.java.KoinJavaComponent
-import screens.register.CurrentRegisterState
 import screens.register.RegisterScreenUiAction
 import screens.register.RegisterScreenUiEvent
 import screens.register.RegisterScreenUiState
@@ -125,7 +126,7 @@ fun RegisterLayout(
     TopBar(topBarTitle, {
         onAction(RegisterScreenUiAction.OnPreviousClickedAction)
     }) {
-        Column(Modifier.padding(it).padding(horizontal = 16.dp)) {
+        Column(Modifier.padding(it).padding(horizontal = Padding.medium)) {
             when (state.currentRegisterState) {
                 CurrentRegisterState.EMAIL -> EmailRegisterStep(state, onAction)
                 CurrentRegisterState.PROFILE -> ProfileCompletionStep(state, onAction)
