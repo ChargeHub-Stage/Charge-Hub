@@ -36,7 +36,6 @@ struct HeaderComponent: View {
             Image("logo")
                 .resizable()
                 .frame(width: 74, height: 74)
-            
         }
     }
 }
@@ -66,7 +65,6 @@ struct ButtonsComponent: View {
                 }
             )
             .padding(.bottom, 35)
-            
             .frame(maxWidth: .infinity) .cornerRadius(8)
         }
     }
