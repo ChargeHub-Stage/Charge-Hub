@@ -70,7 +70,7 @@ fun ShortInfoPage(title: String, imageResId: Int, descriptionResId: Int) {
 }
 
 @Composable
-fun InfoPageOne() {
+fun InfoPageCharging() {
     ShortInfoPage(
         title = stringResource(R.string.charges),
         imageResId = R.drawable.charge_info,
@@ -79,7 +79,7 @@ fun InfoPageOne() {
 }
 
 @Composable
-fun InfoPageTwo() {
+fun InfoPageChargingRules() {
     ShortInfoPage(
         title = stringResource(R.string.charge_giveaway),
         imageResId = R.drawable.giveaway_charge,
@@ -88,7 +88,7 @@ fun InfoPageTwo() {
 }
 
 @Composable
-fun InfoPageThree() {
+fun InfoPageLevelInfo() {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
@@ -122,7 +122,7 @@ fun InfoPageThree() {
 }
 
 @Composable
-fun InfoPageFour() {
+fun InfoPageLevelingInfo() {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
