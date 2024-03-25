@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.receiveAsFlow
  *  [E] represents the UiEvent.
  *  [S] represents the UiState which can be a nullable type of Any if no state is applicable.
  */
-interface IViewModel<A, E, S : Any?> {
+interface BaseComposeViewModel<A, E, S : Any?> {
 
     private val eventChannel: Channel<E>
         get() = Channel()
