@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="laadpaal">Laadpaal %1$s</string>
+    <string name="_28_september">28 September</string>
+    <string name="start">START</string>
+    <string name="jouw_tijdslot">JOUW TIJDSLOT</string>
+    <string name="start_end_hour">%1$s - %2$s</string>
+    <string name="your_timeslot">JOUW TIJDSLOT</string>
+    <string name="charge_time">OPLAADTIJD</string>
+    <string name="hour">%1$s uur</string>
+    <string name="chargehub">Laadpaal %1$s</string>
+    <string name="timeslot_duration_start_end">%1$s - %2$s</string>
     <string name="type_here">Type here...</string>
     <string name="password_is_required">" 'Password' cannot be empty and must be atleast 6 characters"</string>
     <string name="email_is_required">" 'Email' is invalid"</string>
