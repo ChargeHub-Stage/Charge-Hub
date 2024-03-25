@@ -69,7 +69,7 @@ fun RegisterLayout(
 
     val topBarTitle = when (state.currentRegisterState) {
         CurrentRegisterState.EMAIL -> stringResource(R.string.e_mail)
-        CurrentRegisterState.CAR_CONNECT -> stringResource(R.string.voertuig)
+        CurrentRegisterState.CAR_CONNECT -> stringResource(R.string.car)
         else -> {""}
     }
 
@@ -103,13 +103,13 @@ fun EmailRegisterStep(state: RegisterScreenUiState, onAction: (RegisterScreenUiA
     )
     Text(
         modifier = Modifier.padding(top = 4.dp, bottom = 27.dp),
-        text = stringResource(R.string.privacybeleid),
+        text = stringResource(R.string.privacy),
         style = TextStyles.bottomLabel
     )
 
     PrimaryButton(
         modifier = Modifier.fillMaxWidth(),
-        text = stringResource(R.string.volgende),
+        text = stringResource(R.string.next),
         onClick = {
             onAction(RegisterScreenUiAction.OnNextClickedAction)
         },
