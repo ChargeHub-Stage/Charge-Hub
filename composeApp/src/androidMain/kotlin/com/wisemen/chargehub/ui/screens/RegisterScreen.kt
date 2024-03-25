@@ -113,7 +113,6 @@ fun RegisterLayout(
                 CurrentRegisterState.PROFILE -> ProfileCompletionStep(state, onAction)
                 CurrentRegisterState.CAR_CONNECT -> CarConnectStep(state, onAction)
                 CurrentRegisterState.NOTIFICATIONS -> PermissionStep(onAction)
-
                 else -> {}
             }
 
