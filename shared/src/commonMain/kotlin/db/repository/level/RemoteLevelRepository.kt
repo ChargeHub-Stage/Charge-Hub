@@ -28,8 +28,8 @@ class RemoteLevelRepository :
             val levelResponse =
                 firestore.collection(FIREBASE_LEVEL_COLLECTION).get()
             return levelResponse.documents.map { it.data() }
-        } catch (e: Exception) {
-            throw e
+        } catch (_: Exception) {
+            throw Exception("Failed to fetch levels")
         }
     }
 
@@ -38,8 +38,8 @@ class RemoteLevelRepository :
             val levelDocument =
                 firestore.collection(FIREBASE_LEVEL_COLLECTION).document(id).get()
             return levelDocument.data()
-        } catch(e: Exception) {
-            throw e
+        } catch(_: Exception) {
+            throw Exception("Failed to fetch level")
         }
     }
 
