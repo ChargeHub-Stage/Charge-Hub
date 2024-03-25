@@ -74,7 +74,7 @@ fun LandingLayout(onAction: (LandingScreenUiAction) -> Unit) {
             modifier = Modifier.matchParentSize()
         )
         Column(
-            modifier = Modifier.padding(top = 46.dp, start = 16.dp, end = 16.dp)
+            modifier = Modifier.padding(start = 16.dp, end = 16.dp)
         ) {
             Header()
             Spacer(Modifier.weight(1F))
@@ -85,7 +85,7 @@ fun LandingLayout(onAction: (LandingScreenUiAction) -> Unit) {
 
 @Composable
 fun Header() {
-    Column {
+    Column(Modifier.padding(top = 46.dp)) {
         Text(
             stringResource(R.string.stroomlijn_je_dag_met),
             style = TextStyles.bigTitle,
