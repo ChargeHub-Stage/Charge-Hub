@@ -14,7 +14,11 @@ import kotlinx.coroutines.flow.receiveAsFlow
  *  [E] represents the UiEvent.
  *  [S] represents the UiState which can be a nullable type of Any if no state is applicable.
  */
+<<<<<<<< HEAD:shared/src/commonMain/kotlin/screens/AbstractViewModel.kt
 abstract class AbstractViewModel<A, E, S : Any?> : KMMViewModel() {
+========
+interface BaseComposeViewModel<A, E, S : Any?> {
+>>>>>>>> feature/11-landing-page-ios:shared/src/commonMain/kotlin/screens/BaseComposeViewModel.kt
 
     private val eventChannel: Channel<E> = Channel()
 
