@@ -7,6 +7,13 @@ import screens.AbstractViewModel
 
 class ForgotPasswordViewModel(private val firebaseRepo: FirebaseRepository) :
     AbstractViewModel<ForgotPasswordUiAction, ForgotPasswordUiEvent, ForgotPasswordUiState>(ForgotPasswordUiState()) {
+
+        fun setEmail(email: String) {
+            _state.value = state.value.copy(email = email)
+        }
+        fun getState(): ForgotPasswordUiState {
+            return state.value
+        }
         override fun onAction(action: ForgotPasswordUiAction) = viewModelScope.coroutineScope.launch {
         when (action) {
             is ForgotPasswordUiAction.OnClickedBackAction -> sendEvent(ForgotPasswordUiEvent.ClickedBackEvent)

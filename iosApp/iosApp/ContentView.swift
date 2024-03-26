@@ -14,6 +14,8 @@ struct ContentView: View {
             RegistrationScreenView(navigation: navController)
         case .home:
             HomeScreen(navigation: navController)
+        case .forgotPassword:
+            ForgotPasswordScreen(navigation: navController)
         case .none:
             EmptyView()
         }

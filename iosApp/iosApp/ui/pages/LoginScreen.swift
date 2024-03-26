@@ -5,7 +5,6 @@ import KMPNativeCoroutinesAsync
 
 struct LoginScreenView: View {
     @ObservedObject var navigation: NavigationController
-    @Environment(\.presentationMode) var presentationMode
     @StateViewModel var viewModel = LoginScreenViewModel(firebaseRepo: FirebaseRepository())
 
     var body: some View {
@@ -58,7 +57,9 @@ struct LoginScreenView: View {
                         )
                     ).padding(.bottom, 4)
                     HStack {
-                        Text("Wachtwoord vergeten?").font(.system(size: 12)).fontWeight(.regular)
+                        Button(action: { navigation.navigateTo(.forgotPassword) }) {
+                            Text("Wachtwoord vergeten?").font(.system(size: 12)).fontWeight(.regular)
+                        }
                         Spacer()
                     }
                 }
