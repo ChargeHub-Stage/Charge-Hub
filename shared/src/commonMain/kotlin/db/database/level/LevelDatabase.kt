@@ -28,7 +28,6 @@ class LevelDatabase(sqlDriver: SqlDriver) :
             id = id,
             level = request.level,
             requiredPoints = request.requiredPoints,
-            pointsToNextLevel = request.pointsToNextLevel
         )
     }
 
@@ -36,7 +35,6 @@ class LevelDatabase(sqlDriver: SqlDriver) :
         query.insertLevel(
             level = request.level,
             requiredPoints = request.requiredPoints,
-            pointsToNextLevel = request.pointsToNextLevel
         )
     }
 }

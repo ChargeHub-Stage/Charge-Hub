@@ -1,7 +1,6 @@
 CREATE TABLE Level (
     id TEXT PRIMARY KEY,
     level INTEGER NOT NULL,
-    pointsToNextLevel INTEGER NOT NULL,
     requiredPoints INTEGER NOT NULL
 );
 
@@ -12,10 +11,10 @@ getLevelById:
 SELECT * FROM Level WHERE id = ?;
 
 updateLevel:
-UPDATE Level SET level = ?, pointsToNextLevel = ?, requiredPoints = ? WHERE id = ?;
+UPDATE Level SET level = ?, requiredPoints = ? WHERE id = ?;
 
 deleteLevel:
 DELETE FROM Level WHERE id = ?;
 
 insertLevel:
-INSERT INTO Level (level, pointsToNextLevel, requiredPoints) VALUES (?, ?, ?);
+INSERT INTO Level (level, requiredPoints) VALUES (?, ?);

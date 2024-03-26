@@ -1,6 +1,5 @@
 package com.wisemen.chargehub.ui.components
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -12,8 +11,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ErrorOutline
-import androidx.compose.material.icons.outlined.Visibility
-import androidx.compose.material.icons.outlined.VisibilityOff
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
@@ -53,7 +50,8 @@ fun ErrorPreview() {
                 isValid = true,
                 onInputChanged = {},
                 onTogglePasswordVisibility = { },
-                isPasswordVisible = false
+                isPasswordVisible = false,
+                trailingIcon = {}
             )
         }
     }
@@ -129,8 +127,10 @@ object TextFields {
             }
 
             errorMessage?.let {
-                Spacer(modifier = Modifier.padding(top = 5.dp))
-                Row(verticalAlignment = Alignment.CenterVertically) {
+                Row(
+                    modifier = Modifier.padding(top = 5.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
                     Icon(
                         modifier = Modifier.size(10.5.dp),
                         imageVector = Icons.Outlined.ErrorOutline,
@@ -151,35 +151,19 @@ object TextFields {
         currentPassword: String,
         isPasswordVisible: Boolean,
         isValid: Boolean,
+        trailingIcon: @Composable (() -> Unit)? = null
     ) {
 
         Box(modifier, contentAlignment = Alignment.CenterEnd) {
             EditText(
-                errorMessage = if (! isValid) stringResource(R.string.password_is_required) else null,
+                errorMessage = if (!isValid) stringResource(R.string.password_is_required) else null,
                 visualTransformation = if (isPasswordVisible) VisualTransformation.None else PasswordVisualTransformation(),
                 topLabel = stringResource(R.string.password),
                 input = currentPassword,
                 onInputChanged = {
                     onInputChanged(it)
                 },
-                trailingIcon = {
-                    val iconClick =
-                        Modifier.clickable { onTogglePasswordVisibility() }
-
-                    if (isPasswordVisible) {
-                        Icon(
-                            Icons.Outlined.VisibilityOff,
-                            null,
-                            iconClick,
-                            tint = Colors.blackPearl
-                        )
-                    } else Icon(
-                        Icons.Outlined.Visibility,
-                        contentDescription = null,
-                        iconClick,
-                        tint = Colors.blackPearl
-                    )
-                },
+                trailingIcon = trailingIcon,
                 maxLines = 1,
             )
         }
@@ -194,7 +178,7 @@ object TextFields {
     ) {
         EditText(
             modifier = modifier,
-            errorMessage = if (! isValid) stringResource(R.string.email_is_required) else null,
+            errorMessage = if (!isValid) stringResource(R.string.email_is_required) else null,
             topLabel = stringResource(id = R.string.email),
             input = email,
             onInputChanged = {

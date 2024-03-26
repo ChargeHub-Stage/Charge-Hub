@@ -12,7 +12,6 @@ struct TextOnlyButton: View {
         textColor: Color = .black,
         action: @escaping () -> Void)
     {
-        
         self.text = text
         self.enabled = enabled
         self.textColor = textColor
@@ -25,9 +24,9 @@ struct TextOnlyButton: View {
                 .foregroundColor(textColor)
                 .padding()
                 .background(Color.clear)
-                .cornerRadius(5)
+                .cornerRadius(4)
                 .overlay(
-                    RoundedRectangle(cornerRadius: 5)
+                    RoundedRectangle(cornerRadius: 4)
                         .stroke(textColor, lineWidth: 0)
                 )
         }
@@ -86,7 +85,7 @@ struct PrimaryButton: View {
             }
             .padding()
             .background(enabled ? backgroundColor : Color.gray)
-            .cornerRadius(5)
+            .cornerRadius(4)
         }
         .disabled(!enabled)
         .frame(maxWidth: .infinity)
@@ -114,9 +113,9 @@ struct IconButton: View {
             icon
                 .padding()
                 .background(Color.clear)
-                .cornerRadius(5)
+                .cornerRadius(4)
                 .overlay(
-                    RoundedRectangle(cornerRadius: 5)
+                    RoundedRectangle(cornerRadius: 4)
                         .stroke(Color.black, lineWidth: 1)
                 )
         }

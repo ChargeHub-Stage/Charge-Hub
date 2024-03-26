@@ -30,11 +30,14 @@ kotlin {
             implementation(libs.koinAndroid)
             implementation(libs.koinCore)
             implementation(libs.androidx.material3.android)
+            implementation(libs.androidx.material3.extended)
             implementation(project.dependencies.platform(libs.firebase.bom))
             implementation(libs.androidx.navigation.runtime.ktx)
             implementation(libs.androidx.navigation.compose)
             implementation(libs.raamcosta.core)
             implementation(libs.androidx.material3.extended)
+            implementation(libs.androidx.media3.common)
+            implementation(libs.accompanist.pager)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -82,7 +85,4 @@ android {
     dependencies {
         debugImplementation(libs.compose.ui.tooling)
     }
-}
-dependencies {
-    implementation(libs.androidx.media3.common)
 }

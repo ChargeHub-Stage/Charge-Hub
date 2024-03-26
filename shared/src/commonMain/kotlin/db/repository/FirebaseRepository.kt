@@ -7,15 +7,20 @@ import org.koin.core.component.KoinComponent
 class FirebaseRepository : KoinComponent {
     private val auth = Firebase.auth
 
-    suspend fun login(email: String, password: String, onSuccess: () -> Unit) {
+    companion object {
+        const val TEST_USER = "test_id"
+    }
+
+
+    suspend fun login(email: String, password: String, onSuccess: suspend () -> Unit) {
         auth.signInWithEmailAndPassword(email, password)
         onSuccess()
     }
 
-    suspend fun register(email: String, password: String, onSuccess: () -> Unit) {
+    suspend fun register(email: String, password: String, onSuccess: suspend () -> Unit) {
         auth.createUserWithEmailAndPassword(email, password)
         onSuccess()
     }
 
-    fun getCurrentUserUid(): String = auth.currentUser?.uid.toString()
+    fun getCurrentUserUid(): String = auth.currentUser?.uid ?: TEST_USER
 }
