@@ -36,6 +36,8 @@ kotlin {
             implementation(libs.androidx.navigation.compose)
             implementation(libs.raamcosta.core)
             implementation(libs.androidx.material3.extended)
+            implementation(libs.androidx.media3.common)
+            implementation(libs.accompanist.pager)
         }
         commonMain.dependencies {
             implementation(compose.runtime)

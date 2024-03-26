@@ -1,11 +1,13 @@
 CREATE TABLE User (
     id TEXT PRIMARY KEY,
     levelId TEXT,
-    name TEXT NOT NULL,
+    carId TEXT,
+    firstName TEXT NOT NULL,
+    lastName TEXT NOT NULL,
     email TEXT NOT NULL,
-    password TEXT NOT NULL,
     currentPoints INTEGER NOT NULL,
-    FOREIGN KEY (levelId) REFERENCES Level(id)
+    FOREIGN KEY (levelId) REFERENCES Level(id),
+    FOREIGN KEY (carId) REFERENCES Car(id)
 );
 
 getAllUsers:
@@ -15,10 +17,10 @@ getUserById:
 SELECT * FROM User WHERE id = ?;
 
 updateUser:
-UPDATE User SET levelId = ?, name = ?, email = ?, password = ?, currentPoints = ? WHERE id = ?;
+UPDATE User SET levelId = ?, carId = ?, firstName = ?, lastName = ?, email = ?, currentPoints = ? WHERE id = ?;
 
 deleteUser:
 DELETE FROM User WHERE id = ?;
 
 insertUser:
-INSERT INTO User (levelId, name, email, password, currentPoints) VALUES (?, ?, ?, ?, ?);
+INSERT INTO User (levelId, carId, firstName, lastName, email, currentPoints) VALUES (?,?, ?, ?, ?, ?);

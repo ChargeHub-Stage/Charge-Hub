@@ -1,6 +1,5 @@
 package com.wisemen.chargehub.ui.components
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -12,8 +11,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ErrorOutline
-import androidx.compose.material.icons.outlined.Visibility
-import androidx.compose.material.icons.outlined.VisibilityOff
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
@@ -23,6 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
@@ -52,7 +50,8 @@ fun ErrorPreview() {
                 isValid = true,
                 onInputChanged = {},
                 onTogglePasswordVisibility = { },
-                isPasswordVisible = false
+                isPasswordVisible = false,
+                trailingIcon = {}
             )
         }
     }
@@ -94,27 +93,38 @@ object TextFields {
                 )
             }
 
-            OutlinedTextField(
+            Box(
                 modifier = Modifier
-                    .height(textBoxHeight)
-                    .fillMaxWidth(),
-                isError = errorMessage != null,
-                placeholder = {
-                    Text(
-                        text = hint,
-                        style = TextStyles.hint
+                    .fillMaxWidth()
+                    .padding(10.dp)
+                    .graphicsLayer(
+                        shadowElevation = 7.0F,
+                        shape = RoundedCornerShape(10.dp),
+                        spotShadowColor = Color(0.0F, 0.0F, 0.0F, 0.14F)
                     )
-                },
-                maxLines = maxLines,
-                visualTransformation = visualTransformation,
-                enabled = enabled,
-                shape = RoundedCornerShape(10.dp),
-                colors = colors,
-                trailingIcon = trailingIcon,
-                leadingIcon = leadingIcon,
-                value = input,
-                onValueChange = onInputChanged,
-            )
+            ) {
+                OutlinedTextField(
+                    modifier = Modifier
+                        .height(textBoxHeight)
+                        .fillMaxWidth(),
+                    isError = errorMessage != null,
+                    placeholder = {
+                        Text(
+                            text = hint,
+                            style = TextStyles.hint
+                        )
+                    },
+                    maxLines = maxLines,
+                    visualTransformation = visualTransformation,
+                    enabled = enabled,
+                    shape = RoundedCornerShape(10.dp),
+                    colors = colors,
+                    trailingIcon = trailingIcon,
+                    leadingIcon = leadingIcon,
+                    value = input,
+                    onValueChange = onInputChanged,
+                )
+            }
 
             errorMessage?.let {
                 Row(
@@ -141,6 +151,7 @@ object TextFields {
         currentPassword: String,
         isPasswordVisible: Boolean,
         isValid: Boolean,
+        trailingIcon: @Composable (() -> Unit)? = null
     ) {
 
         Box(modifier, contentAlignment = Alignment.CenterEnd) {
@@ -152,24 +163,7 @@ object TextFields {
                 onInputChanged = {
                     onInputChanged(it)
                 },
-                trailingIcon = {
-                    val iconClick =
-                        Modifier.clickable { onTogglePasswordVisibility() }
-
-                    if (isPasswordVisible) {
-                        Icon(
-                            Icons.Outlined.VisibilityOff,
-                            null,
-                            iconClick,
-                            tint = Colors.blackPearl
-                        )
-                    } else Icon(
-                        Icons.Outlined.Visibility,
-                        contentDescription = null,
-                        iconClick,
-                        tint = Colors.blackPearl
-                    )
-                },
+                trailingIcon = trailingIcon,
                 maxLines = 1,
             )
         }
