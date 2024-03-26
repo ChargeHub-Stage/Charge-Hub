@@ -9,6 +9,11 @@ class LoginScreenViewModel(private val firebaseRepo: FirebaseRepository) :
     AbstractViewModel<LoginScreenUiAction, LoginScreenUiEvent, LoginScreenUiState>(
         LoginScreenUiState()
     ) {
+        fun getEmail(): String { return state.value.email }
+        fun setEmail(email: String) { _state.value = state.value.copy(email = email) }
+        fun getPassword(): String { return state.value.password }
+        fun setPassword(password: String) { _state.value = state.value.copy(password = password) }
+
     override fun onAction(action: LoginScreenUiAction) = viewModelScope.coroutineScope.launch {
         when (action) {
             is LoginScreenUiAction.OnClickedBackButtonAction -> {sendEvent(LoginScreenUiEvent.ClickedBackButtonEvent) }

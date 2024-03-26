@@ -31,8 +31,8 @@ abstract class AbstractViewModel<A, E, S : Any?>(initialValue: S) : KMMViewModel
     }
 
     internal val _state by lazy { MutableStateFlow(viewModelScope, initialValue) }
+    @NativeCoroutinesState
     val state: StateFlow<S> = _state.asStateFlow()
-
 
     abstract fun onAction(action: A): Job
 
