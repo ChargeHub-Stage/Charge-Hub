@@ -27,11 +27,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.wisemen.chargehub.R
+import com.wisemen.chargehub.SharedRes
+import com.wisemen.chargehub.toStringResource
 import com.wisemen.chargehub.ui.theme.Colors
 import com.wisemen.chargehub.ui.theme.TextStyles
 import kotlinx.coroutines.launch
@@ -46,7 +47,7 @@ fun InfoTitle(title: String) {
 }
 
 @Composable
-fun ShortInfoPage(title: String, imageResId: Int, descriptionResId: Int) {
+fun ShortInfoPage(title: String, imageResId: Int, description: String) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
@@ -60,7 +61,7 @@ fun ShortInfoPage(title: String, imageResId: Int, descriptionResId: Int) {
             contentDescription = null
         )
         Text(
-            text = stringResource(descriptionResId),
+            text = description,
             style = TextStyles.infoSubTitle,
             textAlign = TextAlign.Center,
             modifier = Modifier.padding(horizontal = 16.dp)
@@ -72,18 +73,18 @@ fun ShortInfoPage(title: String, imageResId: Int, descriptionResId: Int) {
 @Composable
 fun InfoPageCharging() {
     ShortInfoPage(
-        title = stringResource(R.string.charges),
+        title = SharedRes.strings.charges.toStringResource(),
         imageResId = R.drawable.charge_info,
-        descriptionResId = R.string.charges_info
+        description = SharedRes.strings.charges.toStringResource()
     )
 }
 
 @Composable
 fun InfoPageChargingRules() {
     ShortInfoPage(
-        title = stringResource(R.string.charge_giveaway),
+        title = SharedRes.strings.charge_giveaway.toStringResource(),
         imageResId = R.drawable.giveaway_charge,
-        descriptionResId = R.string.charge_giveaway_info
+        description = SharedRes.strings.charge_giveaway_info.toStringResource()
     )
 }
 
@@ -95,7 +96,7 @@ fun InfoPageLevelInfo() {
         modifier = Modifier.fillMaxHeight()
     ) {
         Spacer(modifier = Modifier.weight(1f))
-        InfoTitle(stringResource(R.string.level_system))
+        InfoTitle(SharedRes.strings.level_system.toStringResource())
         Image(
             modifier = Modifier.padding(bottom = 56.dp).width(294.dp).height(41.dp),
             painter = painterResource(R.drawable.progress_bar),
@@ -103,18 +104,21 @@ fun InfoPageLevelInfo() {
         )
         Text(
             modifier = Modifier.padding(bottom = 14.dp),
-            text = stringResource(R.string.level_system_title),
+            text = SharedRes.strings.level_system_title.toStringResource(),
             style = TextStyles.infoTitle
         )
-        Text(text = stringResource(R.string.punctuality), style = TextStyles.infoSubTitle)
+        Text(
+            text = SharedRes.strings.punctuality.toStringResource(),
+            style = TextStyles.infoSubTitle
+        )
         Text(
             modifier = Modifier.padding(bottom = 16.dp),
-            text = stringResource(R.string.punctuality_details),
+            text = SharedRes.strings.punctuality_details.toStringResource(),
             style = TextStyles.infoText
         )
-        Text(text = stringResource(R.string.friendly), style = TextStyles.infoSubTitle)
+        Text(text = SharedRes.strings.friendly.toStringResource(), style = TextStyles.infoSubTitle)
         Text(
-            text = stringResource(R.string.friendly_details),
+            text = SharedRes.strings.friendly_details.toStringResource(),
             style = TextStyles.infoText
         )
         Spacer(modifier = Modifier.weight(1f))
@@ -129,7 +133,7 @@ fun InfoPageLevelingInfo() {
         modifier = Modifier.fillMaxHeight()
     ) {
         Spacer(modifier = Modifier.weight(1f))
-        InfoTitle(stringResource(R.string.level_system))
+        InfoTitle(SharedRes.strings.level_system.toStringResource())
         Image(
             modifier = Modifier.padding(bottom = 54.dp).width(294.dp).height(41.dp),
             painter = painterResource(R.drawable.progress_bar_full),
@@ -137,7 +141,7 @@ fun InfoPageLevelingInfo() {
         )
         Text(
             modifier = Modifier.padding(bottom = 14.dp),
-            text = stringResource(R.string.level_system_2_details),
+            text = SharedRes.strings.level_system_2_details.toStringResource(),
             style = TextStyles.infoTitle
         )
 
@@ -149,18 +153,26 @@ fun InfoPageLevelingInfo() {
 @Composable
 fun LevelSquares() {
     Row(Modifier.padding(bottom = 14.dp, top = 14.dp)) {
-        LevelColumn(stringResource(R.string.level, 1), stringResource(R.string.priorities), 91.dp)
-        LevelColumn(stringResource(R.string.level, 2), stringResource(R.string.trading), 91.dp)
+        LevelColumn(
+            SharedRes.strings.level.toStringResource(listOf(1)),
+            SharedRes.strings.priorities.toStringResource(),
+            91.dp
+        )
+        LevelColumn(
+            SharedRes.strings.level.toStringResource(listOf(2)),
+            SharedRes.strings.trading.toStringResource(),
+            91.dp
+        )
     }
 
     Row {
         LevelColumn(
-            stringResource(R.string.level, 3),
-            stringResource(R.string.reserve_in_advance, 2), 135.dp
+            SharedRes.strings.level.toStringResource(listOf(3)),
+            SharedRes.strings.reserve_in_advance.toStringResource(listOf(2)), 135.dp
         )
         LevelColumn(
-            stringResource(R.string.level, 4),
-            stringResource(R.string.reserve_in_advance, 3),
+            SharedRes.strings.level.toStringResource(listOf(4)),
+            SharedRes.strings.reserve_in_advance.toStringResource(listOf(3)),
             135.dp
         )
     }

@@ -1,6 +1,6 @@
 import dev.icerock.moko.resources.StringResource
 
-expect class ResourceStrings {
+expect class StringResources {
 
     fun get(id: StringResource, args: List<Any> = listOf()) : String
 

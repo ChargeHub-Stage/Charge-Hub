@@ -26,7 +26,9 @@ import androidx.navigation.NavController
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.navigate
 import com.wisemen.chargehub.R
+import com.wisemen.chargehub.SharedRes
 import com.wisemen.chargehub.nav.ChargeHubNavGraph
+import com.wisemen.chargehub.toStringResource
 import com.wisemen.chargehub.ui.components.Buttons
 import com.wisemen.chargehub.ui.components.primaryButtonColors
 import com.wisemen.chargehub.ui.components.secondaryButtonColors
@@ -96,12 +98,12 @@ fun LandingLayout(onAction: (LandingScreenUiAction) -> Unit) {
 fun Header() {
     Column(Modifier.padding(top = 46.dp)) {
         Text(
-            stringResource(R.string.streamline_your_day_with),
+            SharedRes.strings.streamline_your_day_with.toStringResource(),
             style = TextStyles.bigTitle,
             color = Colors.white
         )
         Text(
-            stringResource(R.string.charge),
+            SharedRes.strings.charge.toStringResource(),
             style = TextStyles.bigTitle,
             color = Colors.acid
         )
@@ -119,7 +121,7 @@ fun Buttons(onAction: (LandingScreenUiAction) -> Unit) {
     Row(Modifier.padding(bottom = 16.dp)) {
         Buttons.PrimaryButton(
             Modifier.fillMaxWidth(),
-            text = stringResource(R.string.login),
+            text = SharedRes.strings.login.toStringResource(),
             colors = ButtonDefaults.primaryButtonColors()
         ) {
             onAction(LandingScreenUiAction.ClickedLoginButtonAction)
@@ -129,7 +131,7 @@ fun Buttons(onAction: (LandingScreenUiAction) -> Unit) {
     Row(Modifier.padding(bottom = 14.dp)) {
         Buttons.PrimaryButton(
             Modifier.fillMaxWidth(),
-            text = stringResource(R.string.register),
+            text = SharedRes.strings.register.toStringResource(),
             colors = ButtonDefaults.secondaryButtonColors()
         ) {
             onAction(LandingScreenUiAction.ClickedRegisterButtonAction)

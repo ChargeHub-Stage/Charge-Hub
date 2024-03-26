@@ -1,6 +1,6 @@
 package di
 
-import ResourceStrings
+import StringResources
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.koin.core.context.startKoin
@@ -23,7 +23,8 @@ fun initKoinIos() {
 }
 
 class StringsHelper : KoinComponent {
-    private val strings: ResourceStrings by inject()
+    private val strings: StringResources by inject()
 
-    fun getResourceStrings(): ResourceStrings = strings
+    fun getResourceStrings(): StringResources = strings
+
 }
