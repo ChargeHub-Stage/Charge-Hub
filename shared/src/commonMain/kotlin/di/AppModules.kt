@@ -18,12 +18,14 @@ import org.koin.dsl.module
 import screens.landing.LandingScreenViewModel
 import screens.login.LoginScreenViewModel
 import screens.register.RegisterScreenViewModel
+import screens.forgotpassword.ForgotPasswordViewModel
 import db.repository.FirebaseRepository
 
 val modules = module {
     singleOf(::LoginScreenViewModel)
     singleOf(::LandingScreenViewModel)
     singleOf(::RegisterScreenViewModel)
+    singleOf(::ForgotPasswordViewModel)
 }
 
 val clientsModule = module {

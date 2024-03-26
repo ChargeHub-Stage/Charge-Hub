@@ -60,4 +60,6 @@
     <string name="level">Level %1$s</string>
     <string name="reserve_in_advance">%1$s dagen op voorhand reserveren</string>
     <string name="back_button">Back button</string>
+    <string name="forgot_password_title">Wachtwoord Vergeten</string>
+    <string name="send_mail">Stuur mail</string>
 </resources>
