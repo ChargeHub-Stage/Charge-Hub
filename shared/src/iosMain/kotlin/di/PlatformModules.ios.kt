@@ -1,6 +1,7 @@
 package di
 
 import DATABASE_NAME
+import ResourceStrings
 import app.cash.sqldelight.driver.native.NativeSqliteDriver
 import db.chargehub.ChargeHubDb
 import db.database.car.CarDatabase
@@ -43,5 +44,9 @@ actual fun platformModules(): Module = module {
 
     single {
         CarConnectNetworkCallsWrapper(CarConnectNetworkCallsDatabase((driver)))
+    }
+
+    single {
+        ResourceStrings()
     }
 }

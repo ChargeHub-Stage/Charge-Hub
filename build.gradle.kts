@@ -9,3 +9,22 @@ plugins {
     alias(libs.plugins.sqlDelight) apply false
     alias(libs.plugins.googleService).apply(false)
 }
+
+buildscript {
+    repositories {
+        gradlePluginPortal()
+    }
+
+    dependencies {
+        classpath(libs.resources.generator)
+    }
+}
+
+
+allprojects {
+    repositories {
+        mavenCentral()
+        google()
+        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
+    }
+}
