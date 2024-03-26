@@ -4,12 +4,31 @@ import KMMViewModelSwiftUI
 import KMPNativeCoroutinesAsync
 
 struct LoginScreenView: View {
+    @ObservedObject var navigation: NavigationController
     @Environment(\.presentationMode) var presentationMode
     @StateViewModel var viewModel = LoginScreenViewModel(firebaseRepo: FirebaseRepository())
-    @State var user = FirebaseRepository().getCurrentUserUid()
-    @State var loggedIn = false
 
     var body: some View {
+        HStack {
+            Button(action: {
+                navigation.navigateBack()
+            }) {
+                HStack(spacing: 0) {
+                    Image(systemName: "chevron.left")
+                        .foregroundStyle(.black)
+                        .fontWeight(.bold)
+                    Text("Terug")
+                        .foregroundStyle(.black)
+                }
+            }
+            .padding(.leading, 5)
+            Spacer()
+            Text("Aanmelden")
+                .font(.system(size: 17))
+                .fontWeight(.semibold)
+            Spacer()
+        }
+        .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, alignment: .center)
         VStack(spacing: 0) {
             Text("Welkom Terug!")
                 .font(.system(size: 28))
@@ -18,22 +37,26 @@ struct LoginScreenView: View {
             Text("Fijn om je terug te zien")
             Spacer().frame(height: 60)
             VStack(spacing: 0) {
-//                EmailTextField(email: viewModel, isValid:
-                TextField("Email hier", text: Binding(
-                    get: { viewModel.getEmail() },
-                    set: { value in viewModel.setEmail(email: value) }
-                )).autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
+                EmailTextField(
+                    email: Binding(
+                        get: { viewModel.getState().email },
+                        set: { value in viewModel.setEmail(email: value) }
+                    ),
+                    isValid: true
+                )
                 Spacer().frame(height: 14)
                 VStack(spacing: 0) {
-//                    PasswordTextField(
-//                        password: viewModel.state.password,
-//                        isValid: true,
-//                        isPasswordVisible: viewModel.state.passwordVisibility
-//                    ).padding(.bottom, 4)
-                    SecureField("Wachtwoord hier", text: Binding(
-                        get: { viewModel.getPassword() },
-                        set: { value in viewModel.setPassword(password: value) }
-                    )).autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
+                    PasswordTextField(
+                        password: Binding(
+                            get: { viewModel.getState().password },
+                            set: { value in viewModel.setPassword(password: value)}
+                        ),
+                        isValid: true,
+                        isPasswordVisible: Binding(
+                            get: { viewModel.getState().passwordVisibility },
+                            set: { value in viewModel.setPasswordVisibility(visibility: value) }
+                        )
+                    ).padding(.bottom, 4)
                     HStack {
                         Text("Wachtwoord vergeten?").font(.system(size: 12)).fontWeight(.regular)
                         Spacer()
@@ -42,7 +65,7 @@ struct LoginScreenView: View {
                 Spacer().frame(height: 30)
                 Button(action: {
                     viewModel.onAction(action: LoginScreenUiAction.OnClickedLoginButtonAction())
-                    loggedIn = !loggedIn
+                    navigation.navigateTo(.home)
                 }) {
                     Text("Aanmelden")
                         .font(.system(size: 16))
@@ -52,10 +75,6 @@ struct LoginScreenView: View {
                 .frame(maxWidth: .infinity, maxHeight: 48)
                 .background(Color.acid)
                 .cornerRadius(10)
-                
-                if(loggedIn) {
-                    Text(user)
-                }
             }
             .frame(maxWidth: .infinity)
             .padding(.horizontal, 18)

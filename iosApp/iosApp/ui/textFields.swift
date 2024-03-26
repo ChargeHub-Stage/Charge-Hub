@@ -15,9 +15,11 @@ struct EditText: View {
             if isSecure {
                 SecureField("Type here", text: $input)
                     .modifier(InputFieldModifier(isSecure: isSecure))
+                    .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
             } else {
                 TextField("Type here", text: $input)
                     .modifier(InputFieldModifier(isSecure: isSecure))
+                    .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
             }
             if let errorMessage = errorMessage {
                 HStack {

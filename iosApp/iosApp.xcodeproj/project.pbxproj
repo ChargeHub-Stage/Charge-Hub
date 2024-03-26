@@ -17,6 +17,8 @@
 		64BF5C292BA3109200338446 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 64BF5C282BA3109200338446 /* FirebaseDatabase */; };
 		64BF5C2B2BA3109200338446 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 64BF5C2A2BA3109200338446 /* FirebaseFirestore */; };
 		64BF5C2D2BA31C0E00338446 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 64BF5C2C2BA31C0E00338446 /* GoogleService-Info.plist */; };
+		64C0F5762BB2F10F00DCB1DD /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C0F5752BB2F10F00DCB1DD /* Navigation.swift */; };
+		64C0F5782BB300CD00DCB1DD /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C0F5772BB300CD00DCB1DD /* HomeScreen.swift */; };
 		64E0996F2BB187FD003AAAAC /* KMPNativeCoroutinesAsync in Frameworks */ = {isa = PBXBuildFile; productRef = 64E0996E2BB187FD003AAAAC /* KMPNativeCoroutinesAsync */; };
 		64E099712BB187FD003AAAAC /* KMPNativeCoroutinesCombine in Frameworks */ = {isa = PBXBuildFile; productRef = 64E099702BB187FD003AAAAC /* KMPNativeCoroutinesCombine */; };
 		64E099732BB187FD003AAAAC /* KMPNativeCoroutinesCore in Frameworks */ = {isa = PBXBuildFile; productRef = 64E099722BB187FD003AAAAC /* KMPNativeCoroutinesCore */; };
@@ -38,6 +40,8 @@
 		641E4B492BAB30E400AC738D /* RegistrationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationScreen.swift; sourceTree = "<group>"; };
 		64666D382BA9CC310052C7F3 /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		64BF5C2C2BA31C0E00338446 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		64C0F5752BB2F10F00DCB1DD /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
+		64C0F5772BB300CD00DCB1DD /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* ChargeHub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChargeHub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -113,6 +117,7 @@
 				7555FF82242A565900829871 /* ContentView.swift */,
 				7555FF8C242A565B00829871 /* Info.plist */,
 				2152FB032600AC8F00CF470E /* iOSApp.swift */,
+				64C0F5752BB2F10F00DCB1DD /* Navigation.swift */,
 				058557D7273AAEEB004C7B11 /* Preview Content */,
 			);
 			path = iosApp;
@@ -153,6 +158,7 @@
 				DD98B9222BA84E6D00CFC5F1 /* LandingScreen.swift */,
 				64666D382BA9CC310052C7F3 /* LoginScreen.swift */,
 				641E4B492BAB30E400AC738D /* RegistrationScreen.swift */,
+				64C0F5772BB300CD00DCB1DD /* HomeScreen.swift */,
 			);
 			path = pages;
 			sourceTree = "<group>";
@@ -276,10 +282,12 @@
 				DD98B9232BA84E6D00CFC5F1 /* LandingScreen.swift in Sources */,
 				DD5877F82BA34552000CD0DE /* color.swift in Sources */,
 				641E4B4A2BAB30E400AC738D /* RegistrationScreen.swift in Sources */,
+				64C0F5762BB2F10F00DCB1DD /* Navigation.swift in Sources */,
 				64666D392BA9CC310052C7F3 /* LoginScreen.swift in Sources */,
 				DD877E6C2BA4731300608CF5 /* textFields.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				DD877E6A2BA4730200608CF5 /* textStyles.swift in Sources */,
+				64C0F5782BB300CD00DCB1DD /* HomeScreen.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 				DD564B682BA897BE001D1EED /* KMMViewModel.swift in Sources */,
 				DD5877FA2BA34581000CD0DE /* buttons.swift in Sources */,
