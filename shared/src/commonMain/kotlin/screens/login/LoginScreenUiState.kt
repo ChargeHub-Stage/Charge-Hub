@@ -1,7 +1,7 @@
 package screens.login
 
 data class LoginScreenUiState(
-    val email: String = "",
-    val password: String = "",
+    var email: String = "",
+    var password: String = "",
     val passwordVisibility: Boolean = false
 )

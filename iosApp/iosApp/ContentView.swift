@@ -2,23 +2,20 @@ import SwiftUI
 import Shared
 
 struct ContentView: View {
+    @StateObject var navController = NavigationController()
+    
     var body: some View {
-        ZStack {
-        
-            Image("landingbackground")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .edgesIgnoringSafeArea(.all)
-            
-            VStack {
-                
-            }
+        switch navController.navigationStack.last {
+        case .landing:
+            LandingScreenView(navigation: navController)
+        case .login:
+            LoginScreenView(navigation: navController)
+        case .register:
+            RegistrationScreenView(navigation: navController)
+        case .home:
+            HomeScreen(navigation: navController)
+        case .none:
+            EmptyView()
         }
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
     }
 }

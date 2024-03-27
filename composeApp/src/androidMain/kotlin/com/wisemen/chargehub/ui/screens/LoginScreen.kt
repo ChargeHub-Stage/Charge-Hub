@@ -18,7 +18,6 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -31,7 +30,9 @@ import androidx.navigation.NavController
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.navigate
 import com.wisemen.chargehub.R
+import com.wisemen.chargehub.SharedRes
 import com.wisemen.chargehub.nav.ChargeHubNavGraph
+import com.wisemen.chargehub.toStringResource
 import com.wisemen.chargehub.ui.components.Buttons
 import com.wisemen.chargehub.ui.components.TextFields
 import com.wisemen.chargehub.ui.components.primaryButtonColors
@@ -87,7 +88,7 @@ fun LoginLayout(
             CenterAlignedTopAppBar(
                 title = {
                     Text(
-                        text = stringResource(R.string.login),
+                        text = SharedRes.strings.login.toStringResource(),
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
                         style = TextStyles.topBarTitle,
@@ -115,12 +116,12 @@ fun LoginLayout(
         ) {
             Text(
                 modifier = Modifier.padding(bottom = Spacing.small, top = 70.dp),
-                text = stringResource(R.string.welcome_back),
+                text = SharedRes.strings.welcome_back.toStringResource(),
                 style = TextStyles.title,
             )
 
             Text(
-                stringResource(R.string.login_welcome_text),
+                SharedRes.strings.login_welcome_text.toStringResource(),
                 style = TextStyles.text,
             )
 
@@ -149,14 +150,14 @@ fun LoginLayout(
                         .clickable {
                             onAction(LoginScreenUiAction.OnClickedForgotPasswordButtonAction)
                         },
-                    text = stringResource(R.string.forgot_password),
+                    text = SharedRes.strings.forgot_password.toStringResource(),
                     style = TextStyles.small_text,
                 )
             }
 
             Buttons.PrimaryButton(
                 modifier = Modifier.fillMaxWidth().padding(horizontal = Spacing.medium),
-                text = stringResource(R.string.login),
+                text = SharedRes.strings.login.toStringResource(),
                 colors = ButtonDefaults.primaryButtonColors(),
                 onClick = { onAction(LoginScreenUiAction.OnClickedLoginButtonAction) },
             )

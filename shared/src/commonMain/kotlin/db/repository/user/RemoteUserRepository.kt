@@ -1,5 +1,7 @@
 package db.repository.user
 
+import FIREBASE_USER_COLLECTION
+import db.chargehub.User
 import db.database.user.UserDatabase
 import db.database.user.UserDatabaseWrapper
 import db.networking.request.CreateUserRequest
