@@ -39,9 +39,8 @@ class LoginScreenViewModel(private val firebaseRepo: FirebaseRepository) :
             ) {
                 trySend(LoginScreenUiEvent.ClickedLoginButtonEvent)
             }
-            is LoginScreenUiAction.OnClickedForgotPasswordButtonAction -> sendEvent(
-                LoginScreenUiEvent.ClickedForgotPasswordButtonEvent
-            )
+            is LoginScreenUiAction.OnClickedForgotPasswordButtonAction ->
+                sendEvent(LoginScreenUiEvent.ClickedForgotPasswordButtonEvent)
         }
     }
 }

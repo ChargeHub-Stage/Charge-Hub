@@ -22,5 +22,10 @@ class FirebaseRepository : KoinComponent {
         onSuccess()
     }
 
+    suspend fun sendForgotPasswordEmail(email: String, onSuccess: suspend () -> Unit) {
+        auth.sendPasswordResetEmail(email)
+        onSuccess()
+    }
+
     fun getCurrentUserUid(): String = auth.currentUser?.uid ?: TEST_USER
 }

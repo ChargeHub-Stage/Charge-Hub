@@ -13,6 +13,7 @@ enum AppView: Int {
     case login
     case register
     case home
+    case forgotPassword
 }
 
 class NavigationController: ObservableObject {

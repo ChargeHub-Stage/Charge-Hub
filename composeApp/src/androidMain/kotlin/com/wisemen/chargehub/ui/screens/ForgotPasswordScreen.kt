@@ -1,8 +1,8 @@
 package com.wisemen.chargehub.ui.screens
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -21,72 +21,68 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.media3.common.util.UnstableApi
 import androidx.navigation.NavController
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.navigate
 import com.wisemen.chargehub.R
 import com.wisemen.chargehub.nav.ChargeHubNavGraph
-import com.wisemen.chargehub.ui.components.Buttons
 import com.wisemen.chargehub.ui.components.TextFields
 import com.wisemen.chargehub.ui.components.primaryButtonColors
-import com.wisemen.chargehub.ui.screens.destinations.ForgotPasswordScreenDestination
-import com.wisemen.chargehub.ui.screens.destinations.HomeScreenDestination
+import com.wisemen.chargehub.ui.screens.destinations.LoginScreenDestination
 import com.wisemen.chargehub.ui.theme.AppTheme
 import com.wisemen.chargehub.ui.theme.Colors
 import com.wisemen.chargehub.ui.theme.Spacing
 import com.wisemen.chargehub.ui.theme.TextStyles
 import org.koin.java.KoinJavaComponent.inject
-import screens.login.LoginScreenUiAction
-import screens.login.LoginScreenUiEvent
-import screens.login.LoginScreenUiState
-import screens.login.LoginScreenViewModel
+import screens.forgotpassword.ForgotPasswordUiAction
+import screens.forgotpassword.ForgotPasswordUiEvent
+import screens.forgotpassword.ForgotPasswordUiState
+import screens.forgotpassword.ForgotPasswordViewModel
+import com.wisemen.chargehub.ui.components.Buttons
 
 @Preview
 @Composable
-fun LoginScreenPreview() {
+fun ForgotPasswordPreview() {
     AppTheme {
-        LoginLayout(state = LoginScreenUiState(), onAction = {})
+        ForgotPasswordLayout(state = ForgotPasswordUiState(), onAction = {})
     }
 }
 
 @Composable
 @Destination
 @ChargeHubNavGraph
-fun LoginScreen(navController: NavController) {
-    val viewModel: LoginScreenViewModel by inject(LoginScreenViewModel::class.java)
+fun ForgotPasswordScreen(navController: NavController) {
+    val viewModel: ForgotPasswordViewModel by inject(ForgotPasswordViewModel::class.java)
 
     LaunchedEffect(viewModel) {
         viewModel.eventFlow.collect { event ->
             when (event) {
-                is LoginScreenUiEvent.ClickedBackButtonEvent -> navController.popBackStack()
-                is LoginScreenUiEvent.ClickedLoginButtonEvent -> navController.navigate(
-                    HomeScreenDestination
-                )
-                is LoginScreenUiEvent.ClickedForgotPasswordButtonEvent -> navController.navigate(ForgotPasswordScreenDestination)
+                is ForgotPasswordUiEvent.ClickedBackEvent -> navController.popBackStack()
+                is ForgotPasswordUiEvent.ClickedSendEmailEvent -> navController.navigate(LoginScreenDestination)
             }
         }
     }
+
     val state = viewModel.state.collectAsState()
-    LoginLayout(state.value, viewModel::onAction)
+    ForgotPasswordLayout(state.value, viewModel::onAction)
 }
 
-@androidx.annotation.OptIn(UnstableApi::class)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginLayout(
-    state: LoginScreenUiState,
-    onAction: (LoginScreenUiAction) -> Unit
+fun ForgotPasswordLayout(
+    state: ForgotPasswordUiState,
+    onAction: (ForgotPasswordUiAction) -> Unit
 ) {
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
                 title = {
                     Text(
-                        text = stringResource(R.string.login),
+                        text = stringResource(R.string.forgot_password_title),
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
                         style = TextStyles.topBarTitle,
@@ -94,7 +90,7 @@ fun LoginLayout(
                 },
                 navigationIcon = {
                     IconButton(
-                        onClick = { onAction(LoginScreenUiAction.OnClickedBackButtonAction) },
+                        onClick = { onAction(ForgotPasswordUiAction.OnClickedBackAction) },
                     ) {
                         Row {
                             Icon(
@@ -113,52 +109,23 @@ fun LoginLayout(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                modifier = Modifier.padding(bottom = Spacing.small, top = 70.dp),
-                text = stringResource(R.string.welcome_back),
-                style = TextStyles.title,
+                modifier = Modifier.padding(horizontal = Spacing.medium).padding(top = 70.dp, bottom = 30.dp),
+                textAlign = TextAlign.Center,
+                text = "Geef je e-mail adres in en volg de instructies om je wachtwoord te resetten.",
             )
-
-            Text(
-                stringResource(R.string.login_welcome_text),
-                style = TextStyles.text,
+            TextFields.EmailTextField(
+                modifier = Modifier.padding(horizontal = Spacing.medium).padding(bottom = 5.dp),
+                email = state.email,
+                isValid = true,
+                onInputChanged = { onAction(ForgotPasswordUiAction.OnEmailChangedAction(it)) },
             )
-
-            Column {
-                TextFields.EmailTextField(
-                    modifier = Modifier.padding(horizontal = Spacing.medium).padding(bottom = 5.dp),
-                    email = state.email,
-                    isValid = true,
-                    onInputChanged = { onAction(LoginScreenUiAction.OnEmailChangedAction(it)) },
-                )
-
-                TextFields.PasswordTextField(
-                    modifier = Modifier.padding(horizontal = Spacing.medium),
-                    onInputChanged = { onAction(LoginScreenUiAction.OnPasswordChangedAction(it)) },
-                    onTogglePasswordVisibility = {
-                        onAction(LoginScreenUiAction.OnClickedPasswordVisibilityButtonAction)
-                    },
-                    currentPassword = state.password,
-                    isPasswordVisible = state.passwordVisibility,
-                    isValid = true,
-                )
-
-                Text(
-                    modifier = Modifier
-                        .padding(bottom = 30.dp, start = Spacing.medium)
-                        .clickable {
-                            onAction(LoginScreenUiAction.OnClickedForgotPasswordButtonAction)
-                        },
-                    text = stringResource(R.string.forgot_password),
-                    style = TextStyles.small_text,
-                )
-            }
-
             Buttons.PrimaryButton(
                 modifier = Modifier.fillMaxWidth().padding(horizontal = Spacing.medium),
-                text = stringResource(R.string.login),
+                text = stringResource(R.string.send_mail),
                 colors = ButtonDefaults.primaryButtonColors(),
-                onClick = { onAction(LoginScreenUiAction.OnClickedLoginButtonAction) },
+                onClick = { onAction(ForgotPasswordUiAction.OnClickedSendEmailAction) },
             )
+            Spacer(modifier = Modifier.weight(1f))
         }
     }
 }
