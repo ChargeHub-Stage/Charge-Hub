@@ -15,6 +15,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import com.wisemen.chargehub.R
+import com.wisemen.chargehub.SharedRes
+import com.wisemen.chargehub.toStringResource
 import com.wisemen.chargehub.ui.theme.Colors
 import com.wisemen.chargehub.ui.theme.TextStyles
 
@@ -41,7 +43,7 @@ fun TopBar(
                         Row {
                             Icon(
                                 imageVector = Icons.Filled.ChevronLeft,
-                                contentDescription = stringResource(R.string.back_button)
+                                contentDescription = SharedRes.strings.back_button.toStringResource()
                             )
                         }
                     }

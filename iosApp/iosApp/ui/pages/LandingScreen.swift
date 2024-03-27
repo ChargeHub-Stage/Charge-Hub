@@ -23,13 +23,14 @@ struct LandingScreenView: View {
 }
 
 struct HeaderComponent: View {
+    let strings = StringsHelper().getResourceStrings()
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            Text("Stroomlijn je dag met")
+            Text(strings.get(id: SharedRes.strings().streamline_your_day_with, args: []))
                 .font(.system(size: 64))
                 .fontWeight(.bold)
                 .foregroundColor(.white)
-            Text("Charge\nHub.")
+            Text(strings.get(id: SharedRes.strings().charge, args:[]))
                 .font(.system(size: 64))
                 .fontWeight(.bold)
                 .foregroundColor(.acid)
@@ -41,12 +42,14 @@ struct HeaderComponent: View {
 }
 
 struct ButtonsComponent: View {
+    let strings = StringsHelper().getResourceStrings()
+
     @StateViewModel var landingViewModel = LandingScreenViewModel()
     
     var body: some View {
         VStack() {
             PrimaryButton(
-                text: "Aanmelden",
+                text: strings.get(id: SharedRes.strings().login, args: []),
                 textColor: .blackPearl,
                 backgroundColor: .acid,
                 action: {
@@ -57,7 +60,7 @@ struct ButtonsComponent: View {
             .frame(maxWidth: .infinity) .cornerRadius(8)
             
             PrimaryButton(
-                text: "Registreren",
+                text: strings.get(id: SharedRes.strings().register_, args: []),
                 textColor: .white,
                 backgroundColor: .smoke,
                 action: {

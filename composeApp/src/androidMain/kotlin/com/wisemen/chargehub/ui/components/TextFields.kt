@@ -28,6 +28,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.wisemen.chargehub.R
+import com.wisemen.chargehub.SharedRes
+import com.wisemen.chargehub.toStringResource
 import com.wisemen.chargehub.ui.theme.AppTheme
 import com.wisemen.chargehub.ui.theme.Colors
 import com.wisemen.chargehub.ui.theme.TextStyles
@@ -80,7 +82,7 @@ object TextFields {
         visualTransformation: VisualTransformation = VisualTransformation.None,
         trailingIcon: @Composable (() -> Unit)? = null,
         leadingIcon: @Composable (() -> Unit)? = null,
-        hint: String = stringResource(R.string.type_here),
+        hint: String = SharedRes.strings.type_here.toStringResource(),
         maxLines: Int = Int.MAX_VALUE,
     ) {
 
@@ -156,9 +158,9 @@ object TextFields {
 
         Box(modifier, contentAlignment = Alignment.CenterEnd) {
             EditText(
-                errorMessage = if (!isValid) stringResource(R.string.password_is_required) else null,
+                errorMessage = if (!isValid) SharedRes.strings.password_is_required.toStringResource() else null,
                 visualTransformation = if (isPasswordVisible) VisualTransformation.None else PasswordVisualTransformation(),
-                topLabel = stringResource(R.string.password),
+                topLabel = SharedRes.strings.password.toStringResource(),
                 input = currentPassword,
                 onInputChanged = {
                     onInputChanged(it)
@@ -178,8 +180,8 @@ object TextFields {
     ) {
         EditText(
             modifier = modifier,
-            errorMessage = if (!isValid) stringResource(R.string.email_is_required) else null,
-            topLabel = stringResource(id = R.string.email),
+            errorMessage = if (!isValid) SharedRes.strings.email_is_required.toStringResource() else null,
+            topLabel = SharedRes.strings.email.toStringResource(),
             input = email,
             onInputChanged = {
                 onInputChanged(it)
