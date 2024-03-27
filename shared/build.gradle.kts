@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.sqlDelight)
     alias(libs.plugins.nativeCoroutines)
     id("dev.icerock.mobile.multiplatform-resources")
+
 }
 
 kotlin {
