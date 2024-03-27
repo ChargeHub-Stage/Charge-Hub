@@ -7,7 +7,7 @@ extension Color {
     static let periWinkel = Color(UIColor(hex: "CDD4E3"))
     static let solitude = Color(UIColor(hex: "E9EDF6"))
     static let catSkillWhite = Color(UIColor(hex: "F0F4FA"))
-    static let acid = Color(UIColor(hex: "D7FC51"))
+    static let acid = Color(UIColor(hex: "CCFF00"))
     static let secondary = Color(UIColor(hex: "235757"))
     static let tertiary = Color(UIColor(hex: "F0FFB6"))
     static let rebel = Color(UIColor(hex: "EB333D"))
@@ -18,6 +18,7 @@ extension Color {
     static let mediumGray = Color(UIColor(hex: "888888"))
     static let smoke = Color(UIColor(hex: "333333"))
     static let white = Color(UIColor(hex: "FFFFFF"))
+    static let veryLightGray = Color(UIColor(hex: "F4F4F4"))
 }
 
 extension UIColor {
