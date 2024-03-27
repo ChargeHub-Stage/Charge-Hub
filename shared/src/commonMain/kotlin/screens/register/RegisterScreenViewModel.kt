@@ -19,16 +19,21 @@ class RegisterScreenViewModel :
     private val carRepository: RemoteCarRepository by inject()
     private val userRepository: RemoteUserRepository by inject()
 
+    fun getState() : RegisterScreenUiState {
+        return state.value
+    }
 
     override fun onAction(action: RegisterScreenUiAction) = viewModelScope.coroutineScope.launch {
         when (action) {
             is RegisterScreenUiAction.OnNextClickedAction -> handleNext()
             is RegisterScreenUiAction.OnPreviousClickedAction -> handlePrevious()
-            is RegisterScreenUiAction.OnEmailChangedAction -> handleFieldChange(
-                StateFields.EMAIL,
-                action.email,
-                ValidationRules::isEmailValid
-            )
+            is RegisterScreenUiAction.OnEmailChangedAction -> {
+                handleFieldChange(
+                    StateFields.EMAIL,
+                    action.email,
+                    ValidationRules::isEmailValid
+                )
+            }
 
             is RegisterScreenUiAction.OnFirstNameChangedAction -> handleFieldChange(
                 StateFields.FIRSTNAME,

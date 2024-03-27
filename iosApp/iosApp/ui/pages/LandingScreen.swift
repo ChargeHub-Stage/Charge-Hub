@@ -26,13 +26,14 @@ struct LandingScreenView: View {
 
 struct HeaderComponent: View {
     let strings = StringsHelper().getResourceStrings()
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text(strings.get(id: SharedRes.strings().streamline_your_day_with, args: []))
                 .font(.system(size: 64))
                 .fontWeight(.bold)
                 .foregroundColor(.white)
-            Text(strings.get(id: SharedRes.strings().charge, args:[]))
+            Text(strings.get(id: SharedRes.strings().charge, args: []))
                 .font(.system(size: 64))
                 .fontWeight(.bold)
                 .foregroundColor(.acid)
@@ -45,10 +46,10 @@ struct HeaderComponent: View {
 
 struct Buttons: View {
     var navigation: NavigationController
-    
+    let strings = StringsHelper().getResourceStrings()
     var body: some View {
         VStack {
-            Button("Login") {
+            Button(strings.get(id: SharedRes.strings().login, args: [])) {
                 navigation.navigateTo(.login)
             }
             .frame(maxWidth: .infinity, maxHeight: 48)
@@ -57,7 +58,7 @@ struct Buttons: View {
             .background(Color.acid)
             .cornerRadius(10)
             Spacer().frame(height: 16)
-            Button("Registreren") {
+            Button(strings.get(id: SharedRes.strings().register_, args: [])) {
                 navigation.navigateTo(.register)
             }
             .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, maxHeight: 48)

@@ -7,6 +7,7 @@ struct LoginScreenView: View {
     @ObservedObject var navigation: NavigationController
     @Environment(\.presentationMode) var presentationMode
     @StateViewModel var viewModel = LoginScreenViewModel(firebaseRepo: FirebaseRepository())
+    let strings = StringsHelper().getResourceStrings()
 
     var body: some View {
         HStack {
@@ -17,24 +18,24 @@ struct LoginScreenView: View {
                     Image(systemName: "chevron.left")
                         .foregroundStyle(.black)
                         .fontWeight(.bold)
-                    Text("Terug")
+                    Text(strings.get(id: SharedRes.strings().back_button, args: []))
                         .foregroundStyle(.black)
                 }
             }
             .padding(.leading, 5)
             Spacer()
-            Text("Aanmelden")
+            Text(strings.get(id: SharedRes.strings().login, args: []))
                 .font(.system(size: 17))
                 .fontWeight(.semibold)
             Spacer()
         }
         .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, alignment: .center)
         VStack(spacing: 0) {
-            Text("Welkom Terug!")
+            Text(strings.get(id: SharedRes.strings().welcome_back, args: []))
                 .font(.system(size: 28))
                 .fontWeight(.bold)
                 .padding(.bottom, 5)
-            Text("Fijn om je terug te zien")
+            Text(strings.get(id: SharedRes.strings().login_welcome_text, args: []))
             Spacer().frame(height: 60)
             VStack(spacing: 0) {
                 EmailTextField(
@@ -42,7 +43,8 @@ struct LoginScreenView: View {
                         get: { viewModel.getState().email },
                         set: { value in viewModel.setEmail(email: value) }
                     ),
-                    isValid: true
+                    isValid: true,
+                    clearInputAction: { viewModel.onAction(action: LoginScreenUiAction.OnEmailChangedAction(email: "")) }
                 )
                 Spacer().frame(height: 14)
                 VStack(spacing: 0) {
@@ -52,13 +54,11 @@ struct LoginScreenView: View {
                             set: { value in viewModel.setPassword(password: value)}
                         ),
                         isValid: true,
-                        isPasswordVisible: Binding(
-                            get: { viewModel.getState().passwordVisibility },
-                            set: { value in viewModel.setPasswordVisibility(visibility: value) }
-                        )
+                        isPasswordVisible: true,
+                        clearInputAction: { viewModel.onAction(action: LoginScreenUiAction.OnPasswordChangedAction(password: "")) }
                     ).padding(.bottom, 4)
                     HStack {
-                        Text("Wachtwoord vergeten?").font(.system(size: 12)).fontWeight(.regular)
+                        Text(strings.get(id: SharedRes.strings().forgot_password, args: [])).font(.system(size: 12)).fontWeight(.regular)
                         Spacer()
                     }
                 }
@@ -67,7 +67,7 @@ struct LoginScreenView: View {
                     viewModel.onAction(action: LoginScreenUiAction.OnClickedLoginButtonAction())
                     navigation.navigateTo(.home)
                 }) {
-                    Text("Aanmelden")
+                    Text(strings.get(id: SharedRes.strings().login, args: []))
                         .font(.system(size: 16))
                         .fontWeight(.bold)
                         .foregroundStyle(.black)

@@ -1,13 +1,25 @@
 import SwiftUI
 import Shared
-
 struct EditText: View {
-    let strings = StringsHelper().getResourceStrings()
     @Binding var input: String
     var topLabel: String?
     var errorMessage: String?
     var shadowRadius: CGFloat = 10
     var isSecure: Bool = false
+    var clearInputIcon: Bool = true
+    var clearInputAction: () -> Void = {}
+
+    let strings = StringsHelper().getResourceStrings()
+
+    
+    private var clearButton: some View {
+           Button(action: clearInputAction) {
+               Image(systemName: "xmark")
+                   .foregroundColor(.black)
+                   .frame(width: 24, height: 24)
+           }
+           .padding(.trailing, 8)
+       }
     
     var body: some View {
         let typeHere = strings.get(id: SharedRes.strings().type_here, args: [])
@@ -19,10 +31,13 @@ struct EditText: View {
                 SecureField(typeHere, text: $input)
                     .modifier(InputFieldModifier(isSecure: isSecure))
                     .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
+                    .overlay(clearInputIcon ? clearButton : nil, alignment: .trailing)
             } else {
                 TextField(typeHere, text: $input)
                     .modifier(InputFieldModifier(isSecure: isSecure))
                     .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
+                    .overlay(clearInputIcon ? clearButton : nil, alignment: .trailing)
+
             }
             if let errorMessage = errorMessage {
                 HStack {
@@ -55,41 +70,36 @@ struct InputFieldModifier: ViewModifier {
 struct PasswordTextField: View {
     @Binding var password: String
     var isValid: Bool
-    @Binding var isPasswordVisible: Bool
-    let strings = StringsHelper().getResourceStrings()
+    var isPasswordVisible: Bool
+    var clearInputAction: () -> Void
     
+    let strings = StringsHelper().getResourceStrings()
+
     var body: some View {
-        EditText(input: $password, topLabel:
-                    strings.get(id: SharedRes.strings().password, args: []), isSecure: !isPasswordVisible)
-        .overlay(
-            Button(action: {
-                isPasswordVisible.toggle()
-            }) {
-                Image(systemName: isPasswordVisible ? "eye.slash.fill" : "eye.fill")
-                    .foregroundColor(.blackPearl)
-                    .padding(EdgeInsets(top: 30, leading : 0, bottom: 0, trailing: 8))
-            }
-                .frame(maxHeight: .infinity, alignment: .center),
-            alignment: .trailing
-        )
-        if !isValid {
-            HStack {
-                Image(systemName: "exclamationmark.circle.fill")
-                    .foregroundColor(.red)
-                Text(strings.get(id: SharedRes.strings().password_is_required, args: []))
-                    .foregroundColor(.red)
-            }
-        }
+        EditText(
+            input: $password,
+            topLabel: strings.get(id: SharedRes.strings().password, args: <#T##[Any]#>),
+            errorMessage: isValid ? nil : strings.get(id: SharedRes.strings().password_is_required, args: []),
+            isSecure: !isPasswordVisible,
+            clearInputIcon: true,
+            clearInputAction: clearInputAction)
     }
 }
 
 
 struct EmailTextField: View {
-    let strings = StringsHelper().getResourceStrings()
     @Binding var email: String
     var isValid: Bool
-    
+    var clearInputAction: () -> Void
+    let strings = StringsHelper().getResourceStrings()
+
     var body: some View {
-        EditText(input: $email, topLabel: strings.get(id: SharedRes.strings().email, args: []) , errorMessage: isValid ? nil : strings.get(id: SharedRes.strings().email_is_required, args: []))
+        EditText(
+            input: $email,
+            topLabel: strings.get(id: SharedRes.strings().email, args: []),
+            errorMessage: isValid ? nil : strings.get(id: SharedRes.strings().email_is_required, args: []),
+            clearInputIcon: true,
+            clearInputAction: clearInputAction)
+        
     }
 }
