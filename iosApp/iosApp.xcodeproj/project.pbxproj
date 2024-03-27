@@ -138,7 +138,6 @@
 		DD5877F62BA34522000CD0DE /* ui */ = {
 			isa = PBXGroup;
 			children = (
-				DD98B9242BA84E8900CFC5F1 /* images */,
 				DD98B9212BA84E4800CFC5F1 /* pages */,
 				DD5877F72BA34552000CD0DE /* color.swift */,
 				DD5877F92BA34581000CD0DE /* buttons.swift */,
@@ -154,13 +153,6 @@
 				DD98B9222BA84E6D00CFC5F1 /* LandingScreen.swift */,
 			);
 			path = pages;
-			sourceTree = "<group>";
-		};
-		DD98B9242BA84E8900CFC5F1 /* images */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

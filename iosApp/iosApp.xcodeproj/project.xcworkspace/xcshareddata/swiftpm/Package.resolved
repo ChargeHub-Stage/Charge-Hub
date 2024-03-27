@@ -1,5 +1,5 @@
 {
-  "originHash" : "74f53ad56dd92dcc8a88b04e3c8101ed8d7bc001cd9ce80b176f36c05ed16483",
+  "originHash" : "b94ae2ce7577816da66b8576836f8eeb7e7cd9f5d71bd22d5337759d399ed86a",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -92,15 +92,6 @@
       }
     },
     {
-      "identity" : "kmp-nativecoroutines",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/rickclephas/KMP-NativeCoroutines.git",
-      "state" : {
-        "branch" : "master",
-        "revision" : "43a56ae4eac2da7ebf4935be03b28e651483669e"
-      }
-    },
-    {
       "identity" : "leveldb",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/leveldb.git",
@@ -125,15 +116,6 @@
       "state" : {
         "revision" : "540318ecedd63d883069ae7f1ed811a2df00b6ac",
         "version" : "2.4.0"
-      }
-    },
-    {
-      "identity" : "rxswift",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/ReactiveX/RxSwift.git",
-      "state" : {
-        "revision" : "9dcaa4b333db437b0fbfaf453fad29069044a8b4",
-        "version" : "6.6.0"
       }
     },
     {

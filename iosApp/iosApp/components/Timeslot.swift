@@ -21,8 +21,11 @@ struct Timeslot: View {
                         .fontWeight(.semibold)
                         .font(.system(size: 17))
                     Spacer()
-                    Image(systemName: "chevron.right")
-                        .fontWeight(.semibold)
+                    Button(action: {}) {
+                        Image(systemName: "chevron.right")
+                            .fontWeight(.semibold)
+                            .foregroundStyle(.black)
+                    }
                 }
                 HStack(spacing: 0) {
                     VStack(alignment: .leading) {
@@ -31,14 +34,16 @@ struct Timeslot: View {
                             .foregroundStyle(Color.mediumGray)
                         Text("11:00 - 14:00")
                     }
-                    .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
+                    Spacer()
+                    Divider().frame(height: 25)
+                    Spacer()
                     VStack(alignment: .leading) {
                         Text("OPLAADTIJD")
                             .font(.system(size: 10))
                             .foregroundStyle(Color.mediumGray)
                         Text("3 uur")
                     }
-                    .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
+                    Spacer()
                 }
                 .frame(maxWidth: .infinity, maxHeight: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
             }
