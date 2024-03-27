@@ -4,11 +4,12 @@ import Shared
 struct NextButton: View {
     var state: RegisterScreenUiState
     let onAction: (RegisterScreenUiAction) -> Void
-    
+    let strings = StringsHelper().getResourceStrings()
+
     
     var body: some View {
         
-        PrimaryButton(text: "Volgende",
+        PrimaryButton(text: strings.get(id: SharedRes.strings().next, args: []),
                       enabled: Binding(get: { /* calculateButtonEnableState(for: state) */ true },
                                        set: { _ in }),
                       action: {
@@ -38,10 +39,11 @@ private func calculateButtonEnableState(for state: RegisterScreenUiState) -> Boo
 
 struct SkipTextButton: View {
     let onAction: () -> Void
-    
+    let strings = StringsHelper().getResourceStrings()
+
     var body: some View {
         Button(action: onAction) {
-            Text("Skip")
+            Text(strings.get(id: SharedRes.strings().skip, args: []))
                 .underline()
                 .fontWeight(.bold)
         }
@@ -68,6 +70,7 @@ struct CircularProfilePicture: View {
 
 struct PrivacySwitch: View {
     @Binding var isChecked: Bool
+    let strings = StringsHelper().getResourceStrings()
 
     var body: some View {
         HStack() {
@@ -77,7 +80,7 @@ struct PrivacySwitch: View {
             Button(action: {
                 
             }) {
-                Link("Privacybeleid", destination: URL(string: "https://policies.google.com/privacy")!)
+                Link(strings.get(id: SharedRes.strings().privacy, args: []), destination: URL(string: "https://policies.google.com/privacy")!)
                     .font(.body)
                     .foregroundColor(.blue)
             }

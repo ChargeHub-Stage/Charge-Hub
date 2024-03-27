@@ -9,6 +9,9 @@ struct EditText: View {
     var clearInputIcon: Bool = true
     var clearInputAction: () -> Void = {}
 
+    let strings = StringsHelper().getResourceStrings()
+
+    
     private var clearButton: some View {
            Button(action: clearInputAction) {
                Image(systemName: "xmark")
@@ -19,17 +22,18 @@ struct EditText: View {
        }
     
     var body: some View {
+        let typeHere = strings.get(id: SharedRes.strings().type_here, args: [])
         VStack(alignment: .leading) {
             if let topLabel = topLabel {
                 Text(topLabel).padding(.bottom, 4)
             }
             if isSecure {
-                SecureField("Type here", text: $input)
+                SecureField(typeHere, text: $input)
                     .modifier(InputFieldModifier(isSecure: isSecure))
                     .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
                     .overlay(clearInputIcon ? clearButton : nil, alignment: .trailing)
             } else {
-                TextField("Type here", text: $input)
+                TextField(typeHere, text: $input)
                     .modifier(InputFieldModifier(isSecure: isSecure))
                     .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
                     .overlay(clearInputIcon ? clearButton : nil, alignment: .trailing)
@@ -68,8 +72,17 @@ struct PasswordTextField: View {
     var isValid: Bool
     var isPasswordVisible: Bool
     var clearInputAction: () -> Void
+    
+    let strings = StringsHelper().getResourceStrings()
+
     var body: some View {
-        EditText(input: $password, topLabel: "Wachtwoord", errorMessage: isValid ? nil : "Password is required" ,isSecure: !isPasswordVisible, clearInputIcon: true ,clearInputAction: clearInputAction)
+        EditText(
+            input: $password,
+            topLabel: strings.get(id: SharedRes.strings().password, args: <#T##[Any]#>),
+            errorMessage: isValid ? nil : strings.get(id: SharedRes.strings().password_is_required, args: []),
+            isSecure: !isPasswordVisible,
+            clearInputIcon: true,
+            clearInputAction: clearInputAction)
     }
 }
 
@@ -78,9 +91,15 @@ struct EmailTextField: View {
     @Binding var email: String
     var isValid: Bool
     var clearInputAction: () -> Void
-    
+    let strings = StringsHelper().getResourceStrings()
+
     var body: some View {
-        EditText(input: $email, topLabel: "E-mail", errorMessage: isValid ? nil : "Email is required", clearInputIcon: true ,clearInputAction: clearInputAction)
+        EditText(
+            input: $email,
+            topLabel: strings.get(id: SharedRes.strings().email, args: []),
+            errorMessage: isValid ? nil : strings.get(id: SharedRes.strings().email_is_required, args: []),
+            clearInputIcon: true,
+            clearInputAction: clearInputAction)
         
     }
 }
