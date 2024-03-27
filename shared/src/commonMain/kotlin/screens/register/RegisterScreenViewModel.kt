@@ -9,7 +9,6 @@ import db.repository.user.RemoteUserRepository
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.koin.core.component.inject
-import org.lighthousegames.logging.logging
 import screens.AbstractViewModel
 
 class RegisterScreenViewModel :
@@ -25,7 +24,6 @@ class RegisterScreenViewModel :
     }
 
     override fun onAction(action: RegisterScreenUiAction) = viewModelScope.coroutineScope.launch {
-        val logging = logging()
         when (action) {
             is RegisterScreenUiAction.OnNextClickedAction -> handleNext()
             is RegisterScreenUiAction.OnPreviousClickedAction -> handlePrevious()
@@ -65,7 +63,6 @@ class RegisterScreenViewModel :
 
 
             is RegisterScreenUiAction.OnPrivacyCheckedChangedAction -> _state.update {
-                logging.d { "PRIVACY SWITCH ${!state.value.isPrivacyChecked}" }
                 it.copy(
                     isPrivacyChecked = !state.value.isPrivacyChecked
                 )

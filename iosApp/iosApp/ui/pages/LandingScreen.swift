@@ -25,6 +25,7 @@ struct LandingScreenView: View {
 }
 
 struct HeaderComponent: View {
+    let String
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text("Stroomlijn je dag met")
