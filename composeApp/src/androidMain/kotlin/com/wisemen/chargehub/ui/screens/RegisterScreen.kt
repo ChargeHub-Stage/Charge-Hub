@@ -49,7 +49,9 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.ramcosta.composedestinations.annotation.Destination
 import com.wisemen.chargehub.R
+import com.wisemen.chargehub.SharedRes
 import com.wisemen.chargehub.nav.ChargeHubNavGraph
+import com.wisemen.chargehub.toStringResource
 import com.wisemen.chargehub.ui.components.Buttons.PrimaryButton
 import com.wisemen.chargehub.ui.components.TextFields
 import com.wisemen.chargehub.ui.components.TopBar
@@ -110,9 +112,9 @@ fun RegisterLayout(
 ) {
 
     val topBarTitle = when (state.currentRegisterState) {
-        CurrentRegisterState.EMAIL -> stringResource(R.string.e_mail)
-        CurrentRegisterState.CAR_CONNECT -> stringResource(R.string.vehicle)
-        CurrentRegisterState.PROFILE -> stringResource(R.string.profile)
+        CurrentRegisterState.EMAIL -> SharedRes.strings.email.toStringResource()
+        CurrentRegisterState.CAR_CONNECT -> SharedRes.strings.vehicle.toStringResource()
+        CurrentRegisterState.PROFILE -> SharedRes.strings.profile.toStringResource()
         else -> {
             ""
         }
@@ -150,7 +152,7 @@ fun EmailRegisterStep(state: RegisterScreenUiState, onAction: (RegisterScreenUiA
     )
     Text(
         modifier = Modifier.padding(top = 4.dp, bottom = 27.dp),
-        text = stringResource(R.string.privacy),
+        text = SharedRes.strings.privacy.toStringResource(),
         style = TextStyles.bottomLabel
     )
     NextButton(state, onAction)
@@ -174,22 +176,22 @@ fun ProfileCompletionStep(
             modifier = Modifier.padding(bottom = 21.dp),
             input = state.firstName,
             onInputChanged = { onAction(RegisterScreenUiAction.OnFirstNameChangedAction(it)) },
-            topLabel = stringResource(R.string.firstname),
+            topLabel = SharedRes.strings.firstname.toStringResource(),
             trailingIcon = {
                 ClearFieldIcon { onAction(RegisterScreenUiAction.OnFirstNameChangedAction("")) }
             },
-            errorMessage = if (state.isFirstNameValid) null else stringResource(R.string.first_name_validation_error)
+            errorMessage = if (state.isFirstNameValid) null else SharedRes.strings.first_name_validation_error.toStringResource()
         )
 
         TextFields.EditText(
             modifier = Modifier.padding(bottom = 21.dp),
             input = state.lastName,
             onInputChanged = { onAction(RegisterScreenUiAction.OnLastNameChangedAction(it)) },
-            topLabel = stringResource(R.string.lastname),
+            topLabel = SharedRes.strings.lastname.toStringResource(),
             trailingIcon = {
                 ClearFieldIcon { onAction(RegisterScreenUiAction.OnLastNameChangedAction("")) }
             },
-            errorMessage = if (state.isLastNameValid) null else stringResource(R.string.last_name_validation_error)
+            errorMessage = if (state.isLastNameValid) null else SharedRes.strings.last_name_validation_error.toStringResource()
 
         )
 
@@ -226,14 +228,14 @@ fun CarConnectStep(state: RegisterScreenUiState, onAction: (RegisterScreenUiActi
         modifier = Modifier.padding(top = 34.dp, bottom = 16.dp),
         input = state.vin,
         onInputChanged = { onAction(RegisterScreenUiAction.OnCarIdChangedAction(it)) },
-        topLabel = stringResource(R.string.your_car_id),
+        topLabel = SharedRes.strings.your_car_id.toStringResource(),
         trailingIcon = { ClearFieldIcon { onAction(RegisterScreenUiAction.OnCarIdChangedAction("")) } },
-        errorMessage = if (state.isVinValid) null else stringResource(R.string.invalid_car_id)
+        errorMessage = if (state.isVinValid) null else SharedRes.strings.invalid_car_id.toStringResource()
     )
 
     PrimaryButton(
         modifier = Modifier.fillMaxWidth(),
-        text = stringResource(R.string.next),
+        text = SharedRes.strings.next.toStringResource(),
         onClick = {
             //if (state.isCarIdValid) {
                 onAction(RegisterScreenUiAction.OnNextClickedAction)
@@ -260,19 +262,19 @@ fun PermissionStep(onAction: (RegisterScreenUiAction) -> Unit) {
     ) {
         Text(
             modifier = Modifier.padding(top = 89.dp),
-            text = stringResource(R.string.allow_notis),
+            text = SharedRes.strings.allow_notis.toStringResource(),
             style = TextStyles.mediumTitle,
             textAlign = TextAlign.Center
         )
         Text(
             modifier = Modifier.padding(bottom = 43.dp),
-            text = stringResource(R.string.noti_info),
+            text = SharedRes.strings.noti_info.toStringResource(),
             textAlign = TextAlign.Center
         )
 
         PrimaryButton(
             modifier = Modifier.padding(bottom = 16.dp).fillMaxWidth(),
-            text = stringResource(R.string.allow_notis),
+            text = SharedRes.strings.allow_notis.toStringResource(),
             colors = ButtonDefaults.primaryButtonColors(),
             textStyle = TextStyles.boldText,
         ) {
@@ -375,18 +377,18 @@ fun PrivacySwitch(
             })
         Text(
             modifier = Modifier.padding(start = 8.dp),
-            text = stringResource(R.string.privacy1),
+            text = SharedRes.strings.privacy1.toStringResource(),
             style = TextStyles.bottomLabel
         )
 
         val uriHandler = LocalUriHandler.current
         Text(
             modifier = Modifier.clickable { uriHandler.openUri("https://policies.google.com/privacy") },
-            text = stringResource(R.string.privacy2),
+            text = SharedRes.strings.privacy2.toStringResource(),
             textDecoration = TextDecoration.Underline,
             style = TextStyles.bottomLabel,
         )
-        Text(stringResource(R.string.privacy3), style = TextStyles.bottomLabel)
+        Text(SharedRes.strings.privacy3.toStringResource(), style = TextStyles.bottomLabel)
     }
 }
 
