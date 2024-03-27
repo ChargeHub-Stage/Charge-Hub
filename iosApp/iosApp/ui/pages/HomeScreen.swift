@@ -6,6 +6,6 @@ struct HomeScreen: View {
     var user = FirebaseRepository().getCurrentUserUid()
     
     var body: some View {
-        Text("Logged in User uid: \(user)")
+        Text(user)
     }
 }

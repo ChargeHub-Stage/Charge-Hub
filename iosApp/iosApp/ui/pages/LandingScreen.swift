@@ -15,25 +15,7 @@ struct LandingScreenView: View {
             VStack(alignment: .leading) {
                 HeaderComponent()
                 Spacer()
-                VStack {
-                    Button("Login") {
-                        navigation.navigateTo(.login)
-                    }
-                    .frame(maxWidth: .infinity, maxHeight: 48)
-                    .padding(.horizontal, 18)
-                    .foregroundStyle(Color.blackPearl)
-                    .background(Color.acid)
-                    .cornerRadius(10)
-                    Button("Registreren") {
-                        navigation.navigateTo(.register)
-                    }
-                    .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, maxHeight: 48)
-                    .padding(.horizontal, 18)
-                    .foregroundStyle(.white)
-                    .background(Color.smoke)
-                    .cornerRadius(10)
-                }
-                .padding(.bottom, 50)
+                Buttons(navigation: navigation)
             }
             .padding(.horizontal, 16)
             .padding(.top, 46)
@@ -60,14 +42,30 @@ struct HeaderComponent: View {
     }
 }
 
-//Button(action: {}, label: {
-//    NavigationLink(destination: LoginScreenView()) {
-//        Text("Login")
-//    }
-//})
-
-//Button(action: {}, label: {
-//    NavigationLink(destination: RegistrationScreenView()) {
-//        Text("Registreren")
-//    }
-//})
+struct Buttons: View {
+    var navigation: NavigationController
+    
+    var body: some View {
+        VStack {
+            Button("Login") {
+                navigation.navigateTo(.login)
+            }
+            .frame(maxWidth: .infinity, maxHeight: 48)
+            .padding(.horizontal, 18)
+            .foregroundStyle(Color.blackPearl)
+            .background(Color.acid)
+            .cornerRadius(10)
+            Spacer().frame(height: 16)
+            Button("Registreren") {
+                navigation.navigateTo(.register)
+            }
+            .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, maxHeight: 48)
+            .padding(.horizontal, 18)
+            .foregroundStyle(.white)
+            .background(Color.smoke)
+            .cornerRadius(10)
+            .padding(.bottom, 16)
+        }
+        .padding(.bottom, 50)
+    }
+}
