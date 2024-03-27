@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlinSerialization)
     alias(libs.plugins.sqlDelight)
     alias(libs.plugins.nativeCoroutines)
+    id("dev.icerock.mobile.multiplatform-resources")
 }
 
 kotlin {
@@ -60,16 +61,33 @@ kotlin {
 
             api(libs.logging)
 
-        }
-        androidMain.dependencies {
-            implementation(libs.ktor.client.okhttp)
-            implementation(libs.sqldelight.android)
-        }
-        iosMain.dependencies {
-            implementation(libs.ktor.client.darwin)
-            implementation(libs.sqldelight.native)
+            implementation(libs.resources)
+            api(libs.resources.compose)
+            api(libs.resources.test)
+
         }
 
+        androidMain {
+            dependsOn(commonMain.get())
+            dependencies {
+                implementation(libs.ktor.client.okhttp)
+                implementation(libs.sqldelight.android)
+            }
+        }
+        val iosX64Main by getting
+        val iosArm64Main by getting
+        val iosSimulatorArm64Main by getting
+
+        val iosMain by creating {
+            dependsOn(commonMain.get())
+            iosX64Main.dependsOn(this)
+            iosArm64Main.dependsOn(this)
+            iosSimulatorArm64Main.dependsOn(this)
+            dependencies {
+                implementation(libs.ktor.client.darwin)
+                implementation(libs.sqldelight.native)
+            }
+        }
     }
 }
 
@@ -83,6 +101,11 @@ android {
     defaultConfig {
         minSdk = libs.versions.android.minSdk.get().toInt()
     }
+}
+
+multiplatformResources {
+    multiplatformResourcesPackage = "com.wisemen.chargehub"
+    multiplatformResourcesClassName = "SharedRes"
 }
 
 sqldelight {

@@ -11,6 +11,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import com.wisemen.chargehub.R
+import com.wisemen.chargehub.SharedRes
+import com.wisemen.chargehub.toStringResource
 import com.wisemen.chargehub.ui.components.Buttons
 import com.wisemen.chargehub.ui.components.primaryButtonColors
 import com.wisemen.chargehub.ui.theme.TextStyles
@@ -29,7 +31,7 @@ fun NextButton(state: RegisterScreenUiState, onAction: (RegisterScreenUiAction) 
     }
     Buttons.PrimaryButton(
         modifier = Modifier.fillMaxWidth(),
-        text = stringResource(R.string.next),
+        text = SharedRes.strings.next.toStringResource(),
         onClick = {
             onAction(RegisterScreenUiAction.OnNextClickedAction)
         },
@@ -46,7 +48,7 @@ fun SkipTextButton(
 ) {
     Text(
         modifier = modifier.clickable { onAction() },
-        text = stringResource(R.string.skip),
+        text = SharedRes.strings.skip.toStringResource(),
         textDecoration = TextDecoration.Underline,
         fontWeight = FontWeight.W700,
         textAlign = textAlign

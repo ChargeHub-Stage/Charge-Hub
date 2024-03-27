@@ -25,13 +25,14 @@ struct LandingScreenView: View {
 }
 
 struct HeaderComponent: View {
+    let strings = StringsHelper().getResourceStrings()
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            Text("Stroomlijn je dag met")
+            Text(strings.get(id: SharedRes.strings().streamline_your_day_with, args: []))
                 .font(.system(size: 64))
                 .fontWeight(.bold)
                 .foregroundColor(.white)
-            Text("Charge\nHub.")
+            Text(strings.get(id: SharedRes.strings().charge, args:[]))
                 .font(.system(size: 64))
                 .fontWeight(.bold)
                 .foregroundColor(.acid)

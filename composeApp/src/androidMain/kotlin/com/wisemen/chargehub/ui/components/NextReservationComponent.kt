@@ -15,19 +15,15 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.wisemen.chargehub.R
+import com.wisemen.chargehub.SharedRes
+import com.wisemen.chargehub.toStringResource
 import com.wisemen.chargehub.ui.theme.AppTheme
 import com.wisemen.chargehub.ui.theme.Colors
 import com.wisemen.chargehub.ui.theme.TextStyles
-import org.w3c.dom.Text
 
 @Preview(showBackground = true)
 @Composable
@@ -50,10 +46,17 @@ fun UpcomingReservation(
 
                         Column(modifier = Modifier.padding(start = 4.35.dp)) {
                             Text(
-                                text = stringResource(R.string.laadpaal, chargehubName),
+                                text = SharedRes.strings.chargehub.toStringResource(
+                                    listOf(
+                                        chargehubName
+                                    )
+                                ),
                                 style = TextStyles.nextReservationCardTitle
                             )
-                            Text(text = stringResource(R.string._28_september), style = TextStyles.nextReservationCardSubTitle)
+                            Text(
+                                text = SharedRes.strings._28_september.toStringResource(),
+                                style = TextStyles.nextReservationCardSubTitle
+                            )
                         }
                         Spacer(modifier = Modifier.weight(1F))
                         Icon(
@@ -82,7 +85,7 @@ fun StartTimeInformation(startTime: String) {
     Column {
         Text(
             modifier = Modifier.padding(end = 44.69.dp),
-            text = stringResource(R.string.start),
+            text = SharedRes.strings.start.toStringResource(),
             style = TextStyles.nextReservationHeader
         )
         Text(
@@ -97,14 +100,18 @@ fun StartTimeInformation(startTime: String) {
 fun TimeSlotInformation(startHour: String, endHour: String) {
     Column {
         Text(
-            text = stringResource(R.string.jouw_tijdslot),
+            text = SharedRes.strings.your_timeslot.toStringResource(),
             style = TextStyles.nextReservationHeader
         )
-        Text(text = stringResource(
-            R.string.start_end_hour,
-            startHour,
-            endHour
-        ), style = TextStyles.nextReservationText)
+        Text(
+            text =
+            SharedRes.strings.start_end_hour.toStringResource(
+                listOf(
+                    startHour,
+                    endHour
+                )
+            ), style = TextStyles.nextReservationText
+        )
     }
 }
 
@@ -123,6 +130,7 @@ fun IconDisplay() {
         )
     }
 }
+
 @Composable
 fun ReservationBox(content: @Composable () -> Unit) {
     Box(
