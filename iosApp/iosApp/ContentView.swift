@@ -11,7 +11,7 @@ struct ContentView: View {
         case .login:
             LoginScreenView(navigation: navController)
         case .register:
-            RegistrationScreenView(navigation: navController)
+            RegistrationScreen(navigation: navController)
         case .home:
             HomeScreen(navigation: navController)
         case .none:

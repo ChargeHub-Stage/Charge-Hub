@@ -30,6 +30,7 @@
 		DD5877FA2BA34581000CD0DE /* buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5877F92BA34581000CD0DE /* buttons.swift */; };
 		DD877E6A2BA4730200608CF5 /* textStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD877E692BA4730200608CF5 /* textStyles.swift */; };
 		DD877E6C2BA4731300608CF5 /* textFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD877E6B2BA4731300608CF5 /* textFields.swift */; };
+		DD87B3422BB409C900A53B5F /* RegisterScreenComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD87B3412BB409C900A53B5F /* RegisterScreenComponents.swift */; };
 		DD98B9232BA84E6D00CFC5F1 /* LandingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD98B9222BA84E6D00CFC5F1 /* LandingScreen.swift */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +52,7 @@
 		DD5877F92BA34581000CD0DE /* buttons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = buttons.swift; sourceTree = "<group>"; };
 		DD877E692BA4730200608CF5 /* textStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = textStyles.swift; sourceTree = "<group>"; };
 		DD877E6B2BA4731300608CF5 /* textFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = textFields.swift; sourceTree = "<group>"; };
+		DD87B3412BB409C900A53B5F /* RegisterScreenComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterScreenComponents.swift; sourceTree = "<group>"; };
 		DD98B9222BA84E6D00CFC5F1 /* LandingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -110,6 +112,7 @@
 		7555FF7D242A565900829871 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
+				DD87B3402BB409B800A53B5F /* components */,
 				DD564B662BA897A7001D1EED /* viewmodel */,
 				DD5877F62BA34522000CD0DE /* ui */,
 				64BF5C2C2BA31C0E00338446 /* GoogleService-Info.plist */,
@@ -150,6 +153,14 @@
 				DD877E6B2BA4731300608CF5 /* textFields.swift */,
 			);
 			path = ui;
+			sourceTree = "<group>";
+		};
+		DD87B3402BB409B800A53B5F /* components */ = {
+			isa = PBXGroup;
+			children = (
+				DD87B3412BB409C900A53B5F /* RegisterScreenComponents.swift */,
+			);
+			path = components;
 			sourceTree = "<group>";
 		};
 		DD98B9212BA84E4800CFC5F1 /* pages */ = {
@@ -279,6 +290,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD87B3422BB409C900A53B5F /* RegisterScreenComponents.swift in Sources */,
 				DD98B9232BA84E6D00CFC5F1 /* LandingScreen.swift in Sources */,
 				DD5877F82BA34552000CD0DE /* color.swift in Sources */,
 				641E4B4A2BAB30E400AC738D /* RegistrationScreen.swift in Sources */,

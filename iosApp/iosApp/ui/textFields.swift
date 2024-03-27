@@ -1,11 +1,22 @@
 import SwiftUI
-
+import Shared
 struct EditText: View {
     @Binding var input: String
     var topLabel: String?
     var errorMessage: String?
     var shadowRadius: CGFloat = 10
     var isSecure: Bool = false
+    var clearInputIcon: Bool = true
+    var clearInputAction: () -> Void = {}
+
+    private var clearButton: some View {
+           Button(action: clearInputAction) {
+               Image(systemName: "xmark")
+                   .foregroundColor(.black)
+                   .frame(width: 24, height: 24)
+           }
+           .padding(.trailing, 8)
+       }
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -16,10 +27,13 @@ struct EditText: View {
                 SecureField("Type here", text: $input)
                     .modifier(InputFieldModifier(isSecure: isSecure))
                     .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
+                    .overlay(clearInputIcon ? clearButton : nil, alignment: .trailing)
             } else {
                 TextField("Type here", text: $input)
                     .modifier(InputFieldModifier(isSecure: isSecure))
                     .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
+                    .overlay(clearInputIcon ? clearButton : nil, alignment: .trailing)
+
             }
             if let errorMessage = errorMessage {
                 HStack {
@@ -52,29 +66,10 @@ struct InputFieldModifier: ViewModifier {
 struct PasswordTextField: View {
     @Binding var password: String
     var isValid: Bool
-    @Binding var isPasswordVisible: Bool
-    
+    var isPasswordVisible: Bool
+    var clearInputAction: () -> Void
     var body: some View {
-        EditText(input: $password, topLabel: "Wachtwoord", isSecure: !isPasswordVisible)
-            .overlay(
-                Button(action: {
-                    isPasswordVisible.toggle()
-                }) {
-                    Image(systemName: isPasswordVisible ? "eye.slash.fill" : "eye.fill")
-                        .foregroundColor(.blackPearl)
-                        .padding(EdgeInsets(top: 30, leading : 0, bottom: 0, trailing: 8))
-                }
-                    .frame(maxHeight: .infinity, alignment: .center),
-                alignment: .trailing
-            )
-        if !isValid {
-            HStack {
-                Image(systemName: "exclamationmark.circle.fill")
-                    .foregroundColor(.red)
-                Text("Password is required")
-                    .foregroundColor(.red)
-            }
-        }
+        EditText(input: $password, topLabel: "Wachtwoord", errorMessage: isValid ? nil : "Password is required" ,isSecure: !isPasswordVisible, clearInputIcon: true ,clearInputAction: clearInputAction)
     }
 }
 
@@ -82,8 +77,10 @@ struct PasswordTextField: View {
 struct EmailTextField: View {
     @Binding var email: String
     var isValid: Bool
+    var clearInputAction: () -> Void
     
     var body: some View {
-        EditText(input: $email, topLabel: "E-mail", errorMessage: isValid ? nil : "Email is required")
+        EditText(input: $email, topLabel: "E-mail", errorMessage: isValid ? nil : "Email is required", clearInputIcon: true ,clearInputAction: clearInputAction)
+        
     }
 }

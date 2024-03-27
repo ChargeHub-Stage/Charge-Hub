@@ -42,7 +42,8 @@ struct LoginScreenView: View {
                         get: { viewModel.getState().email },
                         set: { value in viewModel.setEmail(email: value) }
                     ),
-                    isValid: true
+                    isValid: true,
+                    clearInputAction: { viewModel.onAction(action: LoginScreenUiAction.OnEmailChangedAction(email: "")) }
                 )
                 Spacer().frame(height: 14)
                 VStack(spacing: 0) {
@@ -52,10 +53,8 @@ struct LoginScreenView: View {
                             set: { value in viewModel.setPassword(password: value)}
                         ),
                         isValid: true,
-                        isPasswordVisible: Binding(
-                            get: { viewModel.getState().passwordVisibility },
-                            set: { value in viewModel.setPasswordVisibility(visibility: value) }
-                        )
+                        isPasswordVisible: true,
+                        clearInputAction: { viewModel.onAction(action: LoginScreenUiAction.OnPasswordChangedAction(password: "")) }
                     ).padding(.bottom, 4)
                     HStack {
                         Text("Wachtwoord vergeten?").font(.system(size: 12)).fontWeight(.regular)

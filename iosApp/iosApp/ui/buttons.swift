@@ -36,7 +36,7 @@ struct TextOnlyButton: View {
 
 struct PrimaryButton: View {
     var text: String
-    var enabled: Bool
+    @Binding var enabled: Bool
     var textColor: Color
     var backgroundColor: Color
     var trailingIcon: Image? = nil
@@ -45,7 +45,7 @@ struct PrimaryButton: View {
 
     init(
         text: String,
-        enabled: Bool = true,
+        enabled: Binding<Bool>,
         textColor: Color = .black,
         backgroundColor: Color = .acid,
         trailingIcon: Image? = nil,
@@ -54,7 +54,7 @@ struct PrimaryButton: View {
     )
     {
         self.text = text
-        self.enabled = enabled
+        self._enabled = enabled
         self.textColor = textColor
         self.backgroundColor = backgroundColor
         self.action = action
