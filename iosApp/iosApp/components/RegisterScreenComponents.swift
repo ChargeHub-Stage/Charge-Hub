@@ -45,7 +45,7 @@ struct SkipTextButton: View {
         Button(action: onAction) {
             Text(strings.get(id: SharedRes.strings().skip, args: []))
                 .underline()
-                .fontWeight(.bold)
+                .foregroundColor(.black)
         }
     }
 }

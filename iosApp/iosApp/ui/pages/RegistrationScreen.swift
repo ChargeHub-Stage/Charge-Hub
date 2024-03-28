@@ -24,6 +24,10 @@ struct RegistrationScreen: View {
                 CarConnectStep(state: state) { action in
                     viewModel.onAction(action: action)
                 }
+            } else if (currentRegisterState == CurrentRegisterState.notifications) {
+                PermissionStep { action in
+                    viewModel.onAction(action: action)
+                }
             } else {
                 Text("")
             }
@@ -145,3 +149,35 @@ struct CarConnectStep: View {
     }
 }
 
+struct PermissionStep: View {
+    let strings = StringsHelper().getResourceStrings()
+    var onAction: (RegisterScreenUiAction) -> Void
+    let center = UNUserNotificationCenter.current()
+    
+    var body: some View {
+        VStack(alignment: .center) {
+            Text(strings.get(id: SharedRes.strings().allow_notis, args: []))
+                .padding(.top, 89)
+                .fontWeight(.bold)
+                .font(.system(size: 28))
+                .multilineTextAlignment(.center)
+            
+            Text(strings.get(id: SharedRes.strings().noti_info, args: []))
+                .padding(.bottom, 43)
+                .multilineTextAlignment(.center)
+            
+            PrimaryButton(text: strings.get(id: SharedRes.strings().allow_notis, args: []), enabled: .constant(true), action: {
+                Task {
+                    try await center.requestAuthorization(options: [.alert, .sound, .badge])
+                }
+                
+            })
+            
+            SkipTextButton(onAction: {
+                onAction(RegisterScreenUiAction.OnNextClickedAction())
+            })
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.horizontal, 16)
+    }
+}
