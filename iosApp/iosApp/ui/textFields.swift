@@ -78,7 +78,7 @@ struct PasswordTextField: View {
     var body: some View {
         EditText(
             input: $password,
-            topLabel: strings.get(id: SharedRes.strings().password, args: <#T##[Any]#>),
+            topLabel: strings.get(id: SharedRes.strings().password, args: []),
             errorMessage: isValid ? nil : strings.get(id: SharedRes.strings().password_is_required, args: []),
             isSecure: !isPasswordVisible,
             clearInputIcon: true,
