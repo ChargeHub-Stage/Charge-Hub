@@ -20,6 +20,10 @@ struct RegistrationScreen: View {
                 ProfileCompletionStep(state: state) { action in
                     viewModel.onAction(action: action)
                 }.padding(.horizontal, 16)
+            } else if (currentRegisterState == CurrentRegisterState.carConnect) {
+                CarConnectStep(state: state) { action in
+                    viewModel.onAction(action: action)
+                }
             } else {
                 Text("")
             }
@@ -35,7 +39,7 @@ struct EmailRegisterStep: View {
     var onAction: (RegisterScreenUiAction) -> Void
     
     let strings = StringsHelper().getResourceStrings()
-
+    
     
     var body: some View {
         VStack() {
@@ -60,7 +64,7 @@ struct ProfileCompletionStep: View {
     var state: RegisterScreenUiState
     let onAction: (RegisterScreenUiAction) -> Void
     let strings = StringsHelper().getResourceStrings()
-
+    
     var body: some View {
         VStack {
             CircularProfilePicture(borderColor: .white, borderWidth: 4)
@@ -76,7 +80,7 @@ struct ProfileCompletionStep: View {
                 clearInputAction: { onAction(RegisterScreenUiAction.OnFirstNameChangedAction(firstName: "")) }
             )
             .padding(.bottom, 12)
-
+            
             EditText(
                 input: Binding(
                     get: { state.lastName },
@@ -87,7 +91,7 @@ struct ProfileCompletionStep: View {
                 clearInputAction: { onAction(RegisterScreenUiAction.OnLastNameChangedAction(lastName: "")) }
             )
             .padding(.bottom, 12)
-
+            
             PasswordTextField(
                 password: Binding(
                     get: { state.password },
@@ -98,7 +102,7 @@ struct ProfileCompletionStep: View {
                 clearInputAction: { onAction(RegisterScreenUiAction.OnPasswordChangedAction(password: "")) }
             )
             .padding(.bottom, 17)
-
+            
             PrivacySwitch(
                 isChecked: Binding(
                     get: { state.isPrivacyChecked },
@@ -113,3 +117,31 @@ struct ProfileCompletionStep: View {
         .background(Color(UIColor.systemBackground))
     }
 }
+
+struct CarConnectStep: View {
+    var state: RegisterScreenUiState
+    @StateViewModel var viewModel = RegisterScreenViewModel()
+    var onAction: (RegisterScreenUiAction) -> Void
+    let strings = StringsHelper().getResourceStrings()
+    
+    var body: some View {
+        @State var vin: String = state.vin
+        VStack {
+            EditText(
+                input:  Binding (
+                    get: { state.vin },
+                    set: { value in onAction(RegisterScreenUiAction.OnCarIdChangedAction(vin: value)) }
+                ),
+                topLabel: strings.get(id: SharedRes.strings().your_car_id, args: []),
+                errorMessage: state.isVinValid ? nil : strings.get(id: SharedRes.strings().invalid_car_id, args: []),
+                clearInputAction: { onAction(RegisterScreenUiAction.OnCarIdChangedAction(vin: "")) })
+            
+            .padding(EdgeInsets(top: 34, leading: 0, bottom: 16, trailing: 0))
+            
+            
+            NextButton(state: state, onAction: onAction)
+        }
+        .padding()
+    }
+}
+
